@@ -1,4 +1,14 @@
-﻿using AidingElementsUserInterface.Core;
+﻿/* Aiding Elements User Interface
+ *      RightClickChoice element 
+ * 
+ * enables the user to deactivate the application
+ * or shutdown the computer entirely
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ActivityTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LogTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="MatrixElement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Note.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NoteMatrixTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="NotesTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ActivityTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LogTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MatrixElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Note.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="NoteMatrixTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="NotesTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

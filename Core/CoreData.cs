@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      CoreData class
+ * 
+ * basic application properties
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +29,19 @@ namespace AidingElementsUserInterface.Core
         public Thickness thickness { get; set; }
 
 
+        public int fontSize { get; set; }
+        public FontFamily fontFamiliy { get; set; }
+
+        // path values
+        //public string imageFilePath { get; set; }
+        public string buttonImageFilePath { get; set; }
+        public string containerImageFilePath { get; set; }
+
+        // main window size values
+        public int mainWindowHeight { get; set; }
+        public int mainWindowWidth { get; set; }
+
+
         public CoreData()
         {
             background = Colors.BlanchedAlmond;
@@ -30,6 +52,10 @@ namespace AidingElementsUserInterface.Core
             cornerRadius = new CornerRadius(14);
 
             thickness = new Thickness(2);
+
+            fontSize = 12;
+
+            fontFamiliy = new FontFamily("Verdana");
         }
     }
 }

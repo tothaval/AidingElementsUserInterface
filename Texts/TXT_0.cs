@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      TXT_0 class
+ * 
+ * intermediate solution to serve textual contents to recipient elements
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

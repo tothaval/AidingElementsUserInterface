@@ -1,4 +1,16 @@
-﻿using AidingElementsUserInterface.Elements;
+﻿/* Aiding Elements User Interface
+ *      CoreCanvas element 
+ * 
+ * basic surface element for placement of elements
+ * and for scetching, drawing, et cetera
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Elements;
+using AidingElementsUserInterface.Elements.MyNote;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,6 +102,17 @@ namespace AidingElementsUserInterface.Core
 
         }
 
+        internal void PositionElement(CoreContainer container)
+        {
+            Canvas.SetLeft(container, 125);
+            Canvas.SetTop(container, 25);
+        }
+
+        internal void PositionElement(CoreContainer container, MouseButtonEventArgs e)
+        {
+            Canvas.SetLeft(container, e.GetPosition(canvas).X);
+            Canvas.SetTop(container, e.GetPosition(canvas).Y);
+        }
 
         // events
         #region events
@@ -101,7 +124,7 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_KeyDown(object sender, KeyEventArgs e)
         {
-
+         
         }
 
         private void canvas_KeyUp(object sender, KeyEventArgs e)
@@ -118,15 +141,16 @@ namespace AidingElementsUserInterface.Core
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                //canvas.DragMove();
+
             }
 
             else if (e.ChangedButton == MouseButton.Right)
             {
-                CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()));
+                CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()),(CoreCanvas)__CoreCanvas);
 
-                Canvas.SetLeft(rightClickElement, e.GetPosition(canvas).X);
-                Canvas.SetTop(rightClickElement, e.GetPosition(canvas).Y);
+                PositionElement(rightClickElement, e);
+
+                SharedLogic.GetMainWindow().handler.addElement(rightClickElement, __CoreCanvas);
 
                 canvas.Children.Add(rightClickElement);
             }

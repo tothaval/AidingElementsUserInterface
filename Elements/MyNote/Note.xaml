@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.Note"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Elements.MyNote"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border x:Name="MainBorder"
+            BorderThickness="2"
+            BorderBrush="FloralWhite"
+            CornerRadius="5"
+            Margin="2,0,0,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox x:Name="TX_Time"
+                         Grid.Row="0"
+                         MinWidth="100"
+                         Background="SlateGray"
+                         BorderBrush="FloralWhite"
+                         Foreground="FloralWhite"
+                         BorderThickness="2"
+                         IsReadOnly="True"
+                         IsReadOnlyCaretVisible="False"
+                         MouseDoubleClick="TX_Time_MouseDoubleClick"
+                         MouseLeftButtonDown="TX_Time_MouseLeftButtonDown"
+                         MouseLeftButtonUp="TX_Time_MouseLeftButtonUp"
+                     >
+            </TextBox>
+            <TextBox x:Name="TX_Title"
+                         Grid.Row="1"
+                         MinWidth="100"
+                         Background="FloralWhite"
+                         Foreground="SlateGray"
+                         KeyUp="TX_Title_KeyUp"
+                         LostFocus="TX_Title_LostFocus"
+                         TextChanged="TX_Title_TextChanged">
+            </TextBox>
+
+            <TextBox x:Name="TX_Note"
+                         Grid.Row="2"
+                         MinWidth="150"
+                         MinHeight="150"
+                         AcceptsReturn="True"
+                         AcceptsTab="True"
+                         IsUndoEnabled="True"
+                         HorizontalScrollBarVisibility="Auto"
+                         VerticalScrollBarVisibility="Auto"
+                         VerticalAlignment="Stretch"
+                         TextWrapping="Wrap"
+                         Background="FloralWhite"
+                         Foreground="SlateGray"
+                         KeyUp="TX_Note_KeyUp"
+                         LostFocus="TX_Note_LostFocus"
+                         LostKeyboardFocus="TX_Note_LostKeyboardFocus"
+                         LostMouseCapture="TX_Note_LostMouseCapture"
+                         >
+
+            </TextBox>
+        </Grid>
+    </Border>
+</UserControl>

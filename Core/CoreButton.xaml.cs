@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      CoreButton element 
+ * 
+ * basic configurable button element
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -86,14 +95,14 @@ namespace AidingElementsUserInterface.Core
 
             Style style = this.FindResource("buttonStyle") as Style;
 
-            //if (config.buttonImageFilePath.Length > 4)
-            //{
-            //    border.Background = config.Return_ImageBrush(config.buttonImageFilePath);
-            //}
-            //else
-            //{
-            //    border.Background = config.btnBackColor;
-            //}
+            if (config.buttonImageFilePath != null)
+            {
+                //border.Background = config.Return_ImageBrush(config.buttonImageFilePath);
+            }
+            else
+            {
+                border.Background = new SolidColorBrush(config.background);
+            }
 
             border.BorderBrush = new SolidColorBrush(config.borderbrush);
             border.CornerRadius = config.cornerRadius;
@@ -130,28 +139,28 @@ namespace AidingElementsUserInterface.Core
 
         public void _point_expander()
         {
-            //config = new CoreData();
-            //
-            //button.Content = "";
-            //
-            //button.Width = config.expanderSize;
-            //button.Height = config.expanderSize;
+            config = new ButtonData();
+            
+            button.Content = "";
+            
+            button.Width = config.expanderSize;
+            button.Height = config.expanderSize;
         }
 
         public void _expander(bool vertical)
         {
-            //config = new CoreData();
-            //
-            //button.Content = "";
-            //
-            //if (vertical == true)
-            //{
-            //    button.Width = config.expanderSize;
-            //}
-            //else if (vertical == false)
-            //{
-            //    button.Height = config.expanderSize;
-            //}
+            config = new ButtonData();
+            
+            button.Content = "";
+            
+            if (vertical == true)
+            {
+                button.Width = config.expanderSize;
+            }
+            else if (vertical == false)
+            {
+                button.Height = config.expanderSize;
+            }
         }
 
         public void setContent(string content)

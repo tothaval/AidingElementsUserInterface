@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      MainWindow 
+ * 
+ * main frame for the application
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +29,8 @@ using System.IO;
 using Point = System.Windows.Point;
 using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Texts;
+using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Elements.MyNote;
 
 namespace AidingElementsUserInterface
 {
@@ -30,13 +41,38 @@ namespace AidingElementsUserInterface
     {
         private bool loaded = false;
 
+        internal CoreCanvas canvas;
+
         internal CoreData coreData;
+
+        internal ElementHandler handler;
 
 
         public MainWindow()
         {
+            handler = new ElementHandler();
+
             InitializeComponent();
+
+            build();
         }
+
+
+        private async void build()
+        {
+            loaded = true;
+
+            int delayValue = 1;
+
+            await Task.Delay(delayValue);
+
+            load_CoreData();
+
+            load_borderDefaults();
+
+            load_CoreCanvas();
+        }
+
 
         // processing
         #region processing
@@ -55,7 +91,11 @@ namespace AidingElementsUserInterface
 
         private void load_CoreCanvas()
         {
-            canvas_border.Child = new CoreCanvas();
+            canvas = new CoreCanvas();
+
+            canvas_border.Child = canvas;
+
+            Keyboard.Focus(canvas);
         }
 
         private void load_CoreData()
@@ -84,27 +124,28 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.F2)
+            {
+                CoreContainer myNoteElement = new CoreContainer(new MyNote(), canvas);
+
+                canvas.PositionElement(myNoteElement);
+
+                SharedLogic.GetMainWindow().handler.addElement(myNoteElement, canvas);
+
+                canvas.canvas.Children.Add(myNoteElement);
+            }
 
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
 
+            e.Handled = true;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            loaded = true;
 
-            int delayValue = 1;
-
-            await Task.Delay(delayValue);
-
-            load_CoreData();
-
-            load_borderDefaults();
-
-            load_CoreCanvas();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.NotesTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Elements.MyNote"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border CornerRadius="5" BorderBrush="FloralWhite" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="1"
+                    Grid.Row="1"
+                    Orientation="Vertical"    
+                    Background="SlateGray"
+                    >
+                <Button x:Name="BTN_NewNote"
+                    Click="BTN_NewNote_Click"
+                    Content="+"
+                    Background="Transparent"
+                    BorderThickness="3"
+                    BorderBrush="FloralWhite"
+                    Foreground="FloralWhite"
+                    Margin="5,5,5,5"
+                            >
+                </Button>
+
+                <TextBlock x:Name="TB_User"/>
+
+                <TextBlock x:Name="TB_NoteCount"/>
+            </StackPanel>
+
+            <ScrollViewer Grid.Column="1"
+                      Grid.Row="2"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="SlateGray"
+                      >
+                <StackPanel x:Name="NoteSelectionWrapPanel"
+                        Orientation="Vertical"
+                        MaxWidth="120"
+                        >
+                </StackPanel>
+            </ScrollViewer>
+
+            <StackPanel Grid.Column="1" Grid.Row="3"    
+                    Background="SlateGray">
+                <TextBlock Text=" "/>
+                <TextBlock Text=" "/>
+
+                <Button x:Name="BTN_DeleteNote"
+                    Click="BTN_DeleteNote_Click"
+                    Content="-" 
+                    Background="Transparent"
+                    BorderThickness="3"
+                    BorderBrush="FloralWhite"
+                    Foreground="FloralWhite"             
+                    Margin="5,5,5,5"
+                    >
+
+                </Button>
+            </StackPanel>
+
+            <UniformGrid 
+            x:Name="MainWrapPanel"
+            Grid.Column="2"
+            Grid.Row="1"
+            Grid.RowSpan="3"     
+            Background="SlateGray"
+            >
+            </UniformGrid>
+
+        </Grid>
+    </Border>
+</UserControl>

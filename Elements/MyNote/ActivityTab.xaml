@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.ActivityTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Elements.MyNote"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border CornerRadius="5" BorderBrush="FloralWhite" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer Grid.Row="0">
+                <TextBlock
+                        x:Name="TB_History"
+                        TextWrapping="Wrap"    
+                        >
+
+                </TextBlock>
+            </ScrollViewer>
+
+            <Button x:Name="BT_ClearHistory"
+                Content="clear history"
+                Grid.Row="1"
+                Click="BT_ClearHistory_Click"/>
+        </Grid>
+    </Border>
+</UserControl>
