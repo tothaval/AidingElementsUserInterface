@@ -8,8 +8,13 @@ all files within this folder are needed to run the application, other licenses m
 
 currently implemented functions:
 
+elements can be moved via left mouse button
+
 right click on surface: instantiate a right click element, which allows
 	you to quit the application or shutdown your computer
+
+F1: instantiate Manual element
+
 	
 F2: instantiate MyNote element, an application for the creation of notes
-	to capture ideas, currently no save and load functionality implemented
+	to capture ideas

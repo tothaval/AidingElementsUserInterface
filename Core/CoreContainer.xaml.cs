@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices.ActiveDirectory;
@@ -238,6 +239,7 @@ namespace AidingElementsUserInterface.Core
 
             if (e.ChangedButton == MouseButton.Right)
             {
+                SharedLogic.GetMainWindow().handler.removeElement(__CoreContainer);
                 canvas.canvas.Children.Remove(__CoreContainer);
 
                 e.Handled = true;

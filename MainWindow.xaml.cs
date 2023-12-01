@@ -31,6 +31,7 @@ using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Texts;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.MyNote;
+using AidingElementsUserInterface.Elements;
 
 namespace AidingElementsUserInterface
 {
@@ -72,6 +73,40 @@ namespace AidingElementsUserInterface
 
             load_CoreCanvas();
         }
+
+
+
+        // element instantiation
+        private void instantiate_Manual()
+        {
+            Manual manual = new Manual();
+
+            CoreContainer myNoteElement = new CoreContainer(manual, canvas);
+
+            canvas.PositionElement(myNoteElement);
+
+            handler.addElement(myNoteElement, canvas);
+
+            canvas.canvas.Children.Add(myNoteElement);
+
+        }
+
+        private void instantiate_MyNote()
+        {
+            MyNote note = new MyNote();
+
+            if (handler.checkElement(note))
+            {
+                CoreContainer myNoteElement = new CoreContainer(note, canvas);
+
+                canvas.PositionElement(myNoteElement);
+
+                handler.addElement(myNoteElement, canvas);
+
+                canvas.canvas.Children.Add(myNoteElement);
+            }
+        }
+
 
 
         // processing
@@ -124,15 +159,14 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.F1)
+            {
+                instantiate_Manual();
+            }
+
             if (e.Key == Key.F2)
             {
-                CoreContainer myNoteElement = new CoreContainer(new MyNote(), canvas);
-
-                canvas.PositionElement(myNoteElement);
-
-                SharedLogic.GetMainWindow().handler.addElement(myNoteElement, canvas);
-
-                canvas.canvas.Children.Add(myNoteElement);
+                instantiate_MyNote();
             }
 
         }

@@ -8,6 +8,8 @@
              xmlns:local="clr-namespace:AidingElementsUserInterface.Elements.MyNote"
              mc:Ignorable="d" 
              
+             LostFocus="__MyNote_LostFocus"
+             
              >
     <Border x:Name="border"
             BorderBrush="FloralWhite"

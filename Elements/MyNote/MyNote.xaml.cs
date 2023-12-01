@@ -59,20 +59,6 @@ namespace AidingElementsUserInterface.Elements.MyNote
         }
 
 
-
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            Tab_matrix.save_matrix();
-
-            XML_Handler handler = new XML_Handler();
-
-            handler.save_log_to_xml(Tab_log.getNoteData());
-            handler.save_notes_to_xml(Tab_notes.get_notes());
-            handler.save_history_to_xml(Tab_history.application_closing());
-
-        }
-
         private void BTN_options_Click(object sender, RoutedEventArgs e)
         {
             if (SP_options.Visibility == Visibility.Collapsed)
@@ -85,6 +71,17 @@ namespace AidingElementsUserInterface.Elements.MyNote
             }
 
             e.Handled = true;
+        }
+
+        private void __MyNote_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Tab_matrix.save_matrix();
+
+            XML_Handler handler = new XML_Handler();
+
+            handler.save_log_to_xml(Tab_log.getNoteData());
+            handler.save_notes_to_xml(Tab_notes.get_notes());
+            handler.save_history_to_xml(Tab_history.application_closing());
         }
     }
 }

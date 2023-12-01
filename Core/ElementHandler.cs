@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
+using AidingElementsUserInterface.Elements;
+using AidingElementsUserInterface.Elements.MyNote;
+
 namespace AidingElementsUserInterface.Core
 {
     internal class ElementHandler
@@ -15,9 +18,9 @@ namespace AidingElementsUserInterface.Core
         Dictionary<CoreContainer, UserControl> containerContents = new Dictionary<CoreContainer, UserControl>();
 
 
-        internal ElementHandler() 
-        { 
-        
+        internal ElementHandler()
+        {
+
         }
 
         internal void addElement(CoreContainer container, CoreCanvas canvas)
@@ -25,6 +28,30 @@ namespace AidingElementsUserInterface.Core
             containerLocations.Add(container, canvas);
 
             containerContents.Add(container, container.GetContainerData().getContent());
+        }
+
+        internal bool checkElement<T>(T element_content)
+        {
+            if (element_content is MyNote mynote)
+            {
+                foreach (CoreContainer content_dict in containerContents.Keys)
+                {
+                    if (containerContents[content_dict].GetType() == typeof(MyNote))
+                    {
+                        foreach (CoreContainer location_dict in containerLocations.Keys)
+                        {
+                            if (content_dict == location_dict)
+                            {
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            return true;
+
         }
 
         internal bool removeElement(CoreContainer container)
@@ -40,7 +67,7 @@ namespace AidingElementsUserInterface.Core
 
             }
 
-            return true;            
+            return true;
         }
     }
 }
