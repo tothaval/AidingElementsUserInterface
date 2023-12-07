@@ -11,7 +11,6 @@
  * origin:      MyNote_2023_11_01
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +26,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using AidingElementsUserInterface.Core.MyNote_Data;
+using System.Runtime.CompilerServices;
 
 namespace AidingElementsUserInterface.Elements.MyNote
 {
@@ -39,8 +40,12 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         private DispatcherTimer _timer = new DispatcherTimer();
 
-        public LogTab()
+        private MyNote origin_element;
+
+        public LogTab(MyNote myNote)
         {
+            origin_element = myNote;
+
             InitializeComponent();
 
             loadNoteData();
@@ -82,7 +87,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         internal void loadNoteData()
         {
-            data = new XML_Handler().load_log_from_xml();
+            data = new XML_Handler(origin_element).MyNote_load_log();
 
             data.dateTime = DateTime.Now;
 
@@ -91,9 +96,9 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         private void protocol_changed()
         {
-            //SharedLogic.GetMainWindow().Tab_history.history_entry(
-            //    "protocol changed"
-            //);
+            origin_element.Tab_history.history_entry(
+                "protocol changed"
+            );
         }
 
         private void saveNoteData()

@@ -30,13 +30,13 @@ namespace AidingElementsUserInterface.Core
     /// </summary>
     public partial class CoreTextBox : UserControl
     {
-        ContainerData config;
+        TextBoxData config;
 
         public CoreTextBox()
         {
             InitializeComponent();
 
-            config = new ContainerData(__CoreTextBox);
+            config = new TextBoxData();
 
             build();
         }
@@ -47,7 +47,7 @@ namespace AidingElementsUserInterface.Core
 
             textbox.Text = content;
 
-            config = new ContainerData(__CoreTextBox);
+            config = new TextBoxData();
 
             build();
         }

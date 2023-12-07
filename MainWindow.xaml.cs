@@ -32,6 +32,7 @@ using AidingElementsUserInterface.Texts;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
+using AidingElementsUserInterface.Elements.FlatShareCC;
 
 namespace AidingElementsUserInterface
 {
@@ -73,40 +74,6 @@ namespace AidingElementsUserInterface
 
             load_CoreCanvas();
         }
-
-
-
-        // element instantiation
-        private void instantiate_Manual()
-        {
-            Manual manual = new Manual();
-
-            CoreContainer myNoteElement = new CoreContainer(manual, canvas);
-
-            canvas.PositionElement(myNoteElement);
-
-            handler.addElement(myNoteElement, canvas);
-
-            canvas.canvas.Children.Add(myNoteElement);
-
-        }
-
-        private void instantiate_MyNote()
-        {
-            MyNote note = new MyNote();
-
-            if (handler.checkElement(note))
-            {
-                CoreContainer myNoteElement = new CoreContainer(note, canvas);
-
-                canvas.PositionElement(myNoteElement);
-
-                handler.addElement(myNoteElement, canvas);
-
-                canvas.canvas.Children.Add(myNoteElement);
-            }
-        }
-
 
 
         // processing
@@ -161,14 +128,26 @@ namespace AidingElementsUserInterface
         {
             if (e.Key == Key.F1)
             {
-                instantiate_Manual();
+                canvas.add_element_to_canvas(
+                    handler.instantiate_Manual(canvas)
+                    );
             }
 
             if (e.Key == Key.F2)
             {
-                instantiate_MyNote();
+
+                canvas.add_element_to_canvas(
+                    handler.instantiate_MyNote(canvas)
+                    );
             }
 
+            if (e.Key == Key.F3)
+            {
+                canvas.add_element_to_canvas(
+                    handler.instantiate_FlatShareCC(canvas)
+                    );
+
+            }
         }
 
         private void Window_KeyUp(object sender, KeyEventArgs e)

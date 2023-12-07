@@ -11,6 +11,7 @@
  * origin:      MyNote_2023_11_01
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,8 +39,13 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         ObservableCollection<MatrixElement> elements = new ObservableCollection<MatrixElement>();
 
-        public NoteMatrixTab()
+        private MyNote origin_element;
+
+
+        public NoteMatrixTab(MyNote myNote)
         {
+            origin_element = myNote;
+
             InitializeComponent();
 
             loadNotesMatrix();
@@ -49,7 +55,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         private void add_MatrixElement()
         {
-            MatrixElement matrixElement = new MatrixElement();
+            MatrixElement matrixElement = new MatrixElement(origin_element);
             matrixElement.id = elements.Count;
 
             matrixElement.fill(hori);
@@ -67,9 +73,9 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         internal void loadNotesMatrix()
         {
-            XML_Handler xml = new XML_Handler();
+            XML_Handler xml = new XML_Handler(origin_element);
 
-            elements = xml.load_matrix_elements_from_xml();
+            elements = xml.MyNote_load_matrix_elements();
 
             foreach (MatrixElement item in elements)
             {
@@ -91,14 +97,13 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         internal void save_matrix()
         {
-            XML_Handler handler = new XML_Handler();
-            IO_Handler io = new IO_Handler();
+            XML_Handler handler = new XML_Handler(origin_element);
 
-            io.delete_files(io.notes_matrix_folder_path);
+            handler.delete_files(handler.MyNote_notes_matrix_folder);
 
             foreach (MatrixElement matrixElement in elements)
             {
-                handler.save_MatrixElement_to_xml(matrixElement);
+                handler.MyNote_save_MatrixElement(matrixElement);
             }
         }
 

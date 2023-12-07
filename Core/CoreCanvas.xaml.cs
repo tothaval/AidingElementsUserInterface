@@ -38,6 +38,15 @@ namespace AidingElementsUserInterface.Core
             InitializeComponent();
         }
 
+        internal void add_element_to_canvas(CoreContainer container)
+        {
+            PositionElement(container);
+
+            SharedLogic.GetMainWindow().handler.addElement(container, (this));
+
+            canvas.Children.Add(container);
+        }
+
         // move to corecanvas usercontrol v
         private void canvasDesign()
         {

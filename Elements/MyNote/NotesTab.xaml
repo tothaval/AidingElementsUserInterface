@@ -25,7 +25,7 @@
             <StackPanel Grid.Column="1"
                     Grid.Row="1"
                     Orientation="Vertical"    
-                    Background="SlateGray"
+                    Background="SlateGray"  MaxHeight="400"
                     >
                 <Button x:Name="BTN_NewNote"
                     Click="BTN_NewNote_Click"
@@ -43,10 +43,10 @@
                 <TextBlock x:Name="TB_NoteCount"/>
             </StackPanel>
 
-            <ScrollViewer Grid.Column="1"
+            <ScrollViewer Grid.Column="1" 
                       Grid.Row="2"
                       VerticalScrollBarVisibility="Auto"
-                      Background="SlateGray"
+                      Background="SlateGray"  MaxHeight="350"
                       >
                 <StackPanel x:Name="NoteSelectionWrapPanel"
                         Orientation="Vertical"

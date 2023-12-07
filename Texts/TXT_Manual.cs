@@ -69,7 +69,9 @@ namespace AidingElementsUserInterface.Texts
                     "\n" +
                     "Key F1:\t\tmanual element\n" +
                     "\n" +
-                    "Key F2:\t\tMyNote element\n";
+                    "Key F2:\t\tMyNote element\n" +
+                    "\n" +
+                    "Key F3:\t\tFlatShareCostCalculator element\n";
 
                 StringBuilder sb = new StringBuilder(value);
 

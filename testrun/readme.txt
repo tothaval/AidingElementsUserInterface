@@ -17,4 +17,11 @@ F1: instantiate Manual element
 
 	
 F2: instantiate MyNote element, an application for the creation of notes
-	to capture ideas
+	to capture ideas, save and load of note contents now works
+	properly
+
+F3: instantiate FlatShareCostCalculator element, still work in progress,
+	it currently produces some sort of stack overflow when saving or
+	loading data from xml. couldn't figure it out today, but narrowed
+	it down. somehow the load function is called a multitude of times,
+	gonna fix this asap.

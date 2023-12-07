@@ -12,7 +12,6 @@
  * origin:      MyNote_2023_11_01
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +27,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using AidingElementsUserInterface.Core.MyNote_Data;
 
 namespace AidingElementsUserInterface.Elements.MyNote
 {
@@ -39,8 +39,14 @@ namespace AidingElementsUserInterface.Elements.MyNote
         private ObservableCollection<Note> notes = new ObservableCollection<Note>();
         private int active_note = 0;
 
-        public NotesTab()
+
+        private MyNote origin_element;
+
+
+        public NotesTab(MyNote myNote)
         {
+            origin_element = myNote;
+
             InitializeComponent();
 
             loadNotes();
@@ -58,12 +64,10 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
                 update_output();
 
-                //if (SharedLogic.GetMainWindow().Tab_history != null)
-                //{
-                //    SharedLogic.GetMainWindow().Tab_history.history_entry(
-                //    $"note '{note.getNoteData().dateTime}' '{note.getNoteData().title}' created"
-                //    );
-                //}
+                origin_element.Tab_history.history_entry(
+                $"note '{note.getNoteData().dateTime}' '{note.getNoteData().title}' created"
+                );
+
             }
 
             return note;
@@ -98,10 +102,10 @@ namespace AidingElementsUserInterface.Elements.MyNote
                     {
                         notes.Remove(note);
 
-                        //SharedLogic.GetMainWindow().Tab_history.history_entry(
-                        //    $"note '{note.getNoteData().dateTime}'" +
-                        //    $" '{note.getNoteData().title}' deleted"
-                        //    );
+                        origin_element.Tab_history.history_entry(
+                            $"note '{note.getNoteData().dateTime}'" +
+                            $" '{note.getNoteData().title}' deleted"
+                            );
 
                         if (notes.Count <= active_note)
                         {
@@ -117,7 +121,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         internal void loadNotes()
         {
-            ObservableCollection<NoteData> noteDatas = new XML_Handler().load_notes_from_xml();
+            ObservableCollection<NoteData> noteDatas = new XML_Handler(origin_element).MyNote_load_notes();
 
             if (noteDatas.Count > 0)
             {
@@ -128,7 +132,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
                     data.id = i;
                     i++;
 
-                    Note note = new Note(data);
+                    Note note = new Note(origin_element, data);
 
                     notes.Add(note);
                 }
@@ -145,7 +149,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         internal Note new_note()
         {
-            Note note = new Note();
+            Note note = new Note(origin_element);
 
             note.getNoteData().id = notes.Count + 1;
 

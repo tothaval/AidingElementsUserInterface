@@ -32,9 +32,13 @@ namespace AidingElementsUserInterface.Elements.MyNote
     {
         public int id { get; set; }
 
-        public MatrixElement()
+        private MyNote origin_element;
+
+        public MatrixElement(MyNote myNote)
         {
-            InitializeComponent();
+            this.origin_element = myNote;
+
+            InitializeComponent();            
         }
 
         public ObservableCollection<Note> extract()
@@ -59,7 +63,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         public Note insert()
         {
-            Note note = new Note();
+            Note note = new Note(origin_element);
 
             SP.Children.Add(note);
 

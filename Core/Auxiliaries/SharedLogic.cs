@@ -9,6 +9,7 @@
  * 
  * origin:      MyNote_2023_11_01
  */
+using AidingElementsUserInterface.Elements.FlatShareCC;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal static class SharedLogic
     {
+
+        internal static FlatShareCC GetFlatShareCC()
+        {
+            FlatShareCC select= new FlatShareCC();
+
+            select = (FlatShareCC)GetMainWindow().handler.returnElement(select);
+
+            return select;
+        }
+
         internal static MainWindow GetMainWindow()
         {
             return (MainWindow)System.Windows.Application.Current.MainWindow;

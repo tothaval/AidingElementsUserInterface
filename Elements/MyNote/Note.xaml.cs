@@ -10,7 +10,6 @@
  * origin:      MyNote_2023_11_01
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +24,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AidingElementsUserInterface.Core.MyNote_Data;
 
 namespace AidingElementsUserInterface.Elements.MyNote
 {
@@ -35,18 +35,24 @@ namespace AidingElementsUserInterface.Elements.MyNote
     {
         private NoteData data;
 
-        internal Note()
+        private MyNote origin_element;
+
+        internal Note(MyNote myNote)
         {
             data = new NoteData();
+
+            origin_element = myNote;
 
             InitializeComponent();
 
             updateDataOutput();
         }
 
-        internal Note(NoteData data)
+        internal Note(MyNote myNote, NoteData data)
         {
             this.data = data;
+
+            origin_element = myNote;
 
             InitializeComponent();
 
@@ -60,10 +66,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
         private void inform_on_update()
         {
-            //if (SharedLogic.GetMainWindow().Tab_notes != null)
-            //{
-            //    SharedLogic.GetMainWindow().Tab_notes.update_output();
-            //}
+            origin_element.Tab_notes.update_output();
         }
 
         internal void loadNoteData(NoteData noteData)
@@ -77,11 +80,8 @@ namespace AidingElementsUserInterface.Elements.MyNote
         {
             TextBox tx = (TextBox)sender;
 
-            //if (SharedLogic.GetMainWindow().Tab_history != null)
-            //{
-            //    SharedLogic.GetMainWindow().Tab_history.history_entry(
-            //        $"changed note '{data.title}' >>>> '{tx.Text}'");
-            //}
+            origin_element.Tab_history.history_entry(
+                $"changed note '{data.title}' >>>> '{tx.Text}'");
 
             saveNoteData();
 

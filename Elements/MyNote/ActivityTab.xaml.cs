@@ -10,6 +10,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +35,14 @@ namespace AidingElementsUserInterface.Elements.MyNote
     {
         private StringBuilder history = new StringBuilder();
 
-        public ActivityTab()
+
+        private MyNote origin_element;
+
+
+        public ActivityTab(MyNote myNote)
         {
+            origin_element = myNote;
+
             InitializeComponent();
 
             loadHistory();
@@ -72,7 +79,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
         {
             history.Clear();
 
-            history = new XML_Handler().load_history_from_xml();
+            history = new XML_Handler(origin_element).MyNote_load_history();
 
         }
 

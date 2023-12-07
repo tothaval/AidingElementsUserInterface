@@ -1,4 +1,15 @@
-﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.MyNote"
+﻿<!-- 
+    Aidinig Elements User Interface
+    
+    MyNote element
+    
+    MyNote.xaml file
+    
+    file documentation can be found at:
+        MyNote.cs
+        ...?
+    -->
+    <UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.MyNote"
              x:Name="__MyNote"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

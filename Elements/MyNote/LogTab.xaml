@@ -8,7 +8,7 @@
              >
     <Border x:Name="MainBorder" CornerRadius="5" BorderBrush="FloralWhite" BorderThickness="1"
             Padding="2">
-        <Grid Background="FloralWhite">
+        <Grid Background="FloralWhite"  MaxHeight="400">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />

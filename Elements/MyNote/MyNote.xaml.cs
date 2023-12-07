@@ -11,6 +11,7 @@
  * origin:      MyNote_2023_11_01 (former MainWindow.xaml & MainWindow.xaml.cs)
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,21 @@ namespace AidingElementsUserInterface.Elements.MyNote
     /// </summary>
     public partial class MyNote : UserControl
     {
-        internal LogTab Tab_log = new LogTab();
-        internal NotesTab Tab_notes = new NotesTab();
-        internal NoteMatrixTab Tab_matrix = new NoteMatrixTab();
-        internal ActivityTab Tab_history = new ActivityTab();
+        internal LogTab Tab_log;
+        internal NotesTab Tab_notes;
+        internal NoteMatrixTab Tab_matrix;
+        internal ActivityTab Tab_history;
 
         public MyNote()
         {
-            InitializeComponent(); Tab_history.history_entry("loading complete");
+            InitializeComponent();
+
+            Tab_log = new LogTab(this);
+            Tab_notes = new NotesTab(this);
+            Tab_matrix = new NoteMatrixTab(this);
+            Tab_history = new ActivityTab(this);
+
+            Tab_history.history_entry("loading complete");
 
             build();
         }
@@ -77,11 +85,17 @@ namespace AidingElementsUserInterface.Elements.MyNote
         {
             Tab_matrix.save_matrix();
 
-            XML_Handler handler = new XML_Handler();
+            XML_Handler handler = new XML_Handler(this);
 
-            handler.save_log_to_xml(Tab_log.getNoteData());
-            handler.save_notes_to_xml(Tab_notes.get_notes());
-            handler.save_history_to_xml(Tab_history.application_closing());
+            handler.MyNote_save_log(Tab_log.getNoteData());
+
+            handler = new XML_Handler(this);
+
+            handler.MyNote_save_notes(Tab_notes.get_notes());
+
+            handler = new XML_Handler(this);
+
+            handler.MyNote_save_history(Tab_history.application_closing());
         }
     }
 }

@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border CornerRadius="5" BorderBrush="FloralWhite" BorderThickness="1">
         <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Auto">
+                  VerticalScrollBarVisibility="Auto" MaxHeight="400">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="6"/>
