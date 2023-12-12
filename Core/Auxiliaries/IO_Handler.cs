@@ -24,6 +24,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class IO_Handler
     {
+        // Core paths
+        internal string CoreData_file = @".\data\Core\coredata.xml";
+        internal string Core_xml_folder = @"data\Core\";
+
         //FlatShareCostCalculator paths
         internal string FlatShareCC_data_file = @".\data\FlatShareCC\data.xml";
         internal string FlatShareCC_xml_folder = @"data\FlatShareCC\";
@@ -34,6 +38,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal string MyNote_notes_folder = @"data\MyNote\notes\";
         internal string MyNote_notes_matrix_folder = @"data\MyNote\notes_matrix\";
         internal string MyNote_xml_folder = @"\data\MyNote\";
+
+        internal IO_Handler(CoreData coreData)
+        {
+            check_path(Core_xml_folder);
+        }
 
         internal IO_Handler(FlatData flatShareCC)
         {
@@ -83,3 +92,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

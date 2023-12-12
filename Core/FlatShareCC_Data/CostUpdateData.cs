@@ -60,28 +60,31 @@ namespace AidingElementsUserInterface.Core.FlatShareCC_Data
 
         internal CostUpdateData(FlatData data, FlatCosts costs)
         {
+            if (data != null && costs != null)
+            {
+                flatData = data;
+                flatCosts = costs;
+
+                cold_rent = flatCosts.cold_rent;
+                extra_costs_advance = flatCosts.extra_costs_advance;
+
+                roomConsumptionValues = new ObservableCollection<BillingPeriodData>();
+
+                foreach (RoomData room in data.rooms)
+                {
+                    roomConsumptionValues.Add(new BillingPeriodData(room));
+                }
+            }
+
             isAnnualBilling = false;
             isRentChange = false;
 
             based_on_AB = "";
             cause = "";
 
-            flatData = data;
-            flatCosts = costs;
-
             period_start = new DateTime();
             period_end = new DateTime();
             cost_update_received = new DateTime();
-
-            cold_rent = flatCosts.cold_rent;
-            extra_costs_advance = flatCosts.extra_costs_advance;
-
-            roomConsumptionValues = new ObservableCollection<BillingPeriodData>();
-
-            foreach (RoomData room in data.rooms)
-            {
-                roomConsumptionValues.Add(new BillingPeriodData(room));
-            }
         }
 
         internal CostUpdateData()
@@ -89,28 +92,31 @@ namespace AidingElementsUserInterface.Core.FlatShareCC_Data
             XML_Handler aUX_XML_ = new XML_Handler(new FlatData());
             ObservableCollection<object> data = aUX_XML_.FlatShareCC_load_data();
 
+            if (data != null)
+            {
+                flatData = (FlatData)data[0];
+                flatCosts = (FlatCosts)data[1];
+
+                cold_rent = flatCosts.cold_rent;
+                extra_costs_advance = flatCosts.extra_costs_advance;
+
+                roomConsumptionValues = new ObservableCollection<BillingPeriodData>();
+
+                foreach (RoomData room in flatData.rooms)
+                {
+                    roomConsumptionValues.Add(new BillingPeriodData(room));
+                }
+            }
+            
             isAnnualBilling = false;
             isRentChange = false;
 
             based_on_AB = "";
             cause = "";
 
-            flatData = (FlatData)data[0];
-            flatCosts = (FlatCosts)data[1];
-
             period_start = new DateTime();
             period_end = new DateTime();
             cost_update_received = new DateTime();
-
-            cold_rent = flatCosts.cold_rent;
-            extra_costs_advance = flatCosts.extra_costs_advance;
-
-            roomConsumptionValues = new ObservableCollection<BillingPeriodData>();
-
-            foreach (RoomData room in flatData.rooms)
-            {
-                roomConsumptionValues.Add(new BillingPeriodData(room));
-            }
         }
 
         internal void add_origin_element(FlatShareCC flatShareCC)
@@ -129,3 +135,7 @@ namespace AidingElementsUserInterface.Core.FlatShareCC_Data
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

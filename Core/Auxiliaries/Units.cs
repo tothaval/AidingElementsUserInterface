@@ -26,3 +26,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal const string heating = "units";
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

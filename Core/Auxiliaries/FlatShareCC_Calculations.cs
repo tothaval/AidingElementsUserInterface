@@ -60,3 +60,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,7 @@ namespace AidingElementsUserInterface.Core
         #region create ElementOptionsPanel
         public void createElementOptionsPanel()
         {
-            ButtonData config = new ButtonData();
+            ButtonData config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
 
             wrapper.Margin = new Thickness(3, 3, 3, 3);
 
@@ -96,7 +97,7 @@ namespace AidingElementsUserInterface.Core
             label.Content = "element options";
             label.HorizontalContentAlignment = HorizontalAlignment.Center;
             label.VerticalContentAlignment = VerticalAlignment.Center;
-            label.FontFamily = config.fontFamiliy;
+            label.FontFamily = config.fontFamily;
             label.FontSize = config.fontSize;
             label.Background = new SolidColorBrush(Colors.Transparent);
             label.Foreground = new SolidColorBrush(config.foreground);
@@ -115,3 +116,7 @@ namespace AidingElementsUserInterface.Core
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

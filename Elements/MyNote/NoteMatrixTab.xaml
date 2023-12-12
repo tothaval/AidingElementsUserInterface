@@ -1,4 +1,14 @@
-﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.NoteMatrixTab"
+﻿<!-- 
+    Aidinig Elements User Interface
+    
+    NoteMatrixTab.xaml file
+    
+    file documentation can be found at:
+        NoteMatrixTab.cs
+        ...?
+    -->
+<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.NoteMatrixTab"
+             x:Name="__NoteMatrixTab"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -114,3 +124,4 @@
         </ScrollViewer>
     </Border>
 </UserControl>
+<!-- end of file -->

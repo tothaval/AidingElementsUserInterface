@@ -76,7 +76,11 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
             foreach (RoomData room in flatData.rooms)
             {
-                load_room_die(setup_room_die(room.area), room);
+                if (SP_rooms.Children.Count < flatData.rooms.Count)
+                {
+                    load_room_die(setup_room_die(room.area), room);
+                }
+
             }
 
             save_state();
@@ -162,7 +166,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         {
             save_state();
 
-            FlatShareCC origin = SharedLogic.GetFlatShareCC();
+            FlatShareCC origin = new SharedLogic().GetFlatShareCC();
 
             origin.save_data(flatData);
         }
@@ -211,3 +215,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

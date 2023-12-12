@@ -41,7 +41,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private void show_costs()
         {
-            FlatData flatData = SharedLogic.GetFlatShareCC().getFlatData();
+            FlatData flatData = new SharedLogic().GetFlatShareCC().getFlatData();
 
             SP_initial_costs_result.Children.Clear();
 
@@ -70,7 +70,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         internal void focus()
         {
-            FlatShareCC origin = SharedLogic.GetFlatShareCC();
+            FlatShareCC origin = new SharedLogic().GetFlatShareCC();
 
             origin.Tab_InitialCosts.Focus();
 
@@ -115,7 +115,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private void BTN_save_data_Click(object sender, RoutedEventArgs e)
         {
-            FlatShareCC origin = SharedLogic.GetFlatShareCC();
+            FlatShareCC origin = new SharedLogic().GetFlatShareCC();
 
             origin.save_data(flatCosts);
 
@@ -147,3 +147,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

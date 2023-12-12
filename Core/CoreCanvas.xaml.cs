@@ -42,7 +42,7 @@ namespace AidingElementsUserInterface.Core
         {
             PositionElement(container);
 
-            SharedLogic.GetMainWindow().handler.addElement(container, (this));
+            new SharedLogic().GetElementHandler().addElement(container, (this));
 
             canvas.Children.Add(container);
         }
@@ -159,7 +159,7 @@ namespace AidingElementsUserInterface.Core
 
                 PositionElement(rightClickElement, e);
 
-                SharedLogic.GetMainWindow().handler.addElement(rightClickElement, __CoreCanvas);
+                new SharedLogic().GetElementHandler().addElement(rightClickElement, __CoreCanvas);
 
                 canvas.Children.Add(rightClickElement);
             }
@@ -190,3 +190,7 @@ namespace AidingElementsUserInterface.Core
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

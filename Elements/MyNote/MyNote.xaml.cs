@@ -99,3 +99,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

@@ -28,3 +28,7 @@ namespace AidingElementsUserInterface.Core
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

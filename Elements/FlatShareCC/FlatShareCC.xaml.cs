@@ -29,6 +29,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 /*BKA2022 gezahlt: 2491,92 €
 BKA2022 Kosten:   2668,13 €
 BKA2022 Differenz: 176,21 €
@@ -102,6 +103,8 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private ObservableCollection<CostUpdateData> costUpdates = new ObservableCollection<CostUpdateData>();
 
+        private DispatcherTimer _timer = new DispatcherTimer();
+
         private XML_Handler xml_handler;
 
         public FlatShareCC()
@@ -110,18 +113,22 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
             xml_handler = new XML_Handler(flatData);
 
-            if (!load_data())
-            {
-                FlatDataUI_object.focus();
-            }
-            else
+            _timer.Tick += __FlatShareCC_loading_intervall;
+            _timer.Interval = TimeSpan.FromSeconds(0.25);
+            _timer.Start();
+        }
+
+        private async void __FlatShareCC_loading_intervall(object sender, EventArgs e)
+        {
+            FlatDataUI_object.focus();
+
+            if (load_data())
             {
                 FlatDataUI_object.load_data(flatData);
                 InitialCostsUI_object.load_data(flatCosts);
             }
-
+            
             load_costUpdates();
-
         }
 
         internal void addCostUpdate(CostUpdateData costUpdate)
@@ -235,11 +242,16 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         }
 
-        private void __FlatShareCC_LostFocus(object sender, RoutedEventArgs e)
+        internal void end_this()
         {
             save_data(flatCosts);
             save_data(flatData);
             save_costUpdates();
         }
+
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

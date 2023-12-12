@@ -7,7 +7,8 @@
         CorePanel.cs
         ...?
     -->
-    <UserControl x:Class="AidingElementsUserInterface.Core.CorePanel"
+<UserControl x:Class="AidingElementsUserInterface.Core.CorePanel"
+             x:Name="__CorePanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -19,3 +20,4 @@
         <WrapPanel x:Name="wrapper" />
     </Border>
 </UserControl>
+<!-- end of file -->

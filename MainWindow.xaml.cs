@@ -41,53 +41,64 @@ namespace AidingElementsUserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool loaded = false;
-
         internal CoreCanvas canvas;
-
         internal CoreData coreData;
 
-        internal ElementHandler handler;
+        internal Data_Handler data_Handler = new Data_Handler();
 
+        internal ElementHandler handler = new ElementHandler();
 
         public MainWindow()
         {
-            handler = new ElementHandler();
-
             InitializeComponent();
 
             build();
         }
 
 
-        private async void build()
-        {
-            loaded = true;
-
-            int delayValue = 1;
-
-            await Task.Delay(delayValue);
-
-            load_CoreData();
-
-            load_borderDefaults();
-
-            load_CoreCanvas();
+        private void build()
+        {            
+            load_coreData();
         }
 
 
         // processing
         #region processing
+        private async void load_coreData()
+        {
+            coreData = data_Handler.LoadCoreData();
+
+            //await Task.Delay(10);
+
+            if (coreData == null)
+            {
+                MessageBox.Show("hi");
+
+                coreData = new CoreData();
+            }
+
+            //MessageBox.Show($"{coreData.mainWindowWidth}\n{coreData.fontSize}\n{coreData.highlight}" +
+            //    $"\n{coreData.brushtype}" +
+            //    $"\n{coreData.cornerRadius}");
+
+
+            data_Handler.AddCoreData(coreData);
+
+            load_borderDefaults();
+        }
+
         private void load_borderDefaults()
         {
-            border.Background = new SolidColorBrush(coreData.background);
-
-            border.BorderBrush = new SolidColorBrush(coreData.borderbrush);
+            if (coreData.brushtype.Equals("SolidColorBrush"))
+            {
+                border.Background = new SolidColorBrush(coreData.background);
+                border.BorderBrush = new SolidColorBrush(coreData.borderbrush);
+            }
 
             border.CornerRadius = coreData.cornerRadius;
-
             border.BorderThickness = coreData.thickness;
 
+            load_CoreCanvas();
         }
 
 
@@ -100,15 +111,10 @@ namespace AidingElementsUserInterface
             Keyboard.Focus(canvas);
         }
 
-        private void load_CoreData()
-        {
-            // if default_file not found
-            coreData = new CoreData();
-        }
-
-
         public void quitAEUI()
         {
+            new XML_Handler(coreData).CoreData_save();
+
             Application.Current.Shutdown();
         }
 
@@ -152,8 +158,24 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.F1)
+            {
 
-            e.Handled = true;
+                e.Handled = true;
+            }
+
+            if (e.Key == Key.F2)
+            {
+
+                e.Handled = true;
+            }
+
+            if (e.Key == Key.F3)
+            {
+
+                e.Handled = true;
+
+            }
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -202,3 +224,7 @@ namespace AidingElementsUserInterface
         #endregion events
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

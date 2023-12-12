@@ -222,11 +222,11 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
             {
                 if (cud.based_on_AB.Length > 1)
                 {                    
-                    foreach (CostUpdateData cud_item in SharedLogic.GetFlatShareCC().getCostUpdates())
+                    foreach (CostUpdateData cud_item in new SharedLogic().GetFlatShareCC().getCostUpdates())
                     {
                         string header = $"{cud_item.cause} - {cud_item.cost_update_received:d}";
 
-                        MessageBox.Show(header + "\n" + cud.based_on_AB);
+                        //MessageBox.Show(header + "\n" + cud.based_on_AB);
 
                         if (cud.based_on_AB == header)
                         {
@@ -289,3 +289,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

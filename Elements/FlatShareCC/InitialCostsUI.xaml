@@ -1,4 +1,14 @@
-﻿<UserControl x:Class="AidingElementsUserInterface.Elements.FlatShareCC.InitialCostsUI"
+﻿<!-- 
+    Aidinig Elements User Interface
+    
+    InitialCostsUI.xaml file
+    
+    file documentation can be found at:
+        InitialCostsUI.cs
+        ...?
+    -->
+<UserControl x:Class="AidingElementsUserInterface.Elements.FlatShareCC.InitialCostsUI"
+             x:Name="__InitialCostsUI"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -42,3 +52,4 @@
         </StackPanel>
     </ScrollViewer>
 </UserControl>
+<!-- end of file -->

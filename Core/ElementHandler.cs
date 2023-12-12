@@ -26,7 +26,7 @@ namespace AidingElementsUserInterface.Core
         private Dictionary<CoreContainer, CoreCanvas> containerLocations = new Dictionary<CoreContainer, CoreCanvas>();
 
         private Dictionary<CoreContainer, UserControl> containerContents = new Dictionary<CoreContainer, UserControl>();
-                
+
         internal ElementHandler()
         {
 
@@ -86,8 +86,16 @@ namespace AidingElementsUserInterface.Core
 
         internal bool removeElement(CoreContainer container)
         {
+            if (container.GetContainerData().getContent() is FlatShareCC flatShareCC)
+            {
+                flatShareCC.end_this();
+            }
+
             try
             {
+
+
+
                 containerLocations.Remove(container);
                 containerContents.Remove(container);
             }
@@ -102,3 +110,7 @@ namespace AidingElementsUserInterface.Core
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

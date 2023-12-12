@@ -21,16 +21,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Xml;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class XML_Handler : IO_Handler
     {
-        private MyNote myNote_element;
+        internal CoreData coreData_data { get; set; }
+        internal FlatData flatShareCC_data { get; set; }
+        internal MyNote myNote_element { get; set; }
+
+        internal XML_Handler(CoreData coreData) : base(coreData)
+        {
+
+        }
 
         internal XML_Handler(FlatData flatShareCC) : base(flatShareCC)
         {
+            flatShareCC_data = flatShareCC;
         }
 
         internal XML_Handler(MyNote myNote) : base(myNote)
@@ -45,6 +54,141 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         //        Directory.CreateDirectory(path);
         //    }
         //}
+
+        // Core loading and saving via XML
+        #region Core
+        #region CoreData loading
+        internal CoreData? CoreData_load()
+        {
+            SharedLogic logic = new SharedLogic();
+
+            CoreData coreData = new CoreData(true);
+            XmlDocument xmlDocument = new XmlDocument();
+
+            
+            if (File.Exists(CoreData_file))
+            {
+                xmlDocument.Load(CoreData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode node_CoreData = node.SelectSingleNode("CoreData");
+
+                if (node != null && node_CoreData != null)
+                {
+                    coreData.brushtype = node_CoreData.SelectSingleNode("brushtype").InnerText;
+
+                    coreData.background = logic.ParseColor(node_CoreData.SelectSingleNode("background").InnerText);
+                    coreData.borderbrush = logic.ParseColor(node_CoreData.SelectSingleNode("borderbrush").InnerText);
+                    coreData.foreground = logic.ParseColor(node_CoreData.SelectSingleNode("foreground").InnerText);
+                    coreData.highlight = logic.ParseColor(node_CoreData.SelectSingleNode("highlight").InnerText);
+
+                    coreData.cornerRadius = logic.ParseCornerRadius(node_CoreData.SelectSingleNode("cornerRadius").InnerText);
+
+                    coreData.thickness = logic.ParseThickness(node_CoreData.SelectSingleNode("thickness").InnerText);
+
+                    coreData.fontSize = Int32.Parse(node_CoreData.SelectSingleNode("fontSize").InnerText);
+                    coreData.fontFamily = new FontFamily(node_CoreData.SelectSingleNode("fontFamily").InnerText);
+
+                    // path values
+                    //public string imageFilePath { get; set; }
+                    coreData.buttonImageFilePath = node_CoreData.SelectSingleNode("buttonImageFilePath").InnerText;
+                    coreData.containerImageFilePath = node_CoreData.SelectSingleNode("containerImageFilePath").InnerText;
+
+                    // main window size values
+                    coreData.mainWindowHeight = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowHeight").InnerText);
+                    coreData.mainWindowWidth = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowWidth").InnerText);
+
+                    return coreData;
+                }
+
+                return null;
+
+            }
+
+            return null;
+        }
+
+        #endregion CoreData loading
+
+        #region CoreData saving
+        internal void CoreData_save()
+        {
+            coreData_data = new SharedLogic().GetDataHandler().GetCoreData();
+
+            XmlDocument xmlDocument = new XmlDocument();
+
+            XmlNode node = xmlDocument.CreateElement("Core");
+            xmlDocument.AppendChild(node);
+
+            XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+            XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+            brushtype.InnerText = coreData_data.brushtype;
+            node_CoreData.AppendChild(brushtype);
+
+            XmlNode background = xmlDocument.CreateElement("background");
+            background.InnerText = coreData_data.background.ToString();
+            node_CoreData.AppendChild(background);
+
+            XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
+            borderbrush.InnerText = coreData_data.borderbrush.ToString();
+            node_CoreData.AppendChild(borderbrush);
+            
+            XmlNode foreground = xmlDocument.CreateElement("foreground");
+            foreground.InnerText = coreData_data.foreground.ToString();
+            node_CoreData.AppendChild(foreground);
+
+            XmlNode highlight = xmlDocument.CreateElement("highlight");
+            highlight.InnerText = coreData_data.highlight.ToString();
+            node_CoreData.AppendChild(highlight);
+
+            XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
+            cornerRadius.InnerText = coreData_data.cornerRadius.ToString();
+            node_CoreData.AppendChild(cornerRadius);
+
+            XmlNode thickness = xmlDocument.CreateElement("thickness");
+            thickness.InnerText = coreData_data.thickness.ToString();
+            node_CoreData.AppendChild(thickness);
+            
+            XmlNode fontSize = xmlDocument.CreateElement("fontSize");
+            fontSize.InnerText = coreData_data.fontSize.ToString();
+            node_CoreData.AppendChild(fontSize);
+
+            XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
+            fontFamily.InnerText = coreData_data.fontFamily.ToString();
+            node_CoreData.AppendChild(fontFamily);
+
+            XmlNode buttonImageFilePath = xmlDocument.CreateElement("buttonImageFilePath");
+            buttonImageFilePath.InnerText = coreData_data.buttonImageFilePath;
+            node_CoreData.AppendChild(buttonImageFilePath);
+
+            XmlNode containerImageFilePath = xmlDocument.CreateElement("containerImageFilePath");
+            containerImageFilePath.InnerText = coreData_data.containerImageFilePath;
+            node_CoreData.AppendChild(containerImageFilePath);
+
+            XmlNode mainWindowHeight = xmlDocument.CreateElement("mainWindowHeight");
+            mainWindowHeight.InnerText = coreData_data.mainWindowHeight.ToString();
+            node_CoreData.AppendChild(mainWindowHeight);
+
+            XmlNode mainWindowWidth = xmlDocument.CreateElement("mainWindowWidth");
+            mainWindowWidth.InnerText = coreData_data.mainWindowWidth.ToString();
+            node_CoreData.AppendChild(mainWindowWidth);
+             
+            node.AppendChild(node_CoreData);
+
+            try
+            {
+                xmlDocument.Save(CoreData_file);
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+        #endregion CoreData saving
+        #endregion Core
+
+
 
         // FlatShareCostCalculator loading and saving via XML
         #region FlatShareCC
@@ -169,6 +313,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             FlatData flatData = new FlatData();
             FlatCosts flatCosts = new FlatCosts();
 
+            data_list.Add(flatData);
+            data_list.Add(flatCosts);
+
+            //MessageBox.Show(File.Exists(FlatShareCC_data_file).ToString());
 
             if (File.Exists(FlatShareCC_data_file))
             {
@@ -179,6 +327,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 if (SharedApartmentCalculator != null && initial_contract != null)
                 {
+                    data_list.Clear();
+
                     XmlNode living_space = initial_contract.SelectSingleNode("flat_space");
                     flatData.flat_space = Double.Parse(living_space.InnerText);
 
@@ -210,12 +360,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     data_list.Add(flatData);
                     data_list.Add(flatCosts);
 
-                    MessageBox.Show("Loading completed");
-
                     return data_list;
                 }
 
-                return null;
+                return data_list;
             }
 
             return null;
@@ -648,7 +796,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             }
 
-        
+
         }
         #endregion MyNote saving
         #endregion MyNote
@@ -673,3 +821,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

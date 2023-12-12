@@ -63,8 +63,6 @@ namespace AidingElementsUserInterface.Core
             TX.IsReadOnly = tx_readonly;
 
             TB_R.Text = tb_right;
-
-
         }
 
 
@@ -266,11 +264,15 @@ namespace AidingElementsUserInterface.Core
         private void TX_GotFocus(object sender, RoutedEventArgs e)
         {
             TX.SelectAll();
+
+            e.Handled = true;
         }
 
         private void TX_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             TX.SelectAll();
+
+            e.Handled = true;
         }
 
         private void TX_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -278,7 +280,21 @@ namespace AidingElementsUserInterface.Core
             if (e.ChangedButton == MouseButton.Left)
             {
                 TX.SelectAll();
+
+                e.Handled = true;
+            }
+        }
+
+        private void TX_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                e.Handled = true;
             }
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

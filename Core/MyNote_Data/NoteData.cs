@@ -37,3 +37,7 @@ namespace AidingElementsUserInterface.Core.MyNote_Data
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

@@ -1,4 +1,14 @@
-﻿<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.MatrixElement"
+﻿<!-- 
+    Aidinig Elements User Interface
+    
+    MatrixElement.xaml file
+    
+    file documentation can be found at:
+        MatrixElement.cs
+        ...?
+    -->
+<UserControl x:Class="AidingElementsUserInterface.Elements.MyNote.MatrixElement"
+             x:Name="__MatrixElement"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -57,3 +67,4 @@
         <StackPanel x:Name="SP" Orientation="Horizontal"/>
     </StackPanel>
 </UserControl>
+<!-- end of file -->

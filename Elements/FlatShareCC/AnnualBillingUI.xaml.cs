@@ -27,7 +27,10 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         public AnnualBillingUI()
         {
-            costUpdateData = new CostUpdateData(SharedLogic.GetFlatShareCC().getFlatData(), SharedLogic.GetFlatShareCC().getFlatCosts());
+            costUpdateData = new CostUpdateData(
+                new SharedLogic().GetFlatShareCC().getFlatData(),
+                new SharedLogic().GetFlatShareCC().getFlatCosts()
+                );
 
             InitializeComponent();
 
@@ -137,7 +140,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         {
             SP_room_consumption.Children.Clear();
 
-            FlatData flatData = SharedLogic.GetFlatShareCC().getFlatData();
+            FlatData flatData = new SharedLogic().GetFlatShareCC().getFlatData();
 
             foreach (RoomData room in flatData.rooms)
             {
@@ -299,3 +302,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

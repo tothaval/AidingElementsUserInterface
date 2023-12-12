@@ -1,4 +1,14 @@
-﻿<UserControl x:Class="AidingElementsUserInterface.Elements.FlatShareCC.RentOutputUI"
+﻿<!-- 
+    Aidinig Elements User Interface
+    
+    RentOutputUI.xaml file
+    
+    file documentation can be found at:
+        RentOutputUI.cs
+        ...?
+    -->
+<UserControl x:Class="AidingElementsUserInterface.Elements.FlatShareCC.RentOutputUI"
+             x:Name="__RentOutputUI"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -104,3 +114,4 @@
         </StackPanel>
     </ScrollViewer>
 </UserControl>
+<!-- end of file -->

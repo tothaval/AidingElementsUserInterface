@@ -8,6 +8,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core;
+using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace AidingElementsUserInterface.Elements
         #region constructors
         public Manual()
         {
-            config = new ContainerData(__Manual);
+            config = new ContainerData(new SharedLogic().GetDataHandler().GetCoreData(), __Manual);
 
             InitializeComponent();
 
@@ -69,7 +70,7 @@ namespace AidingElementsUserInterface.Elements
         private void build()
         {
 
-            __Manual.FontFamily = config.fontFamiliy;
+            __Manual.FontFamily = config.fontFamily;
             __Manual.FontSize = config.fontSize;
 
             Background = new SolidColorBrush(Colors.Transparent);

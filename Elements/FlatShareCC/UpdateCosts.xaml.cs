@@ -37,9 +37,12 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         {
             InitializeComponent();
 
-            costUpdateData = new CostUpdateData(SharedLogic.GetFlatShareCC().getFlatData(), SharedLogic.GetFlatShareCC().getFlatCosts());
+            costUpdateData = new CostUpdateData(
+                new SharedLogic().GetFlatShareCC().getFlatData(),
+                new SharedLogic().GetFlatShareCC().getFlatCosts()
+                );
             
-            SharedLogic.GetFlatShareCC().addCostUpdate(costUpdateData);
+            new SharedLogic().GetFlatShareCC().addCostUpdate(costUpdateData);
 
             setup_edit_tab();
 
@@ -204,7 +207,8 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         private void reset_costUpdateData()
         {
             costUpdateData = new CostUpdateData(
-                SharedLogic.GetFlatShareCC().getFlatData(), SharedLogic.GetFlatShareCC().getFlatCosts()
+                new SharedLogic().GetFlatShareCC().getFlatData(),
+                new SharedLogic().GetFlatShareCC().getFlatCosts()
                 );
 
             SP_new_costs_result.Children.Clear();
@@ -253,19 +257,26 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private void set_header()
         {
-            UpdateCostsUI costsUI = SharedLogic.GetFlatShareCC().UpdateCostsUI_object;
+            UpdateCostsUI costsUI = new SharedLogic().GetFlatShareCC().UpdateCostsUI_object;
 
             int index = costsUI.MainTabControl.SelectedIndex;
 
-            TabItem item = (TabItem)costsUI.MainTabControl.Items[index];
-
-            if (this.Parent as TabItem != null)
+            try
             {
-                item = this.Parent as TabItem;
+                TabItem item = (TabItem)costsUI.MainTabControl.Items[index];
 
-                item.Header = header_string();
+                if (this.Parent as TabItem != null)
+                {
+                    item = this.Parent as TabItem;
 
-                item.ToolTip = $"period start {costUpdateData.period_start:d}\nperiod end {costUpdateData.period_end:d}";
+                    item.Header = header_string();
+
+                    item.ToolTip = $"period start {costUpdateData.period_start:d}\nperiod end {costUpdateData.period_end:d}";
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
 
@@ -509,7 +520,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
                 }
             }
 
-            foreach (CostUpdateData item in SharedLogic.GetFlatShareCC().getCostUpdates())
+            foreach (CostUpdateData item in new SharedLogic().GetFlatShareCC().getCostUpdates())
             {
                 ComboBoxItem comboBoxItem = new ComboBoxItem();
 
@@ -665,3 +676,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

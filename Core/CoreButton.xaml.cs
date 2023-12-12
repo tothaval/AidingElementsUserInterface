@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,7 +74,7 @@ namespace AidingElementsUserInterface.Core
         {
             await Task.Delay(12);
 
-            config = new ButtonData();
+            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
 
             config.background = Colors.DarkGreen;
             config.foreground = Colors.Yellow;
@@ -139,7 +140,7 @@ namespace AidingElementsUserInterface.Core
 
         public void _point_expander()
         {
-            config = new ButtonData();
+            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
             
             button.Content = "";
             
@@ -149,7 +150,7 @@ namespace AidingElementsUserInterface.Core
 
         public void _expander(bool vertical)
         {
-            config = new ButtonData();
+            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
             
             button.Content = "";
             
@@ -170,7 +171,7 @@ namespace AidingElementsUserInterface.Core
 
         public void setShapeAsContent(Shape shape)
         {
-            config = new ButtonData();
+            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
 
             //shape.Fill = config.btnBackColor;
             //shape.Stroke = config.btnForeColor;

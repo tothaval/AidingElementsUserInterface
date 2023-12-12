@@ -45,7 +45,7 @@ namespace AidingElementsUserInterface.Core
         #region constructors
         public CoreContainer(UserControl element, CoreCanvas canvas)
         {
-            containerData = new ContainerData(element);
+            containerData = new ContainerData(new SharedLogic().GetDataHandler().GetCoreData(), element);
 
             this.canvas = canvas;
 
@@ -82,7 +82,7 @@ namespace AidingElementsUserInterface.Core
         private void build()
         {
             __CoreContainer.FontSize = containerData.fontSize;
-            __CoreContainer.FontFamily = containerData.fontFamiliy;
+            __CoreContainer.FontFamily = containerData.fontFamily;
 
             rightExpander = new CorePanel();
             rightExpander.createElementOptionsPanel();
@@ -163,12 +163,16 @@ namespace AidingElementsUserInterface.Core
             return containerData;
         }
 
-        private void initialize_container()
+        private async void initialize_container()
         {
+            await Task.Delay(10);
+
             if (containerData.getContent() == null)
             {
                 containerData.setContent(new UserControl());
             }
+
+            content_border.Child = null;
 
             content_border.Child = containerData.getContent();
 
@@ -239,8 +243,10 @@ namespace AidingElementsUserInterface.Core
 
             if (e.ChangedButton == MouseButton.Right)
             {
-                SharedLogic.GetMainWindow().handler.removeElement(__CoreContainer);
+                new SharedLogic().GetElementHandler().removeElement(__CoreContainer);
                 canvas.canvas.Children.Remove(__CoreContainer);
+
+                content_border.Child = null;
 
                 e.Handled = true;
             }
@@ -293,3 +299,7 @@ namespace AidingElementsUserInterface.Core
         #endregion element mouse events
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

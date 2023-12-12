@@ -104,7 +104,7 @@ namespace AidingElementsUserInterface.Core
         {
 
             //uie_textbox.MaxWidth = mainWindow.MainWindowCanvas.RenderSize.Width / 4;  //mainWindow.last_width;
-            textbox.MaxHeight = SharedLogic.GetMainWindow().RenderSize.Height * limitationValue; //mainWindow.last_height;
+            textbox.MaxHeight = new SharedLogic().GetMainWindow().RenderSize.Height * limitationValue; //mainWindow.last_height;
         }
 
         public void _heightLimitationBasedOnUserControl(UserControl usc, double limitationValue)
@@ -144,7 +144,7 @@ namespace AidingElementsUserInterface.Core
         public void _widthLimitationBasedOnMainWindow(UserControl initiator, double limitationValue)
         {
             //uie_textbox.MaxWidth = mainWindow.MainWindowCanvas.RenderSize.Width / 4;  //mainWindow.last_width;
-            textbox.MaxWidth = SharedLogic.GetMainWindow().RenderSize.Width * limitationValue; //mainWindow.last_height;
+            textbox.MaxWidth = new SharedLogic().GetMainWindow().RenderSize.Width * limitationValue; //mainWindow.last_height;
         }
 
         public void _widthLimitationBasedOnUserControl(UserControl usc, double limitationValue)

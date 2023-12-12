@@ -76,3 +76,7 @@ namespace AidingElementsUserInterface.Texts
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */
