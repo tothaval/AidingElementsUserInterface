@@ -8,6 +8,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core;
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Texts;
 using System;
@@ -36,9 +37,8 @@ namespace AidingElementsUserInterface.Elements
         #region global classes, properties and variables   
         public int containerElementIndex = 0;
 
-        private ContainerData config;
-
         private TXT_Manual info;
+
         private CoreButton CB_PageLeft = new CoreButton("<");
         private CoreButton CB_PageRight = new CoreButton(">");
         private CoreTextBox textbox = new CoreTextBox();
@@ -51,14 +51,7 @@ namespace AidingElementsUserInterface.Elements
         #region constructors
         public Manual()
         {
-            config = new ContainerData(new SharedLogic().GetDataHandler().GetCoreData(), __Manual);
-
             InitializeComponent();
-
-            horizontalWrapPanel.Children.Add(CB_PageLeft);
-            horizontalWrapPanel.Children.Add(CB_PageRight);
-
-            verticalWrapPanel.Children.Add(textbox);
 
             build();
         }
@@ -69,6 +62,14 @@ namespace AidingElementsUserInterface.Elements
         #region element design and functionality
         private void build()
         {
+            Data_Handler data_Handler = new SharedLogic().GetDataHandler();
+
+            CoreData config = data_Handler.LoadCoreData();
+
+            horizontalWrapPanel.Children.Add(CB_PageLeft);
+            horizontalWrapPanel.Children.Add(CB_PageRight);
+
+            verticalWrapPanel.Children.Add(textbox);
 
             __Manual.FontFamily = config.fontFamily;
             __Manual.FontSize = config.fontSize;
@@ -77,10 +78,6 @@ namespace AidingElementsUserInterface.Elements
             Foreground = new SolidColorBrush(config.foreground);
 
             loadInfoTextStrings();
-
-            configureInfoElement();
-
-            showManualPage();
         }
 
 
@@ -95,6 +92,8 @@ namespace AidingElementsUserInterface.Elements
             textbox._heightLimitationBasedOnMainWindow(__Manual, 0.75);
             textbox._widthLimitationBasedOnMainWindow(__Manual, 0.75);
             textbox._scrolling();
+
+            showManualPage();
         }
 
         // maybe work with lists to enlist textboxes and texts, which could simplify the page turning
@@ -113,6 +112,8 @@ namespace AidingElementsUserInterface.Elements
             content_pages.Add(info.tb_LicenseTerms());
             //content_pages.Add(info.);
             //content_pages.Add();
+
+            configureInfoElement();
         }
 
         private void managePageCounter()

@@ -33,6 +33,7 @@ using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
+using AidingElementsUserInterface.Core.AEUI_Data;
 
 namespace AidingElementsUserInterface
 {
@@ -42,11 +43,12 @@ namespace AidingElementsUserInterface
     public partial class MainWindow : Window
     {
         internal CoreCanvas canvas;
-        internal CoreData coreData;
+        internal MainWindowData mainWindowData;
 
         internal Data_Handler data_Handler = new Data_Handler();
 
         internal ElementHandler handler = new ElementHandler();
+
 
         public MainWindow()
         {
@@ -58,23 +60,21 @@ namespace AidingElementsUserInterface
 
         private void build()
         {            
-            load_coreData();
+            load_MainWindowData();
         }
 
 
         // processing
         #region processing
-        private async void load_coreData()
+        private async void load_MainWindowData()
         {
-            coreData = data_Handler.LoadCoreData();
+            mainWindowData = data_Handler.LoadMainWindowData();
 
             //await Task.Delay(10);
 
-            if (coreData == null)
+            if (mainWindowData == null)
             {
-                MessageBox.Show("hi");
-
-                coreData = new CoreData();
+                mainWindowData = new MainWindowData();
             }
 
             //MessageBox.Show($"{coreData.mainWindowWidth}\n{coreData.fontSize}\n{coreData.highlight}" +
@@ -82,21 +82,21 @@ namespace AidingElementsUserInterface
             //    $"\n{coreData.cornerRadius}");
 
 
-            data_Handler.AddCoreData(coreData);
+            data_Handler.AddData(mainWindowData);
 
             load_borderDefaults();
         }
 
         private void load_borderDefaults()
         {
-            if (coreData.brushtype.Equals("SolidColorBrush"))
+            if (mainWindowData.brushtype.Equals("SolidColorBrush"))
             {
-                border.Background = new SolidColorBrush(coreData.background);
-                border.BorderBrush = new SolidColorBrush(coreData.borderbrush);
+                border.Background = new SolidColorBrush(mainWindowData.background);
+                border.BorderBrush = new SolidColorBrush(mainWindowData.borderbrush);
             }
 
-            border.CornerRadius = coreData.cornerRadius;
-            border.BorderThickness = coreData.thickness;
+            border.CornerRadius = mainWindowData.cornerRadius;
+            border.BorderThickness = mainWindowData.thickness;
 
             load_CoreCanvas();
         }
@@ -113,7 +113,10 @@ namespace AidingElementsUserInterface
 
         public void quitAEUI()
         {
-            new XML_Handler(coreData).CoreData_save();
+            new XML_Handler(mainWindowData).ButtonData_save();
+            new XML_Handler(mainWindowData).CoreData_save();
+            new XML_Handler(mainWindowData).MainWindowData_save();
+            new XML_Handler(mainWindowData).TextBoxData_save();
 
             Application.Current.Shutdown();
         }

@@ -120,12 +120,14 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private async void __FlatShareCC_loading_intervall(object sender, EventArgs e)
         {
-            FlatDataUI_object.focus();
+
 
             if (load_data())
             {
                 FlatDataUI_object.load_data(flatData);
-                InitialCostsUI_object.load_data(flatCosts);
+                InitialCostsUI_object.load_data(flatCosts); 
+                
+                FlatDataUI_object.focus();
             }
             
             load_costUpdates();

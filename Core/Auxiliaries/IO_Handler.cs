@@ -9,6 +9,7 @@
  * 
  * origin:      MyNote_2023_11_01
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.FlatShareCC_Data;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using AidingElementsUserInterface.Elements.FlatShareCC;
@@ -25,8 +26,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
     internal class IO_Handler
     {
         // Core paths
+        #region Core paths
+        // files
+        internal string ButtonData_file = @".\data\Core\buttondata.xml";        
         internal string CoreData_file = @".\data\Core\coredata.xml";
-        internal string Core_xml_folder = @"data\Core\";
+        internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
+        internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
+        // folders
+        internal string Core_xml_folder = @"data\Core\";        
+        internal string ContainerData_xml_folder = @"data\Core\ContainerData\";
+        #endregion Core paths
 
         //FlatShareCostCalculator paths
         internal string FlatShareCC_data_file = @".\data\FlatShareCC\data.xml";
@@ -42,6 +51,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal IO_Handler(CoreData coreData)
         {
             check_path(Core_xml_folder);
+            check_path(ContainerData_xml_folder);
         }
 
         internal IO_Handler(FlatData flatShareCC)

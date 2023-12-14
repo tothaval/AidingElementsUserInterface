@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace AidingElementsUserInterface.Core
 {
@@ -31,25 +33,22 @@ namespace AidingElementsUserInterface.Core
     /// </summary>
     public partial class CoreContainer : UserControl
     {
-        private CoreButton leftExpanderButton = new CoreButton(true);
-        private CoreButton rightExpanderButton = new CoreButton(true);
-        public CorePanel rightExpander;
-        public bool rightExpanderLoadValue = true;
-
         private CoreCanvas canvas;
         private ContainerData containerData;
 
         private Point dragPoint = new Point();
         private bool elementDrag = false;
 
+        private bool container_is_selected = false;
+
         #region constructors
         public CoreContainer(UserControl element, CoreCanvas canvas)
         {
-            containerData = new ContainerData(new SharedLogic().GetDataHandler().GetCoreData(), element);
+            InitializeComponent();
 
             this.canvas = canvas;
 
-            InitializeComponent();
+            containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
 
             initialize_container();
 
@@ -61,18 +60,6 @@ namespace AidingElementsUserInterface.Core
             //
             //if (loadTickCounter == 1 || loadTickCounter < 2)
             //{
-            //    rightExpander = new CorePanel( CORE_ContainerElement);
-            //    rightExpander.createElementOptionsPanel();
-            //    rightExpander.DVIB_amount_and_thickness.Visibility = Visibility.Collapsed;
-            //    rightExpander.element_wrapper.Orientation = Orientation.Vertical;
-            //
-            //    if (rightExpander != null)
-            //    {
-            //        rightExpander.ui_eventHandlingChoice.IsChecked = rightExpanderLoadValue;
-            //    }
-            //    alterFontValuesOnContainerElement();
-            //
-            //    alterAppearance();
             //
             //    _loadtimer.Stop();
             //}
@@ -84,21 +71,6 @@ namespace AidingElementsUserInterface.Core
             __CoreContainer.FontSize = containerData.fontSize;
             __CoreContainer.FontFamily = containerData.fontFamily;
 
-            rightExpander = new CorePanel();
-            rightExpander.createElementOptionsPanel();
-            rightExpander.wrapper.Orientation = Orientation.Vertical;
-
-            // element arrangement
-            #region element arrangement
-            ui_border_ExpansionArea_right.Visibility = Visibility.Collapsed;
-            ui_border_ExpansionArea_right.Background = new SolidColorBrush(Colors.Transparent);
-            ui_border_ExpansionArea_right.BorderBrush = new SolidColorBrush(Colors.Transparent);
-
-            ui_border_rightExpander.Margin = new Thickness(7, 0, 7, 0);
-
-            ui_border_ExpansionArea_right.Child = rightExpander;
-            #endregion element arrangement
-
             Background = new SolidColorBrush(Colors.Transparent);
             Foreground = new SolidColorBrush(containerData.foreground);
 
@@ -108,54 +80,15 @@ namespace AidingElementsUserInterface.Core
             element_border.Background = new SolidColorBrush(containerData.background);
             element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
 
-            rightExpander.ui_eventHandlingChoice.Background = new SolidColorBrush(containerData.foreground);
-
             configure_CORE_ContainerElement();
         }
 
 
         private void configure_CORE_ContainerElement()
         {
-            element_border.MouseLeftButtonDown += Element_border_MouseLeftButtonDown;
-
-            //content_border.MouseDown += ui_border_ElementContainer_MouseDown;
-            //content_border.MouseMove += ui_border_ElementContainer_MouseMove;
-            //content_border.MouseUp += ui_border_ElementContainer_MouseUp;
-
             element_border.MouseDown += Element_border_MouseDown;
             element_border.MouseMove += Element_border_MouseMove;
             element_border.MouseUp += Element_border_MouseUp;
-
-
-            //rightExpanderButton.ui_button.Click += Ui_button_rightExpander_Click;
-
-            ui_border_rightExpander.Child = rightExpanderButton;
-
-            leftExpanderButton._expander(true);
-            rightExpanderButton._expander(true);
-
-            //if (config.showPanels && !invisibleContainer)
-            //{
-            //    showPanelExpanders();
-            //}
-            //else
-            //{
-            //    hideSidePanels();
-            //}
-            //
-            //if (config.showTooltips)
-            //{
-            //    showTooltips();
-            //}
-            //else
-            //{
-            //    hideTooltips();
-            //}
-            //
-            //if (config.containerImageFilePath.Length > 4)
-            //{
-            //    element_border.Background = YS_CLASS_ConfigData.Return_ImageBrush(config.containerImageFilePath);
-            //}
         }
 
         internal ContainerData GetContainerData()
@@ -165,6 +98,8 @@ namespace AidingElementsUserInterface.Core
 
         private async void initialize_container()
         {
+
+
             await Task.Delay(10);
 
             if (containerData.getContent() == null)
@@ -179,23 +114,20 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        //public void reloadConfig()
-        //{
-        //    config = new YS_CLASS_ConfigData();
-        //
-        //    CORE_ContainerElement.FontFamily = config.font;
-        //
-        //    dragLevel = config.dragLevel;
-        //    element_border.CornerRadius = new CornerRadius(config.borderRadius);
-        //    element_border.BorderThickness = new Thickness(config.borderThickness);
-        //
-        //    color1_string = config.backColor.ToString();
-        //    color2_string = config.foreColor.ToString();
-        //
-        //    setColors();
-        //
-        //    finishSetup();
-        //}
+        private void selected()
+        {
+            if (container_is_selected)
+            {
+                container_is_selected = false;
+
+                element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
+            }
+            else
+            {
+                container_is_selected = true;
+                element_border.BorderBrush = new SolidColorBrush(containerData.highlight);
+            }
+        }
 
         private void setColors()
         {
@@ -203,19 +135,19 @@ namespace AidingElementsUserInterface.Core
             //imageIsBackground = false;
 
             ContainerLogic.ApplyColorOnBorder(
-                ref element_border,
-                ref containerData.brushType,
-                ref containerData.brushOrientation,
-                ref containerData.color1_string,
-                ref containerData.color2_string,
-                ref containerData.color3_string,
-                ref containerData.color4_string
+                element_border,
+                containerData.GetColorData().brushtype,
+                containerData.GetColorData().brushOrientation,
+                containerData.GetColorData().color1_string,
+                containerData.GetColorData().color2_string,
+                containerData.GetColorData().color3_string,
+                containerData.GetColorData().color4_string
                 );
         }
 
         private void Container_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         // element mouse events
@@ -226,16 +158,17 @@ namespace AidingElementsUserInterface.Core
             {
                 ContainerLogic.DragStart(
                     ref elementDrag,
-                    ref __CoreContainer,
-                    containerData.z_position,
-                    containerData.dragLevel,
+                    __CoreContainer,
+                    ref containerData.z_position,
+                    ref containerData.dragLevel,
                     ref dragPoint,
                     ref canvas
                     );
 
+
                 //mainWindow.writing = false;
                 ////Keyboard.ClearFocus();
-                //Keyboard.Focus(mainWindow.focusTarget);
+                Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);
 
                 e.Handled = true;
             }
@@ -243,7 +176,7 @@ namespace AidingElementsUserInterface.Core
 
             if (e.ChangedButton == MouseButton.Right)
             {
-                new SharedLogic().GetElementHandler().removeElement(__CoreContainer);
+                new SharedLogic().GetElementHandler().removeElement((CoreContainer)__CoreContainer);
                 canvas.canvas.Children.Remove(__CoreContainer);
 
                 content_border.Child = null;
@@ -256,7 +189,7 @@ namespace AidingElementsUserInterface.Core
         {
             ContainerLogic.DragMove(
                 ref elementDrag,
-                ref __CoreContainer,
+                (CoreContainer)__CoreContainer,
                 ref dragPoint,
                 ref canvas
                 );
@@ -268,9 +201,11 @@ namespace AidingElementsUserInterface.Core
             {
                 ContainerLogic.DragStop(
                     ref elementDrag,
-                    ref __CoreContainer,
-                    containerData.z_position
+                    (CoreContainer)__CoreContainer,
+                    ref containerData.z_position
                     );
+
+                selected();
 
                 //int count = 0;
                 //foreach (YS_CORE_ContainerElement item in mainWindow.UIE_ModuleCreator.list_YS_CORE_ContainerElement)
@@ -289,13 +224,6 @@ namespace AidingElementsUserInterface.Core
                 e.Handled = true;
             }
         }
-
-
-        private void Element_border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         #endregion element mouse events
     }
 }

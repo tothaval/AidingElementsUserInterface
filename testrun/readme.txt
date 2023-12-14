@@ -8,23 +8,29 @@ files, dunno.
 
 currently implemented functions:
 
+
 elements can be moved via left mouse button
+
+left click on element will select that element, __WIP__
 
 right click on surface: instantiate a right click element, which allows
 	you to quit the application or shutdown your computer
 
-F1: instantiate Manual element (english language only)
+F1: instantiate Manual element (english language only), __WIP__
 	
 F2: instantiate MyNote element, an application for the creation of notes
 	to capture ideas, save and load of note contents now works
-	properly, the element itself is still work in progress(__WIP__)
+	properly, __WIP__
 
-F3: instantiate FlatShareCostCalculator element, still __WIP__
-
+F3: instantiate FlatShareCostCalculator element, __WIP__
 
 began implementing property saving and loading,
 once the ui was active for one time, a data folder will be created
 in the same folder where the binary is located. within this folder
-there is a core folder and within that is a coredata.xml file.
-manipulate the values of that file to change parts of the appearance.
-still wip, other data types will follow next.
+there is a core folder and within that are several ...data.xml files.
+manipulate the values of the files to change AEUIs appearance, __WIP__
+
+
+abbr:
+abbr	abbreviations
+__WIP__ work in progress

@@ -7,7 +7,9 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,29 +31,13 @@ namespace AidingElementsUserInterface.Core
     /// Interaktionslogik für CoreButton.xaml
     /// </summary>
     public partial class CoreButton : UserControl
-    {        
-        // global classes, properties and variables
-        #region global classes, properties and variables     
-        private bool expander = false;
-
-        ButtonData config;
-        #endregion global classes, properties and variables
-
+    { 
+        private ButtonData config;
 
         // constructors
         #region constructors
         public CoreButton()
         {
-            InitializeComponent();
-
-            build();
-        }
-
-
-        public CoreButton(bool expander_)
-        {
-            expander = expander_;
-
             InitializeComponent();
 
             build();
@@ -67,22 +53,24 @@ namespace AidingElementsUserInterface.Core
         }
         #endregion constructors
 
-
-        // element design and functionality
-        #region element design and functionality
         private async void build()
         {
-            await Task.Delay(12);
+            Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
-            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
+            config = data_Handler.LoadButtonData();
 
-            config.background = Colors.DarkGreen;
-            config.foreground = Colors.Yellow;
-            config.thickness = new Thickness(5);
-            config.cornerRadius = new CornerRadius(25);
-            config.highlight = Colors.Tomato;
-            config.borderbrush = Colors.Tan;
+            //await Task.Delay(10);
 
+            if (config == null)
+            {
+                MessageBox.Show("hgi");
+
+                config = new ButtonData();
+            }
+
+            data_Handler.AddData(config);
+
+            //await Task.Delay(12);
 
             this.Resources.Remove("buttonColor");
             this.Resources.Remove("forecolor");
@@ -96,7 +84,7 @@ namespace AidingElementsUserInterface.Core
 
             Style style = this.FindResource("buttonStyle") as Style;
 
-            if (config.buttonImageFilePath != null)
+            if (config.imageFilePath != null)
             {
                 //border.Background = config.Return_ImageBrush(config.buttonImageFilePath);
             }
@@ -112,11 +100,8 @@ namespace AidingElementsUserInterface.Core
             border.HorizontalAlignment = HorizontalAlignment.Stretch;
             border.VerticalAlignment = VerticalAlignment.Stretch;
 
-            if (expander == false)
-            {
-                button.MinWidth = config.width;
-                button.MinHeight = config.height;
-            }
+            button.MinWidth = config.width;
+            button.MinHeight = config.height;
 
             //button.Background = config.return_TransparentSolidColorBrush();
             button.Foreground = new SolidColorBrush(config.foreground);
@@ -136,32 +121,6 @@ namespace AidingElementsUserInterface.Core
         public void _enabled()
         {
             button.IsEnabled = true;
-        }
-
-        public void _point_expander()
-        {
-            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
-            
-            button.Content = "";
-            
-            button.Width = config.expanderSize;
-            button.Height = config.expanderSize;
-        }
-
-        public void _expander(bool vertical)
-        {
-            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
-            
-            button.Content = "";
-            
-            if (vertical == true)
-            {
-                button.Width = config.expanderSize;
-            }
-            else if (vertical == false)
-            {
-                button.Height = config.expanderSize;
-            }
         }
 
         public void setContent(string content)
@@ -184,8 +143,6 @@ namespace AidingElementsUserInterface.Core
         {
             this.ToolTip = tooltip;
         }
-        #endregion element design and functionality
-
 
         // element events
         #region element events

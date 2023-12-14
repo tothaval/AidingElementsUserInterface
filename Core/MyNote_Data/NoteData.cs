@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AidingElementsUserInterface.Core.AEUI_Data;
 
 namespace AidingElementsUserInterface.Core.MyNote_Data
 {

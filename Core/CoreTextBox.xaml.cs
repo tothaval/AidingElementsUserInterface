@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
@@ -30,13 +31,11 @@ namespace AidingElementsUserInterface.Core
     /// </summary>
     public partial class CoreTextBox : UserControl
     {
-        TextBoxData config;
+        private TextBoxData config;
 
         public CoreTextBox()
         {
             InitializeComponent();
-
-            config = new TextBoxData();
 
             build();
         }
@@ -47,13 +46,15 @@ namespace AidingElementsUserInterface.Core
 
             textbox.Text = content;
 
-            config = new TextBoxData();
-
             build();
         }
 
         private void build()
         {
+            Data_Handler data_Handler = new SharedLogic().GetDataHandler();
+
+            config = data_Handler.LoadTextBoxData();
+
             border.Background = new SolidColorBrush(config.background);
             border.BorderBrush = new SolidColorBrush(config.borderbrush);
             border.CornerRadius = config.cornerRadius;

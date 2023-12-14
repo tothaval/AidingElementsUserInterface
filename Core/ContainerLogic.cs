@@ -27,9 +27,9 @@ namespace AidingElementsUserInterface.Core
         // Container Movement
         public static void DragStart(
             ref bool elementDrag,
-            ref CoreContainer CORE_ContainerElement,
-            int z_position,
-            int dragLevel,
+            CoreContainer CORE_ContainerElement,
+            ref int z_position,
+            ref int dragLevel,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
@@ -49,7 +49,7 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragMove(
             ref bool elementDrag,
-            ref CoreContainer CORE_ContainerElement,
+            CoreContainer CORE_ContainerElement,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
@@ -68,8 +68,8 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragStop(
             ref bool elementDrag,
-            ref CoreContainer CORE_ContainerElement,
-            int z_position
+            CoreContainer CORE_ContainerElement,
+            ref int z_position
             )
         {
             elementDrag = false;
@@ -78,9 +78,9 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static void PositionUserControl(
-            ref UserControl userControl,
-            ref double x,
-            ref double y
+            UserControl userControl,
+            double x,
+            double y
             )
         {
             Canvas.SetLeft(userControl, x);
@@ -88,8 +88,8 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static void RotateUserControl(
-            ref UserControl userControl,
-            ref double angle
+            UserControl userControl,
+            double angle
             )
         {
             RotateTransform rt = new RotateTransform()
@@ -106,13 +106,13 @@ namespace AidingElementsUserInterface.Core
 
         // Container Coloring
         public static void ApplyColorOnBorder(
-         ref Border border,
-         ref int brushType,
-         ref int brushOrientation,
-         ref string color1_string,
-         ref string color2_string,
-         ref string color3_string,
-         ref string color4_string)
+            Border border,
+            string brushtype,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            string color4_string)
         {
             //if (brushType == 0)
             //{
@@ -219,14 +219,14 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static void ApplyColorOnCanvasElement(
-            ref Border border,
-            ref Canvas userControl,
-            ref int brushType,
-            ref int brushOrientation,
-            ref string color1_string,
-            ref string color2_string,
-            ref string color3_string,
-            ref string color4_string)
+            Border border,
+            Canvas userControl,
+            int brushType,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            string color4_string)
         {
             //if (brushType == 0)
             //{
@@ -345,13 +345,13 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static void ApplyColorOnShape(
-            ref Shape shape,
-            ref int brushType,
-            ref int brushOrientation,
-            ref string color1_string,
-            ref string color2_string,
-            ref string color3_string,
-            ref string color4_string,
+            Shape shape,
+            int brushType,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            string color4_string,
             bool polyline)
         {
             //if (brushType == 0)
@@ -487,13 +487,13 @@ namespace AidingElementsUserInterface.Core
 
 
         public static void ApplyColorOnText(
-         ref Label label,
-         ref int brushType,
-         ref int brushOrientation,
-         ref string color1_string,
-         ref string color2_string,
-         ref string color3_string,
-         ref string color4_string)
+            Label label,
+            int brushType,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            ref string color4_string)
         {
             //if (brushType == 0)
             //{
@@ -594,15 +594,15 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static void ApplyElementColorDataFromList(
-            ref List<object> list,
-            ref int brushType,
-            ref int brushOrientation,
-            ref string color1_string,
-            ref string color2_string,
-            ref string color3_string,
-            ref string color4_string,
-            ref string imageFilepath,
-            ref bool imageIsBackground)
+            List<object> list,
+            int brushType,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            string color4_string,
+            string imageFilepath,
+            bool imageIsBackground)
         {
             brushType = (int)list[0];
             brushOrientation = (int)list[1];
@@ -615,14 +615,14 @@ namespace AidingElementsUserInterface.Core
         }
 
         public static List<object> ReturnElementColorDataAsList(
-            ref int brushType,
-            ref int brushOrientation,
-            ref string color1_string,
-            ref string color2_string,
-            ref string color3_string,
-            ref string color4_string,
-            ref string imageFilepath,
-            ref bool imageIsBackground)
+            int brushType,
+            int brushOrientation,
+            string color1_string,
+            string color2_string,
+            string color3_string,
+            string color4_string,
+            string imageFilepath,
+            bool imageIsBackground)
         {
             List<object> list = new List<object>();
 

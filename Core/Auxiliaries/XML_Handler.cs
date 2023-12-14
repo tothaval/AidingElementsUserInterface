@@ -9,6 +9,7 @@
  * 
  * origin:      MyNote_2023_11_01
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.FlatShareCC_Data;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using AidingElementsUserInterface.Elements.FlatShareCC;
@@ -57,6 +58,137 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // Core loading and saving via XML
         #region Core
+
+        // ButtonData
+        // + color data? OR replace color values in core data OR if colordata == null, use coredata
+        #region ButtonData
+        #region ButtonData loading
+        internal ButtonData? ButtonData_load()
+        {
+            SharedLogic logic = new SharedLogic();
+
+            ButtonData buttonData = new ButtonData(true);
+            XmlDocument xmlDocument = new XmlDocument();
+
+
+            if (File.Exists(ButtonData_file))
+            {
+                xmlDocument.Load(ButtonData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode node_ButtonData = node.SelectSingleNode("CoreData");
+
+                if (node != null && node_ButtonData != null)
+                {
+                    buttonData.brushtype = node_ButtonData.SelectSingleNode("brushtype").InnerText;
+
+                    buttonData.background = logic.ParseColor(node_ButtonData.SelectSingleNode("background").InnerText);
+                    buttonData.borderbrush = logic.ParseColor(node_ButtonData.SelectSingleNode("borderbrush").InnerText);
+                    buttonData.foreground = logic.ParseColor(node_ButtonData.SelectSingleNode("foreground").InnerText);
+                    buttonData.highlight = logic.ParseColor(node_ButtonData.SelectSingleNode("highlight").InnerText);
+
+                    buttonData.cornerRadius = logic.ParseCornerRadius(node_ButtonData.SelectSingleNode("cornerRadius").InnerText);
+
+                    buttonData.thickness = logic.ParseThickness(node_ButtonData.SelectSingleNode("thickness").InnerText);
+
+                    buttonData.fontSize = Int32.Parse(node_ButtonData.SelectSingleNode("fontSize").InnerText);
+                    buttonData.fontFamily = new FontFamily(node_ButtonData.SelectSingleNode("fontFamily").InnerText);
+
+                    buttonData.height = Double.Parse(node_ButtonData.SelectSingleNode("height").InnerText);
+                    buttonData.width = Double.Parse(node_ButtonData.SelectSingleNode("width").InnerText);
+
+                    buttonData.imageFilePath = node_ButtonData.SelectSingleNode("imageFilePath").InnerText;
+
+
+                    return buttonData;
+                }
+
+                return null;
+
+            }
+
+            return null;
+        }
+        #endregion ButtonData loading
+
+        #region ButtonData saving
+        internal void ButtonData_save()
+        {
+            ButtonData buttonData = new SharedLogic().GetDataHandler().GetButtonData();
+
+            if (buttonData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_ButtonData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+                brushtype.InnerText = buttonData.brushtype;
+                node_ButtonData.AppendChild(brushtype);
+
+                XmlNode background = xmlDocument.CreateElement("background");
+                background.InnerText = buttonData.background.ToString();
+                node_ButtonData.AppendChild(background);
+
+                XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
+                borderbrush.InnerText = buttonData.borderbrush.ToString();
+                node_ButtonData.AppendChild(borderbrush);
+
+                XmlNode foreground = xmlDocument.CreateElement("foreground");
+                foreground.InnerText = buttonData.foreground.ToString();
+                node_ButtonData.AppendChild(foreground);
+
+                XmlNode highlight = xmlDocument.CreateElement("highlight");
+                highlight.InnerText = buttonData.highlight.ToString();
+                node_ButtonData.AppendChild(highlight);
+
+                XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
+                cornerRadius.InnerText = buttonData.cornerRadius.ToString();
+                node_ButtonData.AppendChild(cornerRadius);
+
+                XmlNode thickness = xmlDocument.CreateElement("thickness");
+                thickness.InnerText = buttonData.thickness.ToString();
+                node_ButtonData.AppendChild(thickness);
+
+                XmlNode fontSize = xmlDocument.CreateElement("fontSize");
+                fontSize.InnerText = buttonData.fontSize.ToString();
+                node_ButtonData.AppendChild(fontSize);
+
+                XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
+                fontFamily.InnerText = buttonData.fontFamily.ToString();
+                node_ButtonData.AppendChild(fontFamily);
+
+                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
+                buttonImageFilePath.InnerText = buttonData.imageFilePath;
+                node_ButtonData.AppendChild(buttonImageFilePath);
+
+                XmlNode mainWindowHeight = xmlDocument.CreateElement("height");
+                mainWindowHeight.InnerText = buttonData.height.ToString();
+                node_ButtonData.AppendChild(mainWindowHeight);
+
+                XmlNode mainWindowWidth = xmlDocument.CreateElement("width");
+                mainWindowWidth.InnerText = buttonData.width.ToString();
+                node_ButtonData.AppendChild(mainWindowWidth);
+
+                node.AppendChild(node_ButtonData);
+
+                try
+                {
+                    xmlDocument.Save(ButtonData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        #endregion ButtonData saving
+        #endregion ButtonData
+
+        // CoreData
+        #region CoreData
         #region CoreData loading
         internal CoreData? CoreData_load()
         {
@@ -65,7 +197,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             CoreData coreData = new CoreData(true);
             XmlDocument xmlDocument = new XmlDocument();
 
-            
+
             if (File.Exists(CoreData_file))
             {
                 xmlDocument.Load(CoreData_file);
@@ -88,15 +220,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     coreData.fontSize = Int32.Parse(node_CoreData.SelectSingleNode("fontSize").InnerText);
                     coreData.fontFamily = new FontFamily(node_CoreData.SelectSingleNode("fontFamily").InnerText);
 
-                    // path values
-                    //public string imageFilePath { get; set; }
-                    coreData.buttonImageFilePath = node_CoreData.SelectSingleNode("buttonImageFilePath").InnerText;
-                    coreData.containerImageFilePath = node_CoreData.SelectSingleNode("containerImageFilePath").InnerText;
-
-                    // main window size values
-                    coreData.mainWindowHeight = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowHeight").InnerText);
-                    coreData.mainWindowWidth = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowWidth").InnerText);
-
                     return coreData;
                 }
 
@@ -114,78 +237,299 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             coreData_data = new SharedLogic().GetDataHandler().GetCoreData();
 
+            if (coreData_data != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+                brushtype.InnerText = coreData_data.brushtype;
+                node_CoreData.AppendChild(brushtype);
+
+                XmlNode background = xmlDocument.CreateElement("background");
+                background.InnerText = coreData_data.background.ToString();
+                node_CoreData.AppendChild(background);
+
+                XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
+                borderbrush.InnerText = coreData_data.borderbrush.ToString();
+                node_CoreData.AppendChild(borderbrush);
+
+                XmlNode foreground = xmlDocument.CreateElement("foreground");
+                foreground.InnerText = coreData_data.foreground.ToString();
+                node_CoreData.AppendChild(foreground);
+
+                XmlNode highlight = xmlDocument.CreateElement("highlight");
+                highlight.InnerText = coreData_data.highlight.ToString();
+                node_CoreData.AppendChild(highlight);
+
+                XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
+                cornerRadius.InnerText = coreData_data.cornerRadius.ToString();
+                node_CoreData.AppendChild(cornerRadius);
+
+                XmlNode thickness = xmlDocument.CreateElement("thickness");
+                thickness.InnerText = coreData_data.thickness.ToString();
+                node_CoreData.AppendChild(thickness);
+
+                XmlNode fontSize = xmlDocument.CreateElement("fontSize");
+                fontSize.InnerText = coreData_data.fontSize.ToString();
+                node_CoreData.AppendChild(fontSize);
+
+                XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
+                fontFamily.InnerText = coreData_data.fontFamily.ToString();
+                node_CoreData.AppendChild(fontFamily);
+
+                node.AppendChild(node_CoreData);
+
+                try
+                {
+                    xmlDocument.Save(CoreData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        #endregion CoreData saving
+        #endregion CoreData
+
+        // MainWindowData
+        #region MainWindowData
+        #region MainWindowData loading
+        internal MainWindowData? MainWindowData_load()
+        {
+            SharedLogic logic = new SharedLogic();
+
+            MainWindowData coreData = new MainWindowData(true);
             XmlDocument xmlDocument = new XmlDocument();
 
-            XmlNode node = xmlDocument.CreateElement("Core");
-            xmlDocument.AppendChild(node);
 
-            XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
-
-            XmlNode brushtype = xmlDocument.CreateElement("brushtype");
-            brushtype.InnerText = coreData_data.brushtype;
-            node_CoreData.AppendChild(brushtype);
-
-            XmlNode background = xmlDocument.CreateElement("background");
-            background.InnerText = coreData_data.background.ToString();
-            node_CoreData.AppendChild(background);
-
-            XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
-            borderbrush.InnerText = coreData_data.borderbrush.ToString();
-            node_CoreData.AppendChild(borderbrush);
-            
-            XmlNode foreground = xmlDocument.CreateElement("foreground");
-            foreground.InnerText = coreData_data.foreground.ToString();
-            node_CoreData.AppendChild(foreground);
-
-            XmlNode highlight = xmlDocument.CreateElement("highlight");
-            highlight.InnerText = coreData_data.highlight.ToString();
-            node_CoreData.AppendChild(highlight);
-
-            XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
-            cornerRadius.InnerText = coreData_data.cornerRadius.ToString();
-            node_CoreData.AppendChild(cornerRadius);
-
-            XmlNode thickness = xmlDocument.CreateElement("thickness");
-            thickness.InnerText = coreData_data.thickness.ToString();
-            node_CoreData.AppendChild(thickness);
-            
-            XmlNode fontSize = xmlDocument.CreateElement("fontSize");
-            fontSize.InnerText = coreData_data.fontSize.ToString();
-            node_CoreData.AppendChild(fontSize);
-
-            XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
-            fontFamily.InnerText = coreData_data.fontFamily.ToString();
-            node_CoreData.AppendChild(fontFamily);
-
-            XmlNode buttonImageFilePath = xmlDocument.CreateElement("buttonImageFilePath");
-            buttonImageFilePath.InnerText = coreData_data.buttonImageFilePath;
-            node_CoreData.AppendChild(buttonImageFilePath);
-
-            XmlNode containerImageFilePath = xmlDocument.CreateElement("containerImageFilePath");
-            containerImageFilePath.InnerText = coreData_data.containerImageFilePath;
-            node_CoreData.AppendChild(containerImageFilePath);
-
-            XmlNode mainWindowHeight = xmlDocument.CreateElement("mainWindowHeight");
-            mainWindowHeight.InnerText = coreData_data.mainWindowHeight.ToString();
-            node_CoreData.AppendChild(mainWindowHeight);
-
-            XmlNode mainWindowWidth = xmlDocument.CreateElement("mainWindowWidth");
-            mainWindowWidth.InnerText = coreData_data.mainWindowWidth.ToString();
-            node_CoreData.AppendChild(mainWindowWidth);
-             
-            node.AppendChild(node_CoreData);
-
-            try
+            if (File.Exists(MainWindowData_file))
             {
-                xmlDocument.Save(CoreData_file);
+                xmlDocument.Load(MainWindowData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode node_CoreData = node.SelectSingleNode("CoreData");
+
+                if (node != null && node_CoreData != null)
+                {
+                    coreData.brushtype = node_CoreData.SelectSingleNode("brushtype").InnerText;
+
+                    coreData.background = logic.ParseColor(node_CoreData.SelectSingleNode("background").InnerText);
+                    coreData.borderbrush = logic.ParseColor(node_CoreData.SelectSingleNode("borderbrush").InnerText);
+                    coreData.foreground = logic.ParseColor(node_CoreData.SelectSingleNode("foreground").InnerText);
+                    coreData.highlight = logic.ParseColor(node_CoreData.SelectSingleNode("highlight").InnerText);
+
+                    coreData.cornerRadius = logic.ParseCornerRadius(node_CoreData.SelectSingleNode("cornerRadius").InnerText);
+
+                    coreData.thickness = logic.ParseThickness(node_CoreData.SelectSingleNode("thickness").InnerText);
+
+                    coreData.fontSize = Int32.Parse(node_CoreData.SelectSingleNode("fontSize").InnerText);
+                    coreData.fontFamily = new FontFamily(node_CoreData.SelectSingleNode("fontFamily").InnerText);
+
+                    // main window size values
+                    coreData.mainWindowHeight = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowHeight").InnerText);
+                    coreData.mainWindowWidth = Int32.Parse(node_CoreData.SelectSingleNode("mainWindowWidth").InnerText);
+
+                    return coreData;
+                }
+
+                return null;
+
             }
-            catch (Exception)
-            {
 
+            return null;
+        }
+
+        #endregion MainWindowData loading
+
+        #region MainWindowData saving
+        internal void MainWindowData_save()
+        {
+            MainWindowData mainWindowData = new SharedLogic().GetDataHandler().GetMainWindowData();
+
+            if (mainWindowData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+                brushtype.InnerText = mainWindowData.brushtype;
+                node_CoreData.AppendChild(brushtype);
+
+                XmlNode background = xmlDocument.CreateElement("background");
+                background.InnerText = mainWindowData.background.ToString();
+                node_CoreData.AppendChild(background);
+
+                XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
+                borderbrush.InnerText = mainWindowData.borderbrush.ToString();
+                node_CoreData.AppendChild(borderbrush);
+
+                XmlNode foreground = xmlDocument.CreateElement("foreground");
+                foreground.InnerText = mainWindowData.foreground.ToString();
+                node_CoreData.AppendChild(foreground);
+
+                XmlNode highlight = xmlDocument.CreateElement("highlight");
+                highlight.InnerText = mainWindowData.highlight.ToString();
+                node_CoreData.AppendChild(highlight);
+
+                XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
+                cornerRadius.InnerText = mainWindowData.cornerRadius.ToString();
+                node_CoreData.AppendChild(cornerRadius);
+
+                XmlNode thickness = xmlDocument.CreateElement("thickness");
+                thickness.InnerText = mainWindowData.thickness.ToString();
+                node_CoreData.AppendChild(thickness);
+
+                XmlNode fontSize = xmlDocument.CreateElement("fontSize");
+                fontSize.InnerText = mainWindowData.fontSize.ToString();
+                node_CoreData.AppendChild(fontSize);
+
+                XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
+                fontFamily.InnerText = mainWindowData.fontFamily.ToString();
+                node_CoreData.AppendChild(fontFamily);
+
+                XmlNode mainWindowHeight = xmlDocument.CreateElement("mainWindowHeight");
+                mainWindowHeight.InnerText = mainWindowData.mainWindowHeight.ToString();
+                node_CoreData.AppendChild(mainWindowHeight);
+
+                XmlNode mainWindowWidth = xmlDocument.CreateElement("mainWindowWidth");
+                mainWindowWidth.InnerText = mainWindowData.mainWindowWidth.ToString();
+                node_CoreData.AppendChild(mainWindowWidth);
+
+                node.AppendChild(node_CoreData);
+
+                try
+                {
+                    xmlDocument.Save(MainWindowData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        #endregion MainWindowData saving
+        #endregion MainWindowData
+
+        // TextBoxData
+        #region TextBoxData
+        #region TextBoxData loading
+        internal TextBoxData? TextBoxData_load()
+        {
+            SharedLogic logic = new SharedLogic();
+
+            TextBoxData textBoxData = new TextBoxData(true);
+            XmlDocument xmlDocument = new XmlDocument();
+
+
+            if (File.Exists(TextBoxData_file))
+            {
+                xmlDocument.Load(TextBoxData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode node_CoreData = node.SelectSingleNode("CoreData");
+
+                if (node != null && node_CoreData != null)
+                {
+                    textBoxData.brushtype = node_CoreData.SelectSingleNode("brushtype").InnerText;
+
+                    textBoxData.background = logic.ParseColor(node_CoreData.SelectSingleNode("background").InnerText);
+                    textBoxData.borderbrush = logic.ParseColor(node_CoreData.SelectSingleNode("borderbrush").InnerText);
+                    textBoxData.foreground = logic.ParseColor(node_CoreData.SelectSingleNode("foreground").InnerText);
+                    textBoxData.highlight = logic.ParseColor(node_CoreData.SelectSingleNode("highlight").InnerText);
+
+                    textBoxData.cornerRadius = logic.ParseCornerRadius(node_CoreData.SelectSingleNode("cornerRadius").InnerText);
+
+                    textBoxData.thickness = logic.ParseThickness(node_CoreData.SelectSingleNode("thickness").InnerText);
+
+                    textBoxData.fontSize = Int32.Parse(node_CoreData.SelectSingleNode("fontSize").InnerText);
+                    textBoxData.fontFamily = new FontFamily(node_CoreData.SelectSingleNode("fontFamily").InnerText);
+
+                    return textBoxData;
+                }
+
+                return null;
+
+            }
+
+            return null;
+        }
+
+        #endregion TextBoxData loading
+
+        #region TextBoxData saving
+        internal void TextBoxData_save()
+        {
+            TextBoxData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+
+            if (textBoxData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+                brushtype.InnerText = textBoxData.brushtype;
+                node_CoreData.AppendChild(brushtype);
+
+                XmlNode background = xmlDocument.CreateElement("background");
+                background.InnerText = textBoxData.background.ToString();
+                node_CoreData.AppendChild(background);
+
+                XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
+                borderbrush.InnerText = textBoxData.borderbrush.ToString();
+                node_CoreData.AppendChild(borderbrush);
+
+                XmlNode foreground = xmlDocument.CreateElement("foreground");
+                foreground.InnerText = textBoxData.foreground.ToString();
+                node_CoreData.AppendChild(foreground);
+
+                XmlNode highlight = xmlDocument.CreateElement("highlight");
+                highlight.InnerText = textBoxData.highlight.ToString();
+                node_CoreData.AppendChild(highlight);
+
+                XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
+                cornerRadius.InnerText = textBoxData.cornerRadius.ToString();
+                node_CoreData.AppendChild(cornerRadius);
+
+                XmlNode thickness = xmlDocument.CreateElement("thickness");
+                thickness.InnerText = textBoxData.thickness.ToString();
+                node_CoreData.AppendChild(thickness);
+
+                XmlNode fontSize = xmlDocument.CreateElement("fontSize");
+                fontSize.InnerText = textBoxData.fontSize.ToString();
+                node_CoreData.AppendChild(fontSize);
+
+                XmlNode fontFamily = xmlDocument.CreateElement("fontFamily");
+                fontFamily.InnerText = textBoxData.fontFamily.ToString();
+                node_CoreData.AppendChild(fontFamily);
+
+                node.AppendChild(node_CoreData);
+
+                try
+                {
+                    xmlDocument.Save(TextBoxData_file);
+                }
+                catch (Exception)
+                {
+
+                }
             }
 
         }
-        #endregion CoreData saving
+        #endregion TextBoxData saving
+        #endregion TextBoxData
+
         #endregion Core
 
 

@@ -8,6 +8,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.MyNote;
@@ -33,9 +34,13 @@ namespace AidingElementsUserInterface.Core
     /// </summary>
     public partial class CoreCanvas : UserControl
     {
+        private CanvasData config;
+
         public CoreCanvas()
         {
             InitializeComponent();
+
+            build();
         }
 
         internal void add_element_to_canvas(CoreContainer container)
@@ -48,8 +53,10 @@ namespace AidingElementsUserInterface.Core
         }
 
         // move to corecanvas usercontrol v
-        private void canvasDesign()
+        private void build()
         {
+            config = new CanvasData();
+
             //Height = config.mainWindowHeight;
             //Width = config.mainWindowWidth;
 

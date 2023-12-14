@@ -38,27 +38,18 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7"/>
                         <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="7"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="7" />
                         <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
                         <RowDefinition Height="7" />
 
                     </Grid.RowDefinitions>
 
-                    <Border x:Name="ui_border_rightExpander"
-                            Grid.Column="2" Grid.Row="1" Grid.RowSpan="3"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch" />
-
-
                     <Border x:Name="content_border"
-                            Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"
+                            Grid.Column="1" Grid.Row="1" Grid.RowSpan="1"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="Transparent"
@@ -66,11 +57,6 @@
                             IsHitTestVisible="True" />
                 </Grid>
             </Border>
-
-            <Border x:Name="ui_border_ExpansionArea_right"
-                    Grid.Column="2" Grid.Row="1" Grid.RowSpan="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"/>
         </Grid>
     </Border>
 </UserControl>

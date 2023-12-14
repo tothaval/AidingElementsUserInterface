@@ -52,7 +52,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
             loadNotes();
         }
 
-        internal Note add_note(Note note)
+        internal Note add_note(Note note, bool loaded = true)
         {
             if (!notes.Contains(note))
             {
@@ -64,10 +64,12 @@ namespace AidingElementsUserInterface.Elements.MyNote
 
                 update_output();
 
-                origin_element.Tab_history.history_entry(
-                $"note '{note.getNoteData().dateTime}' '{note.getNoteData().title}' created"
-                );
-
+                if (loaded)
+                {
+                    origin_element.Tab_history.history_entry(
+                        $"note '{note.getNoteData().dateTime}' '{note.getNoteData().title}' created"
+                        );
+                }
             }
 
             return note;
@@ -141,7 +143,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
             }
             else
             {
-                add_note(new_note());
+                add_note(new_note(), false);
             }
 
             update_output();
