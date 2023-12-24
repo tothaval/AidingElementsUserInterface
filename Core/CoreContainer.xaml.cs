@@ -42,6 +42,11 @@ namespace AidingElementsUserInterface.Core
         private bool container_is_selected = false;
 
         #region constructors
+        public CoreContainer()
+        {
+
+        }
+
         public CoreContainer(UserControl element, CoreCanvas canvas)
         {
             InitializeComponent();
@@ -51,7 +56,6 @@ namespace AidingElementsUserInterface.Core
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
 
             initialize_container();
-
         }
 
         private void _loadtimer_Tick(object sender, EventArgs e)
@@ -96,6 +100,11 @@ namespace AidingElementsUserInterface.Core
             return containerData;
         }
 
+        internal Point get_Position()
+        {
+            return canvas.GetElementPosition(this);
+        }
+
         private async void initialize_container()
         {
 
@@ -112,6 +121,17 @@ namespace AidingElementsUserInterface.Core
             content_border.Child = containerData.getContent();
 
             build();
+        }
+
+        internal void load_Container(UserControl element, CoreCanvas canvas, ContainerData containerData)
+        {
+            InitializeComponent();
+
+            this.canvas = canvas;
+
+            this.containerData = new ContainerData(containerData, element);
+
+            initialize_container();
         }
 
         private void selected()

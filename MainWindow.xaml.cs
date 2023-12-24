@@ -59,7 +59,7 @@ namespace AidingElementsUserInterface
 
 
         private void build()
-        {            
+        {
             load_MainWindowData();
         }
 
@@ -113,11 +113,21 @@ namespace AidingElementsUserInterface
 
         public void quitAEUI()
         {
-            new XML_Handler(mainWindowData).ButtonData_save();
-            new XML_Handler(mainWindowData).CoreData_save();
-            new XML_Handler(mainWindowData).MainWindowData_save();
-            new XML_Handler(mainWindowData).TextBoxData_save();
+            if (mainWindowData != null)
+            {
+                XML_Handler xml_handler = new XML_Handler(mainWindowData);
+                
+                xml_handler.ButtonData_save();
+                xml_handler.CoreData_save();
+                xml_handler.MainWindowData_save();
+                xml_handler.TextBoxData_save();
 
+                if (handler != null)
+                {
+                    handler.save_state(xml_handler);
+                }                
+            }
+            
             Application.Current.Shutdown();
         }
 

@@ -15,6 +15,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
+using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Elements.MyNote;
@@ -93,9 +95,6 @@ namespace AidingElementsUserInterface.Core
 
             try
             {
-
-
-
                 containerLocations.Remove(container);
                 containerContents.Remove(container);
             }
@@ -107,6 +106,30 @@ namespace AidingElementsUserInterface.Core
 
             return true;
         }
+
+        internal void save_state(XML_Handler handler)
+        {
+            int counter = 0;
+
+            handler.delete_files(handler.ContainerData_xml_folder);
+
+            foreach (CoreContainer container in containerLocations.Keys)
+            {
+                handler.Container_save(container, counter);
+
+                counter++;
+            }
+        }
+
+        // public void save_state() ... use for loops, the index is the filename or foldername,
+        // save on a per canvas basis, for each canvas save all container including contents
+        // each container needs one file, so per canvas there are n files, depending on canvas
+        // container element children count.
+        // somehow filter, if a canvas is the same in container_locations collection, 
+        // start with foreach value canvas in container_locations... count per int within the loop
+        
+        // think really hard about loading order of canvas files
+        // (not yet necessary, because canvas instantiation not yet implemented.)
 
     }
 }

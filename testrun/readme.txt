@@ -24,11 +24,13 @@ F2: instantiate MyNote element, an application for the creation of notes
 
 F3: instantiate FlatShareCostCalculator element, __WIP__
 
-began implementing property saving and loading,
 once the ui was active for one time, a data folder will be created
 in the same folder where the binary is located. within this folder
 there is a core folder and within that are several ...data.xml files.
 manipulate the values of the files to change AEUIs appearance, __WIP__
+
+began working on container saving,
+cleaned and refactored the project a little bit
 
 
 abbr:

@@ -19,8 +19,6 @@ namespace AidingElementsUserInterface.Core
 {
     internal class CoreData
     {
-        public string brushtype { get; set; }
-
         public Color background { get; set; }
         public Color borderbrush { get; set; }
         public Color foreground { get; set; }
@@ -32,7 +30,7 @@ namespace AidingElementsUserInterface.Core
 
 
         public int fontSize { get; set; }
-        public FontFamily fontFamily { get; set; }
+        public FontFamily fontFamiliy { get; set; }
 
         // path values
         //public string imageFilePath { get; set; }
@@ -46,8 +44,6 @@ namespace AidingElementsUserInterface.Core
 
         public CoreData()
         {
-            brushtype = "SolidColorBrush";
-
             background = Colors.BlanchedAlmond;
             borderbrush = Colors.Black;
             foreground = Colors.DarkSlateGray;
@@ -59,19 +55,7 @@ namespace AidingElementsUserInterface.Core
 
             fontSize = 12;
 
-            fontFamily = new FontFamily("Verdana");
-        }
-
-        public CoreData(bool load)
-        {
-            if (load)
-            {
-
-            }
+            fontFamiliy = new FontFamily("Verdana");
         }
     }
 }
-/*  END OF FILE
- * 
- * 
- */

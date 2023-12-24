@@ -61,6 +61,24 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             }
         }
+
+        internal void apply_CoreData(CoreData coreData)
+        {
+            if (coreData != null) 
+            {
+                brushtype = coreData.brushtype;
+                background = coreData.background;
+                borderbrush = coreData.borderbrush;
+                foreground = coreData.foreground;
+                highlight = coreData.highlight;
+
+                cornerRadius = coreData.cornerRadius;
+                thickness = coreData.thickness;
+
+                fontSize = coreData.fontSize;
+                fontFamily = coreData.fontFamily;
+            }
+        }
     }
 }
 /*  END OF FILE

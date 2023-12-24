@@ -118,6 +118,14 @@ namespace AidingElementsUserInterface.Core
 
         }
 
+        internal Point GetElementPosition(CoreContainer container)
+        {
+            Point position = new Point(Canvas.GetLeft(container), Canvas.GetTop(container));
+
+            return position;
+        }
+
+
         internal void PositionElement(CoreContainer container)
         {
             Canvas.SetLeft(container, 125);
