@@ -37,7 +37,7 @@ namespace AidingElementsUserInterface.Elements
         #region global classes, properties and variables   
         public int containerElementIndex = 0;
 
-        private TXT_Manual info;
+        private TXT_Manual info = new TXT_Manual();
 
         private CoreButton CB_PageLeft = new CoreButton("<");
         private CoreButton CB_PageRight = new CoreButton(">");
@@ -83,14 +83,18 @@ namespace AidingElementsUserInterface.Elements
 
         private void configureInfoElement()
         {
-
             CB_PageLeft.button.Click += CB_PageLeft_Click;
             CB_PageRight.button.Click += CB_PageRight_Click;
 
             textbox.setText(content_pages[0].ToString());
             textbox._readonly_no_caret();
-            textbox._heightLimitationBasedOnMainWindow(__Manual, 0.75);
-            textbox._widthLimitationBasedOnMainWindow(__Manual, 0.75);
+
+            // Rendersize is 0 when loading the manual element via xml,
+            // therefor no text is shown, don't know if necessary, depends
+            // on text length 
+            //textbox._heightLimitationBasedOnMainWindow(__Manual, 0.75);
+            //textbox._widthLimitationBasedOnMainWindow(__Manual, 0.75);
+
             textbox._scrolling();
 
             showManualPage();
@@ -101,9 +105,7 @@ namespace AidingElementsUserInterface.Elements
         // of the other on page count up or down. not that high a priority atm.
 
         private void loadInfoTextStrings()
-        {
-            info = new TXT_Manual();
-
+        {            
             content_pages.Add(info.tb_NoticesAndHandlingInstructions());
             content_pages.Add(info.tb_NonAlphabetKeys());
             content_pages.Add(info.tb_AlphabetKeys_A_M());
@@ -131,31 +133,7 @@ namespace AidingElementsUserInterface.Elements
 
         private void showManualPage()
         {
-
-            if (page_counter == 0)
-            {
-                textbox.setText(content_pages[0].ToString());
-            }
-            else if (page_counter == 1)
-            {
-                textbox.setText(content_pages[1].ToString());
-            }
-            else if (page_counter == 2)
-            {
-                textbox.setText(content_pages[2].ToString());
-            }
-            else if (page_counter == 3)
-            {
-                textbox.setText(content_pages[3].ToString());
-            }
-            else if (page_counter == 4)
-            {
-                textbox.setText(content_pages[4].ToString());
-            }
-            else if (page_counter == 5)
-            {
-                textbox.setText(content_pages[5].ToString());
-            }
+            textbox.setText(content_pages[page_counter].ToString());
         }
         #endregion element design and functionality
 
@@ -166,7 +144,7 @@ namespace AidingElementsUserInterface.Elements
         #region UI_InfoElement
         private void UI_InfoElement_Loaded(object sender, RoutedEventArgs e)
         {
-
+            showManualPage();
         }
         #endregion UI_InfoElement
 

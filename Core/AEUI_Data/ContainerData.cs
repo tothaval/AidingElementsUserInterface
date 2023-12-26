@@ -29,12 +29,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal int dragLevel;
 
 
-        public ContainerData(bool load)
+        public ContainerData()
         {
-            if (load)
-            {
-
-            }
         }
 
         public ContainerData(UserControl _content)

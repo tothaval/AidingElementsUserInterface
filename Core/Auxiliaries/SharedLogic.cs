@@ -25,6 +25,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class SharedLogic
     {
+        internal Point point = new Point(125, 25);
+
         public SharedLogic()
         {
 
@@ -37,14 +39,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         internal ElementHandler GetElementHandler()
         {
-            return GetMainWindow().handler;
+            return GetMainWindow().element_handler;
         }
 
         internal FlatShareCC GetFlatShareCC()
         {
             FlatShareCC select = new FlatShareCC();
 
-            select = (FlatShareCC)GetMainWindow().handler.returnElement(select);
+            select = (FlatShareCC)GetMainWindow().element_handler.returnElement(select);
 
             return select;
         }

@@ -34,9 +34,11 @@ namespace AidingElementsUserInterface.Core
 
         }
 
-        internal void addElement(CoreContainer container, CoreCanvas canvas)
+        internal async void addElement(CoreContainer container, CoreCanvas canvas)
         {
             update_instance(container.GetContainerData().getContent());
+
+            await Task.Delay(2);
 
             containerLocations.Add(container, canvas);
 

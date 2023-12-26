@@ -42,12 +42,19 @@ namespace AidingElementsUserInterface.Core
         private bool container_is_selected = false;
 
         #region constructors
-        public CoreContainer()
+        internal CoreContainer()
         {
-
+            InitializeComponent();
         }
 
-        public CoreContainer(UserControl element, CoreCanvas canvas)
+        internal CoreContainer(ContainerData containerData)
+        {
+            this.containerData = containerData;
+
+            InitializeComponent();
+        }
+
+        internal CoreContainer(UserControl element, CoreCanvas canvas)
         {
             InitializeComponent();
 
@@ -100,6 +107,11 @@ namespace AidingElementsUserInterface.Core
             return containerData;
         }
 
+        internal Point get_dragPoint()
+        {
+            return dragPoint;
+        }
+
         internal Point get_Position()
         {
             return canvas.GetElementPosition(this);
@@ -107,13 +119,13 @@ namespace AidingElementsUserInterface.Core
 
         private async void initialize_container()
         {
-
-
             await Task.Delay(10);
 
             if (containerData.getContent() == null)
             {
                 containerData.setContent(new UserControl());
+
+                MessageBox.Show("hi");
             }
 
             content_border.Child = null;
@@ -123,14 +135,8 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        internal void load_Container(UserControl element, CoreCanvas canvas, ContainerData containerData)
+        internal void load_Container()
         {
-            InitializeComponent();
-
-            this.canvas = canvas;
-
-            this.containerData = new ContainerData(containerData, element);
-
             initialize_container();
         }
 
@@ -149,6 +155,11 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
+        internal void setCanvas(CoreCanvas coreCanvas)
+        {
+            this.canvas = coreCanvas;
+        }
+
         private void setColors()
         {
             //imageFilepath = "-";
@@ -163,6 +174,16 @@ namespace AidingElementsUserInterface.Core
                 containerData.GetColorData().color3_string,
                 containerData.GetColorData().color4_string
                 );
+        }
+
+        internal void setContainerData(ContainerData containerData)
+        {
+            this.containerData = containerData;
+        }
+
+        internal void setPosition(Point point)
+        {
+            this.dragPoint = point;
         }
 
         private void Container_Loaded(object sender, RoutedEventArgs e)

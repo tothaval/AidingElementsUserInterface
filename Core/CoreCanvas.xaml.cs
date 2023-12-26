@@ -11,7 +11,9 @@
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
+using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Elements.MyNote;
+using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,11 +45,11 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        internal void add_element_to_canvas(CoreContainer container)
+        internal void add_element_to_canvas(CoreContainer container, Point point)
         {
-            PositionElement(container);
+            PositionElement(container, point);
 
-            new SharedLogic().GetElementHandler().addElement(container, (this));
+            new SharedLogic().GetElementHandler().addElement(container, this);
 
             canvas.Children.Add(container);
         }
@@ -61,6 +63,22 @@ namespace AidingElementsUserInterface.Core
             //Width = config.mainWindowWidth;
 
             this.Background = new SolidColorBrush(Colors.Transparent);
+            
+            XML_Handler xml_Handler = new XML_Handler(new SharedLogic().GetDataHandler().GetCoreData());
+
+            foreach (CoreContainer item in xml_Handler.Container_load())
+            {
+                item.setCanvas(this);
+
+                add_element_to_canvas(item, item.get_dragPoint());
+
+                item.load_Container();
+
+                //MessageBox.Show(item.GetContainerData().getContent().GetType().Name);
+            }
+
+            //MessageBox.Show(counter.ToString());
+
             //this.FontFamily = config.font;
             //
             //border.Background = config.backColor;
@@ -126,10 +144,10 @@ namespace AidingElementsUserInterface.Core
         }
 
 
-        internal void PositionElement(CoreContainer container)
+        internal void PositionElement(CoreContainer container, Point point)
         {
-            Canvas.SetLeft(container, 125);
-            Canvas.SetTop(container, 25);
+            Canvas.SetLeft(container, point.X);
+            Canvas.SetTop(container, point.Y);
         }
 
         internal void PositionElement(CoreContainer container, MouseButtonEventArgs e)
@@ -148,7 +166,7 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_KeyDown(object sender, KeyEventArgs e)
         {
-         
+
         }
 
         private void canvas_KeyUp(object sender, KeyEventArgs e)
@@ -170,7 +188,7 @@ namespace AidingElementsUserInterface.Core
 
             else if (e.ChangedButton == MouseButton.Right)
             {
-                CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()),(CoreCanvas)__CoreCanvas);
+                CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()), (CoreCanvas)__CoreCanvas);
 
                 PositionElement(rightClickElement, e);
 

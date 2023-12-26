@@ -34,6 +34,7 @@ using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Core.AEUI_Data;
+using System.Drawing;
 
 namespace AidingElementsUserInterface
 {
@@ -42,12 +43,14 @@ namespace AidingElementsUserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal CoreCanvas canvas;
+        internal CoreCanvas coreCanvas;
         internal MainWindowData mainWindowData;
 
         internal Data_Handler data_Handler = new Data_Handler();
 
-        internal ElementHandler handler = new ElementHandler();
+        internal ElementHandler element_handler = new ElementHandler();
+
+        internal SharedLogic logic = new SharedLogic();
 
 
         public MainWindow()
@@ -104,11 +107,11 @@ namespace AidingElementsUserInterface
 
         private void load_CoreCanvas()
         {
-            canvas = new CoreCanvas();
+            coreCanvas = new CoreCanvas();
 
-            canvas_border.Child = canvas;
+            canvas_border.Child = coreCanvas;
 
-            Keyboard.Focus(canvas);
+            Keyboard.Focus(coreCanvas);
         }
 
         public void quitAEUI()
@@ -122,9 +125,9 @@ namespace AidingElementsUserInterface
                 xml_handler.MainWindowData_save();
                 xml_handler.TextBoxData_save();
 
-                if (handler != null)
+                if (element_handler != null)
                 {
-                    handler.save_state(xml_handler);
+                    element_handler.save_state(xml_handler);
                 }                
             }
             
@@ -147,23 +150,25 @@ namespace AidingElementsUserInterface
         {
             if (e.Key == Key.F1)
             {
-                canvas.add_element_to_canvas(
-                    handler.instantiate_Manual(canvas)
+                coreCanvas.add_element_to_canvas(
+                    element_handler.instantiate_Manual(coreCanvas),
+                    logic.point
                     );
             }
 
             if (e.Key == Key.F2)
             {
-
-                canvas.add_element_to_canvas(
-                    handler.instantiate_MyNote(canvas)
+                coreCanvas.add_element_to_canvas(
+                    element_handler.instantiate_MyNote(coreCanvas),
+                    logic.point
                     );
             }
 
             if (e.Key == Key.F3)
             {
-                canvas.add_element_to_canvas(
-                    handler.instantiate_FlatShareCC(canvas)
+                coreCanvas.add_element_to_canvas(
+                    element_handler.instantiate_FlatShareCC(coreCanvas),
+                    logic.point
                     );
 
             }

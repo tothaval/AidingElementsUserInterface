@@ -27,6 +27,7 @@ using System.Xml;
 
 using AidingElementsUserInterface.Core.AEUI_Data;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -63,55 +64,122 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // Container loading and saving via XML
         #region Container
         #region Container loading
-        internal CoreContainer? Container_load()
+        internal ObservableCollection<CoreContainer> Container_load()
         {
-            SharedLogic logic = new SharedLogic();
+            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
 
-            CoreContainer coreContainer = new CoreContainer();
-            XmlDocument xmlDocument = new XmlDocument();
+            foreach (string filename in scan_directory(ContainerData_xml_folder))
+            {
+                if (File.Exists(filename))
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+
+                    xmlDocument.Load(filename);
+
+                    XmlNode? node = xmlDocument.SelectSingleNode("Container");
+
+                    ContainerData containerData = new ContainerData();
+
+                    Point container_position;
+
+                    UserControl userControl = new UserControl();
+
+                    if (node != null)
+                    {
+                        XmlNode? node_ContainerData = node.SelectSingleNode("ContainerData");
+
+                        if (node_ContainerData != null)
+                        {
+                            XmlNode? node_CoreData = node_ContainerData.SelectSingleNode("CoreData");
+
+                            CoreData? aux_data = loadCoreData(node_CoreData);
+
+                            if (aux_data != null)
+                            {
+                                containerData.apply_CoreData(aux_data);
+                            }
+
+                            containerData.imageIsBackground = Boolean.Parse(node_ContainerData.SelectSingleNode("imageIsBackground").InnerText);
+                            containerData.imageFilePath = node_ContainerData.SelectSingleNode("imageFilePath").InnerText;
+
+                            containerData.z_position = Int32.Parse(node_ContainerData.SelectSingleNode("z_position").InnerText);
+                            containerData.dragLevel = Int32.Parse(node_ContainerData.SelectSingleNode("dragLevel").InnerText);
+
+                            XmlNode node_Content = node.SelectSingleNode("Content");
+
+                            if (node_Content != null)
+                            {
+                                XmlNode node_Type = node_Content.SelectSingleNode("Type");
 
 
-            // getting the type by string
-            //https://stackoverflow.com/questions/11107536/convert-string-to-type-in-c-sharp
-            //Type type = Type.GetType("Namespace.MyClass, MyAssembly");
+                                if (node_Type != null)
+                                {
+                                    //MessageBox.Show(node_Type.ToString() + "\n" + node_Type.InnerText);
 
-            //Type type = Type.GetType(inputString); //target type
-            //object o = Activator.CreateInstance(type); // an instance of target type
-            //YourType your = (YourType)o;
-            //
-            //YourType your = (YourType)Activator.CreateInstance("AssemblyName", "NameSpace.MyClass");
+                                    // getting the type by string
+                                    //https://stackoverflow.com/questions/11107536/convert-string-to-type-in-c-sharp
+                                    Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}, AidingElementsUserInterface");
 
+                                    //MessageBox.Show(type.Name + "\n" + type.FullName + "\n" + type.Namespace);
 
-            //if (File.Exists(TextBoxData_file))
-            //{
-            //    xmlDocument.Load(TextBoxData_file);
-            //    XmlNode node = xmlDocument.SelectSingleNode("Core");
-            //    XmlNode node_CoreData = node.SelectSingleNode("CoreData");
+                                    //Type type = Type.GetType(node_Type.InnerText); //target type
 
-            //    if (node != null && node_CoreData != null)
-            //    {
-            //        textBoxData.brushtype = node_CoreData.SelectSingleNode("brushtype").InnerText;
+                                    if (type != null)
+                                    {
 
-            //        textBoxData.background = logic.ParseColor(node_CoreData.SelectSingleNode("background").InnerText);
-            //        textBoxData.borderbrush = logic.ParseColor(node_CoreData.SelectSingleNode("borderbrush").InnerText);
-            //        textBoxData.foreground = logic.ParseColor(node_CoreData.SelectSingleNode("foreground").InnerText);
-            //        textBoxData.highlight = logic.ParseColor(node_CoreData.SelectSingleNode("highlight").InnerText);
+                                        userControl = (UserControl)Activator.CreateInstance(type);
 
-            //        textBoxData.cornerRadius = logic.ParseCornerRadius(node_CoreData.SelectSingleNode("cornerRadius").InnerText);
+                                        //YourType your = (YourType)o;
+                                        //
+                                        //YourType your = (YourType)Activator.CreateInstance("AssemblyName", "NameSpace.MyClass");
+                                    }
+                                    else
+                                    {
+                                        Type? type_in_folder = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}.{node_Type.InnerText}, AidingElementsUserInterface");
+                                        
+                                        if (type_in_folder != null)
+                                        {
 
-            //        textBoxData.thickness = logic.ParseThickness(node_CoreData.SelectSingleNode("thickness").InnerText);
+                                            userControl = (UserControl)Activator.CreateInstance(type_in_folder);
 
-            //        textBoxData.fontSize = Int32.Parse(node_CoreData.SelectSingleNode("fontSize").InnerText);
-            //        textBoxData.fontFamily = new FontFamily(node_CoreData.SelectSingleNode("fontFamily").InnerText);
+                                            //YourType your = (YourType)o;
+                                            //
+                                            //YourType your = (YourType)Activator.CreateInstance("AssemblyName", "NameSpace.MyClass");
+                                        }
+                                    }
+                                }
 
-            //        return textBoxData;
-            //    }
+                                XmlNode node_Position = node.SelectSingleNode("Position");
 
-            //    return null;
+                                if (node_Position != null)
+                                {
+                                    XmlNode node_x = node_Position.SelectSingleNode("x");
+                                    XmlNode node_y = node_Position.SelectSingleNode("y");
 
-            //}
+                                    if (node_x != null && node_y != null)
+                                    {
+                                        container_position = new Point(
+                                            Double.Parse(node_x.InnerText),
+                                            Double.Parse(node_y.InnerText)
+                                            );
+                                    }
+                                }
 
-            return null;
+                                CoreContainer coreContainer = new CoreContainer();
+                                coreContainer.setContainerData(containerData);
+                                coreContainer.setPosition(container_position);
+                                coreContainer.GetContainerData().setContent(userControl);
+
+                                container_list.Add(coreContainer);
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+            return container_list;
         }
 
         #endregion Container loading
@@ -169,11 +237,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode node_Position = xmlDocument.CreateElement("Position");
 
                 XmlNode node_position_x = xmlDocument.CreateElement("x");
-                node_position_x.InnerText = container.get_Position().X.ToString();
+                node_position_x.InnerText = container.get_dragPoint().X.ToString();
                 node_Position.AppendChild(node_position_x);
 
-                XmlNode node_position_y = xmlDocument.CreateElement("x");
-                node_position_y.InnerText = container.get_Position().Y.ToString();
+                XmlNode node_position_y = xmlDocument.CreateElement("y");
+                node_position_y.InnerText = container.get_dragPoint().Y.ToString();
                 node_Position.AppendChild(node_position_y);
 
                 node.AppendChild(node_Position);
@@ -235,8 +303,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                         buttonData.imageFilePath = node_ButtonData.SelectSingleNode("imageFilePath").InnerText;
 
                         return buttonData;
-                    }                                
-                }              
+                    }
+                }
 
                 return null;
             }
@@ -307,9 +375,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             if (File.Exists(CoreData_file))
             {
                 xmlDocument.Load(CoreData_file);
-                XmlNode node = xmlDocument.SelectSingleNode("Core");                
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
 
-                if (node != null)                
+                if (node != null)
                 {
                     XmlNode node_CoreData = node.SelectSingleNode("CoreData");
 
@@ -455,19 +523,19 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             if (File.Exists(MainWindowData_file))
             {
                 xmlDocument.Load(MainWindowData_file);
-                XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode? node = xmlDocument.SelectSingleNode("Core");
 
                 if (node != null)
                 {
-                    XmlNode node_MainWindowData = node.SelectSingleNode("MainWindowData");
+                    XmlNode? node_MainWindowData = node.SelectSingleNode("MainWindowData");
 
                     if (node_MainWindowData != null)
-                    { 
-                        XmlNode node_CoreData = node_MainWindowData.SelectSingleNode("CoreData");
+                    {
+                        XmlNode? node_CoreData = node_MainWindowData.SelectSingleNode("CoreData");
 
                         if (node_CoreData != null)
                         {
-                            CoreData aux_data = loadCoreData(node_CoreData);
+                            CoreData? aux_data = loadCoreData(node_CoreData);
 
                             if (aux_data != null)
                             {
@@ -475,13 +543,27 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
                         }
 
-                        // main window size values
-                        mainWindowData.mainWindowHeight = Int32.Parse(node_MainWindowData.SelectSingleNode("mainWindowHeight").InnerText);
-                        mainWindowData.mainWindowWidth = Int32.Parse(node_MainWindowData.SelectSingleNode("mainWindowWidth").InnerText);
+                        XmlNode? node_mainWindowHeight = node_MainWindowData.SelectSingleNode("mainWindowHeight");
+                        if (node_mainWindowHeight != null)
+                        {
+                            mainWindowData.mainWindowHeight = Int32.Parse(node_mainWindowHeight.InnerText);
+                        }
+
+                        XmlNode? node_mainWindowWidth = node_MainWindowData.SelectSingleNode("mainWindowWidth");
+                        if (node_mainWindowWidth != null)
+                        {
+                            mainWindowData.mainWindowWidth = Int32.Parse(node_mainWindowWidth.InnerText);
+                        }
+
+                        XmlNode? node_language = node_MainWindowData.SelectSingleNode("language");
+                        if (node_language != null)
+                        {
+                            mainWindowData.language = node_language.InnerText;
+                        }
 
                         return mainWindowData;
-                    }                    
-                }             
+                    }
+                }
 
                 return null;
             }
@@ -521,6 +603,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode mainWindowWidth = xmlDocument.CreateElement("mainWindowWidth");
                 mainWindowWidth.InnerText = mainWindowData.mainWindowWidth.ToString();
                 node_MainWindowData.AppendChild(mainWindowWidth);
+
+                XmlNode language = xmlDocument.CreateElement("language");
+                language.InnerText = mainWindowData.language;
+                node_MainWindowData.AppendChild(language);
 
                 node.AppendChild(node_MainWindowData);
 
@@ -573,7 +659,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                         return textBoxData;
                     }
-                }        
+                }
 
                 return null;
             }
@@ -1235,25 +1321,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
         #endregion MyNote saving
         #endregion MyNote
-
-        private List<string> scan_directory(string path)
-        {
-            List<string> scan_list = new List<string>();
-
-            scan_list = Directory.GetFiles(path).ToList<string>();
-
-            StringBuilder stringBuilder = new StringBuilder();
-
-            foreach (string item in scan_list)
-            {
-                stringBuilder.AppendLine(item);
-            }
-
-
-            //MessageBox.Show(stringBuilder.ToString());
-
-            return scan_list;
-        }
     }
 }
 /*  END OF FILE

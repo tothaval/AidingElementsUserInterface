@@ -86,7 +86,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             }
         }
 
-        public void delete_files(string folderpath, string exception)
+        internal void delete_files(string folderpath, string exception)
         {
             string[] paths;
 
@@ -99,6 +99,25 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     File.Delete(path);
                 }
             }
+        }
+
+        internal List<string> scan_directory(string path)
+        {
+            List<string> scan_list = new List<string>();
+
+            scan_list = Directory.GetFiles(path).ToList<string>();
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (string item in scan_list)
+            {
+                stringBuilder.AppendLine(item);
+            }
+
+
+            //MessageBox.Show(stringBuilder.ToString());
+
+            return scan_list;
         }
     }
 }
