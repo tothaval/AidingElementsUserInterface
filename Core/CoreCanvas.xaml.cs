@@ -14,7 +14,11 @@ using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.MyNote;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +30,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AidingElementsUserInterface.Core
 {
@@ -35,6 +41,10 @@ namespace AidingElementsUserInterface.Core
     public partial class CoreCanvas : UserControl
     {
         private CanvasData config;
+        private System.Windows.Point selection_point;
+        private System.Windows.Shapes.Rectangle selection_rectangle;
+
+        private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
 
         public CoreCanvas()
         {
@@ -43,7 +53,38 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
+<<<<<<< Updated upstream
         internal void add_element_to_canvas(CoreContainer container)
+=======
+
+        internal void add_element_to_canvas(UserControl content)
+        {
+            SharedLogic logic = new SharedLogic();
+
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, this);
+
+            if (coreContainer != null)
+            {
+                PositionElement(coreContainer, logic.point);
+                canvas.Children.Add(coreContainer);
+            }
+        }
+
+        internal void add_element_to_canvas(UserControl content, MouseButtonEventArgs e)
+        {
+            SharedLogic logic = new SharedLogic();
+
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, this);
+
+            if (coreContainer != null)
+            {
+                PositionElement(coreContainer, e.GetPosition(canvas));
+                canvas.Children.Add(coreContainer);
+            }
+        }
+
+        internal void add_element_to_canvas(CoreContainer container, System.Windows.Point point)
+>>>>>>> Stashed changes
         {
             PositionElement(container);
 
@@ -52,23 +93,40 @@ namespace AidingElementsUserInterface.Core
             canvas.Children.Add(container);
         }
 
-        // move to corecanvas usercontrol v
+        internal void add_selected_item(CoreContainer coreContainer)
+        {
+            selected_items.Add(coreContainer);
+        }
+
         private void build()
         {
-            config = new CanvasData();
+            Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
-            //Height = config.mainWindowHeight;
-            //Width = config.mainWindowWidth;
 
+<<<<<<< Updated upstream
             this.Background = new SolidColorBrush(Colors.Transparent);
             //this.FontFamily = config.font;
             //
             //border.Background = config.backColor;
             //border.BorderThickness = new Thickness(config.borderThickness);
             //border.CornerRadius = new CornerRadius(config.borderRadius);
+=======
+            config = data_Handler.LoadCanvasData();
 
-            //imageIsBackground = config.imageBackgroundOnQuit;
-            //colorsAreBackground = config.colorsAreBackground;
+            if (config == null)
+            {
+                config = new CanvasData();
+            }
+
+            data_Handler.AddData(config);
+
+            this.Background = new SolidColorBrush(config.background);
+>>>>>>> Stashed changes
+
+            __CoreCanvas.BorderBrush = new SolidColorBrush(config.borderbrush);
+            __CoreCanvas.BorderThickness = config.thickness;
+
+            load();
 
             //if (imageIsBackground == false)
             //{
@@ -112,21 +170,87 @@ namespace AidingElementsUserInterface.Core
 
         public void clearCanvasElements()
         {
-            //UIE_ModuleCreator.list_YS_CORE_ContainerElement.Clear();
-            //lines.Clear();
-            //points.Clear();
 
         }
 
-        internal Point GetElementPosition(CoreContainer container)
+        internal void delete_selected_items()
         {
-            Point position = new Point(Canvas.GetLeft(container), Canvas.GetTop(container));
+            foreach (CoreContainer item in selected_items)
+            {
+                item.remove_Container();
+            }
+
+            selected_items.Clear();
+        }
+
+        private void deselect_selected_containers()
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                item.deselect(false);   
+            }
+
+            selected_items.Clear();
+        }
+
+        internal CanvasData getCanvasData()
+        {
+            return config;
+        }
+
+
+        internal System.Windows.Point GetElementPosition(CoreContainer container)
+        {
+            System.Windows.Point position = new System.Windows.Point(Canvas.GetLeft(container), Canvas.GetTop(container));
 
             return position;
         }
 
+        private void load()
+        {
+            XML_Handler xml_Handler = new XML_Handler(new SharedLogic().GetDataHandler().GetCoreData());
 
+<<<<<<< Updated upstream
         internal void PositionElement(CoreContainer container)
+=======
+            foreach (CoreContainer item in xml_Handler.Container_load())
+            {
+                item.setCanvas(this);
+
+                add_element_to_canvas(item, item.get_dragPoint());
+
+                item.load_Container();
+            }
+        }
+
+        internal async void MoveSelection(
+            CoreContainer event_sender,
+            System.Windows.Point sender_origin,
+            System.Windows.Point new_point)
+        {
+            double x0, y0, x_diff, y_diff, x1, y1;
+
+            foreach (CoreContainer item in selected_items)
+            {
+                if (item != event_sender)
+                {
+                    x0 = Canvas.GetLeft(item);
+                    y0 = Canvas.GetTop(item);
+
+                    x_diff = sender_origin.X - x0;
+                    y_diff = sender_origin.Y - y0;
+
+                    x1 = new_point.X + x_diff;
+                    y1 = new_point.Y + y_diff;
+
+                    Canvas.SetLeft(item, x1);
+                    Canvas.SetTop(item, y1);
+                }
+            }
+        }
+
+        internal void PositionElement(CoreContainer container, System.Windows.Point point)
+>>>>>>> Stashed changes
         {
             Canvas.SetLeft(container, 125);
             Canvas.SetTop(container, 25);
@@ -137,7 +261,68 @@ namespace AidingElementsUserInterface.Core
             Canvas.SetLeft(container, e.GetPosition(canvas).X);
             Canvas.SetTop(container, e.GetPosition(canvas).Y);
         }
+        internal void RemoveFlatShareCC()
+        {
+            foreach (CoreContainer container in canvas.Children)
+            {
+                if (container.GetContainerData().getContent().GetType() == typeof(FlatShareCC))
+                {
+                    new SharedLogic().GetElementHandler().removeElement(container);
 
+                    canvas.Children.Remove(container);
+                    break;
+                }
+            }
+        }
+
+        internal void RemoveMyNote()
+        {
+            foreach (CoreContainer container in canvas.Children)
+            {
+                if (container.GetContainerData().getContent().GetType() == typeof(MyNote))
+                {
+                    new SharedLogic().GetElementHandler().removeElement(container);
+
+                    canvas.Children.Remove(container);
+                    break;
+                }
+            }
+        }
+
+        internal void removeSelectedItem(CoreContainer coreContainer)
+        {
+            selected_items.Remove(coreContainer);
+        }
+
+        private void select_containers()
+        {
+            if (canvas.Children.Contains(selection_rectangle))
+            {
+
+                // how to do the hittest? 
+                // i need to determine whether a single set of coordinates 
+                // of one object is part of the coordinates set of the other
+                // or i use an already existing function like hittest, but i don't
+                // know how this is done.
+
+
+                foreach (object item in canvas.Children)
+                {
+                    if (item is CoreContainer container)
+                    {
+
+                    }
+                }
+
+                canvas.Children.Remove(selection_rectangle);
+            }
+
+        }
+
+        internal void setCanvasData(CanvasData data)
+        {
+            this.config = data;
+        }
         // events
         #region events
 
@@ -165,11 +350,31 @@ namespace AidingElementsUserInterface.Core
         {
             if (e.ChangedButton == MouseButton.Left)
             {
+                deselect_selected_containers();
 
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    selection_point = e.GetPosition(canvas);
+
+                    selection_rectangle = new System.Windows.Shapes.Rectangle();
+
+                    selection_rectangle.Stroke = new SolidColorBrush(config.highlight);
+                    selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1 };
+                    selection_rectangle.StrokeThickness = 3;
+                    //selection_rectangle.Fill = new SolidColorBrush(Colors.Transparent);
+
+                    Canvas.SetLeft(selection_rectangle, selection_point.X);
+                    Canvas.SetTop(selection_rectangle, selection_point.Y);
+
+                    canvas.Children.Add(selection_rectangle);
+
+                    e.Handled = true;
+                }
             }
 
             else if (e.ChangedButton == MouseButton.Right)
             {
+<<<<<<< Updated upstream
                 CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()),(CoreCanvas)__CoreCanvas);
 
                 PositionElement(rightClickElement, e);
@@ -177,6 +382,9 @@ namespace AidingElementsUserInterface.Core
                 new SharedLogic().GetElementHandler().addElement(rightClickElement, __CoreCanvas);
 
                 canvas.Children.Add(rightClickElement);
+=======
+                add_element_to_canvas(new RightClickChoice(), e);
+>>>>>>> Stashed changes
             }
         }
 
@@ -187,12 +395,36 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            System.Windows.Point pos = e.GetPosition(canvas);
 
+            double x = Math.Min(pos.X, selection_point.X);
+            double y = Math.Min(pos.Y, selection_point.Y);
+
+            double w = Math.Max(pos.X, selection_point.X) - x;
+            double h = Math.Max(pos.Y, selection_point.Y) - y;
+
+            //dragWidth = w;
+            //dragHeight = h;
+
+            if (selection_rectangle != null)
+            {
+                selection_rectangle.Width = w;
+                selection_rectangle.Height = h;
+
+                Canvas.SetLeft(selection_rectangle, x);
+                Canvas.SetTop(selection_rectangle, y);
+            }
         }
 
         private void canvas_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                select_containers();
 
+                e.Handled = true;
+
+            }
         }
 
         private void canvas_PreviewDragOver(object sender, DragEventArgs e)

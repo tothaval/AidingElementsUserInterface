@@ -66,11 +66,33 @@ namespace AidingElementsUserInterface
 
         // processing
         #region processing
-        private async void load_MainWindowData()
+        private void add_MyNote()
+        {
+            if (MI_MyNote.IsChecked)
+            {
+                coreCanvas.add_element_to_canvas(new MyNote());
+            }
+            else
+            {
+                coreCanvas.RemoveMyNote();
+            }
+        }
+
+        private void add_FlatShareCC()
+        {
+            if (MI_FlatShareCC.IsChecked)
+            {
+                coreCanvas.add_element_to_canvas(new FlatShareCC());
+            }
+            else
+            {
+                coreCanvas.RemoveFlatShareCC();
+            }
+        }
+
+        private void load_MainWindowData()
         {
             mainWindowData = data_Handler.LoadMainWindowData();
-
-            //await Task.Delay(10);
 
             if (mainWindowData == null)
             {
@@ -116,18 +138,24 @@ namespace AidingElementsUserInterface
             if (mainWindowData != null)
             {
                 XML_Handler xml_handler = new XML_Handler(mainWindowData);
-                
+
                 xml_handler.ButtonData_save();
+                xml_handler.CanvasData_save();
                 xml_handler.CoreData_save();
                 xml_handler.MainWindowData_save();
                 xml_handler.TextBoxData_save();
 
                 if (handler != null)
                 {
+<<<<<<< Updated upstream
                     handler.save_state(xml_handler);
                 }                
+=======
+                    element_handler.save_state(xml_handler);
+                }
+>>>>>>> Stashed changes
             }
-            
+
             Application.Current.Shutdown();
         }
 
@@ -145,27 +173,60 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.X)
+            {
+                coreCanvas.delete_selected_items();
+            }
+
             if (e.Key == Key.F1)
             {
+<<<<<<< Updated upstream
                 canvas.add_element_to_canvas(
                     handler.instantiate_Manual(canvas)
                     );
+=======
+                coreCanvas.add_element_to_canvas(new Manual());
+>>>>>>> Stashed changes
             }
 
             if (e.Key == Key.F2)
             {
+<<<<<<< Updated upstream
 
                 canvas.add_element_to_canvas(
                     handler.instantiate_MyNote(canvas)
                     );
+=======
+                if (MI_MyNote.IsChecked == false)
+                {
+                    MI_MyNote.IsChecked = true;
+                }
+                else
+                {
+                    MI_MyNote.IsChecked = false;
+                }
+                add_MyNote();
+>>>>>>> Stashed changes
             }
 
             if (e.Key == Key.F3)
             {
+<<<<<<< Updated upstream
                 canvas.add_element_to_canvas(
                     handler.instantiate_FlatShareCC(canvas)
                     );
 
+=======
+                if (MI_FlatShareCC.IsChecked == false)
+                {
+                    MI_FlatShareCC.IsChecked = true;
+                }
+                else
+                {
+                    MI_FlatShareCC.IsChecked = false;
+                }
+                add_FlatShareCC();
+>>>>>>> Stashed changes
             }
         }
 
@@ -191,7 +252,7 @@ namespace AidingElementsUserInterface
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
@@ -235,6 +296,42 @@ namespace AidingElementsUserInterface
         }
 
         #endregion events
+        private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Coordinates());
+        }
+
+
+
+        private void MI_manual_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Manual());
+        }
+
+        private void MI_MyNote_Click(object sender, RoutedEventArgs e)
+        {
+            add_MyNote();
+        }
+
+        private void MI_FlatShareCC_Click(object sender, RoutedEventArgs e)
+        {
+            add_FlatShareCC();
+        }
+
+        private void MI_quit_Click(object sender, RoutedEventArgs e)
+        {
+            logic.QuitApplicationCommand();
+        }
+
+        private void MI_shutdown_Click(object sender, RoutedEventArgs e)
+        {
+            logic.ShutdownCommand();
+        }
+
+        private void MI_RightClickChoice_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new RightClickChoice());
+        }
     }
 }
 /*  END OF FILE

@@ -62,7 +62,10 @@ namespace AidingElementsUserInterface.Core
                 Canvas.SetLeft(CORE_ContainerElement, left + (newPoint.X - dragPoint.X));
                 Canvas.SetTop(CORE_ContainerElement, top + (newPoint.Y - dragPoint.Y));
 
+                canvas.MoveSelection(CORE_ContainerElement, dragPoint, newPoint);
+
                 dragPoint = newPoint;
+
             }
         }
 

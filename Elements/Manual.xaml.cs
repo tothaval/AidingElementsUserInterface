@@ -35,9 +35,13 @@ namespace AidingElementsUserInterface.Elements
     {
         // global classes, properties and variables
         #region global classes, properties and variables   
+<<<<<<< Updated upstream
         public int containerElementIndex = 0;
 
         private TXT_Manual info;
+=======
+        private TXT_Manual info = new TXT_Manual();
+>>>>>>> Stashed changes
 
         private CoreButton CB_PageLeft = new CoreButton("<");
         private CoreButton CB_PageRight = new CoreButton(">");

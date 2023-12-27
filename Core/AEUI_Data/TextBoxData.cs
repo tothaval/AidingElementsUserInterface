@@ -23,10 +23,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     {
         public TextBoxData(bool load)
         {
-            if (load)
-            {
-
-            }
         }
 
         public TextBoxData()

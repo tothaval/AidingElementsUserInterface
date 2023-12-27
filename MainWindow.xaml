@@ -54,11 +54,15 @@
         <Grid x:Name="grid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="7" />
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="7"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
+                <RowDefinition Height="7" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="7" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="7" />
@@ -72,9 +76,71 @@
                      Grid.Column="0"
                      Opacity="0"/>
 
+            <Menu x:Name="menu"
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  IsMainMenu="True"
+                  Background="Transparent"                  
+                  >
+
+                <MenuItem x:Name="MI_AEUI_CTRL"                          
+                          Header="control">
+                    <Separator />
+                    <MenuItem x:Name="MI_quit"
+                          Header="Quit"
+                              
+                          Click="MI_quit_Click"/>
+                    <Separator />
+                    <Separator />
+                    <MenuItem x:Name="MI_shutdown"
+                          Header="Shutdown"
+                          Click="MI_shutdown_Click"/>
+                    <Separator />
+                </MenuItem>
+
+                <MenuItem x:Name="MI_elements"                          
+                          Header="elements">
+
+                    <MenuItem x:Name="MI_Coordinates"
+                              Header="Coordinates"
+                              
+                              Click="MI_Coordinates_Click"/>
+
+                    <MenuItem x:Name="MI_MyNote"
+                              Header="MyNote"
+                              IsCheckable="True"
+                              InputGestureText="F2"
+                              Click="MI_MyNote_Click"/>
+
+                        <MenuItem x:Name="MI_FlatShareCC"
+                              Header="FlatShare CC"
+                              IsCheckable="True"
+                              InputGestureText="F3"
+                              Click="MI_FlatShareCC_Click"/>
+                    </MenuItem>
+
+                <MenuItem x:Name="MI_options"
+                          Header="options">
+                    <Separator />
+                    <MenuItem x:Name="MI_RightClickChoice"
+                          Header="End it!"                              
+                          Click="MI_RightClickChoice_Click"/>                    
+                </MenuItem>
+
+                <MenuItem x:Name="MI_about"
+                          Header="about">
+
+                    <MenuItem x:Name="MI_manual"
+                              Header="Manual"
+                              InputGestureText="F1"
+                              Click="MI_manual_Click"/>
+                </MenuItem>
+            </Menu>
+
             <Border x:Name="canvas_border"
                     Grid.Column="1"
-                    Grid.Row="1"                
+                    Grid.ColumnSpan="3"
+                    Grid.Row="3"                
                     >
             </Border>
 

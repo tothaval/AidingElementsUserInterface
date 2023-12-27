@@ -28,7 +28,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // Core paths
         #region Core paths
         // files
-        internal string ButtonData_file = @".\data\Core\buttondata.xml";        
+        internal string ButtonData_file = @".\data\Core\buttondata.xml";
+        internal string CanvasData_file = @".\data\Core\canvasdata.xml";
         internal string CoreData_file = @".\data\Core\coredata.xml";
         internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
         internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
