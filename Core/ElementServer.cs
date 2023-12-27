@@ -7,11 +7,13 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Elements.MyNote;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,97 +23,39 @@ namespace AidingElementsUserInterface.Core
 {
     internal class ElementServer
     {
-        private MyNote myNote_instance;
-
-        private FlatShareCC flatShareCC_instance;
-
+        FlatShareCC flatShareCC;
 
         // element instance creation
         #region element instantiation
-        internal CoreContainer coreContainer(UserControl content, CoreCanvas target)
+        internal CoreContainer GetCoreContainer(UserControl content, CoreCanvas target)
         {
             return new CoreContainer(content, target);
         }
 
-
-        internal CoreContainer instantiate_FlatShareCC(CoreCanvas target)
+        internal CoreContainer? instantiate(UserControl content, CoreCanvas target)
         {
-            if (flatShareCC_instance == null)
+            if (content != null)
             {
-                FlatShareCC fscc = new FlatShareCC();
-
-                flatShareCC_instance = fscc;
-
-                return coreContainer(fscc, target);
-            }
-            
-            return coreContainer(flatShareCC_instance, target);
-        }
-
-        internal CoreContainer instantiate_Manual(CoreCanvas target)
-        {
-            Manual manual = new Manual();
-
-            return coreContainer(manual, target);
-
-        }
-
-        internal CoreContainer instantiate_MyNote(CoreCanvas target)
-        {
-            if (myNote_instance == null)
-            {
-                MyNote note = new MyNote();
-
-                myNote_instance = note;
-
-                return coreContainer(note, target);
-            }
-
-            return coreContainer(myNote_instance, target);
-        }
-        #endregion element instantiation
-
-        internal UserControl returnElement<T>(T element_content)
-        {
-            if (element_content is MyNote mynote)
-            {
-                if (myNote_instance != null)
+                if (content.GetType() == typeof(FlatShareCC))
                 {
-                    return myNote_instance;
-                }
-            }
-
-            if (element_content is FlatShareCC flatShareCC)
-            {
-                if (flatShareCC_instance != null)
-                {
-                    return flatShareCC_instance;
+                    flatShareCC = (FlatShareCC)content;
                 }
 
+                CoreContainer coreContainer = GetCoreContainer(content, target);
+
+                new SharedLogic().GetElementHandler().addElement(coreContainer, target);
+
+                return coreContainer;
             }
 
             return null;
         }
 
-        internal void update_instance<T>(T element_content)
+        internal FlatShareCC returnFlatShareCC()
         {
-            if (element_content is MyNote mynote)
-            {
-                if (mynote != null)
-                {
-                    myNote_instance = mynote;
-                }
-            }
-
-            if (element_content is FlatShareCC flatShareCC)
-            {
-                if (flatShareCC != null)
-                {
-                    flatShareCC_instance = flatShareCC;
-                }
-
-            }
+                return flatShareCC;      
         }
+        #endregion element instantiation
     }
 }
 /*  END OF FILE

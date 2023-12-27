@@ -63,8 +63,6 @@ namespace AidingElementsUserInterface.Core
 
             if (config == null)
             {
-                MessageBox.Show("hgi");
-
                 config = new ButtonData();
             }
 

@@ -9,6 +9,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core;
+using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace AidingElementsUserInterface.Elements
     {
         // global classes, properties and variables
         #region global classes, properties and variables
-        private CoreButton CB_GraphicsTest = new CoreButton("graphics test");
+        //private CoreButton CB_GraphicsTest = new CoreButton("graphics test");
 
         private CoreButton CB_QuitButton = new CoreButton("quit\nys ui");
 
@@ -54,7 +55,7 @@ namespace AidingElementsUserInterface.Elements
         {
             await Task.Delay(12);
 
-            CB_GraphicsTest.button.Click += CB_GraphicsTest_Click;
+            //CB_GraphicsTest.button.Click += CB_GraphicsTest_Click;
             CB_QuitButton.button.Click += CB_QuitButton_Click;
             CB_ShutdownButton.button.Click += CB_ShutdownButton_Click;
 
@@ -79,8 +80,9 @@ namespace AidingElementsUserInterface.Elements
 
         // clicks
         #region button clicks
-        private void CB_GraphicsTest_Click(object sender, RoutedEventArgs e)
-        {
+        //private void CB_GraphicsTest_Click(object sender, RoutedEventArgs e)
+        
+        //{
             //MainWindow mainWindow = YS_CLASS_ConfigData.Return_MainWindow();
 
             //Polyline poly = new Polyline();
@@ -104,38 +106,17 @@ namespace AidingElementsUserInterface.Elements
             //}
 
             //mainWindow.MainWindowCanvas.Children.Add(poly);
-        }
+        //}
 
 
         private void CB_QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-
-            TXT_0 txt = new TXT_0("english");
-
-            string question = txt.quitQuestion();
-            string title = txt.quitTitle();
-
-            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                mainWindow.quitAEUI();
-            }
+            new SharedLogic().QuitApplicationCommand();
         }
 
         private void CB_ShutdownButton_Click(object sender, RoutedEventArgs e)
         {
-            TXT_0 text = new TXT_0("english");
-
-            string question = text.shutdownQuestion().ToString();
-            string title = text.shutdownTitle().ToString();
-
-            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if (result == MessageBoxResult.Yes)
-            {
-                string command = "/C shutdown /p";
-                Process.Start("cmd.exe", command);
-            }
+            new SharedLogic().ShutdownCommand();
         }
         #endregion button clicks
         #endregion element events

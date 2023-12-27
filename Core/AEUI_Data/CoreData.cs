@@ -56,10 +56,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public CoreData(bool load)
         {
-            if (load)
-            {
 
-            }
         }
 
         internal void apply_CoreData(CoreData coreData)

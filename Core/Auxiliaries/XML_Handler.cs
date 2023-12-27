@@ -51,14 +51,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             myNote_element = myNote;
         }
 
-        //private void checkExistence(string path)
-        //{
-        //    if (!File.Exists(path))
-        //    {
-        //        Directory.CreateDirectory(path);
-        //    }
-        //}
-
 
         // Container loading and saving via XML
         #region Container
@@ -293,6 +285,102 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
         #endregion ButtonData saving
         #endregion ButtonData
+
+
+        // CanvasData
+        // + color data? OR replace color values in core data OR if colordata == null, use coredata
+        #region CanvasData
+        #region CanvasData loading
+        internal CanvasData? CanvasData_load()
+        {
+            CanvasData canvasData = new CanvasData(true);
+            XmlDocument xmlDocument = new XmlDocument();
+
+            if (File.Exists(CanvasData_file))
+            {
+                xmlDocument.Load(CanvasData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+
+                if (node != null)
+                {
+                    XmlNode node_CanvasData = node.SelectSingleNode("CanvasData");
+
+                    if (node_CanvasData != null)
+                    {
+                        XmlNode node_CoreData = node_CanvasData.SelectSingleNode("CoreData");
+
+                        CoreData aux_data = loadCoreData(node_CoreData);
+
+                        if (aux_data != null)
+                        {
+                            canvasData.apply_CoreData(aux_data);
+                        }
+
+                        canvasData.imageFilePath = node_CanvasData.SelectSingleNode("imageFilePath").InnerText;
+
+                        canvasData.z_level_MAX = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MAX").InnerText);
+                        canvasData.z_level_MIN = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MIN").InnerText);
+
+
+                        return canvasData;
+                    }
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+        #endregion CanvasData loading
+
+        #region CanvasData saving
+        internal void CanvasData_save()
+        {
+            CanvasData canvasData = new SharedLogic().GetMainWindow().coreCanvas.getCanvasData();
+
+            if (canvasData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_CanvasData = xmlDocument.CreateElement("CanvasData");
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, canvasData);
+
+                if (aux_node != null)
+                {
+                    node_CanvasData.AppendChild(aux_node);
+                }
+
+                XmlNode imageFilePath = xmlDocument.CreateElement("imageFilePath");
+                imageFilePath.InnerText = canvasData.imageFilePath;
+                node_CanvasData.AppendChild(imageFilePath);
+
+                XmlNode mainWindowHeight = xmlDocument.CreateElement("z_level_MAX");
+                mainWindowHeight.InnerText = canvasData.z_level_MAX.ToString();
+                node_CanvasData.AppendChild(mainWindowHeight);
+
+                XmlNode mainWindowWidth = xmlDocument.CreateElement("z_level_MIN");
+                mainWindowWidth.InnerText = canvasData.z_level_MIN.ToString();
+                node_CanvasData.AppendChild(mainWindowWidth);
+
+                node.AppendChild(node_CanvasData);
+
+                try
+                {
+                    xmlDocument.Save(CanvasData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        #endregion CanvasData saving
+        #endregion CanvasData
 
         // CoreData
         #region CoreData

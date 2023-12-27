@@ -25,10 +25,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public ButtonData(bool load)
         {
-            if (load)
-            {
-
-            }
         }
 
         public ButtonData()

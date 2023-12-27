@@ -34,56 +34,24 @@ namespace AidingElementsUserInterface.Core
 
         }
 
+<<<<<<< Updated upstream
         internal void addElement(CoreContainer container, CoreCanvas canvas)
         {
             update_instance(container.GetContainerData().getContent());
 
+=======
+
+        internal async void addElement(CoreContainer container, CoreCanvas canvas)
+        {
+>>>>>>> Stashed changes
             containerLocations.Add(container, canvas);
 
             containerContents.Add(container, container.GetContainerData().getContent());
-
         }
 
-        internal bool checkElement<T>(T element_content)
+        internal Dictionary<CoreContainer, UserControl> GetContainerContentsDict()
         {
-            if (element_content is MyNote mynote)
-            {
-                foreach (CoreContainer content_dict in containerContents.Keys)
-                {
-                    if (containerContents[content_dict].GetType() == typeof(MyNote))
-                    {
-                        foreach (CoreContainer location_dict in containerLocations.Keys)
-                        {
-                            if (content_dict == location_dict)
-                            {
-                                return false;
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            if (element_content is FlatShareCC flatShareCC)
-            {
-                foreach (CoreContainer content_dict in containerContents.Keys)
-                {
-                    if (containerContents[content_dict].GetType() == typeof(FlatShareCC))
-                    {
-                        foreach (CoreContainer location_dict in containerLocations.Keys)
-                        {
-                            if (content_dict == location_dict)
-                            {
-                                return false;
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            return true;
-
+            return containerContents;
         }
 
         internal bool removeElement(CoreContainer container)

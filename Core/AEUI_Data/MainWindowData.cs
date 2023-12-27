@@ -24,10 +24,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public MainWindowData(bool load)
         {
-            if (load)
-            {
-
-            }
         }
 
         public MainWindowData()

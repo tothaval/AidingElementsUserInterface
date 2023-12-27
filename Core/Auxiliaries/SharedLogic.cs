@@ -10,9 +10,11 @@
  * origin:      MyNote_2023_11_01
  */
 using AidingElementsUserInterface.Elements.FlatShareCC;
+using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +46,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             FlatShareCC select = new FlatShareCC();
 
+<<<<<<< Updated upstream
             select = (FlatShareCC)GetMainWindow().handler.returnElement(select);
+=======
+            select = (FlatShareCC)GetMainWindow().element_handler.returnFlatShareCC();
+>>>>>>> Stashed changes
 
             return select;
         }
@@ -116,6 +122,35 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             }
 
             return thickness;
+        }
+
+        internal void QuitApplicationCommand()
+        {
+            TXT_0 txt = new TXT_0("english");
+
+            string question = txt.quitQuestion();
+            string title = txt.quitTitle();
+
+            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                GetMainWindow().quitAEUI();
+            }
+        }
+
+        internal void ShutdownCommand()
+        {
+            TXT_0 text = new TXT_0("english");
+
+            string question = text.shutdownQuestion().ToString();
+            string title = text.shutdownTitle().ToString();
+
+            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                string command = "/C shutdown /p";
+                Process.Start("cmd.exe", command);
+            }
         }
     }
 }

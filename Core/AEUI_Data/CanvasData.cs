@@ -18,18 +18,23 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class CanvasData : CoreData
     {
-        public int z_level_MIN { get; set; }
+        public string imageFilePath { get; set; }
 
         public int z_level_MAX { get; set; }
 
-        public string backgroundImageFilePath { get; set; }
+        public int z_level_MIN { get; set; }
+
+
+        public CanvasData(bool load)
+        {
+        }
 
         public CanvasData()
         {
             z_level_MIN = -100;
             z_level_MAX = 100;
 
-            backgroundImageFilePath = "";
+            imageFilePath = "";
         }
 
         public CanvasData(CoreData coreData)
@@ -49,7 +54,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             z_level_MIN = -100;
             z_level_MAX = 100;
 
-            backgroundImageFilePath = "";
+            imageFilePath = "";
         }
     }
 }

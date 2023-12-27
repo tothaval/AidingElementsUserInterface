@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="AidingElementsUserInterface.Elements.Coordinates"
+             x:Name="__Coordinates"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Elements"
+             xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="__Coordinates_Loaded"
+             Initialized="__Coordinates_Initialized">
+
+    <Grid x:Name="content_grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="7"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="ui_border_textbox_elementCoords"
+                Grid.Column="0" Grid.ColumnSpan="2"
+                Grid.Row="0" Grid.RowSpan="1" >
+            <core:CoreTextBox x:Name="CTB_ElementCoordinates">
+                
+            </core:CoreTextBox>
+        </Border>
+
+        <TextBlock x:Name="uie_textblockseparator"
+                       Grid.Column="0" Grid.ColumnSpan="2"
+                       Grid.Row="1" Grid.RowSpan="1" Margin="0,3,0,3"
+                       TextWrapping="NoWrap">-------</TextBlock>
+
+        <Border x:Name="ui_border_textbox_mouseCoords"
+                       Grid.Column="0" Grid.ColumnSpan="2"
+                       Grid.Row="2" Grid.RowSpan="1">
+            <core:CoreTextBox x:Name="CTB_MouseCoordinates">
+
+            </core:CoreTextBox>
+        </Border>
+    </Grid>
+</UserControl>

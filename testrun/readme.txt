@@ -9,12 +9,20 @@ files, dunno.
 currently implemented functions:
 
 
-elements can be moved via left mouse button
+element control: __WIP__
+	elements can be moved via left mouse button
 
-left click on element will select that element, __WIP__
+	shift + left click on element will select that element 
+	selected elements can be deleted with 'x'
+
+	right click on element to delete that element
+
+left click on surface: deselect all selected elements
 
 right click on surface: instantiate a right click element, which allows
 	you to quit the application or shutdown your computer
+
+
 
 F1: instantiate Manual element (english language only), __WIP__
 	

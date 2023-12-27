@@ -100,6 +100,19 @@ namespace AidingElementsUserInterface.Core
             return containerData;
         }
 
+<<<<<<< Updated upstream
+=======
+        internal Point get_dragPoint()
+        {
+            return dragPoint;
+        }
+
+        internal bool get_containerIsSelected()
+        {
+            return container_is_selected;
+        }
+
+>>>>>>> Stashed changes
         internal Point get_Position()
         {
             return canvas.GetElementPosition(this);
@@ -107,9 +120,13 @@ namespace AidingElementsUserInterface.Core
 
         private async void initialize_container()
         {
+<<<<<<< Updated upstream
 
 
             await Task.Delay(10);
+=======
+            await Task.Delay(2);
+>>>>>>> Stashed changes
 
             if (containerData.getContent() == null)
             {
@@ -134,18 +151,43 @@ namespace AidingElementsUserInterface.Core
             initialize_container();
         }
 
+        internal void deselect(bool remove_from_list = true)
+        {
+            container_is_selected = false;
+
+            element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
+
+            if (remove_from_list)
+            {
+                canvas.removeSelectedItem(this);
+            }            
+        }
+
+        internal void remove_Container()
+        {
+            new SharedLogic().GetElementHandler().removeElement((CoreContainer)__CoreContainer);
+            canvas.canvas.Children.Remove(__CoreContainer);
+
+            content_border.Child = null;
+        }
+
+        internal void select()
+        {
+            container_is_selected = true;
+            element_border.BorderBrush = new SolidColorBrush(containerData.highlight);
+
+            canvas.add_selected_item(this);
+        }
+
         private void selected()
         {
             if (container_is_selected)
             {
-                container_is_selected = false;
-
-                element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
+                deselect();
             }
             else
             {
-                container_is_selected = true;
-                element_border.BorderBrush = new SolidColorBrush(containerData.highlight);
+                select();
             }
         }
 
@@ -185,7 +227,6 @@ namespace AidingElementsUserInterface.Core
                     ref canvas
                     );
 
-
                 //mainWindow.writing = false;
                 ////Keyboard.ClearFocus();
                 Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);
@@ -196,10 +237,7 @@ namespace AidingElementsUserInterface.Core
 
             if (e.ChangedButton == MouseButton.Right)
             {
-                new SharedLogic().GetElementHandler().removeElement((CoreContainer)__CoreContainer);
-                canvas.canvas.Children.Remove(__CoreContainer);
-
-                content_border.Child = null;
+                remove_Container();
 
                 e.Handled = true;
             }
@@ -225,7 +263,11 @@ namespace AidingElementsUserInterface.Core
                     ref containerData.z_position
                     );
 
-                selected();
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    selected();
+                }
+                
 
                 //int count = 0;
                 //foreach (YS_CORE_ContainerElement item in mainWindow.UIE_ModuleCreator.list_YS_CORE_ContainerElement)
