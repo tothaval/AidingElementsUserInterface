@@ -34,6 +34,7 @@ using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Core.AEUI_Data;
+using System.Drawing;
 
 namespace AidingElementsUserInterface
 {
@@ -42,12 +43,14 @@ namespace AidingElementsUserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal CoreCanvas canvas;
+        internal CoreCanvas coreCanvas;
         internal MainWindowData mainWindowData;
 
         internal Data_Handler data_Handler = new Data_Handler();
 
-        internal ElementHandler handler = new ElementHandler();
+        internal ElementHandler element_handler = new ElementHandler();
+
+        internal SharedLogic logic = new SharedLogic();
 
 
         public MainWindow()
@@ -126,11 +129,12 @@ namespace AidingElementsUserInterface
 
         private void load_CoreCanvas()
         {
-            canvas = new CoreCanvas();
+            coreCanvas = new CoreCanvas();
+            coreCanvas.Name = "mainWindowCanvas";
 
-            canvas_border.Child = canvas;
+            canvas_border.Child = coreCanvas;
 
-            Keyboard.Focus(canvas);
+            Keyboard.Focus(coreCanvas);
         }
 
         public void quitAEUI()
@@ -145,15 +149,10 @@ namespace AidingElementsUserInterface
                 xml_handler.MainWindowData_save();
                 xml_handler.TextBoxData_save();
 
-                if (handler != null)
+                if (element_handler != null)
                 {
-<<<<<<< Updated upstream
-                    handler.save_state(xml_handler);
-                }                
-=======
                     element_handler.save_state(xml_handler);
                 }
->>>>>>> Stashed changes
             }
 
             Application.Current.Shutdown();
@@ -180,23 +179,11 @@ namespace AidingElementsUserInterface
 
             if (e.Key == Key.F1)
             {
-<<<<<<< Updated upstream
-                canvas.add_element_to_canvas(
-                    handler.instantiate_Manual(canvas)
-                    );
-=======
                 coreCanvas.add_element_to_canvas(new Manual());
->>>>>>> Stashed changes
             }
 
             if (e.Key == Key.F2)
             {
-<<<<<<< Updated upstream
-
-                canvas.add_element_to_canvas(
-                    handler.instantiate_MyNote(canvas)
-                    );
-=======
                 if (MI_MyNote.IsChecked == false)
                 {
                     MI_MyNote.IsChecked = true;
@@ -206,17 +193,10 @@ namespace AidingElementsUserInterface
                     MI_MyNote.IsChecked = false;
                 }
                 add_MyNote();
->>>>>>> Stashed changes
             }
 
             if (e.Key == Key.F3)
             {
-<<<<<<< Updated upstream
-                canvas.add_element_to_canvas(
-                    handler.instantiate_FlatShareCC(canvas)
-                    );
-
-=======
                 if (MI_FlatShareCC.IsChecked == false)
                 {
                     MI_FlatShareCC.IsChecked = true;
@@ -226,7 +206,6 @@ namespace AidingElementsUserInterface
                     MI_FlatShareCC.IsChecked = false;
                 }
                 add_FlatShareCC();
->>>>>>> Stashed changes
             }
         }
 
@@ -298,9 +277,23 @@ namespace AidingElementsUserInterface
         #endregion events
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Coordinates());
+            coreCanvas.add_element_to_canvas(new Elements.Coordinates());
         }
 
+        private void MI_FileLink_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.FileLink());
+        }
+
+        private void MI_Image_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.Image());
+        }
+
+        private void MI_Link_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.Link());
+        }
 
 
         private void MI_manual_Click(object sender, RoutedEventArgs e)

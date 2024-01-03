@@ -8,11 +8,16 @@ files, dunno.
 
 currently implemented functions:
 
-
 element control: __WIP__
 	elements can be moved via left mouse button
 
-	shift + left click on element will select that element 
+	ctrl + left click
+		Link or FileLink element 
+		 	reset element
+
+	shift + left click on element
+		select lement 
+
 	selected elements can be deleted with 'x'
 
 	right click on element to delete that element
@@ -36,9 +41,6 @@ once the ui was active for one time, a data folder will be created
 in the same folder where the binary is located. within this folder
 there is a core folder and within that are several ...data.xml files.
 manipulate the values of the files to change AEUIs appearance, __WIP__
-
-began working on container saving,
-cleaned and refactored the project a little bit
 
 
 abbr:

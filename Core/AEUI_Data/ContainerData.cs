@@ -22,6 +22,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         private UserControl content;
         private ColorData colorData;
 
+        internal string containerLocation { get; set; }
+
         internal bool imageIsBackground = false;
         internal string imageFilePath { get; set; }
 
@@ -29,12 +31,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal int dragLevel;
 
 
-        public ContainerData(bool load)
+        public ContainerData()
         {
-            if (load)
-            {
-
-            }
         }
 
         public ContainerData(UserControl _content)

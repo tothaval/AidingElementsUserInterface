@@ -11,7 +11,9 @@
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
+using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Elements.MyNote;
+using AidingElementsUserInterface.Texts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +48,8 @@ namespace AidingElementsUserInterface.Core
 
         private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
 
+        private Link_Handler link_Handler = new Link_Handler();
+
         public CoreCanvas()
         {
             InitializeComponent();
@@ -53,15 +57,12 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-<<<<<<< Updated upstream
-        internal void add_element_to_canvas(CoreContainer container)
-=======
 
         internal void add_element_to_canvas(UserControl content)
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, this);
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -74,7 +75,7 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, this);
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -84,11 +85,10 @@ namespace AidingElementsUserInterface.Core
         }
 
         internal void add_element_to_canvas(CoreContainer container, System.Windows.Point point)
->>>>>>> Stashed changes
         {
-            PositionElement(container);
+            PositionElement(container, point);
 
-            new SharedLogic().GetElementHandler().addElement(container, (this));
+            new SharedLogic().GetElementHandler().addElement(container, __CoreCanvas);
 
             canvas.Children.Add(container);
         }
@@ -103,14 +103,6 @@ namespace AidingElementsUserInterface.Core
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
 
-<<<<<<< Updated upstream
-            this.Background = new SolidColorBrush(Colors.Transparent);
-            //this.FontFamily = config.font;
-            //
-            //border.Background = config.backColor;
-            //border.BorderThickness = new Thickness(config.borderThickness);
-            //border.CornerRadius = new CornerRadius(config.borderRadius);
-=======
             config = data_Handler.LoadCanvasData();
 
             if (config == null)
@@ -120,11 +112,12 @@ namespace AidingElementsUserInterface.Core
 
             data_Handler.AddData(config);
 
-            this.Background = new SolidColorBrush(config.background);
->>>>>>> Stashed changes
+            __CoreCanvas.Background = new SolidColorBrush(config.background);
 
             __CoreCanvas.BorderBrush = new SolidColorBrush(config.borderbrush);
             __CoreCanvas.BorderThickness = config.thickness;
+
+            __CoreCanvas.Name = config.canvasName;
 
             load();
 
@@ -210,9 +203,6 @@ namespace AidingElementsUserInterface.Core
         {
             XML_Handler xml_Handler = new XML_Handler(new SharedLogic().GetDataHandler().GetCoreData());
 
-<<<<<<< Updated upstream
-        internal void PositionElement(CoreContainer container)
-=======
             foreach (CoreContainer item in xml_Handler.Container_load())
             {
                 item.setCanvas(this);
@@ -250,10 +240,9 @@ namespace AidingElementsUserInterface.Core
         }
 
         internal void PositionElement(CoreContainer container, System.Windows.Point point)
->>>>>>> Stashed changes
         {
-            Canvas.SetLeft(container, 125);
-            Canvas.SetTop(container, 25);
+            Canvas.SetLeft(container, point.X);
+            Canvas.SetTop(container, point.Y);
         }
 
         internal void PositionElement(CoreContainer container, MouseButtonEventArgs e)
@@ -333,7 +322,7 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_KeyDown(object sender, KeyEventArgs e)
         {
-         
+
         }
 
         private void canvas_KeyUp(object sender, KeyEventArgs e)
@@ -374,17 +363,7 @@ namespace AidingElementsUserInterface.Core
 
             else if (e.ChangedButton == MouseButton.Right)
             {
-<<<<<<< Updated upstream
-                CoreContainer rightClickElement = new CoreContainer((new RightClickChoice()),(CoreCanvas)__CoreCanvas);
-
-                PositionElement(rightClickElement, e);
-
-                new SharedLogic().GetElementHandler().addElement(rightClickElement, __CoreCanvas);
-
-                canvas.Children.Add(rightClickElement);
-=======
                 add_element_to_canvas(new RightClickChoice(), e);
->>>>>>> Stashed changes
             }
         }
 

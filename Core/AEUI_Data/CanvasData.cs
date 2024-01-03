@@ -18,6 +18,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class CanvasData : CoreData
     {
+        internal string canvasName { get; set; }
+
         public string imageFilePath { get; set; }
 
         public int z_level_MAX { get; set; }
@@ -31,6 +33,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public CanvasData()
         {
+            canvasName = "canvas";
+
             z_level_MIN = -100;
             z_level_MAX = 100;
 
@@ -50,6 +54,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
+
+            canvasName = "canvas";
 
             z_level_MIN = -100;
             z_level_MAX = 100;

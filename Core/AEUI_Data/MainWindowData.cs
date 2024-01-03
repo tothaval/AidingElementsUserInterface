@@ -8,6 +8,7 @@
  * mail:        kammel@posteo.de
  */
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,22 +18,25 @@ using System.Windows.Media.Media3D;
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class MainWindowData : CoreData
-    {        
+    {
         // main window size values
-        public int mainWindowHeight { get; set; }
-        public int mainWindowWidth { get; set; }
+        internal int mainWindowHeight { get; set; }
+        internal int mainWindowWidth { get; set; }
+        internal string? language { get; set; }
 
-        public MainWindowData(bool load)
+        internal MainWindowData(bool load)
         {
         }
 
-        public MainWindowData()
+        internal MainWindowData()
         {
             mainWindowHeight = 480;
             mainWindowWidth = 640;
+
+            language = "english";
         }
 
-        public MainWindowData(CoreData coreData)
+        internal MainWindowData(CoreData coreData)
         {
             brushtype = coreData.brushtype;
             background = coreData.background;
@@ -49,6 +53,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             mainWindowHeight = 480;
             mainWindowWidth = 640;
 
+            language = "english";
         }
     }
 }

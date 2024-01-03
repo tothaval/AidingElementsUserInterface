@@ -34,19 +34,16 @@ namespace AidingElementsUserInterface.Core
 
         }
 
-<<<<<<< Updated upstream
-        internal void addElement(CoreContainer container, CoreCanvas canvas)
-        {
-            update_instance(container.GetContainerData().getContent());
-
-=======
 
         internal async void addElement(CoreContainer container, CoreCanvas canvas)
         {
->>>>>>> Stashed changes
+            container.GetContainerData().containerLocation = canvas.Name;
+
             containerLocations.Add(container, canvas);
 
             containerContents.Add(container, container.GetContainerData().getContent());
+
+
         }
 
         internal Dictionary<CoreContainer, UserControl> GetContainerContentsDict()

@@ -120,8 +120,6 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
 
         private async void __FlatShareCC_loading_intervall(object sender, EventArgs e)
         {
-
-
             if (load_data())
             {
                 FlatDataUI_object.load_data(flatData);
@@ -173,6 +171,8 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
             }
 
             loadable_data_detected = true;
+
+            _timer.Stop();
 
             return loadable_data_detected;
         }

@@ -106,6 +106,21 @@
                               
                               Click="MI_Coordinates_Click"/>
 
+                    <MenuItem x:Name="MI_FileLink"
+                              Header="FileLink"
+                              
+                              Click="MI_FileLink_Click"/>
+
+                    <MenuItem x:Name="MI_Image"
+                              Header="Image"
+                              
+                              Click="MI_Image_Click"/>
+
+                    <MenuItem x:Name="MI_Link"
+                              Header="Link"
+                              
+                              Click="MI_Link_Click"/>
+
                     <MenuItem x:Name="MI_MyNote"
                               Header="MyNote"
                               IsCheckable="True"
