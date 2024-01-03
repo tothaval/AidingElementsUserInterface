@@ -11,6 +11,7 @@
  */
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Texts;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,9 +28,31 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class SharedLogic
     {
+        internal Point point = new Point(125, 25);
+
         public SharedLogic()
         {
 
+        }
+
+
+        internal void executeLink(string link)
+        {
+            try
+            {
+                ProcessStartInfo start = new ProcessStartInfo(link)
+                {
+                    UseShellExecute = true
+                };
+                Process.Start(start);
+            }
+            catch
+            {
+                //if (btn.ToolTip.ToString() != null)
+                //{
+                //    MessageBox.Show(text.pathExcetptionMessage().ToString());
+                //}
+            }
         }
 
         internal Data_Handler GetDataHandler()
@@ -39,18 +62,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         internal ElementHandler GetElementHandler()
         {
-            return GetMainWindow().handler;
+            return GetMainWindow().element_handler;
         }
 
         internal FlatShareCC GetFlatShareCC()
         {
             FlatShareCC select = new FlatShareCC();
 
-<<<<<<< Updated upstream
-            select = (FlatShareCC)GetMainWindow().handler.returnElement(select);
-=======
             select = (FlatShareCC)GetMainWindow().element_handler.returnFlatShareCC();
->>>>>>> Stashed changes
 
             return select;
         }
@@ -58,6 +77,23 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal MainWindow GetMainWindow()
         {
             return (MainWindow)System.Windows.Application.Current.MainWindow;
+        }
+
+
+        internal OpenFileDialog? openDialog()
+        {
+            OpenFileDialog setPath = new OpenFileDialog();
+            setPath.InitialDirectory = Environment.GetEnvironmentVariable("userdir");
+            setPath.Filter = "files (*.*)|*.*";
+            setPath.FilterIndex = 2;
+            setPath.RestoreDirectory = true;
+
+            if (setPath.ShowDialog() == true)
+            {
+                return setPath;
+            }
+
+            return null;
         }
 
         internal Color ParseColor(string colorstring)

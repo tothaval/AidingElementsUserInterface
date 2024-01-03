@@ -17,7 +17,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace AidingElementsUserInterface.Core
 {
@@ -42,6 +44,9 @@ namespace AidingElementsUserInterface.Core
                 }
 
                 CoreContainer coreContainer = GetCoreContainer(content, target);
+
+                coreContainer.GetContainerData().containerLocation = target.Name;
+
 
                 new SharedLogic().GetElementHandler().addElement(coreContainer, target);
 

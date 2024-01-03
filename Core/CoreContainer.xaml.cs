@@ -42,12 +42,19 @@ namespace AidingElementsUserInterface.Core
         private bool container_is_selected = false;
 
         #region constructors
-        public CoreContainer()
+        internal CoreContainer()
         {
-
+            InitializeComponent();
         }
 
-        public CoreContainer(UserControl element, CoreCanvas canvas)
+        internal CoreContainer(ContainerData containerData)
+        {
+            this.containerData = containerData;
+
+            InitializeComponent();
+        }
+
+        internal CoreContainer(UserControl element, CoreCanvas canvas)
         {
             InitializeComponent();
 
@@ -100,8 +107,6 @@ namespace AidingElementsUserInterface.Core
             return containerData;
         }
 
-<<<<<<< Updated upstream
-=======
         internal Point get_dragPoint()
         {
             return dragPoint;
@@ -112,7 +117,6 @@ namespace AidingElementsUserInterface.Core
             return container_is_selected;
         }
 
->>>>>>> Stashed changes
         internal Point get_Position()
         {
             return canvas.GetElementPosition(this);
@@ -120,13 +124,7 @@ namespace AidingElementsUserInterface.Core
 
         private async void initialize_container()
         {
-<<<<<<< Updated upstream
-
-
-            await Task.Delay(10);
-=======
             await Task.Delay(2);
->>>>>>> Stashed changes
 
             if (containerData.getContent() == null)
             {
@@ -140,14 +138,8 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        internal void load_Container(UserControl element, CoreCanvas canvas, ContainerData containerData)
+        internal void load_Container()
         {
-            InitializeComponent();
-
-            this.canvas = canvas;
-
-            this.containerData = new ContainerData(containerData, element);
-
             initialize_container();
         }
 
@@ -191,6 +183,11 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
+        internal void setCanvas(CoreCanvas coreCanvas)
+        {
+            this.canvas = coreCanvas;
+        }
+
         private void setColors()
         {
             //imageFilepath = "-";
@@ -205,6 +202,16 @@ namespace AidingElementsUserInterface.Core
                 containerData.GetColorData().color3_string,
                 containerData.GetColorData().color4_string
                 );
+        }
+
+        internal void setContainerData(ContainerData containerData)
+        {
+            this.containerData = containerData;
+        }
+
+        internal void setPosition(Point point)
+        {
+            this.dragPoint = point;
         }
 
         private void Container_Loaded(object sender, RoutedEventArgs e)
@@ -263,6 +270,8 @@ namespace AidingElementsUserInterface.Core
                     ref containerData.z_position
                     );
 
+                    dragPoint = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
+
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
                     selected();
@@ -287,6 +296,19 @@ namespace AidingElementsUserInterface.Core
             }
         }
         #endregion element mouse events
+
+        private void element_grid_MouseEnter(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void element_grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            //this.ToolTip = $"{(int)e.GetPosition(canvas).X}:{(int)e.GetPosition(canvas).Y}";            
+        }
+
+        private void element_grid_MouseLeave(object sender, MouseEventArgs e)
+        {
+        }
     }
 }
 /*  END OF FILE

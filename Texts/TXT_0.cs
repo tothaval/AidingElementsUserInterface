@@ -25,6 +25,19 @@ namespace AidingElementsUserInterface.Texts
         }
 
         #region strings
+        public string containerLoadingError()
+        {
+            if (language.Equals("english"))
+            {
+                return "Container Loading Error!";
+            }
+            else
+            {
+                return "language selection error";
+            }
+        }
+
+
         public string quitQuestion()
         {
             if (language.Equals("english"))

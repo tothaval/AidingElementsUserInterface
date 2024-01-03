@@ -33,9 +33,17 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Border x:Name="element_border" Grid.Column="1" Grid.Row="1" Grid.RowSpan="1"
-                    Background="Transparent" BorderBrush="Transparent" >
-                <Grid x:Name="element_grid" Background="Transparent">
+            <Border x:Name="element_border"
+                    Grid.Column="1"
+                    Grid.Row="1" Grid.RowSpan="1"
+                    Background="Transparent"
+                    BorderBrush="Transparent" >
+                <Grid x:Name="element_grid"
+                      Background="Transparent"
+                      MouseEnter="element_grid_MouseEnter"
+                      MouseMove="element_grid_MouseMove"
+                      MouseLeave="element_grid_MouseLeave">
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7"/>
                         <ColumnDefinition Width="auto"/>
