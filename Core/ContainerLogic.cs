@@ -9,6 +9,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace AidingElementsUserInterface.Core
         // Container Movement
         public static void DragStart(
             ref bool elementDrag,
-            CoreContainer CORE_ContainerElement,
+            AEUI_Container CORE_ContainerElement,
             ref int z_position,
             ref int dragLevel,
             ref Point dragPoint,
@@ -49,7 +50,7 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragMove(
             ref bool elementDrag,
-            CoreContainer CORE_ContainerElement,
+            AEUI_Container CORE_ContainerElement,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
@@ -71,7 +72,7 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragStop(
             ref bool elementDrag,
-            CoreContainer CORE_ContainerElement,
+            AEUI_Container CORE_ContainerElement,
             ref int z_position
             )
         {

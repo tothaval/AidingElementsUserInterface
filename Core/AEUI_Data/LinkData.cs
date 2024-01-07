@@ -1,4 +1,13 @@
-﻿using Microsoft.Win32;
+﻿/* Aiding Elements User Interface
+ *      LinkData class
+ *      
+ * link element properties
+ * 
+ * init:        2024|04|01
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,12 +26,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal string GetLink => _link;
         internal string GetLinkText => _linkText;
 
-        public LinkData()
+        internal LinkData()
         {
 
         }
 
-        public LinkData(string link, string linktext)
+        internal LinkData(string link, string linktext)
         {
             _link = link;
             _linkText = linktext;

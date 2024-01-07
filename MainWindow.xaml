@@ -8,6 +8,7 @@
         ...?
     -->
 <Window x:Class="AidingElementsUserInterface.MainWindow"
+        x:Name="__MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -17,8 +18,7 @@
         Title="Aiding Elements User Interface"
                 
         WindowStartupLocation="Manual"
-        Left="25"
-        Top="25"
+
         FontFamily="Verdana"
         Focusable="True"               
         
@@ -134,8 +134,11 @@
                               Click="MI_FlatShareCC_Click"/>
                     </MenuItem>
 
-                <MenuItem x:Name="MI_options"
-                          Header="options">
+                <MenuItem x:Name="MI_tools"
+                          Header="tools">
+                    <MenuItem x:Name="MI_Random"
+                          Header="Random"                              
+                          Click="MI_Random_Click"/>
                     <Separator />
                     <MenuItem x:Name="MI_RightClickChoice"
                           Header="End it!"                              

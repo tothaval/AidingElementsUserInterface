@@ -63,7 +63,7 @@ namespace AidingElementsUserInterface.Core
             textbox.Background = new SolidColorBrush(Colors.Transparent);
             textbox.Foreground = new SolidColorBrush(config.foreground);
 
-            textbox.CaretBrush = new SolidColorBrush(config.highlight);
+            textbox.CaretBrush = new SolidColorBrush(config.foreground);            
 
             textbox.Padding = new Thickness(7, 3, 7, 3);
         }

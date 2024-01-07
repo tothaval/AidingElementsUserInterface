@@ -72,7 +72,10 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         {
             FlatShareCC origin = new SharedLogic().GetFlatShareCC();
 
-            origin.Tab_InitialCosts.Focus();
+            if (origin != null)
+            {
+                origin.Tab_InitialCosts.Focus();
+            }            
 
             DIE_cold_rent.focus_and_select();
         }

@@ -30,6 +30,7 @@
                             <ContentPresenter 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
+                                Margin="5,0,5,0"
                             >
                             </ContentPresenter>
                         </Border>

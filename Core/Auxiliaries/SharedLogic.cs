@@ -21,6 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -80,9 +81,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
 
 
-        internal OpenFileDialog? openDialog()
+        internal Microsoft.Win32.OpenFileDialog? openDialog()
         {
-            OpenFileDialog setPath = new OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog setPath = new Microsoft.Win32.OpenFileDialog();
             setPath.InitialDirectory = Environment.GetEnvironmentVariable("userdir");
             setPath.Filter = "files (*.*)|*.*";
             setPath.FilterIndex = 2;
@@ -96,7 +97,20 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return null;
         }
 
-        internal Color ParseColor(string colorstring)
+        internal FolderBrowserDialog? openFolder()
+        {
+            FolderBrowserDialog openFileDlg = new FolderBrowserDialog();
+
+            var result = openFileDlg.ShowDialog();
+            if (result.ToString() != string.Empty)
+            {
+                return openFileDlg;
+            }
+
+            return null;
+        }
+
+    internal Color ParseColor(string colorstring)
         {
             Color color;
             byte a, r, g, b;
@@ -167,7 +181,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             string question = txt.quitQuestion();
             string title = txt.quitTitle();
 
-            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = System.Windows.MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 GetMainWindow().quitAEUI();
@@ -181,7 +195,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             string question = text.shutdownQuestion().ToString();
             string title = text.shutdownTitle().ToString();
 
-            MessageBoxResult result = MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            MessageBoxResult result = System.Windows.MessageBox.Show(question, title, MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
                 string command = "/C shutdown /p";

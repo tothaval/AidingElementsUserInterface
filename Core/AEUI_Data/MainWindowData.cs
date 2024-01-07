@@ -1,6 +1,8 @@
 ﻿/* Aiding Elements User Interface
  *      MainWindowData class
  * 
+ * inherits from: CoreData class
+ * 
  * mainwindow properties
  * 
  * init:        2023|12|14
@@ -13,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Media3D;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
@@ -20,6 +23,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     internal class MainWindowData : CoreData
     {
         // main window size values
+        internal Point initialPosition { get; set; }
+
         internal int mainWindowHeight { get; set; }
         internal int mainWindowWidth { get; set; }
         internal string? language { get; set; }
@@ -30,6 +35,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal MainWindowData()
         {
+            initialPosition = new Point(25, 25);
+
             mainWindowHeight = 480;
             mainWindowWidth = 640;
 
@@ -49,6 +56,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
+
+            initialPosition = new Point(25, 25);
 
             mainWindowHeight = 480;
             mainWindowWidth = 640;

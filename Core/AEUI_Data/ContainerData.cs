@@ -1,5 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      ContainerData class
+ *      
+ * inherits from: CoreData class
  * 
  * container element properties
  * 
@@ -12,15 +14,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
 
     internal class ContainerData : CoreData
     {
+        private const int SPACING = 8;
+
         private UserControl content;
         private ColorData colorData;
+
 
         internal string containerLocation { get; set; }
 
@@ -29,6 +36,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal int z_position;
         internal int dragLevel;
+        internal GridLength element_spacing;
 
 
         public ContainerData()
@@ -42,6 +50,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             z_position = 0;
             dragLevel = 30000;
+            element_spacing = new GridLength(SPACING);
         }
 
         public ContainerData(CoreData coreData, UserControl _content)
@@ -63,6 +72,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             z_position = 0;
             dragLevel = 30000;
+
+            element_spacing = new GridLength(SPACING);
         }
 
         internal ColorData GetColorData()

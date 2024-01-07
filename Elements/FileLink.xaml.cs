@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      FileLink element 
+ * 
+ * link any file to a button
+ * 
+ * init:        2024|01|03
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +37,7 @@ namespace AidingElementsUserInterface.Elements
     public partial class FileLink : UserControl
     {
         private bool loaded = false;
+        private bool linked = false;
 
         internal LinkData data;
         private SharedLogic logic = new SharedLogic();
@@ -42,26 +52,42 @@ namespace AidingElementsUserInterface.Elements
         }
 
         private void build()
-        {           
-            CB_FileLink.button.Click += Button_Click;
+        {
+            CB_FileLink.setContent("link file");
+            CB_FileLink.button.Click += CB_FileLink_Click;
+
+            CTB_LinkText.setText("linktext");
+
+            CB_LinkButton.setContent("setup\nlink");
+            CB_LinkButton.button.Click += CB_LinkButton_Click;
         }
 
         internal void load(LinkData linkData)
         {
-            CB_FileLink.ToolTip = linkData.GetLink;
-            CB_FileLink.button.Content = linkData.GetLinkText;
-            
+            SP_Choice.Visibility = Visibility.Collapsed;
+
+            CB_FileLink.setContent(linkData.GetLink);
+
+            CB_LinkButton.setTooltip(linkData.GetLink);
+            CB_LinkButton.setContent(linkData.GetLinkText);
+
             data = linkData;
+
+            linked = true;
         }
 
         internal void initiate_link()
         {
             OpenFileDialog file = logic.openDialog();
 
-            if (file != null) 
+            if (file != null)
             {
-                load(new LinkData(file.FileName, file.SafeFileName));
-            }            
+                data = new LinkData();
+                data.SetLink(file.FileName);
+                
+                CB_FileLink.setContent(file.FileName);
+                CTB_LinkText.setText(file.SafeFileName);
+            }
         }
 
         //public ImageSource GetIcon(string fileName)
@@ -85,34 +111,65 @@ namespace AidingElementsUserInterface.Elements
         //}
 
 
+        private void reset()
+        {
+            SP_Choice.Visibility = Visibility.Visible;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+            CB_LinkButton.setContent("setup\nlink");
+
+            linked = false;
+        }
+
+        private void setup_choice()
+        {
+            data.SetLinkText(CTB_LinkText.getText());
+
+            CB_LinkButton.setContent(data.GetLinkText);
+
+            SP_Choice.Visibility = Visibility.Collapsed;
+
+            linked = true;
+        }
+
+        private void CB_FileLink_Click(object sender, RoutedEventArgs e)
         {
             if (loaded)
             {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                initiate_link();
+            }
+
+            e.Handled = true;
+        }
+        private void CB_LinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                reset();
+            }
+            else
+            {
+                if (loaded)
                 {
-                    initiate_link();
-                }
-                else 
-                {
-                    if (data != null)
+                    if (linked)
                     {
                         logic.executeLink(data.GetLink);
                     }
                     else
                     {
-                        initiate_link();
+                        setup_choice();
                     }
                 }
             }
-            
+
             e.Handled = true;
         }
-
         private void __FileLink_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

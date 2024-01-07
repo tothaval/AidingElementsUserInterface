@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
@@ -29,12 +30,12 @@ namespace AidingElementsUserInterface.Core
 
         // element instance creation
         #region element instantiation
-        internal CoreContainer GetCoreContainer(UserControl content, CoreCanvas target)
+        internal AEUI_Container GetCoreContainer(UserControl content, CoreCanvas target)
         {
-            return new CoreContainer(content, target);
+            return new AEUI_Container(content, target);
         }
 
-        internal CoreContainer? instantiate(UserControl content, CoreCanvas target)
+        internal AEUI_Container? instantiate(UserControl content, CoreCanvas target)
         {
             if (content != null)
             {
@@ -43,7 +44,7 @@ namespace AidingElementsUserInterface.Core
                     flatShareCC = (FlatShareCC)content;
                 }
 
-                CoreContainer coreContainer = GetCoreContainer(content, target);
+                AEUI_Container coreContainer = GetCoreContainer(content, target);
 
                 coreContainer.GetContainerData().containerLocation = target.Name;
 
