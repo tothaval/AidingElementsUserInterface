@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 
 using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
@@ -25,9 +26,9 @@ namespace AidingElementsUserInterface.Core
 {
     internal class ElementHandler : ElementServer
     {
-        private Dictionary<CoreContainer, CoreCanvas> containerLocations = new Dictionary<CoreContainer, CoreCanvas>();
+        private Dictionary<AEUI_Container, CoreCanvas> containerLocations = new Dictionary<AEUI_Container, CoreCanvas>();
 
-        private Dictionary<CoreContainer, UserControl> containerContents = new Dictionary<CoreContainer, UserControl>();
+        private Dictionary<AEUI_Container, UserControl> containerContents = new Dictionary<AEUI_Container, UserControl>();
 
         internal ElementHandler()
         {
@@ -35,7 +36,7 @@ namespace AidingElementsUserInterface.Core
         }
 
 
-        internal async void addElement(CoreContainer container, CoreCanvas canvas)
+        internal async void addElement(AEUI_Container container, CoreCanvas canvas)
         {
             container.GetContainerData().containerLocation = canvas.Name;
 
@@ -46,12 +47,12 @@ namespace AidingElementsUserInterface.Core
 
         }
 
-        internal Dictionary<CoreContainer, UserControl> GetContainerContentsDict()
+        internal Dictionary<AEUI_Container, UserControl> GetContainerContentsDict()
         {
             return containerContents;
         }
 
-        internal bool removeElement(CoreContainer container)
+        internal bool removeElement(AEUI_Container container)
         {
             if (container.GetContainerData().getContent() is FlatShareCC flatShareCC)
             {
@@ -78,7 +79,7 @@ namespace AidingElementsUserInterface.Core
 
             handler.delete_files(handler.ContainerData_xml_folder);
 
-            foreach (CoreContainer container in containerLocations.Keys)
+            foreach (AEUI_Container container in containerLocations.Keys)
             {
                 handler.Container_save(container, counter);
 

@@ -18,7 +18,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
                  Loaded="__Link_Loaded">
-    <Border x:Name="border" Padding="5">
+    <Border x:Name="border">
+        <StackPanel>
+            <StackPanel x:Name="SP_Choice"
+                        Orientation="Horizontal">
+                <core:CoreButton x:Name="CB_local"
+                                 Margin="1"/>
+                <core:CoreButton x:Name="CB_web"
+                                 Margin="1"/>
+            </StackPanel>            
+            <core:CoreTextBox x:Name="CTB_Link"
+                              Visibility="Collapsed"
+                              Margin="1"/>
+            <core:CoreTextBox x:Name="CTB_LinkText"
+                              Margin="1"/>
+            <core:CoreButton x:Name="CB_LinkButton"
+                             Margin="1"/>
+        </StackPanel>
 
     </Border>
 </UserControl>

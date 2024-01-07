@@ -18,6 +18,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Border x:Name="border">
         <TextBox x:Name="textbox"
+                 Padding="2,0,2,0"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.CanContentScroll="true"

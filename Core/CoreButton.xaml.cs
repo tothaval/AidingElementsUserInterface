@@ -33,6 +33,7 @@ namespace AidingElementsUserInterface.Core
     public partial class CoreButton : UserControl
     { 
         private ButtonData config;
+        private bool selected = false;
 
         // constructors
         #region constructors
@@ -95,8 +96,8 @@ namespace AidingElementsUserInterface.Core
             border.CornerRadius = config.cornerRadius;
             border.BorderThickness = config.thickness;
 
-            border.HorizontalAlignment = HorizontalAlignment.Stretch;
-            border.VerticalAlignment = VerticalAlignment.Stretch;
+            border.HorizontalAlignment = HorizontalAlignment.Center;
+            border.VerticalAlignment = VerticalAlignment.Center;
 
             button.MinWidth = config.width;
             button.MinHeight = config.height;
@@ -104,8 +105,8 @@ namespace AidingElementsUserInterface.Core
             //button.Background = config.return_TransparentSolidColorBrush();
             button.Foreground = new SolidColorBrush(config.foreground);
 
-            button.VerticalContentAlignment = VerticalAlignment.Stretch;
-            button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            button.VerticalContentAlignment = VerticalAlignment.Center;
+            button.HorizontalContentAlignment = HorizontalAlignment.Center;
 
             button.Style = style;
         }
@@ -116,9 +117,39 @@ namespace AidingElementsUserInterface.Core
             button.IsEnabled = false;
         }
 
+        internal void deselect()
+        {
+            this.Resources.Remove("buttonColor");
+            this.Resources.Remove("highlight");
+
+            this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
+            this.Resources.Add("highlight", new SolidColorBrush(config.highlight));
+
+            Style style = this.FindResource("buttonStyle") as Style;
+            button.Style = style;
+
+            selected = false;
+        }
+
         public void _enabled()
         {
             button.IsEnabled = true;
+        }
+
+        internal bool isSelected => selected;
+
+        internal void select()
+        {
+            this.Resources.Remove("buttonColor");
+            this.Resources.Remove("highlight");
+
+            this.Resources.Add("buttonColor", new SolidColorBrush(config.highlight));
+            this.Resources.Add("highlight", new SolidColorBrush(config.background));
+
+            Style style = this.FindResource("buttonStyle") as Style;
+            button.Style = style;
+
+            selected = true;
         }
 
         public void setContent(string content)

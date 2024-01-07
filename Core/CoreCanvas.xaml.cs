@@ -9,6 +9,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
@@ -46,7 +47,7 @@ namespace AidingElementsUserInterface.Core
         private System.Windows.Point selection_point;
         private System.Windows.Shapes.Rectangle selection_rectangle;
 
-        private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
+        private ObservableCollection<AEUI_Container> selected_items = new ObservableCollection<AEUI_Container>();
 
         private Link_Handler link_Handler = new Link_Handler();
 
@@ -62,7 +63,7 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
+            AEUI_Container coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -71,11 +72,11 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal void add_element_to_canvas(UserControl content, MouseButtonEventArgs e)
+        internal void add_element_to_canvas(AEUI_Container content, MouseButtonEventArgs e)
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
+            AEUI_Container coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -84,7 +85,7 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal void add_element_to_canvas(CoreContainer container, System.Windows.Point point)
+        internal void add_element_to_canvas(AEUI_Container container, System.Windows.Point point)
         {
             PositionElement(container, point);
 
@@ -93,7 +94,7 @@ namespace AidingElementsUserInterface.Core
             canvas.Children.Add(container);
         }
 
-        internal void add_selected_item(CoreContainer coreContainer)
+        internal void add_selected_item(AEUI_Container coreContainer)
         {
             selected_items.Add(coreContainer);
         }
@@ -168,7 +169,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void delete_selected_items()
         {
-            foreach (CoreContainer item in selected_items)
+            foreach (AEUI_Container item in selected_items)
             {
                 item.remove_Container();
             }
@@ -178,7 +179,7 @@ namespace AidingElementsUserInterface.Core
 
         private void deselect_selected_containers()
         {
-            foreach (CoreContainer item in selected_items)
+            foreach (AEUI_Container item in selected_items)
             {
                 item.deselect(false);   
             }
@@ -192,7 +193,7 @@ namespace AidingElementsUserInterface.Core
         }
 
 
-        internal System.Windows.Point GetElementPosition(CoreContainer container)
+        internal System.Windows.Point GetElementPosition(AEUI_Container container)
         {
             System.Windows.Point position = new System.Windows.Point(Canvas.GetLeft(container), Canvas.GetTop(container));
 
@@ -203,7 +204,7 @@ namespace AidingElementsUserInterface.Core
         {
             XML_Handler xml_Handler = new XML_Handler(new SharedLogic().GetDataHandler().GetCoreData());
 
-            foreach (CoreContainer item in xml_Handler.Container_load())
+            foreach (AEUI_Container item in xml_Handler.Container_load())
             {
                 item.setCanvas(this);
 
@@ -214,13 +215,13 @@ namespace AidingElementsUserInterface.Core
         }
 
         internal async void MoveSelection(
-            CoreContainer event_sender,
+            AEUI_Container event_sender,
             System.Windows.Point sender_origin,
             System.Windows.Point new_point)
         {
             double x0, y0, x_diff, y_diff, x1, y1;
 
-            foreach (CoreContainer item in selected_items)
+            foreach (AEUI_Container item in selected_items)
             {
                 if (item != event_sender)
                 {
@@ -239,20 +240,20 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal void PositionElement(CoreContainer container, System.Windows.Point point)
+        internal void PositionElement(AEUI_Container container, System.Windows.Point point)
         {
             Canvas.SetLeft(container, point.X);
             Canvas.SetTop(container, point.Y);
         }
 
-        internal void PositionElement(CoreContainer container, MouseButtonEventArgs e)
+        internal void PositionElement(AEUI_Container container, MouseButtonEventArgs e)
         {
             Canvas.SetLeft(container, e.GetPosition(canvas).X);
             Canvas.SetTop(container, e.GetPosition(canvas).Y);
         }
         internal void RemoveFlatShareCC()
         {
-            foreach (CoreContainer container in canvas.Children)
+            foreach (AEUI_Container container in canvas.Children)
             {
                 if (container.GetContainerData().getContent().GetType() == typeof(FlatShareCC))
                 {
@@ -266,7 +267,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void RemoveMyNote()
         {
-            foreach (CoreContainer container in canvas.Children)
+            foreach (AEUI_Container container in canvas.Children)
             {
                 if (container.GetContainerData().getContent().GetType() == typeof(MyNote))
                 {
@@ -278,7 +279,7 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal void removeSelectedItem(CoreContainer coreContainer)
+        internal void removeSelectedItem(AEUI_Container coreContainer)
         {
             selected_items.Remove(coreContainer);
         }
@@ -297,7 +298,7 @@ namespace AidingElementsUserInterface.Core
 
                 foreach (object item in canvas.Children)
                 {
-                    if (item is CoreContainer container)
+                    if (item is AEUI_Container container)
                     {
 
                     }

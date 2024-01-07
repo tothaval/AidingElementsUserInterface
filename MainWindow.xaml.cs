@@ -57,6 +57,7 @@ namespace AidingElementsUserInterface
         {
             InitializeComponent();
 
+
             build();
         }
 
@@ -64,6 +65,10 @@ namespace AidingElementsUserInterface
         private void build()
         {
             load_MainWindowData();
+
+            load_borderDefaults();
+
+            load_CoreCanvas();
         }
 
 
@@ -83,14 +88,15 @@ namespace AidingElementsUserInterface
 
         private void add_FlatShareCC()
         {
-            if (MI_FlatShareCC.IsChecked)
-            {
-                coreCanvas.add_element_to_canvas(new FlatShareCC());
-            }
-            else
-            {
-                coreCanvas.RemoveFlatShareCC();
-            }
+            // disabled until fixed
+            //if (MI_FlatShareCC.IsChecked)
+            //{
+            //    coreCanvas.add_element_to_canvas(new FlatShareCC());
+            //}
+            //else
+            //{
+            //    coreCanvas.RemoveFlatShareCC();
+            //}
         }
 
         private void load_MainWindowData()
@@ -102,14 +108,18 @@ namespace AidingElementsUserInterface
                 mainWindowData = new MainWindowData();
             }
 
+            __MainWindow.Left = mainWindowData.initialPosition.X;
+            __MainWindow.Top = mainWindowData.initialPosition.Y;
+
+            __MainWindow.Width = mainWindowData.mainWindowWidth;
+            __MainWindow.Height = mainWindowData.mainWindowHeight;
+
             //MessageBox.Show($"{coreData.mainWindowWidth}\n{coreData.fontSize}\n{coreData.highlight}" +
             //    $"\n{coreData.brushtype}" +
             //    $"\n{coreData.cornerRadius}");
 
 
             data_Handler.AddData(mainWindowData);
-
-            load_borderDefaults();
         }
 
         private void load_borderDefaults()
@@ -122,8 +132,6 @@ namespace AidingElementsUserInterface
 
             border.CornerRadius = mainWindowData.cornerRadius;
             border.BorderThickness = mainWindowData.thickness;
-
-            load_CoreCanvas();
         }
 
 
@@ -141,6 +149,8 @@ namespace AidingElementsUserInterface
         {
             if (mainWindowData != null)
             {
+                mainWindowData.initialPosition = new Point(this.Left, this.Top);
+
                 XML_Handler xml_handler = new XML_Handler(mainWindowData);
 
                 xml_handler.ButtonData_save();
@@ -271,7 +281,12 @@ namespace AidingElementsUserInterface
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            System.Windows.Size size = e.NewSize;
 
+            mainWindowData.mainWindowWidth = (int)size.Width;
+            mainWindowData.mainWindowHeight = (int)size.Height;
+
+            e.Handled = true;
         }
 
         #endregion events
@@ -298,7 +313,7 @@ namespace AidingElementsUserInterface
 
         private void MI_manual_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Manual());
+            coreCanvas.add_element_to_canvas(new Elements.Manual());
         }
 
         private void MI_MyNote_Click(object sender, RoutedEventArgs e)
@@ -321,9 +336,14 @@ namespace AidingElementsUserInterface
             logic.ShutdownCommand();
         }
 
+        private void MI_Random_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.Random());
+        }
+
         private void MI_RightClickChoice_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new RightClickChoice());
+            coreCanvas.add_element_to_canvas(new Elements.RightClickChoice());
         }
     }
 }

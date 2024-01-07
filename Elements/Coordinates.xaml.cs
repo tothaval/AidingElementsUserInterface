@@ -1,5 +1,6 @@
 ﻿using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace AidingElementsUserInterface.Elements
     public partial class Coordinates : UserControl
     {
         CoreCanvas coreCanvas;
-        CoreContainer coreContainer;
+        AEUI_Container coreContainer;
 
         // constructors
         #region constructors
@@ -54,7 +55,7 @@ namespace AidingElementsUserInterface.Elements
         {
             await Task.Delay(5);
 
-            foreach (CoreContainer item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
+            foreach (AEUI_Container item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
             {
                 if (item.GetContainerData().getContent() == __Coordinates)
                 {

@@ -5,7 +5,6 @@ all files within this folder are needed to run the
 application, other licenses may apply to these other
 files, dunno.
 
-
 currently implemented functions:
 
 element control: __WIP__
@@ -27,7 +26,11 @@ left click on surface: deselect all selected elements
 right click on surface: instantiate a right click element, which allows
 	you to quit the application or shutdown your computer
 
-
+Link and FileLink elements neet to be setup. From top to bottom
+you'll need to first select a file, a folder or insert a webadress,
+next line you can alter the linktext and lastly you can finalize your
+work by hitting the "setup link" button. to reset a Link or FileLink
+element, hold CTRL and left click onto the element. 
 
 F1: instantiate Manual element (english language only), __WIP__
 	
@@ -41,7 +44,6 @@ once the ui was active for one time, a data folder will be created
 in the same folder where the binary is located. within this folder
 there is a core folder and within that are several ...data.xml files.
 manipulate the values of the files to change AEUIs appearance, __WIP__
-
 
 abbr:
 abbr	abbreviations
