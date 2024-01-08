@@ -17,6 +17,9 @@ element control: __WIP__
 	shift + left click on element
 		select lement 
 
+	hold shift + left mouse button pressed
+		draw selection rectangle on canvas
+
 	selected elements can be deleted with 'x'
 
 	right click on element to delete that element
@@ -39,6 +42,10 @@ F2: instantiate MyNote element, an application for the creation of notes
 	properly, __WIP__
 
 F3: instantiate FlatShareCostCalculator element, __WIP__
+
+Command element currently features:
+>ELEMENTNAME create new element of type ELEMENTNAME on canvas
+<ELEMENTNAME select all elements of type ELEMENTNAME on canvas
 
 once the ui was active for one time, a data folder will be created
 in the same folder where the binary is located. within this folder

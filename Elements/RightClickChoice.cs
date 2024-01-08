@@ -11,7 +11,7 @@ using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 namespace AidingElementsUserInterface.Elements
 {
-    internal class RightClickChoice : AEUI_Container
+    internal class RightClickChoice : CoreContainer
     {
 
         public RightClickChoice()

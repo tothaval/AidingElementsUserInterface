@@ -58,9 +58,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // Container loading and saving via XML
         #region Container
         #region Container loading
-        internal ObservableCollection<AEUI_Container> Container_load()
+        internal ObservableCollection<CoreContainer> Container_load()
         {
-            ObservableCollection<AEUI_Container> container_list = new ObservableCollection<AEUI_Container>();
+            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
 
             foreach (string filename in scan_directory(ContainerData_xml_folder))
             {
@@ -114,6 +114,15 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                                         userControl = (UserControl)Activator.CreateInstance(type_in_folder);
                                     }
+                                    else
+                                    {
+                                        Type? core_type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                        if (core_type != null)
+                                        {
+                                            userControl = (UserControl)Activator.CreateInstance(core_type);
+                                        }
+                                    }
                                 }
                             }
 
@@ -139,7 +148,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
 
 
-                            AEUI_Container coreContainer = new AEUI_Container();
+                            CoreContainer coreContainer = new CoreContainer();
                             coreContainer.setContainerData(containerData);
                             coreContainer.setPosition(container_position);
                             coreContainer.GetContainerData().setContent(userControl);
@@ -156,9 +165,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion Container loading
 
         #region Container saving
-        internal void Container_save(AEUI_Container coreContainer, int counter)
+        internal void Container_save(CoreContainer coreContainer, int counter)
         {
-            AEUI_Container container = coreContainer;
+            CoreContainer container = coreContainer;
 
             if (coreContainer != null)
             {
@@ -239,7 +248,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion Container saving
         #endregion Container
 
-        private XmlNode Content_save(XmlDocument xmlDocument, AEUI_Container container)
+        private XmlNode Content_save(XmlDocument xmlDocument, CoreContainer container)
         {
             XmlNode node_Content = xmlDocument.CreateElement("Content");
 

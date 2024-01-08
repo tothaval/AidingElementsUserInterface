@@ -16,14 +16,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using Color = System.Windows.Media.Color;
+using Point = System.Windows.Point;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -110,7 +117,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return null;
         }
 
-    internal Color ParseColor(string colorstring)
+        internal Color ParseColor(string colorstring)
         {
             Color color;
             byte a, r, g, b;
@@ -201,6 +208,19 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 string command = "/C shutdown /p";
                 Process.Start("cmd.exe", command);
             }
+        }
+
+       
+        internal static ImageSource ToImageSource(Icon icon)
+        {
+            // thx to: https://stackoverflow.com/questions/1127647/convert-system-drawing-icon-to-system-media-imagesource
+
+            ImageSource imageSource = Imaging.CreateBitmapSourceFromHIcon(
+                icon.Handle,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
+
+            return imageSource;
         }
     }
 }

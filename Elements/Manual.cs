@@ -23,7 +23,7 @@ using System.Windows.Controls;
 
 namespace AidingElementsUserInterface.Elements
 {
-    public class Manual : AEUI_Container
+    public class Manual : CoreContainer
     {
         // global classes, properties and variables
         #region global classes, properties and variables            
