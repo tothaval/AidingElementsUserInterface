@@ -25,7 +25,7 @@ namespace AidingElementsUserInterface.Elements
     public partial class Coordinates : UserControl
     {
         CoreCanvas coreCanvas;
-        AEUI_Container coreContainer;
+        CoreContainer coreContainer;
 
         // constructors
         #region constructors
@@ -55,7 +55,7 @@ namespace AidingElementsUserInterface.Elements
         {
             await Task.Delay(5);
 
-            foreach (AEUI_Container item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
+            foreach (CoreContainer item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
             {
                 if (item.GetContainerData().getContent() == __Coordinates)
                 {

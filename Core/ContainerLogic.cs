@@ -28,7 +28,7 @@ namespace AidingElementsUserInterface.Core
         // Container Movement
         public static void DragStart(
             ref bool elementDrag,
-            AEUI_Container CORE_ContainerElement,
+            CoreContainer CORE_ContainerElement,
             ref int z_position,
             ref int dragLevel,
             ref Point dragPoint,
@@ -50,7 +50,7 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragMove(
             ref bool elementDrag,
-            AEUI_Container CORE_ContainerElement,
+            CoreContainer CORE_ContainerElement,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
@@ -72,7 +72,7 @@ namespace AidingElementsUserInterface.Core
 
         public static void DragStop(
             ref bool elementDrag,
-            AEUI_Container CORE_ContainerElement,
+            CoreContainer CORE_ContainerElement,
             ref int z_position
             )
         {

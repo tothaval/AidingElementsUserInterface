@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Policy;
@@ -28,6 +29,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.LinkLabel;
 
 namespace AidingElementsUserInterface.Elements
 {
@@ -49,6 +51,10 @@ namespace AidingElementsUserInterface.Elements
             build();
 
             loaded = true;
+
+            //L_LinkText.FontSize = new SharedLogic().GetDataHandler().GetCoreData().fontSize;
+            L_LinkText.FontSize = 9;
+            L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
         }
 
         private void build()
@@ -112,6 +118,8 @@ namespace AidingElementsUserInterface.Elements
 
             CB_LinkButton.setContent("setup\nlink");
 
+            L_LinkText.Visibility = Visibility.Collapsed;
+
             data = null;
         }
 
@@ -123,6 +131,32 @@ namespace AidingElementsUserInterface.Elements
             CB_LinkButton.setContent(data.GetLinkText);
 
             __Link.ToolTip = data.GetLink;
+
+            if (data.GetLink != null)
+            {
+                if (Uri.IsWellFormedUriString(data.GetLink, UriKind.RelativeOrAbsolute))
+                {
+                    //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
+                    Icon icon = IconTools.GetIconForExtension(".html", ShellIconSize.LargeIcon);
+
+                    if (icon != null)
+                    {
+                        CB_LinkButton.setContent(icon);
+                    }
+                }
+                else
+                {
+                    Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+
+                    if (icon != null)
+                    {
+                        CB_LinkButton.setContent(icon);
+                    }
+                }
+            }
+
+            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Visibility = Visibility.Visible;
         }
 
         private void setup_choice()

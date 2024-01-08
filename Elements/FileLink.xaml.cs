@@ -49,6 +49,10 @@ namespace AidingElementsUserInterface.Elements
             build();
 
             loaded = true;
+
+            //L_LinkText.FontSize = new SharedLogic().GetDataHandler().GetCoreData().fontSize;
+            L_LinkText.FontSize = 9;
+            L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
         }
 
         private void build()
@@ -71,7 +75,18 @@ namespace AidingElementsUserInterface.Elements
             CB_LinkButton.setTooltip(linkData.GetLink);
             CB_LinkButton.setContent(linkData.GetLinkText);
 
+            //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
+            Icon icon = IconTools.GetIconForFile(linkData.GetLink, ShellIconSize.LargeIcon);
+
+            if (icon != null)
+            {
+                CB_LinkButton.setContent(icon);
+            }
+
             data = linkData;
+
+            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Visibility = Visibility.Visible;       
 
             linked = true;
         }
@@ -84,38 +99,19 @@ namespace AidingElementsUserInterface.Elements
             {
                 data = new LinkData();
                 data.SetLink(file.FileName);
-                
+
                 CB_FileLink.setContent(file.FileName);
                 CTB_LinkText.setText(file.SafeFileName);
             }
         }
-
-        //public ImageSource GetIcon(string fileName)
-        //{
-        //    try
-        //    {
-        //        System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(fileName);
-        //        return System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
-        //            icon.Handle,
-        //            new Int32Rect(),
-        //            BitmapSizeOptions.FromEmptyOptions()
-        //            );
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        //MessageBox.Show("empty path");
-        //    }
-
-        //    return null;
-        //}
-
 
         private void reset()
         {
             SP_Choice.Visibility = Visibility.Visible;
 
             CB_LinkButton.setContent("setup\nlink");
+
+            L_LinkText.Visibility = Visibility.Collapsed;
 
             linked = false;
         }
@@ -124,9 +120,23 @@ namespace AidingElementsUserInterface.Elements
         {
             data.SetLinkText(CTB_LinkText.getText());
 
-            CB_LinkButton.setContent(data.GetLinkText);
+            if (data.GetLink != null)
+            {
+                CB_LinkButton.setContent(data.GetLinkText);
+
+                //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
+                Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+
+                if (icon != null)
+                {
+                    CB_LinkButton.setContent(icon);
+                }
+            }
 
             SP_Choice.Visibility = Visibility.Collapsed;
+
+            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Visibility = Visibility.Visible;
 
             linked = true;
         }

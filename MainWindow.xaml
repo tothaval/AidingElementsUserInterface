@@ -85,6 +85,11 @@
 
                 <MenuItem x:Name="MI_AEUI_CTRL"                          
                           Header="control">
+                    <MenuItem x:Name="MI_command"
+                          Header="Command"
+                              
+                          Click="MI_command_Click"/>
+
                     <Separator />
                     <MenuItem x:Name="MI_quit"
                           Header="Quit"

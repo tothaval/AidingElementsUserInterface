@@ -30,12 +30,12 @@ namespace AidingElementsUserInterface.Core
 
         // element instance creation
         #region element instantiation
-        internal AEUI_Container GetCoreContainer(UserControl content, CoreCanvas target)
+        internal CoreContainer GetCoreContainer(UserControl content, CoreCanvas target)
         {
-            return new AEUI_Container(content, target);
+            return new CoreContainer(content, target);
         }
 
-        internal AEUI_Container? instantiate(UserControl content, CoreCanvas target)
+        internal CoreContainer? instantiate(UserControl content, CoreCanvas target)
         {
             if (content != null)
             {
@@ -44,7 +44,7 @@ namespace AidingElementsUserInterface.Core
                     flatShareCC = (FlatShareCC)content;
                 }
 
-                AEUI_Container coreContainer = GetCoreContainer(content, target);
+                CoreContainer coreContainer = GetCoreContainer(content, target);
 
                 coreContainer.GetContainerData().containerLocation = target.Name;
 

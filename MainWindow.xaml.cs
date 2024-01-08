@@ -35,6 +35,7 @@ using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using System.Drawing;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 namespace AidingElementsUserInterface
 {
@@ -290,6 +291,7 @@ namespace AidingElementsUserInterface
         }
 
         #endregion events
+
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
             coreCanvas.add_element_to_canvas(new Elements.Coordinates());
@@ -324,6 +326,11 @@ namespace AidingElementsUserInterface
         private void MI_FlatShareCC_Click(object sender, RoutedEventArgs e)
         {
             add_FlatShareCC();
+        }
+
+        private void MI_command_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new CoreCommand());
         }
 
         private void MI_quit_Click(object sender, RoutedEventArgs e)
