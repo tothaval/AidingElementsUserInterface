@@ -20,7 +20,7 @@ element control: __WIP__
 	hold shift + left mouse button pressed
 		draw selection rectangle on canvas
 
-	selected elements can be deleted with 'x'
+	selected elements can be deleted with 'ctrl + shift + x'
 
 	right click on element to delete that element
 

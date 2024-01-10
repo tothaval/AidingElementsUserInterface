@@ -1,0 +1,21 @@
+<Core>
+  <CanvasData>
+    <CoreData>
+      <brushtype>SolidColorBrush</brushtype>
+      <background>#FFFFEBCD</background>
+      <borderbrush>#FF000000</borderbrush>
+      <foreground>#FF2F4F4F</foreground>
+      <highlight>#FFF0FFFF</highlight>
+      <cornerRadius>14,14,14,14</cornerRadius>
+      <thickness>2,2,2,2</thickness>
+      <fontSize>12</fontSize>
+      <fontFamily>Verdana</fontFamily>
+    </CoreData>
+    <canvasName>canvas</canvasName>
+    <grouping_displacement>25</grouping_displacement>
+    <imageFilePath>
+    </imageFilePath>
+    <z_level_MAX>100</z_level_MAX>
+    <z_level_MIN>-100</z_level_MIN>
+  </CanvasData>
+</Core>

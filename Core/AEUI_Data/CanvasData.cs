@@ -20,6 +20,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     {
         internal string canvasName { get; set; }
 
+        public int grouping_displacement { get; set; }
+
         public string imageFilePath { get; set; }
 
         public int z_level_MAX { get; set; }
@@ -35,6 +37,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         {
             canvasName = "canvas";
 
+            grouping_displacement = 25;
             z_level_MIN = -100;
             z_level_MAX = 100;
 
@@ -56,6 +59,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             fontFamily = coreData.fontFamily;
 
             canvasName = "canvas";
+
+            grouping_displacement = 25;
 
             z_level_MIN = -100;
             z_level_MAX = 100;

@@ -22,17 +22,21 @@
         <StackPanel>
             <StackPanel x:Name="SP_Choice"
                         Orientation="Horizontal">
+                <core:CoreButton x:Name="CB_FileLink"
+                                 Margin="1"/>
                 <core:CoreButton x:Name="CB_local"
                                  Margin="1"/>
                 <core:CoreButton x:Name="CB_web"
                                  Margin="1"/>
-            </StackPanel>            
+            </StackPanel>
             <core:CoreTextBox x:Name="CTB_Link"
                               Visibility="Collapsed"
                               Margin="1"/>
             <core:CoreTextBox x:Name="CTB_LinkText"
+                              Visibility="Collapsed"
                               Margin="1"/>
             <core:CoreButton x:Name="CB_LinkButton"
+                              Visibility="Collapsed"
                              Margin="1"/>
             <Label x:Name="L_LinkText" 
                    Visibility="Collapsed" 

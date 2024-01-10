@@ -103,10 +103,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void configure_CORE_ContainerElement()
         {
+            element_border.MouseEnter += Element_border_MouseEnter;
+            element_border.MouseLeave += Element_border_MouseLeave;
+
+
             element_border.MouseDown += Element_border_MouseDown;
             element_border.MouseMove += Element_border_MouseMove;
             element_border.MouseUp += Element_border_MouseUp;
         }
+
 
         internal ContainerData GetContainerData()
         {
@@ -301,19 +306,47 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 e.Handled = true;
             }
         }
+        private void Element_border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            if (containerData != null)
+            {
+                int index = containerData.z_position;
+
+                Canvas.SetZIndex(this, index + containerData.hoverLevel);
+
+
+                //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.z_position}\n{containerData.z_position + containerData.hoverLevel}");
+            }
+
+            e.Handled = true; 
+        }
+
+        private void Element_border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (containerData != null)
+            {
+                Canvas.SetZIndex(this, containerData.z_position);
+            }
+
+            e.Handled = true;
+        }
         #endregion element mouse events
 
         private void element_grid_MouseEnter(object sender, MouseEventArgs e)
         {
+
+            
         }
 
         private void element_grid_MouseMove(object sender, MouseEventArgs e)
         {
+
             //this.ToolTip = $"{(int)e.GetPosition(canvas).X}:{(int)e.GetPosition(canvas).Y}";            
         }
 
         private void element_grid_MouseLeave(object sender, MouseEventArgs e)
         {
+         
         }
     }
 }

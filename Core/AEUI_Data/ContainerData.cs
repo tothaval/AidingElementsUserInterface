@@ -36,6 +36,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal int z_position;
         internal int dragLevel;
+        internal int hoverLevel;
         internal GridLength element_spacing;
 
 
@@ -50,6 +51,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             z_position = 0;
             dragLevel = 30000;
+            hoverLevel = 200;
             element_spacing = new GridLength(SPACING);
         }
 
@@ -72,6 +74,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             z_position = 0;
             dragLevel = 30000;
+            hoverLevel = 200;
 
             element_spacing = new GridLength(SPACING);
         }

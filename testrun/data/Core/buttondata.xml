@@ -1,0 +1,19 @@
+<Core>
+  <ButtonData>
+    <CoreData>
+      <brushtype>SolidColorBrush</brushtype>
+      <background>#FFFFEBCD</background>
+      <borderbrush>#FF000000</borderbrush>
+      <foreground>#FF2F4F4F</foreground>
+      <highlight>#FFF0FFFF</highlight>
+      <cornerRadius>14,14,14,14</cornerRadius>
+      <thickness>2,2,2,2</thickness>
+      <fontSize>12</fontSize>
+      <fontFamily>Verdana</fontFamily>
+    </CoreData>
+    <imageFilePath>
+    </imageFilePath>
+    <height>40</height>
+    <width>80</width>
+  </ButtonData>
+</Core>

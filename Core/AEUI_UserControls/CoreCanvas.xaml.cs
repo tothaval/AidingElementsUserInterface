@@ -186,7 +186,7 @@ namespace AidingElementsUserInterface.Core
         {
             foreach (CoreContainer item in selected_items)
             {
-                item.deselect(false);   
+                item.deselect(false);
             }
 
             selected_items.Clear();
@@ -203,6 +203,32 @@ namespace AidingElementsUserInterface.Core
             System.Windows.Point position = new System.Windows.Point(Canvas.GetLeft(container), Canvas.GetTop(container));
 
             return position;
+        }
+
+        internal void group_selected_items(bool horizontal)
+        {
+            int iteration = 1;
+            int displacement = config.grouping_displacement;
+
+            foreach (CoreContainer item in selected_items)
+            {
+                if (horizontal)
+                {
+                    Canvas.SetLeft(item, iteration * displacement);
+                    Canvas.SetTop(item, displacement);                    
+
+                    //System.Windows.MessageBox.Show($"{iteration}\n{displacement}\n{iteration * displacement}");
+                }
+                else
+                {
+                    Canvas.SetLeft(item, displacement);
+                    Canvas.SetTop(item, iteration * displacement);
+                }
+
+                Canvas.SetZIndex(item, item.GetContainerData().z_position);
+
+                iteration++;
+            }
         }
 
         private void load()
@@ -291,41 +317,38 @@ namespace AidingElementsUserInterface.Core
 
         private void select_containers()
         {
-            if (canvas.Children.Contains(selection_rectangle))
-            {
-                var rectangleGeometry = selection_rectangle.RenderedGeometry as RectangleGeometry;
-                var hitTestParams = new GeometryHitTestParameters(rectangleGeometry);
+            var rectangleGeometry = selection_rectangle.RenderedGeometry as RectangleGeometry;
+            var hitTestParams = new GeometryHitTestParameters(rectangleGeometry);
 
-                var resultCallback = new HitTestResultCallback(
-                    result => HitTestResultBehavior.Continue);
+            var resultCallback = new HitTestResultCallback(
+                result => HitTestResultBehavior.Continue);
 
-                var filterCallback = new HitTestFilterCallback(
-                    element =>
+            var filterCallback = new HitTestFilterCallback(
+                element =>
+                {
+                    if (VisualTreeHelper.GetParent(element) == canvas)
                     {
-                        if (VisualTreeHelper.GetParent(element) == canvas)
+                        if (element != null && element.GetType() != selection_rectangle.GetType())
                         {
-                            if (element != null && element.GetType() != selection_rectangle.GetType())
+                            CoreContainer coreContainer = element as CoreContainer;
+
+                            if (coreContainer != null)
                             {
-                                CoreContainer coreContainer = element as CoreContainer;
+                                coreContainer.select();
 
-                                if (coreContainer != null)
+                                if (!selected_items.Contains(coreContainer))
                                 {
-                                    coreContainer.select();
-
-                                    if (!selected_items.Contains(coreContainer))
-                                    {
-                                        selected_items.Add(coreContainer);
-                                    }                                    
+                                    selected_items.Add(coreContainer);
                                 }
                             }
                         }
-                        return HitTestFilterBehavior.Continue;
-                    });
-                VisualTreeHelper.HitTest(
-                    canvas, filterCallback, resultCallback, hitTestParams);
+                    }
+                    return HitTestFilterBehavior.Continue;
+                });
+            VisualTreeHelper.HitTest(
+                canvas, filterCallback, resultCallback, hitTestParams);
 
-                canvas.Children.Remove(selection_rectangle);
-            }
+            canvas.Children.Remove(selection_rectangle);
         }
 
         internal void selectType(Type type)
@@ -378,10 +401,10 @@ namespace AidingElementsUserInterface.Core
 
                     selection_rectangle = new System.Windows.Shapes.Rectangle();
 
-                    selection_rectangle.Stroke = new SolidColorBrush(config.highlight);
-                    selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1 };
-                    selection_rectangle.StrokeThickness = 3;
-                    //selection_rectangle.Fill = new SolidColorBrush(Colors.Transparent);
+                    selection_rectangle.Stroke = new SolidColorBrush(config.borderbrush);
+                    selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1, 4, 1 };
+                    selection_rectangle.StrokeThickness = 7;
+                    selection_rectangle.Fill = new SolidColorBrush(Colors.Transparent);
 
                     Canvas.SetLeft(selection_rectangle, selection_point.X);
                     Canvas.SetTop(selection_rectangle, selection_point.Y);
@@ -405,24 +428,35 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            System.Windows.Point pos = e.GetPosition(canvas);
-
-            double x = Math.Min(pos.X, selection_point.X);
-            double y = Math.Min(pos.Y, selection_point.Y);
-
-            double w = Math.Max(pos.X, selection_point.X) - x;
-            double h = Math.Max(pos.Y, selection_point.Y) - y;
-
-            //dragWidth = w;
-            //dragHeight = h;
-
-            if (selection_rectangle != null)
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
             {
-                selection_rectangle.Width = w;
-                selection_rectangle.Height = h;
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    System.Windows.Point pos = e.GetPosition(canvas);
 
-                Canvas.SetLeft(selection_rectangle, x);
-                Canvas.SetTop(selection_rectangle, y);
+                    double x = Math.Min(pos.X, selection_point.X);
+                    double y = Math.Min(pos.Y, selection_point.Y);
+
+                    double w = Math.Max(pos.X, selection_point.X) - x;
+                    double h = Math.Max(pos.Y, selection_point.Y) - y;
+
+                    //dragWidth = w;
+                    //dragHeight = h;
+
+                    if (selection_rectangle != null)
+                    {
+                        selection_rectangle.Width = w;
+                        selection_rectangle.Height = h;
+
+                        Canvas.SetLeft(selection_rectangle, x);
+                        Canvas.SetTop(selection_rectangle, y);
+                    }
+                }
+                else
+                {
+                    canvas.Children.Remove(selection_rectangle);
+                    selection_rectangle = null;
+                }
             }
         }
 
@@ -430,11 +464,14 @@ namespace AidingElementsUserInterface.Core
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                select_containers();
 
-                e.Handled = true;
-
+                if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                {
+                    select_containers();
+                }
             }
+
+            e.Handled = true;
         }
 
         private void canvas_PreviewDragOver(object sender, DragEventArgs e)
