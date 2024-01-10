@@ -103,6 +103,26 @@
                     <Separator />
                 </MenuItem>
 
+                <MenuItem x:Name="MI_SelectionControl"                          
+                          Header="selection">
+                    <MenuItem x:Name="MI_group_to_line"
+                          Header="build Line"
+                              
+                          Click="MI_group_to_line_Click"/>
+                    <Separator />
+                    <MenuItem x:Name="MI_group_to_row"
+                          Header="build Row"
+                              
+                          Click="MI_group_to_row_Click"/>
+                    <Separator />
+                    <Separator />
+                    <MenuItem x:Name="MI_delete"
+                              Header="delete"
+                              InputGestureText="Ctrl + X"
+                              Click="MI_delete_Click"/>
+                    <Separator />
+                </MenuItem>
+
                 <MenuItem x:Name="MI_elements"                          
                           Header="elements">
 

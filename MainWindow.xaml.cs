@@ -185,7 +185,10 @@ namespace AidingElementsUserInterface
         {
             if (e.Key == Key.X)
             {
-                coreCanvas.delete_selected_items();
+                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+                {
+                    coreCanvas.delete_selected_items();
+                }
             }
 
             if (e.Key == Key.F1)
@@ -292,6 +295,8 @@ namespace AidingElementsUserInterface
 
         #endregion events
 
+
+        #region elements menu item clicks
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
             coreCanvas.add_element_to_canvas(new Elements.Coordinates());
@@ -312,12 +317,6 @@ namespace AidingElementsUserInterface
             coreCanvas.add_element_to_canvas(new Elements.Link());
         }
 
-
-        private void MI_manual_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.add_element_to_canvas(new Elements.Manual());
-        }
-
         private void MI_MyNote_Click(object sender, RoutedEventArgs e)
         {
             add_MyNote();
@@ -327,7 +326,16 @@ namespace AidingElementsUserInterface
         {
             add_FlatShareCC();
         }
+        #endregion elements menu item clicks
 
+        #region about menu item clicks
+        private void MI_manual_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.Manual());
+        }
+        #endregion about menu item clicks
+
+        #region control menu item clicks
         private void MI_command_Click(object sender, RoutedEventArgs e)
         {
             coreCanvas.add_element_to_canvas(new CoreCommand());
@@ -342,7 +350,10 @@ namespace AidingElementsUserInterface
         {
             logic.ShutdownCommand();
         }
+        #endregion control menu item clicks
 
+
+        #region tools menu item clicks
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {
             coreCanvas.add_element_to_canvas(new Elements.Random());
@@ -352,6 +363,22 @@ namespace AidingElementsUserInterface
         {
             coreCanvas.add_element_to_canvas(new Elements.RightClickChoice());
         }
+        #endregion tools menu item clicks
+
+        #region selection control menu item clicks
+        private void MI_group_to_line_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.group_selected_items(true);
+        }
+        private void MI_group_to_row_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.group_selected_items(false);
+        }
+        private void MI_delete_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.delete_selected_items();
+        }
+        #endregion selection control menu item clicks
     }
 }
 /*  END OF FILE

@@ -207,6 +207,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 node_dragLevel.InnerText = container.GetContainerData().dragLevel.ToString();
                 node_ContainerData.AppendChild(node_dragLevel);
 
+                XmlNode node_hoverLevel = xmlDocument.CreateElement("hoverLevel");
+                node_hoverLevel.InnerText = container.GetContainerData().hoverLevel.ToString();
+                node_ContainerData.AppendChild(node_hoverLevel);
+
                 XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
                 node_element_spacing.InnerText = container.GetContainerData().element_spacing.ToString();
                 if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
@@ -420,11 +424,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                         canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
 
+                        canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
                         canvasData.imageFilePath = node_CanvasData.SelectSingleNode("imageFilePath").InnerText;
 
                         canvasData.z_level_MAX = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MAX").InnerText);
                         canvasData.z_level_MIN = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MIN").InnerText);
-
 
                         return canvasData;
                     }
@@ -462,6 +466,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode canvasName = xmlDocument.CreateElement("canvasName");
                 canvasName.InnerText = canvasData.canvasName;
                 node_CanvasData.AppendChild(canvasName);
+
+                XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
+                grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
+                node_CanvasData.AppendChild(grouping_displacement);
+
 
                 XmlNode imageFilePath = xmlDocument.CreateElement("imageFilePath");
                 imageFilePath.InnerText = canvasData.imageFilePath;
@@ -538,6 +547,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 if (dragLevel != null)
                 {
                     containerData.dragLevel = Int32.Parse(dragLevel.InnerText);
+                }
+
+                XmlNode? hoverLevel = NodeCheck(node_ContainerData, "hoverLevel");
+                if (hoverLevel != null)
+                {
+                    containerData.hoverLevel = Int32.Parse(hoverLevel.InnerText);
                 }
 
                 XmlNode? element_spacing = NodeCheck(node_ContainerData, "element_spacing");

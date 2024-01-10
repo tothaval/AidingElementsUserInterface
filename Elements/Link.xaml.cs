@@ -59,9 +59,11 @@ namespace AidingElementsUserInterface.Elements
 
         private void build()
         {
+            CB_FileLink.setContent("file");
             CB_local.setContent("local");
             CB_web.setContent("web");
 
+            CB_FileLink.button.Click += CB_file_Click;
             CB_local.button.Click += CB_local_Click;
             CB_web.button.Click += CB_web_Click;
 
@@ -77,10 +79,10 @@ namespace AidingElementsUserInterface.Elements
             data = new LinkData(CTB_Link.getText(), CTB_LinkText.getText());
 
             if (Uri.IsWellFormedUriString(data.GetLink, UriKind.RelativeOrAbsolute)
-                || Directory.Exists(data.GetLink))
+                || Directory.Exists(data.GetLink) || File.Exists(data.GetLink))
             {
                 setup();
-            }
+            }            
             else
             {
                 data = null;
@@ -106,6 +108,8 @@ namespace AidingElementsUserInterface.Elements
 
             CTB_Link.Visibility = Visibility.Collapsed;
             CTB_LinkText.Visibility = Visibility.Collapsed;
+
+            CB_LinkButton.Visibility = Visibility.Visible;
         }
 
         private void reset()
@@ -114,9 +118,11 @@ namespace AidingElementsUserInterface.Elements
 
             CTB_Link.Visibility = Visibility.Collapsed;
                         
-            CTB_LinkText.Visibility = Visibility.Visible;
+            CTB_LinkText.Visibility = Visibility.Collapsed;
 
             CB_LinkButton.setContent("setup\nlink");
+
+            CB_LinkButton.Visibility = Visibility.Collapsed;
 
             L_LinkText.Visibility = Visibility.Collapsed;
 
@@ -144,6 +150,15 @@ namespace AidingElementsUserInterface.Elements
                         CB_LinkButton.setContent(icon);
                     }
                 }
+                //else if (File.Exists(data.GetLink))
+                //{
+                //    Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+
+                //    if (icon != null)
+                //    {
+                //        CB_LinkButton.setContent(icon);                        
+                //    }
+                //}
                 else
                 {
                     Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
@@ -162,7 +177,25 @@ namespace AidingElementsUserInterface.Elements
         private void setup_choice()
         {
             SP_Choice.Visibility = Visibility.Collapsed;
+
             CTB_Link.Visibility = Visibility.Visible;
+            CTB_LinkText.Visibility = Visibility.Visible;
+            CB_LinkButton.Visibility = Visibility.Visible;
+        }
+        
+        private void CB_file_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = logic.openDialog();
+
+            if (file != null)
+            {
+                CB_FileLink.setContent(file.FileName);
+
+                CTB_Link.setText(file.FileName);
+                CTB_LinkText.setText(file.SafeFileName);
+
+                setup_choice();
+            }
         }
 
         private void CB_local_Click(object sender, RoutedEventArgs e)
@@ -172,6 +205,7 @@ namespace AidingElementsUserInterface.Elements
             if (folderDialog != null)
             {                
                 CTB_Link.setText(folderDialog.SelectedPath);
+                CTB_LinkText.setText(folderDialog.SelectedPath);
 
                 setup_choice();
             }           
