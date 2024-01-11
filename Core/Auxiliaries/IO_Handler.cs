@@ -11,15 +11,12 @@
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.FlatShareCC_Data;
-using AidingElementsUserInterface.Core.MyNote_Data;
-using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Elements.MyNote;
-using System;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {

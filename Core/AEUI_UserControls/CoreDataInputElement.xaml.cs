@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Aiding Elements User Interface
+ *      CoreDataInputElement element 
+ * 
+ * basic element for entering and display of data
+ * 
+ * init:        2023|12|03
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ * 
+ * origin:      FlatShareCostCalculator_2023_11_18(MIT-license) https://github.com/tothaval/Flat-Share-CC
+ */
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
+/*  END OF FILE
+ * 
+ * 
+ */
 namespace AidingElementsUserInterface.Core
 {
     /// <summary>

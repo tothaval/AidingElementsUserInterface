@@ -7,14 +7,6 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {

@@ -7,34 +7,17 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using System.Collections;
-using System.Diagnostics;
-using System.IO;
 
 using Point = System.Windows.Point;
+
 using AidingElementsUserInterface.Core;
-using AidingElementsUserInterface.Texts;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
-using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Core.AEUI_Data;
-using System.Drawing;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 namespace AidingElementsUserInterface
@@ -338,8 +321,36 @@ namespace AidingElementsUserInterface
         #region control menu item clicks
         private void MI_command_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new CoreCommand());
+            coreCanvas.add_element_to_canvas(new Command());
         }
+
+
+        #region control options menu item clicks
+        private void MI_OPTIONS_general_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MI_OPTIONS_buttons_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new OptionsElement_ButtonData());
+        }
+
+        private void MI_OPTIONS_canvas_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MI_OPTIONS_container_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MI_OPTIONS_textboxes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion control options menu item clicks
 
         private void MI_quit_Click(object sender, RoutedEventArgs e)
         {
@@ -379,6 +390,7 @@ namespace AidingElementsUserInterface
             coreCanvas.delete_selected_items();
         }
         #endregion selection control menu item clicks
+
     }
 }
 /*  END OF FILE

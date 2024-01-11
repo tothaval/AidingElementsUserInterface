@@ -1,5 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      ButtonData class
+ *      
+ * inherits from: CoreData class
  * 
  * button element properties
  * 
@@ -7,12 +9,6 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {

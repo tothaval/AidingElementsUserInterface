@@ -1,5 +1,5 @@
-<Core>
-  <MainWindowData>
+<Container>
+  <ContainerData>
     <CoreData>
       <brushtype>SolidColorBrush</brushtype>
       <background>#FFFFEBCD</background>
@@ -11,10 +11,17 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
-    <initialPositionX>470</initialPositionX>
-    <initialPositionY>86</initialPositionY>
-    <mainWindowHeight>888</mainWindowHeight>
-    <mainWindowWidth>1326</mainWindowWidth>
-    <language>english</language>
-  </MainWindowData>
-</Core>
+    <containerLocation>mainWindowCanvas</containerLocation>
+    <imageIsBackground>False</imageIsBackground>
+    <imageFilePath>
+    </imageFilePath>
+    <z_position>400</z_position>
+  </ContainerData>
+  <Content>
+    <Type>RightClickChoice</Type>
+  </Content>
+  <Position>
+    <x>19</x>
+    <y>349</y>
+  </Position>
+</Container>

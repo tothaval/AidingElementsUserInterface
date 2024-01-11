@@ -19,16 +19,8 @@
  * every element depending on it
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
-using AidingElementsUserInterface.Core.MyNote_Data;
-using System;
-using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Automation.Peers;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -55,6 +47,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #region AddData method group
         public void AddData(ButtonData data)
         {
+            buttonData = null;
+
             int index = 0;
 
             foreach (object item in data_objects)
@@ -307,5 +301,40 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             data_objects.Remove(data);
         }
         #endregion RemoveData method group
+
+        // SetData
+        #region SetData method group
+        public void SetData(ButtonData data)
+        {
+            RemoveData(buttonData);
+
+            AddData(data);
+
+            new XML_Handler(data).save_ButtonData(data);
+        }
+        public void SetData(CanvasData data)
+        {
+            canvasData = data;
+        }
+
+        public void SetData(CoreData data)
+        {
+            coreData = data;
+        }
+
+        public void SetData(MainWindowData data)
+        {
+            mainWindowData = data;
+        }
+
+        public void SetData(TextBoxData data)
+        {
+            textBoxData = data;
+        }
+        #endregion RemoveData method group
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

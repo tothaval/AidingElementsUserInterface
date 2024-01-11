@@ -7,24 +7,11 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 using Microsoft.Win32;
-using System;
-using System.Diagnostics;
 using System.Drawing;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
@@ -57,7 +44,7 @@ namespace AidingElementsUserInterface.Elements
 
         private void build()
         {
-            CB_FileLink.setContent("link file");
+            CB_FileLink.setContent("file");
             CB_FileLink.button.Click += CB_FileLink_Click;
 
             CTB_LinkText.setText("linktext");
@@ -70,7 +57,7 @@ namespace AidingElementsUserInterface.Elements
         {
             SP_Choice.Visibility = Visibility.Collapsed;
 
-            CB_FileLink.setContent(linkData.GetLink);
+            CB_FileLink.setContent(linkData.GetLink);            
 
             CB_LinkButton.setTooltip(linkData.GetLink);
             CB_LinkButton.setContent(linkData.GetLinkText);
@@ -86,6 +73,9 @@ namespace AidingElementsUserInterface.Elements
             data = linkData;
 
             L_LinkText.Content = data.GetLinkText;
+
+            CB_LinkButton.Visibility = Visibility.Visible;
+            CTB_LinkText.Visibility = Visibility.Visible;
             L_LinkText.Visibility = Visibility.Visible;       
 
             linked = true;
@@ -102,6 +92,9 @@ namespace AidingElementsUserInterface.Elements
 
                 CB_FileLink.setContent(file.FileName);
                 CTB_LinkText.setText(file.SafeFileName);
+
+                CB_LinkButton.Visibility = Visibility.Visible;
+                CTB_LinkText.Visibility = Visibility.Visible;
             }
         }
 
@@ -111,6 +104,8 @@ namespace AidingElementsUserInterface.Elements
 
             CB_LinkButton.setContent("setup\nlink");
 
+            CB_LinkButton.Visibility = Visibility.Collapsed;
+            CTB_LinkText.Visibility = Visibility.Collapsed;
             L_LinkText.Visibility = Visibility.Collapsed;
 
             linked = false;
@@ -123,6 +118,7 @@ namespace AidingElementsUserInterface.Elements
             if (data.GetLink != null)
             {
                 CB_LinkButton.setContent(data.GetLinkText);
+                CB_LinkButton.setTooltip(data.GetLink);
 
                 //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
                 Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);

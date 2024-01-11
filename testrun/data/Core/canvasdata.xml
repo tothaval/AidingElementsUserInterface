@@ -12,10 +12,13 @@
       <fontFamily>Verdana</fontFamily>
     </CoreData>
     <canvasName>canvas</canvasName>
-    <grouping_displacement>25</grouping_displacement>
+    <grouping_displacement>57</grouping_displacement>
     <imageFilePath>
     </imageFilePath>
     <z_level_MAX>100</z_level_MAX>
     <z_level_MIN>-100</z_level_MIN>
+    <dragLevel>30000</dragLevel>
+    <hoverLevel>200</hoverLevel>
+    <element_spacing>6</element_spacing>
   </CanvasData>
 </Core>
