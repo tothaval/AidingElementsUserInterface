@@ -15,6 +15,7 @@ using AidingElementsUserInterface.Core.FlatShareCC_Data;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.MyNote;
+
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -203,21 +204,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 node_z_position.InnerText = container.GetContainerData().z_position.ToString();
                 node_ContainerData.AppendChild(node_z_position);
 
-                XmlNode node_dragLevel = xmlDocument.CreateElement("dragLevel");
-                node_dragLevel.InnerText = container.GetContainerData().dragLevel.ToString();
-                node_ContainerData.AppendChild(node_dragLevel);
 
-                XmlNode node_hoverLevel = xmlDocument.CreateElement("hoverLevel");
-                node_hoverLevel.InnerText = container.GetContainerData().hoverLevel.ToString();
-                node_ContainerData.AppendChild(node_hoverLevel);
-
-                XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
-                node_element_spacing.InnerText = container.GetContainerData().element_spacing.ToString();
-                if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
-                {
-                    node_element_spacing.InnerText = "5";
-                }                
-                node_ContainerData.AppendChild(node_element_spacing);
 
                 node.AppendChild(node_ContainerData);
 
@@ -344,10 +331,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion ButtonData loading
 
         #region ButtonData saving
-        internal void ButtonData_save()
+        internal void save_ButtonData(ButtonData buttonData)
         {
-            ButtonData buttonData = new SharedLogic().GetDataHandler().GetButtonData();
-
             if (buttonData != null)
             {
                 XmlDocument xmlDocument = new XmlDocument();
@@ -389,6 +374,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 }
             }
         }
+
+
+        internal void ButtonData_save()
+        {
+            ButtonData buttonData = new SharedLogic().GetDataHandler().GetButtonData();
+
+           save_ButtonData(buttonData);
+        }
         #endregion ButtonData saving
         #endregion ButtonData
 
@@ -429,6 +422,31 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                         canvasData.z_level_MAX = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MAX").InnerText);
                         canvasData.z_level_MIN = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MIN").InnerText);
+
+                        XmlNode? dragLevel = NodeCheck(node_CanvasData, "dragLevel");
+                        if (dragLevel != null)
+                        {
+                            canvasData.dragLevel = Int32.Parse(dragLevel.InnerText);
+                        }
+
+                        XmlNode? hoverLevel = NodeCheck(node_CanvasData, "hoverLevel");
+                        if (hoverLevel != null)
+                        {
+                            canvasData.hoverLevel = Int32.Parse(hoverLevel.InnerText);
+                        }
+
+                        XmlNode? element_spacing = NodeCheck(node_CanvasData, "element_spacing");
+                        if (element_spacing != null)
+                        {
+                            if (element_spacing.InnerText.Equals("-1"))
+                            {
+                                canvasData.element_spacing = GridLength.Auto;
+                            }
+                            else
+                            {
+                                canvasData.element_spacing = new GridLength(Double.Parse(element_spacing.InnerText));
+                            }
+                        }
 
                         return canvasData;
                     }
@@ -483,6 +501,22 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode mainWindowWidth = xmlDocument.CreateElement("z_level_MIN");
                 mainWindowWidth.InnerText = canvasData.z_level_MIN.ToString();
                 node_CanvasData.AppendChild(mainWindowWidth);
+
+                XmlNode node_dragLevel = xmlDocument.CreateElement("dragLevel");
+                node_dragLevel.InnerText = canvasData.dragLevel.ToString();
+                node_CanvasData.AppendChild(node_dragLevel);
+
+                XmlNode node_hoverLevel = xmlDocument.CreateElement("hoverLevel");
+                node_hoverLevel.InnerText = canvasData.hoverLevel.ToString();
+                node_CanvasData.AppendChild(node_hoverLevel);
+
+                XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
+                node_element_spacing.InnerText = canvasData.element_spacing.ToString();
+                if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
+                {
+                    node_element_spacing.InnerText = "-1";
+                }
+                node_CanvasData.AppendChild(node_element_spacing);
 
                 node.AppendChild(node_CanvasData);
 
@@ -541,31 +575,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 if (z_position != null)
                 {
                     containerData.z_position = Int32.Parse(z_position.InnerText);
-                }
-
-                XmlNode? dragLevel = NodeCheck(node_ContainerData, "dragLevel");
-                if (dragLevel != null)
-                {
-                    containerData.dragLevel = Int32.Parse(dragLevel.InnerText);
-                }
-
-                XmlNode? hoverLevel = NodeCheck(node_ContainerData, "hoverLevel");
-                if (hoverLevel != null)
-                {
-                    containerData.hoverLevel = Int32.Parse(hoverLevel.InnerText);
-                }
-
-                XmlNode? element_spacing = NodeCheck(node_ContainerData, "element_spacing");
-                if (element_spacing != null)
-                {
-                    try
-                    {
-                        containerData.element_spacing = new GridLength(Double.Parse(element_spacing.InnerText));
-                    }
-                    catch (Exception)
-                    {
-                        containerData.element_spacing = new GridLength(5);
-                    }               
                 }
             }
 

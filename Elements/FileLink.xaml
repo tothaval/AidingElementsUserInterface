@@ -24,10 +24,12 @@
                 <core:CoreButton x:Name="CB_FileLink"
                                  Margin="1"/>
                 <core:CoreTextBox x:Name="CTB_LinkText"
-                                  Margin="1"/>
+                                  Margin="1"
+                                  Visibility="Collapsed"/>
             </StackPanel>
             <core:CoreButton x:Name="CB_LinkButton"
-                             Margin="1"/>
+                             Margin="1"
+                             Visibility="Collapsed"/>
             <Label x:Name="L_LinkText" 
                    Visibility="Collapsed" 
                    Padding="0"

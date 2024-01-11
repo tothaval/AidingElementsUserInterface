@@ -1,13 +1,21 @@
-﻿using AidingElementsUserInterface.Core.Auxiliaries;
+﻿/* Aiding Elements User Interface
+ *      RightClickChoice element class
+ * 
+ * inherits from: CoreContainer user control
+ * 
+ * element offers buttons to quit aeui or shutdown computer
+ * 
+ * init:        2023|11|27
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
 using AidingElementsUserInterface.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
+using AidingElementsUserInterface.Core.Auxiliaries;
+
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
-using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 namespace AidingElementsUserInterface.Elements
 {
@@ -27,9 +35,9 @@ namespace AidingElementsUserInterface.Elements
 
             WrapPanel wrapPanel = new WrapPanel() { Orientation = Orientation.Vertical };
 
-            CoreButton CB_QuitButton = new CoreButton("quit\nys ui");
+            CoreButton CB_QuitButton = new CoreButton("quit");
 
-            CoreButton CB_ShutdownButton = new CoreButton("shut\ndown");
+            CoreButton CB_ShutdownButton = new CoreButton("shutdown");
 
             //CB_GraphicsTest.button.Click += CB_GraphicsTest_Click;
             CB_QuitButton.button.Click += CB_QuitButton_Click;
@@ -102,7 +110,3 @@ namespace AidingElementsUserInterface.Elements
 
     }
 }
-/*  END OF FILE
- * 
- * 
- */

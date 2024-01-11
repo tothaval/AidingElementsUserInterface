@@ -91,6 +91,37 @@
                           Click="MI_command_Click"/>
 
                     <Separator />
+                    <MenuItem x:Name="MI_options"
+                          Header="options">
+                        <MenuItem x:Name="MI_OPTIONS_general"
+                          Header="general"
+                              
+                          Click="MI_OPTIONS_general_Click"/>
+
+                        <Separator />
+                        <MenuItem x:Name="MI_OPTIONS_buttons"
+                          Header="buttons"
+                              
+                          Click="MI_OPTIONS_buttons_Click"/>
+                        <Separator />
+                        <MenuItem x:Name="MI_OPTIONS_canvas"
+                          Header="canvas"
+                              
+                          Click="MI_OPTIONS_canvas_Click"/>
+                        <Separator />
+                        <MenuItem x:Name="MI_OPTIONS_container"
+                          Header="container"
+                              
+                          Click="MI_OPTIONS_container_Click"/>
+                        <Separator />
+                        <MenuItem x:Name="MI_OPTIONS_textboxes"
+                          Header="textboxes"
+                              
+                          Click="MI_OPTIONS_textboxes_Click"/>
+                    </MenuItem>
+                    
+                    <Separator />
+                    
                     <MenuItem x:Name="MI_quit"
                           Header="Quit"
                               
@@ -168,6 +199,10 @@
                     <MenuItem x:Name="MI_RightClickChoice"
                           Header="End it!"                              
                           Click="MI_RightClickChoice_Click"/>                    
+                </MenuItem>
+                
+                <MenuItem x:Name="MI_infobits"
+                          Header="infobits">                
                 </MenuItem>
 
                 <MenuItem x:Name="MI_about"

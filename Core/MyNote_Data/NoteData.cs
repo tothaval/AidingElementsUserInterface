@@ -11,12 +11,10 @@
  * 
  * origin:      MyNote_2023_11_01(MIT-license) https://github.com/tothaval/MyNote
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AidingElementsUserInterface.Core.AEUI_Data;
+
+using System;
+using System.Text;
 
 namespace AidingElementsUserInterface.Core.MyNote_Data
 {

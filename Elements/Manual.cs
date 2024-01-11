@@ -7,18 +7,16 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Texts;
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
-using AidingElementsUserInterface.Core.AEUI_UserControls;
 using System.Windows.Controls;
 
 namespace AidingElementsUserInterface.Elements

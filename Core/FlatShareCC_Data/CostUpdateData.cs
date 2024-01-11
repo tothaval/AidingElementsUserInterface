@@ -13,12 +13,9 @@
  */
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.FlatShareCC;
+
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.FlatShareCC_Data
 {

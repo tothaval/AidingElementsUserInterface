@@ -11,7 +11,6 @@
  * 
  * origin:      FlatShareCostCalculator_2023_11_18(MIT-license) https://github.com/tothaval/Flat-Share-CC
  */
-using AidingElementsUserInterface.Elements.FlatShareCC;
 using System.Collections.ObjectModel;
 
 namespace AidingElementsUserInterface.Core.FlatShareCC_Data

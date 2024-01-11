@@ -1,8 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Aiding Elements User Interface
+ *      ColorData class
+ * 
+ * color properties class
+ * 
+ * init:        2023|12|14
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
@@ -39,3 +43,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

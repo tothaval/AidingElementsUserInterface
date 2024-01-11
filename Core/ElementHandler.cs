@@ -9,18 +9,11 @@
  */
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
-using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
-using AidingElementsUserInterface.Elements.MyNote;
 
 namespace AidingElementsUserInterface.Core
 {

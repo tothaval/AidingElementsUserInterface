@@ -1,12 +1,17 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
-using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+﻿/* Aiding Elements User Interface
+ *      Link_Handler class
+ * 
+ * basic LinkData management class
+ * 
+ * init:        2023|11|30
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ * 
+ * origin:      MyNote_2023_11_01
+ */
+using AidingElementsUserInterface.Core.AEUI_Data;
+
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -38,3 +43,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

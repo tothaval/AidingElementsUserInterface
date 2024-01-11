@@ -7,28 +7,22 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_HelperClasses;
 using AidingElementsUserInterface.Core.Auxiliaries;
 
+using System;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
+
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     /// <summary>
-    /// Interaktionslogik für CoreContainer.xaml
+    /// CoreContainer(UserControl_Inheritance){[0] empty; [1] ContainerData; [2] UserControl, CoreCanvas;}
+    /// intended to serve as container element for other elements
     /// </summary>
     public partial class CoreContainer : UserControl_Inheritance
     {
@@ -82,11 +76,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             __CoreContainer.FontSize = containerData.fontSize;
             __CoreContainer.FontFamily = containerData.fontFamily;
 
-            Column_left.Width = containerData.element_spacing;
-            Column_right.Width = containerData.element_spacing;
+            Column_left.Width = canvas.getCanvasData().element_spacing;
+            Column_right.Width = canvas.getCanvasData().element_spacing;
 
-            Row_top.Height = containerData.element_spacing;
-            Row_bottom.Height = containerData.element_spacing;
+            Row_top.Height = canvas.getCanvasData().element_spacing;
+            Row_bottom.Height = canvas.getCanvasData().element_spacing;
 
             Background = new SolidColorBrush(Colors.Transparent);
             Foreground = new SolidColorBrush(containerData.foreground);
@@ -153,6 +147,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             initialize_container();
         }
+
 
         internal void deselect(bool remove_from_list = true)
         {
@@ -240,7 +235,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     ref elementDrag,
                     __CoreContainer,
                     ref containerData.z_position,
-                    ref containerData.dragLevel,
+                    ref canvas.getCanvasData().dragLevel,
                     ref dragPoint,
                     ref canvas
                     );
@@ -312,7 +307,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 int index = containerData.z_position;
 
-                Canvas.SetZIndex(this, index + containerData.hoverLevel);
+                Canvas.SetZIndex(this, index + canvas.getCanvasData().hoverLevel);
 
 
                 //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.z_position}\n{containerData.z_position + containerData.hoverLevel}");

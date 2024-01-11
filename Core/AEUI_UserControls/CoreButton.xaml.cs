@@ -9,21 +9,13 @@
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Core
@@ -82,15 +74,18 @@ namespace AidingElementsUserInterface.Core
             this.Resources.Add("highlight", new SolidColorBrush(config.highlight));
             this.Resources.Add("radius", config.cornerRadius);
 
-            Style style = this.FindResource("buttonStyle") as Style;
 
             if (config.imageFilePath != null)
             {
-                //border.Background = config.Return_ImageBrush(config.buttonImageFilePath);
-            }
-            else
-            {
-                border.Background = new SolidColorBrush(config.background);
+                if (File.Exists(config.imageFilePath))
+                {
+                    border.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
+                    this.Resources.Remove("buttonColor");
+                }
+                else
+                {
+                    border.Background = new SolidColorBrush(config.background);
+                }
             }
 
             border.BorderBrush = new SolidColorBrush(config.borderbrush);
@@ -108,6 +103,8 @@ namespace AidingElementsUserInterface.Core
 
             button.VerticalContentAlignment = VerticalAlignment.Center;
             button.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+            Style style = this.FindResource("buttonStyle") as Style;
 
             button.Style = style;
         }

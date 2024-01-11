@@ -9,18 +9,9 @@
  */
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.FlatShareCC;
-using AidingElementsUserInterface.Elements.MyNote;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+
 using System.Windows.Controls;
-using System.Xml.Linq;
 
 namespace AidingElementsUserInterface.Core
 {
