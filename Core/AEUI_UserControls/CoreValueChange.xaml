@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
+            xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border x:Name="border">
@@ -13,26 +14,15 @@
                    Margin="0,0,5,0"               
                    Width="90"
                    TextAlignment="Right"
-                       HorizontalAlignment="Left">                
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center">                
             </TextBlock>
-
-            <TextBox x:Name="textbox"
-                     Padding="2,0,2,0"
-                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                     ScrollViewer.CanContentScroll="true"
-                     ClipToBounds="True"
-                     BorderBrush="Transparent"
-                     BorderThickness="0"
-                     Width="90"
-                     TextAlignment="Right"
-                     TextWrapping="NoWrap"
-
-                     GotFocus="textbox_GotFocus"
-                     GotKeyboardFocus="textbox_GotKeyboardFocus"
-                     KeyDown="textbox_KeyDown"
-                     KeyUp="textbox_KeyUp"
-                     MouseDoubleClick="textbox_MouseDoubleClick"
-                     />
+            <StackPanel x:Name="SP_ValueChangeElement">
+            <core:CoreTextBox x:Name="CTB_Value" 
+                              HorizontalAlignment="Right"
+                              Visibility="Visible">
+            </core:CoreTextBox>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>

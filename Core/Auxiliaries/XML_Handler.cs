@@ -149,9 +149,13 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
 
 
-                            CoreContainer coreContainer = new CoreContainer();
+                            CoreContainer coreContainer = new CoreContainer();                            
                             coreContainer.setContainerData(containerData);
+
+                            coreContainer.GetContainerData().ApplyInheritanceDataOverwrite<CanvasData>(new SharedLogic().GetDataHandler().GetCanvasData());
+
                             coreContainer.setPosition(container_position);
+
                             coreContainer.GetContainerData().setContent(userControl);
 
                             container_list.Add(coreContainer);
@@ -350,10 +354,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     node_ButtonData.AppendChild(aux_node);
                 }
 
-                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
-                buttonImageFilePath.InnerText = buttonData.imageFilePath;
-                node_ButtonData.AppendChild(buttonImageFilePath);
-
                 XmlNode mainWindowHeight = xmlDocument.CreateElement("height");
                 mainWindowHeight.InnerText = buttonData.height.ToString();
                 node_ButtonData.AppendChild(mainWindowHeight);
@@ -361,6 +361,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode mainWindowWidth = xmlDocument.CreateElement("width");
                 mainWindowWidth.InnerText = buttonData.width.ToString();
                 node_ButtonData.AppendChild(mainWindowWidth);
+
+                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
+                buttonImageFilePath.InnerText = buttonData.imageFilePath;
+                node_ButtonData.AppendChild(buttonImageFilePath);
 
                 node.AppendChild(node_ButtonData);
 
@@ -977,6 +981,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
                         }
 
+                        textBoxData.height = Double.Parse(node_TextBoxData.SelectSingleNode("height").InnerText);
+                        textBoxData.width = Double.Parse(node_TextBoxData.SelectSingleNode("width").InnerText);
+
+                        textBoxData.imageFilePath = node_TextBoxData.SelectSingleNode("imageFilePath").InnerText;
+
                         return textBoxData;
                     }
                 }
@@ -1002,15 +1011,26 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 xmlDocument.AppendChild(node);
 
                 XmlNode node_TextBoxData = xmlDocument.CreateElement("TextBoxData");
-
                 XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
 
-                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, coreData_data);
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, textBoxData);
 
                 if (aux_node != null)
                 {
                     node_TextBoxData.AppendChild(aux_node);
                 }
+
+                XmlNode mainWindowHeight = xmlDocument.CreateElement("height");
+                mainWindowHeight.InnerText = textBoxData.height.ToString();
+                node_TextBoxData.AppendChild(mainWindowHeight);
+
+                XmlNode mainWindowWidth = xmlDocument.CreateElement("width");
+                mainWindowWidth.InnerText = textBoxData.width.ToString();
+                node_TextBoxData.AppendChild(mainWindowWidth);
+
+                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
+                buttonImageFilePath.InnerText = textBoxData.imageFilePath;
+                node_TextBoxData.AppendChild(buttonImageFilePath);
 
                 node.AppendChild(node_TextBoxData);
 

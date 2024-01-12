@@ -11,17 +11,17 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
-    <containerLocation>mainWindowCanvas</containerLocation>
+    <containerLocation>canvas</containerLocation>
     <imageIsBackground>False</imageIsBackground>
     <imageFilePath>
     </imageFilePath>
-    <z_position>200</z_position>
+    <z_position>400</z_position>
   </ContainerData>
   <Content>
-    <Type>OptionsElement_ButtonData</Type>
+    <Type>Coordinates</Type>
   </Content>
   <Position>
-    <x>419</x>
-    <y>98</y>
+    <x>108</x>
+    <y>358</y>
   </Position>
 </Container>

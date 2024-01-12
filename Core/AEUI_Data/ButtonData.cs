@@ -3,7 +3,7 @@
  *      
  * inherits from: CoreData class
  * 
- * button element properties
+ * fileLinkElement element properties
  * 
  * init:        2023|11|28
  * DEV:         Stephan Kammel

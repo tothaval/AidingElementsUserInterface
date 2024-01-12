@@ -11,17 +11,17 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
-    <containerLocation>mainWindowCanvas</containerLocation>
+    <containerLocation>canvas</containerLocation>
     <imageIsBackground>False</imageIsBackground>
     <imageFilePath>
     </imageFilePath>
-    <z_position>200</z_position>
+    <z_position>1200</z_position>
   </ContainerData>
   <Content>
-    <Type>FileLink</Type>
+    <Type>RightClickChoice</Type>
   </Content>
   <Position>
-    <x>23</x>
-    <y>17</y>
+    <x>266</x>
+    <y>417</y>
   </Position>
 </Container>

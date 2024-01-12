@@ -101,7 +101,7 @@ namespace AidingElementsUserInterface.Texts
             //        "\n" +
             //        "manual:\n" +
             //        "\n" +
-            //        "Key A:\t\tinvoke a binding button onto main canvas,\n" +
+            //        "Key A:\t\tinvoke a binding fileLinkElement onto main canvas,\n" +
             //        "\t\tbuttons and bindings will be saved\n" +
             //        "\n" +
             //        "Key B:\t\tchange main canvas background to color selection\n" +
@@ -176,7 +176,7 @@ namespace AidingElementsUserInterface.Texts
             //        "Key V:\t\tcopy all elements to background picture, with option picturize\n" +
             //        "\t\tactive(see options element -> F4) all elements will be deleted, else kept\n" +
             //        "\n" +
-            //        "Key X:\t\tinvoke a binding button area element onto the main canvas,\n" +
+            //        "Key X:\t\tinvoke a binding fileLinkElement area element onto the main canvas,\n" +
             //        "\t\tbindings will be saved\n" +
             //        "\n" +
             //        "Key Y:\t\tinvoke the color element onto the main canvas\n" +
@@ -209,8 +209,8 @@ namespace AidingElementsUserInterface.Texts
                     "\n" +
                     "right mouse click:\n" +
                     "\ta right click onto the main canvas will invoke the right click choice element\n" +
-                    "\tonto the main canvas at the mouse click position, click quit button to quit,\n" +
-                    "\tclick shutdown button and confirm to shutdown your computer\n" +
+                    "\tonto the main canvas at the mouse click position, click quit fileLinkElement to quit,\n" +
+                    "\tclick shutdown fileLinkElement and confirm to shutdown your computer\n" +
                     "\n" +
                     "\ta right click on an element will delete that element\n";
                     //"\n" +
@@ -239,7 +239,7 @@ namespace AidingElementsUserInterface.Texts
                     //"\t\t\tgenerated, use the placement and design element to\n" +
                     //"\t\t\tspecify the size, rotation and z-index of the elements.\n" +
                     //"\n" +
-                    //"\t\t...either the picture mosaic element or the binding button area element,\n" +
+                    //"\t\t...either the picture mosaic element or the binding fileLinkElement area element,\n" +
                     //"\t\tthe images or the files will be bound to that element\n" +
                     //"\n" +
                     //"use mousewheel scrolling on image element, picture mosaic element areas or color element\n" +
@@ -252,14 +252,14 @@ namespace AidingElementsUserInterface.Texts
                     //"and select color using the sliders, click on one of the buttons(1-4) to apply color\n" +
                     //"to color selection buttons(I-IV).\n" +
                     //"select brushes and click on an element on the canvas to apply the color as element\n" +
-                    //"background. select a multitude of elements and use the apply button below the brush\n" +
+                    //"background. select a multitude of elements and use the apply fileLinkElement below the brush\n" +
                     //"options panel to apply color selection to all selected elements\n" +
                     //"\n" +
                     //"change ys ui colors by expanding ys ui color options below slider panel, a click\n" +
-                    //"on a button will paint the saved color onto the color display area and will update\n" +
-                    //"the sliders as well. click bind button to change into bind mode. alter the color\n" +
-                    //"f.e. by using the sliders until you have a pleasent result, then click on the button\n" +
-                    //"which represents the desired surface category you want to change, click on bind button\n" +
+                    //"on a fileLinkElement will paint the saved color onto the color display area and will update\n" +
+                    //"the sliders as well. click bind fileLinkElement to change into bind mode. alter the color\n" +
+                    //"f.e. by using the sliders until you have a pleasent result, then click on the fileLinkElement\n" +
+                    //"which represents the desired surface category you want to change, click on bind fileLinkElement\n" +
                     //"to leave bind mode. the new color will be used(but currently not everywhere right from\n" +
                     //"the beginning, in such cases restart ys ui or recreate an element.) you can change any\n" +
                     //"number of ys ui surface colors while bind mode is active. but be careful, in the worst\n" +

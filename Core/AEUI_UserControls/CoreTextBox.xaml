@@ -23,7 +23,9 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.CanContentScroll="true"
                  ClipToBounds="True"
-                 BorderBrush="Transparent" BorderThickness="0"/>
+                 BorderBrush="Transparent" BorderThickness="0"  
+                 TextWrapping="NoWrap"
+                 />
     </Border>
 </UserControl>
 <!-- end of file -->

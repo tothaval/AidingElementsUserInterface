@@ -1,7 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      Manual element 
  * 
- * link local paths or URLs to a button
+ * link local paths or URLs to a fileLinkElement
  * 
  * init:        2024|01|03
  * DEV:         Stephan Kammel

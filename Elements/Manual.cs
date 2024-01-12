@@ -62,7 +62,7 @@ namespace AidingElementsUserInterface.Elements
             horizontalWrapPanel.Children.Add(CB_PageLeft);
             horizontalWrapPanel.Children.Add(CB_PageRight);
 
-            textbox = new CoreTextBox() { Margin = new Thickness(1)};
+            textbox = new CoreTextBox(true) { Margin = new Thickness(1)};
             textbox.setText(content_pages[0].ToString());
             textbox._readonly_no_caret();
             textbox._scrolling();

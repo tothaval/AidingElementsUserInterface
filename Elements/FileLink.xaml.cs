@@ -1,7 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      FileLink element 
  * 
- * link any file to a button
+ * link any file to a fileLinkElement
  * 
  * init:        2024|01|03
  * DEV:         Stephan Kammel

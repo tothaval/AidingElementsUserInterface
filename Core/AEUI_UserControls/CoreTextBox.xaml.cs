@@ -9,10 +9,12 @@
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
-
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace AidingElementsUserInterface.Core
 {
@@ -30,6 +32,13 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
+        public CoreTextBox(bool no_limits)
+        {
+            InitializeComponent();
+
+            build(no_limits);
+        }
+
         public CoreTextBox(string content)
         {
             InitializeComponent();
@@ -39,13 +48,14 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        private void build()
+        private void build(bool no_limits = false)
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
             config = data_Handler.LoadTextBoxData();
 
-            border.Background = new SolidColorBrush(config.background);
+            _backgroundImage();
+
             border.BorderBrush = new SolidColorBrush(config.borderbrush);
             border.CornerRadius = config.cornerRadius;
             border.BorderThickness = config.thickness;
@@ -53,10 +63,23 @@ namespace AidingElementsUserInterface.Core
             textbox.Background = new SolidColorBrush(Colors.Transparent);
             textbox.Foreground = new SolidColorBrush(config.foreground);
 
-            textbox.CaretBrush = new SolidColorBrush(config.foreground);            
+            textbox.CaretBrush = new SolidColorBrush(config.foreground);
+
+            if (!no_limits)
+            {
+                textbox.Height = config.height;
+                textbox.Width = config.width;
+            }
+            else
+            {
+                textbox.MinHeight = config.height;
+                textbox.MinWidth = config.width;
+            }
 
             textbox.Padding = new Thickness(7, 3, 7, 3);
         }
+
+
 
 
         // element design and functionality
@@ -69,6 +92,22 @@ namespace AidingElementsUserInterface.Core
         public void _acceptsTab()
         {
             textbox.AcceptsTab = true;
+        }
+
+        internal void _backgroundImage()
+        {
+            if (config.imageFilePath != null)
+            {
+                if (File.Exists(config.imageFilePath))
+                {
+                    border.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
+                    this.Resources.Remove("buttonColor");
+                }
+                else
+                {
+                    border.Background = new SolidColorBrush(config.background);
+                }
+            }
         }
 
         public void _disabled()

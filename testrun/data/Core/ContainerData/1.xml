@@ -11,17 +11,17 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
-    <containerLocation>mainWindowCanvas</containerLocation>
+    <containerLocation>canvas</containerLocation>
     <imageIsBackground>False</imageIsBackground>
     <imageFilePath>
     </imageFilePath>
-    <z_position>600</z_position>
+    <z_position>1400</z_position>
   </ContainerData>
   <Content>
     <Type>Manual</Type>
   </Content>
   <Position>
-    <x>127</x>
-    <y>295</y>
+    <x>62</x>
+    <y>70</y>
   </Position>
 </Container>
