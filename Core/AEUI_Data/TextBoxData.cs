@@ -15,13 +15,21 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class TextBoxData : CoreData
     {
+        public double height { get; set; }
+        public double width { get; set; }
+        public string imageFilePath { get; set; }
+
+
         public TextBoxData(bool load)
         {
         }
 
         public TextBoxData()
         {
+            height = 25;
+            width = 50;
 
+            imageFilePath = "";
         }
 
         public TextBoxData(CoreData coreData)
@@ -38,6 +46,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
 
+            height = 25;
+            width = 50;
+
+            imageFilePath = "";
         }
     }
 }

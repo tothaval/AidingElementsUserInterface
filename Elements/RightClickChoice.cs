@@ -39,7 +39,7 @@ namespace AidingElementsUserInterface.Elements
 
             CoreButton CB_ShutdownButton = new CoreButton("shutdown");
 
-            //CB_GraphicsTest.button.Click += CB_GraphicsTest_Click;
+            //CB_GraphicsTest.fileLinkElement.Click += CB_GraphicsTest_Click;
             CB_QuitButton.button.Click += CB_QuitButton_Click;
             CB_ShutdownButton.button.Click += CB_ShutdownButton_Click;
 

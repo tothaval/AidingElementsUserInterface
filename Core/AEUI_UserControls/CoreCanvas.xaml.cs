@@ -199,7 +199,7 @@ namespace AidingElementsUserInterface.Core
                 if (horizontal)
                 {
                     Canvas.SetLeft(item, iteration * displacement);
-                    Canvas.SetTop(item, displacement);                    
+                    Canvas.SetTop(item, displacement);
 
                     //System.Windows.MessageBox.Show($"{iteration}\n{displacement}\n{iteration * displacement}");
                 }
@@ -229,12 +229,12 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal async void MoveSelection(
+
+        internal void MapSelection(
             CoreContainer event_sender,
-            System.Windows.Point sender_origin,
-            System.Windows.Point new_point)
+            System.Windows.Point sender_origin)
         {
-            double x0, y0, x_diff, y_diff, x1, y1;
+            double x0, y0, x_diff, y_diff;
 
             foreach (CoreContainer item in selected_items)
             {
@@ -243,11 +243,28 @@ namespace AidingElementsUserInterface.Core
                     x0 = Canvas.GetLeft(item);
                     y0 = Canvas.GetTop(item);
 
-                    x_diff = sender_origin.X - x0;
-                    y_diff = sender_origin.Y - y0;
+                    x_diff = x0 - sender_origin.X;
+                    y_diff = y0 - sender_origin.Y;
 
-                    x1 = new_point.X + x_diff;
-                    y1 = new_point.Y + y_diff;
+                    item.setPosition(new Point(x_diff, y_diff));
+                }
+            }
+        }
+
+
+        internal void MoveSelection(
+            CoreContainer event_sender,
+            System.Windows.Point sender_origin,
+            System.Windows.Point new_point)
+        {
+            double  x1, y1;
+
+            foreach (CoreContainer item in selected_items)
+            {
+                if (item != event_sender)
+                {
+                    x1 = new_point.X + item.get_dragPoint().X;
+                    y1 = new_point.Y + item.get_dragPoint().Y;
 
                     Canvas.SetLeft(item, x1);
                     Canvas.SetTop(item, y1);
@@ -294,13 +311,13 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-        internal void removeSelectedItem(CoreContainer coreContainer)
+        internal void removeFromSelectedItems(CoreContainer coreContainer)
         {
             selected_items.Remove(coreContainer);
         }
 
         private void select_containers()
-        {
+        {    
             var rectangleGeometry = selection_rectangle.RenderedGeometry as RectangleGeometry;
             var hitTestParams = new GeometryHitTestParameters(rectangleGeometry);
 
@@ -329,10 +346,9 @@ namespace AidingElementsUserInterface.Core
                     }
                     return HitTestFilterBehavior.Continue;
                 });
+
             VisualTreeHelper.HitTest(
                 canvas, filterCallback, resultCallback, hitTestParams);
-
-            canvas.Children.Remove(selection_rectangle);
         }
 
         internal void selectType(Type type)
@@ -350,9 +366,10 @@ namespace AidingElementsUserInterface.Core
         {
             this.config = data;
         }
+
+
         // events
         #region events
-
         private void canvas_Drop(object sender, DragEventArgs e)
         {
 
@@ -381,9 +398,15 @@ namespace AidingElementsUserInterface.Core
 
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
+                    canvas.Children.Remove(selection_rectangle);
+
+                    selection_point = new Point();
                     selection_point = e.GetPosition(canvas);
 
+                    selection_rectangle = null;
+
                     selection_rectangle = new System.Windows.Shapes.Rectangle();
+                    Canvas.SetZIndex(selection_rectangle, config.dragLevel);
 
                     selection_rectangle.Stroke = new SolidColorBrush(config.borderbrush);
                     selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1, 4, 1 };
@@ -402,7 +425,10 @@ namespace AidingElementsUserInterface.Core
             else if (e.ChangedButton == MouseButton.Right)
             {
                 add_element_to_canvas(new RightClickChoice(), e);
+
+                e.Handled = true;
             }
+
         }
 
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -412,35 +438,33 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+            if ((Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) && e.LeftButton == MouseButtonState.Pressed)
             {
-                if (e.LeftButton == MouseButtonState.Pressed)
+                System.Windows.Point pos = e.GetPosition(canvas);
+
+                double x = Math.Min(pos.X, selection_point.X);
+                double y = Math.Min(pos.Y, selection_point.Y);
+
+                double w = Math.Max(pos.X, selection_point.X) - x;
+                double h = Math.Max(pos.Y, selection_point.Y) - y;
+
+                //dragWidth = w;
+                //dragHeight = h;
+
+                if (selection_rectangle != null)
                 {
-                    System.Windows.Point pos = e.GetPosition(canvas);
+                    selection_rectangle.Width = w;
+                    selection_rectangle.Height = h;
 
-                    double x = Math.Min(pos.X, selection_point.X);
-                    double y = Math.Min(pos.Y, selection_point.Y);
-
-                    double w = Math.Max(pos.X, selection_point.X) - x;
-                    double h = Math.Max(pos.Y, selection_point.Y) - y;
-
-                    //dragWidth = w;
-                    //dragHeight = h;
-
-                    if (selection_rectangle != null)
-                    {
-                        selection_rectangle.Width = w;
-                        selection_rectangle.Height = h;
-
-                        Canvas.SetLeft(selection_rectangle, x);
-                        Canvas.SetTop(selection_rectangle, y);
-                    }
+                    Canvas.SetLeft(selection_rectangle, x);
+                    Canvas.SetTop(selection_rectangle, y);
                 }
-                else
-                {
-                    canvas.Children.Remove(selection_rectangle);
-                    selection_rectangle = null;
-                }
+
+            }
+            else
+            {
+                canvas.Children.Remove(selection_rectangle);
+                //selection_rectangle = null;
             }
         }
 
@@ -448,14 +472,15 @@ namespace AidingElementsUserInterface.Core
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
                     select_containers();
-                }
-            }
 
-            e.Handled = true;
+                    canvas.Children.Remove(selection_rectangle);
+                }
+
+                e.Handled = true;
+            }
         }
 
         private void canvas_PreviewDragOver(object sender, DragEventArgs e)

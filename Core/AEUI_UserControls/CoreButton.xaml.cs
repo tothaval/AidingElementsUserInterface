@@ -1,7 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      CoreButton element 
  * 
- * basic configurable button element
+ * basic configurable fileLinkElement element
  * 
  * init:        2023|11|27
  * DEV:         Stephan Kammel
@@ -17,16 +17,30 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace AidingElementsUserInterface.Core
 {
     /// <summary>
-    /// Interaktionslogik für CoreButton.xaml
+    /// basic configurable fileLinkElement element
+    /// <para>:CoreButton(UserControl) { 0 empty; 1 string;} </para> 
+    /// <para>?!public </para> 
+    /// <para> </para> 
+    /// <para>.isSelected(bool) ?!internal > bool . </para> 
+    /// <para> </para> 
+    /// <para>;_disabled(void) ?!internal {} ; </para> 
+    /// <para>;deselect(void) ?!internal {} ; </para> 
+    /// <para>;enabled(void) ?!internal {} ; </para> 
+    /// <para>;select(void) ?!internal {} ; </para> 
+    /// <para>;setContent(void) ?!internal { 0 string  1 Icon } ; </para> 
+    /// <para>;setTooltip(void) ?!internal { 0 string } ; </para> 
+    /// <para>:CoreButton </para> 
     /// </summary>
     public partial class CoreButton : UserControl
     { 
-        private ButtonData config;
+        internal ButtonData config;
         private bool selected = false;
+        internal bool isSelected => selected;
 
         // constructors
         #region constructors
@@ -47,10 +61,19 @@ namespace AidingElementsUserInterface.Core
         }
         #endregion constructors
 
+
+        //private static readonly Action EmptyDelegate = delegate { };
+        //public static void Refresh(this UIElement uiElement)
+        //{
+        //    uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        //}
+
+
+
         private async void build()
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
-
+        
             config = data_Handler.LoadButtonData();
 
             //await Task.Delay(10);
@@ -63,18 +86,46 @@ namespace AidingElementsUserInterface.Core
             data_Handler.AddData(config);
 
             //await Task.Delay(12);
-
-            this.Resources.Remove("buttonColor");
-            this.Resources.Remove("forecolor");
-            this.Resources.Remove("highlight");
-            this.Resources.Remove("radius");
+            
+            //this.Resources.Remove("buttonColor");
+            //this.Resources.Remove("forecolor");
+            //this.Resources.Remove("highlight");
+            //this.Resources.Remove("radius");
 
             this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
             this.Resources.Add("forecolor", new SolidColorBrush(config.foreground));
             this.Resources.Add("highlight", new SolidColorBrush(config.highlight));
             this.Resources.Add("radius", config.cornerRadius);
 
+            _backgroundImage();
 
+            border.BorderBrush = new SolidColorBrush(config.borderbrush);
+            border.CornerRadius = config.cornerRadius;
+            border.BorderThickness = config.thickness;
+
+            border.HorizontalAlignment = HorizontalAlignment.Center;
+            border.VerticalAlignment = VerticalAlignment.Center;
+
+            button.MaxWidth = config.width * 2;
+            button.MinWidth = config.width;
+
+            button.MaxHeight = config.height * 2;
+            button.MinHeight = config.height;
+
+            //fileLinkElement.Background = config.return_TransparentSolidColorBrush();
+            button.Foreground = new SolidColorBrush(config.foreground);
+
+            button.VerticalContentAlignment = VerticalAlignment.Center;
+            button.HorizontalContentAlignment = HorizontalAlignment.Center;
+
+            //fileLinkElement.SetResourceReference(Control.StyleProperty, "buttonStyle");
+
+            Style style = this.FindResource("buttonStyle") as Style;
+            button.Style = style;
+        }
+
+        internal void _backgroundImage()
+        {
             if (config.imageFilePath != null)
             {
                 if (File.Exists(config.imageFilePath))
@@ -87,36 +138,17 @@ namespace AidingElementsUserInterface.Core
                     border.Background = new SolidColorBrush(config.background);
                 }
             }
-
-            border.BorderBrush = new SolidColorBrush(config.borderbrush);
-            border.CornerRadius = config.cornerRadius;
-            border.BorderThickness = config.thickness;
-
-            border.HorizontalAlignment = HorizontalAlignment.Center;
-            border.VerticalAlignment = VerticalAlignment.Center;
-
-            button.MinWidth = config.width;
-            button.MinHeight = config.height;
-
-            //button.Background = config.return_TransparentSolidColorBrush();
-            button.Foreground = new SolidColorBrush(config.foreground);
-
-            button.VerticalContentAlignment = VerticalAlignment.Center;
-            button.HorizontalContentAlignment = HorizontalAlignment.Center;
-
-            Style style = this.FindResource("buttonStyle") as Style;
-
-            button.Style = style;
         }
 
-
-        public void _disabled()
+        internal void _disabled()
         {
             button.IsEnabled = false;
         }
 
         internal void deselect()
         {
+            
+
             this.Resources.Remove("buttonColor");
             this.Resources.Remove("highlight");
 
@@ -129,12 +161,10 @@ namespace AidingElementsUserInterface.Core
             selected = false;
         }
 
-        public void _enabled()
+        internal void _enabled()
         {
             button.IsEnabled = true;
         }
-
-        internal bool isSelected => selected;
 
         internal void select()
         {
@@ -150,12 +180,12 @@ namespace AidingElementsUserInterface.Core
             selected = true;
         }
 
-        public void setContent(string content)
+        internal void setContent(string content)
         {
             button.Content = content;
         }
 
-        public void setContent(Icon icon)
+        internal void setContent(Icon icon)
         {
             System.Windows.Controls.Image image = new System.Windows.Controls.Image();
 
@@ -165,7 +195,7 @@ namespace AidingElementsUserInterface.Core
             button.Content = image;
         }
 
-        public void setShapeAsContent(Shape shape)
+        internal void setShapeAsContent(Shape shape)
         {
             config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
 
@@ -176,7 +206,7 @@ namespace AidingElementsUserInterface.Core
             button.Content = shape;
         }
 
-        public void setTooltip(string tooltip)
+        internal void setTooltip(string tooltip)
         {
             this.ToolTip = tooltip;
         }

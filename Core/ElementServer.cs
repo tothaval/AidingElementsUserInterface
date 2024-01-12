@@ -7,11 +7,13 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 
 using System.Windows.Controls;
+//using System.Windows.Forms;
 
 namespace AidingElementsUserInterface.Core
 {
@@ -47,6 +49,7 @@ namespace AidingElementsUserInterface.Core
 
             return null;
         }
+
 
         internal FlatShareCC returnFlatShareCC()
         {

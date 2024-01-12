@@ -29,7 +29,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreCanvas canvas;
         private ContainerData containerData;
 
-        private Point dragPoint = new Point();
+        private Point dragPoint = new Point();        
+
         private bool elementDrag = false;
 
         private bool container_is_selected = false;
@@ -53,6 +54,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             this.canvas = canvas;
 
+            //containerData = new ContainerData(canvas.getCanvasData(), element);
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
 
             initialize_container();
@@ -100,7 +102,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             element_border.MouseEnter += Element_border_MouseEnter;
             element_border.MouseLeave += Element_border_MouseLeave;
 
-
             element_border.MouseDown += Element_border_MouseDown;
             element_border.MouseMove += Element_border_MouseMove;
             element_border.MouseUp += Element_border_MouseUp;
@@ -143,7 +144,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             build();
         }
 
-        internal void load_Container()
+        internal async void load_Container()
         {
             initialize_container();
         }
@@ -157,13 +158,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             if (remove_from_list)
             {
-                canvas.removeSelectedItem(this);
+                canvas.removeFromSelectedItems(this);
             }
         }
 
         internal void remove_Container()
         {
-            new SharedLogic().GetElementHandler().removeElement((CoreContainer)__CoreContainer);
+            new SharedLogic().GetElementHandler().removeElement(__CoreContainer);
             canvas.canvas.Children.Remove(__CoreContainer);
 
             content_border.Child = null;
@@ -199,15 +200,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             //imageFilepath = "-";
             //imageIsBackground = false;
 
-            ContainerLogic.ApplyColorOnBorder(
-                element_border,
-                containerData.GetColorData().brushtype,
-                containerData.GetColorData().brushOrientation,
-                containerData.GetColorData().color1_string,
-                containerData.GetColorData().color2_string,
-                containerData.GetColorData().color3_string,
-                containerData.GetColorData().color4_string
-                );
+            //ContainerLogic.ApplyColorOnBorder(
+            //    element_border,
+            //    containerData.GetColorData().brushtype,
+            //    containerData.GetColorData().brushOrientation,
+            //    containerData.GetColorData().color1_string,
+            //    containerData.GetColorData().color2_string,
+            //    containerData.GetColorData().color3_string,
+            //    containerData.GetColorData().color4_string
+            //    );
         }
 
         internal void setContainerData(ContainerData containerData)
@@ -233,7 +234,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 ContainerLogic.DragStart(
                     ref elementDrag,
-                    __CoreContainer,
+                    ref __CoreContainer,
                     ref containerData.z_position,
                     ref canvas.getCanvasData().dragLevel,
                     ref dragPoint,
@@ -242,25 +243,23 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 //mainWindow.writing = false;
                 ////Keyboard.ClearFocus();
-                Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);
-
-                e.Handled = true;
+                Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);                           
             }
 
 
             if (e.ChangedButton == MouseButton.Right)
             {
                 remove_Container();
-
-                e.Handled = true;
             }
+
+            e.Handled = true;
         }
 
         private void Element_border_MouseMove(object sender, MouseEventArgs e)
         {
             ContainerLogic.DragMove(
                 ref elementDrag,
-                (CoreContainer)__CoreContainer,
+                ref __CoreContainer,
                 ref dragPoint,
                 ref canvas
                 );
@@ -272,11 +271,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 ContainerLogic.DragStop(
                     ref elementDrag,
-                    (CoreContainer)__CoreContainer,
+                    ref __CoreContainer,
                     ref containerData.z_position
                     );
 
-                dragPoint = new Point(Canvas.GetLeft(this), Canvas.GetTop(this));
+                dragPoint = new Point(Canvas.GetLeft(__CoreContainer), Canvas.GetTop(__CoreContainer));
 
                 if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                 {
@@ -307,7 +306,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 int index = containerData.z_position;
 
-                Canvas.SetZIndex(this, index + canvas.getCanvasData().hoverLevel);
+                Canvas.SetZIndex(__CoreContainer, index + canvas.getCanvasData().hoverLevel);
 
 
                 //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.z_position}\n{containerData.z_position + containerData.hoverLevel}");
@@ -320,7 +319,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (containerData != null)
             {
-                Canvas.SetZIndex(this, containerData.z_position);
+                Canvas.SetZIndex(__CoreContainer, containerData.z_position);
             }
 
             e.Handled = true;

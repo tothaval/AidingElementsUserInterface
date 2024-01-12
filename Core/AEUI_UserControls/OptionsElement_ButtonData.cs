@@ -27,7 +27,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreValueChange CVC_thickness = new CoreValueChange("thickness");
         private CoreValueChange CVC_fontSize = new CoreValueChange("fontSize");
         private CoreValueChange CVC_fontFamily = new CoreValueChange("fontFamily");
-        private CoreValueChange CVC_imageFilePath = new CoreValueChange("image file path");
+        private CoreValueChange CVC_imageFilePath = new CoreValueChange("image", true);
         private CoreValueChange CVC_height = new CoreValueChange("height");
         private CoreValueChange CVC_width = new CoreValueChange("width");
 
@@ -99,7 +99,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             c = double.Parse(split[2]);
             d = double.Parse(split[3]);
 
-            handler.GetButtonData().cornerRadius = new CornerRadius(a, b, c, d);
+            buttonData.cornerRadius = new CornerRadius(a, b, c, d);
 
             splitter = CVC_thickness.value;
             split = splitter.Split(',');

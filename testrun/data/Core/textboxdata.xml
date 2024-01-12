@@ -11,5 +11,9 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
+    <height>25</height>
+    <width>100</width>
+    <imageFilePath>
+    </imageFilePath>
   </TextBoxData>
 </Core>

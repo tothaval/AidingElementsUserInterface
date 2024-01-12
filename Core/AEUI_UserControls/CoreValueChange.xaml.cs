@@ -7,6 +7,12 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Elements;
+using Microsoft.VisualBasic.Logging;
+using Microsoft.Win32;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,12 +24,17 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     /// </summary>
     public partial class CoreValueChange : UserControl
     {
+        private bool has_button = false;
+        private CoreButton coreButton;
+
         internal string value;
         internal string Value => value;
 
         public CoreValueChange()
         {
             InitializeComponent();
+
+            build();
         }
 
         public CoreValueChange(string value_identifier)
@@ -31,6 +42,57 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             InitializeComponent();
 
             TB_value_identifier.Text = value_identifier;
+            //CTB_Value.textbox.HorizontalContentAlignment = HorizontalAlignment.Right;
+            CTB_Value.textbox.TextAlignment = TextAlignment.Right;
+
+            build();
+        }
+
+        public CoreValueChange(string value_identifier, bool has_button)
+        {
+            this.has_button = has_button;
+
+            InitializeComponent();            
+
+            if (has_button)
+            {
+                CTB_Value.Visibility = Visibility.Collapsed;
+
+                coreButton = new CoreButton("-");
+                TextBoxData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+
+                if (textBoxData != null)
+                {
+                    // so it blends in with the surrounding textboxes
+                    coreButton.button.MaxWidth = textBoxData.width;
+                    coreButton.button.MaxHeight = textBoxData.height;
+
+                    coreButton.config.imageFilePath = textBoxData.imageFilePath;
+                    coreButton._backgroundImage();
+                }
+
+                SP_ValueChangeElement.Children.Add(coreButton);
+            }                        
+
+            TB_value_identifier.Text = value_identifier;
+
+            build();
+        }
+
+        private void build()
+        {
+            if (has_button)
+            {
+                coreButton.button.Click += Button_Click;                
+            }
+            else
+            {
+                CTB_Value.textbox.GotFocus += textbox_GotFocus;
+                CTB_Value.textbox.GotKeyboardFocus += textbox_GotKeyboardFocus;
+                CTB_Value.textbox.KeyDown += textbox_KeyDown;
+                CTB_Value.textbox.KeyUp += textbox_KeyUp;
+                CTB_Value.textbox.MouseDoubleClick += textbox_MouseDoubleClick;
+            }
         }
 
         internal void setIdentifier(string value_identifier)
@@ -40,11 +102,42 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void setText(string text)
         {
-            textbox.Text = text;
+            if (!has_button)
+            {
+                CTB_Value.setText(text);
 
-            value = text;
+                value = text;
+            }
+            else
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.FileName = text;
+
+                if (openFileDialog.CheckPathExists)
+                {
+                    coreButton.setContent(openFileDialog.SafeFileName);
+                    coreButton.setTooltip(text);
+                }
+                else
+                {
+                    coreButton.setTooltip(text);
+                    coreButton.setContent(text);
+                }
+            }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog file = new SharedLogic().openDialog();
+
+            if (file != null)
+            {
+                coreButton.setContent(file.SafeFileName);
+                coreButton.setTooltip(file.FileName);
+
+                value = file.FileName;
+            }
+        }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -65,7 +158,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (e.Key == Key.Enter || e.Key == Key.Return)
             {
-                value = textbox.Text;
+                value = CTB_Value.getText();
             }
         }
 

@@ -12,10 +12,12 @@ using System.Windows.Media;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
-    internal class CoreData
+    internal class CoreData : ColorData
     {
         public string brushtype { get; set; }
 
+        // replace this colors with ColorData class objects, manipulate via xml or dependencyproperty or the like, as soon as i get it.
+        // implement parsing and color building functions within colorData or a new ColorLogic class, dunno yet.
         public Color background { get; set; }
         public Color borderbrush { get; set; }
         public Color foreground { get; set; }

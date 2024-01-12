@@ -11,10 +11,10 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
-    <initialPositionX>470</initialPositionX>
-    <initialPositionY>86</initialPositionY>
+    <initialPositionX>554</initialPositionX>
+    <initialPositionY>119</initialPositionY>
     <mainWindowHeight>888</mainWindowHeight>
-    <mainWindowWidth>1326</mainWindowWidth>
+    <mainWindowWidth>1355</mainWindowWidth>
     <language>english</language>
   </MainWindowData>
 </Core>

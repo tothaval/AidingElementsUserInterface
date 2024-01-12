@@ -11,9 +11,9 @@
       <fontSize>22</fontSize>
       <fontFamily>Verdana</fontFamily>
     </CoreData>
+    <height>22</height>
+    <width>50</width>
     <imageFilePath>
     </imageFilePath>
-    <height>40</height>
-    <width>70</width>
   </ButtonData>
 </Core>

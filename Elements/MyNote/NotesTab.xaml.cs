@@ -179,12 +179,12 @@ namespace AidingElementsUserInterface.Elements.MyNote
             Button button = (Button)sender;
 
             string name = button.Name;
-            active_note = Int32.Parse(name.Replace("button", ""));
+            active_note = Int32.Parse(name.Replace("fileLinkElement", ""));
 
             note_selection(active_note);
 
             //SharedLogic.GetMainWindow().Tab_history.history_entry(
-            //    $"{name} '{button.Content}' clicked"
+            //    $"{name} '{fileLinkElement.Content}' clicked"
             //    );
 
             update_output();
@@ -205,7 +205,7 @@ namespace AidingElementsUserInterface.Elements.MyNote
                     note.getNoteData().id = i;
                     string title = note.getNoteData().title;
 
-                    button.Name = $"button{i}";
+                    button.Name = $"fileLinkElement{i}";
 
                     button.Background = new SolidColorBrush(Colors.FloralWhite);
                     button.Foreground = new SolidColorBrush(Colors.SlateGray);
