@@ -52,7 +52,7 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -65,7 +65,7 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, __CoreCanvas);
+            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
 
             if (coreContainer != null)
             {
@@ -100,11 +100,11 @@ namespace AidingElementsUserInterface.Core
                 config = new CanvasData();
             }
 
-            data_Handler.AddData(config);
+            data_Handler.AddCanvasData(config);
 
-            __CoreCanvas.Background = new SolidColorBrush(config.background);
+            __CoreCanvas.Background = config.background.GetBrush();
 
-            __CoreCanvas.BorderBrush = new SolidColorBrush(config.borderbrush);
+            __CoreCanvas.BorderBrush = config.borderbrush.GetBrush();
             __CoreCanvas.BorderThickness = config.thickness;
 
             __CoreCanvas.Name = config.canvasName;
@@ -221,7 +221,7 @@ namespace AidingElementsUserInterface.Core
 
             foreach (CoreContainer item in xml_Handler.Container_load())
             {
-                item.setCanvas(this);
+                item.setCanvas(ref __CoreCanvas);
 
                 add_element_to_canvas(item, item.get_dragPoint());
 
@@ -287,7 +287,7 @@ namespace AidingElementsUserInterface.Core
         {
             foreach (CoreContainer container in canvas.Children)
             {
-                if (container.GetContainerData().getContent().GetType() == typeof(FlatShareCC))
+                if (container.GetContainerData().GetElement().GetType() == typeof(FlatShareCC))
                 {
                     new SharedLogic().GetElementHandler().removeElement(container);
 
@@ -301,7 +301,7 @@ namespace AidingElementsUserInterface.Core
         {
             foreach (CoreContainer container in canvas.Children)
             {
-                if (container.GetContainerData().getContent().GetType() == typeof(MyNote))
+                if (container.GetContainerData().GetElement().GetType() == typeof(MyNote))
                 {
                     new SharedLogic().GetElementHandler().removeElement(container);
 
@@ -355,7 +355,7 @@ namespace AidingElementsUserInterface.Core
         {
             foreach (CoreContainer item in canvas.Children)
             {
-                if (item.GetContainerData().getContent().GetType() == type)
+                if (item.GetContainerData().GetElement().GetType() == type)
                 {
                     item.select();
                 }
@@ -408,7 +408,7 @@ namespace AidingElementsUserInterface.Core
                     selection_rectangle = new System.Windows.Shapes.Rectangle();
                     Canvas.SetZIndex(selection_rectangle, config.dragLevel);
 
-                    selection_rectangle.Stroke = new SolidColorBrush(config.borderbrush);
+                    selection_rectangle.Stroke = config.borderbrush.GetBrush();
                     selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1, 4, 1 };
                     selection_rectangle.StrokeThickness = 7;
                     selection_rectangle.Fill = new SolidColorBrush(Colors.Transparent);

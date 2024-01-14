@@ -25,24 +25,42 @@ namespace AidingElementsUserInterface.Elements
     /// Interaktionslogik für Link.xaml
     /// </summary>
     public partial class Link : UserControl
-    {
+    {        
         private bool loaded = false;
+        private ContentData contentData = new ContentData();
 
-        internal LinkData data;
+        private LinkData linkData;
         private SharedLogic logic = new SharedLogic();
 
 
-        public Link()
+        internal Link()
         {
             InitializeComponent();
 
             build();
+            registerEvents();
 
             loaded = true;
+        }
 
-            //L_LinkText.FontSize = new SharedLogic().GetDataHandler().GetCoreData().fontSize;
-            L_LinkText.FontSize = 9;
-            L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
+        internal Link(ContentData contentData)
+        {
+            this.contentData = contentData;
+
+            InitializeComponent();
+
+            load(contentData);
+            registerEvents();
+
+            loaded = true;
+        }
+
+        private void registerEvents()
+        {
+            CB_FileLink.button.Click += CB_file_Click;
+            CB_local.button.Click += CB_local_Click;
+            CB_web.button.Click += CB_web_Click;
+            CB_LinkButton.button.Click += CB_LinkButton_Click;
         }
 
         private void build()
@@ -51,41 +69,45 @@ namespace AidingElementsUserInterface.Elements
             CB_local.setContent("local");
             CB_web.setContent("web");
 
-            CB_FileLink.button.Click += CB_file_Click;
-            CB_local.button.Click += CB_local_Click;
-            CB_web.button.Click += CB_web_Click;
-
             CTB_Link.setText("link");
             CTB_LinkText.setText("linktext");
             CB_LinkButton.setContent("setup\nlink");
+        }
 
-            CB_LinkButton.button.Click += CB_LinkButton_Click;
+        internal ContentData GetContentData()
+        {
+            return contentData;
         }
 
         internal void initiate_link()
         {
-            data = new LinkData(CTB_Link.getText(), CTB_LinkText.getText());
+            linkData = new LinkData(CTB_Link.getText(), CTB_LinkText.getText());
 
-            if (Uri.IsWellFormedUriString(data.GetLink, UriKind.RelativeOrAbsolute)
-                || Directory.Exists(data.GetLink) || File.Exists(data.GetLink))
+            if (Uri.IsWellFormedUriString(linkData.GetLink, UriKind.RelativeOrAbsolute)
+                || Directory.Exists(linkData.GetLink) || File.Exists(linkData.GetLink))
             {
                 setup();
             }            
             else
             {
-                data = null;
+                linkData = null;
 
                 MessageBox.Show("could not resolve link");
             }
         }
-        internal void load(LinkData linkData)
+        internal void load(ContentData data)
         {
+            string link = (string)data.GetValue("Link");
+            string linkText = (string)data.GetValue("LinkText");
+
             load_setup();
 
-            CTB_Link.setText(linkData.GetLink);
-            CTB_LinkText.setText(linkData.GetLinkText);
+            this.ToolTip = link + "\n" + linkText;
 
-            data = linkData;
+            linkData = new LinkData(link, linkText);
+
+            CTB_Link.setText(link);
+            CTB_LinkText.setText(linkText);
 
             initiate_link();
         }
@@ -114,7 +136,7 @@ namespace AidingElementsUserInterface.Elements
 
             L_LinkText.Visibility = Visibility.Collapsed;
 
-            data = null;
+            linkData = null;
         }
 
         private void setup()
@@ -122,13 +144,23 @@ namespace AidingElementsUserInterface.Elements
             CTB_Link.Visibility = Visibility.Collapsed;
             CTB_LinkText.Visibility = Visibility.Collapsed;
 
-            CB_LinkButton.setContent(data.GetLinkText);
+            CB_LinkButton.setContent(linkData.GetLinkText);
 
-            __Link.ToolTip = data.GetLink;
+            __Link.ToolTip = linkData.GetLink;
 
-            if (data.GetLink != null)
+            if (linkData.GetLink != null)
             {
-                if (Uri.IsWellFormedUriString(data.GetLink, UriKind.RelativeOrAbsolute))
+                contentData.Clear();
+
+                contentData.AddValue("Link", linkData.GetLink);
+                contentData.AddValue("LinkText", linkData.GetLinkText);
+
+                //MessageBox.Show(contentData.GetValuesDictionary().Count.ToString()
+                //    + "\n" + contentData.GetValue("Link")
+                //     + "\n" + contentData.GetValue("LinkText")
+                //     + "\n" + contentData.GetValuesDictionary()["Link"].ToString());
+
+                if (Uri.IsWellFormedUriString(linkData.GetLink, UriKind.RelativeOrAbsolute))
                 {
                     //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
                     Icon icon = IconTools.GetIconForExtension(".html", ShellIconSize.LargeIcon);
@@ -138,18 +170,18 @@ namespace AidingElementsUserInterface.Elements
                         CB_LinkButton.setContent(icon);
                     }
                 }
-                //else if (File.Exists(data.GetLink))
+                //else if (File.Exists(linkData.GetLink))
                 //{
-                //    Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+                //    Icon icon = IconTools.GetIconForFile(linkData.GetLink, ShellIconSize.LargeIcon);
 
                 //    if (icon != null)
                 //    {
-                //        CB_LinkButton.setContent(icon);                        
+                //        CB_LinkButton.SetElement(icon);                        
                 //    }
                 //}
                 else
                 {
-                    Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+                    Icon icon = IconTools.GetIconForFile(linkData.GetLink, ShellIconSize.LargeIcon);
 
                     if (icon != null)
                     {
@@ -158,7 +190,7 @@ namespace AidingElementsUserInterface.Elements
                 }
             }
 
-            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Content = linkData.GetLinkText;
             L_LinkText.Visibility = Visibility.Visible;
         }
 
@@ -213,9 +245,9 @@ namespace AidingElementsUserInterface.Elements
                 }
                 else
                 {
-                    if (data != null)
+                    if (linkData != null)
                     {
-                        logic.executeLink(data.GetLink);
+                        logic.executeLink(linkData.GetLink);
                     }
                     else
                     {

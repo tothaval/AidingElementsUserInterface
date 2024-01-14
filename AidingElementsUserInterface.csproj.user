@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Core\AEUI_UserControls\CoreContainer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreCanvas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreDataInputElement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreMatrix.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreMatrixLine.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreTextBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Coordinates.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FileLink.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\AnnualBillingUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\CostOutputUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\FlatDataUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\FlatShareCC.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\InitialCostOutputUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\InitialCostsUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\PaymentsUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\RentOutputUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\UpdateCosts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\FlatShareCC\UpdateCostsUI.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Image.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Link.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\ActivityTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\LogTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\MatrixElement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\MyNote.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\Note.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\NoteMatrixTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\MyNote\NotesTab.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Random\Random.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Core\AEUI_UserControls\CoreContainer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreCanvas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreDataInputElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreMatrix.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreMatrixLine.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreTextBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\CoreValueChange.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Coordinates.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FileLink.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\AnnualBillingUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\CostOutputUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\FlatDataUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\FlatShareCC.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\InitialCostOutputUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\InitialCostsUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\PaymentsUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\RentOutputUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\UpdateCosts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\FlatShareCC\UpdateCostsUI.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Image.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Link.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\ActivityTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\LogTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\MatrixElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\MyNote.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\Note.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\NoteMatrixTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\MyNote\NotesTab.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Random\Random.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

@@ -23,7 +23,7 @@ namespace AidingElementsUserInterface.Core
     /// </summary>
     public partial class CoreTextBox : UserControl
     {
-        private TextBoxData config;
+        private CoreData config;
 
         public CoreTextBox()
         {
@@ -56,19 +56,19 @@ namespace AidingElementsUserInterface.Core
 
             _backgroundImage();
 
-            border.BorderBrush = new SolidColorBrush(config.borderbrush);
+            border.BorderBrush = config.borderbrush.GetBrush();
             border.CornerRadius = config.cornerRadius;
             border.BorderThickness = config.thickness;
 
             textbox.Background = new SolidColorBrush(Colors.Transparent);
-            textbox.Foreground = new SolidColorBrush(config.foreground);
+            textbox.Foreground = config.foreground.GetBrush();
 
-            textbox.CaretBrush = new SolidColorBrush(config.foreground);
+            textbox.CaretBrush = config.foreground.GetBrush();
 
             if (!no_limits)
             {
                 textbox.Height = config.height;
-                textbox.Width = config.width;
+                textbox.MinWidth = config.width;
             }
             else
             {
@@ -105,7 +105,7 @@ namespace AidingElementsUserInterface.Core
                 }
                 else
                 {
-                    border.Background = new SolidColorBrush(config.background);
+                    border.Background = config.background.GetBrush();
                 }
             }
         }

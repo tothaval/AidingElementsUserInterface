@@ -23,10 +23,12 @@ namespace AidingElementsUserInterface.Elements
     /// </summary>
     public partial class FileLink : UserControl
     {
-        private bool loaded = false;
         private bool linked = false;
+        private bool loaded = false;
 
-        internal LinkData data;
+        private ContentData contentData = new ContentData();
+
+        private LinkData linkData;
         private SharedLogic logic = new SharedLogic();
 
         public FileLink()
@@ -34,6 +36,7 @@ namespace AidingElementsUserInterface.Elements
             InitializeComponent();
 
             build();
+            registerEvents();
 
             loaded = true;
 
@@ -42,19 +45,47 @@ namespace AidingElementsUserInterface.Elements
             L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
         }
 
+        internal FileLink(ContentData contentData)
+        {
+            this.contentData = contentData;
+
+            InitializeComponent();
+
+            load(contentData);
+            registerEvents();
+
+            loaded = true;
+        }
+
+        private void registerEvents()
+        {
+            CB_FileLink.button.Click += CB_FileLink_Click;
+            CB_LinkButton.button.Click += CB_LinkButton_Click;
+        }
+
         private void build()
         {
             CB_FileLink.setContent("file");
-            CB_FileLink.button.Click += CB_FileLink_Click;
 
             CTB_LinkText.setText("linktext");
 
             CB_LinkButton.setContent("setup\nlink");
-            CB_LinkButton.button.Click += CB_LinkButton_Click;
         }
 
-        internal void load(LinkData linkData)
+        internal ContentData GetContentData()
         {
+            return contentData;
+        }
+
+        internal void load(ContentData data)
+        {
+            string link = (string)data.GetValue("Link");
+            string linkText = (string)data.GetValue("LinkText");
+
+            this.ToolTip = link + "\n" + linkText;
+
+            linkData = new LinkData(link, linkText);
+
             SP_Choice.Visibility = Visibility.Collapsed;
 
             CB_FileLink.setContent(linkData.GetLink);            
@@ -70,9 +101,9 @@ namespace AidingElementsUserInterface.Elements
                 CB_LinkButton.setContent(icon);
             }
 
-            data = linkData;
+            this.contentData = data;
 
-            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Content = linkData.GetLinkText;
 
             CB_LinkButton.Visibility = Visibility.Visible;
             CTB_LinkText.Visibility = Visibility.Visible;
@@ -87,10 +118,12 @@ namespace AidingElementsUserInterface.Elements
 
             if (file != null)
             {
-                data = new LinkData();
-                data.SetLink(file.FileName);
+                linkData = new LinkData();
+                linkData.SetLink(file.FileName);
 
                 CB_FileLink.setContent(file.FileName);
+                CB_FileLink.setTooltip(file.FileName);
+
                 CTB_LinkText.setText(file.SafeFileName);
 
                 CB_LinkButton.Visibility = Visibility.Visible;
@@ -113,15 +146,20 @@ namespace AidingElementsUserInterface.Elements
 
         private void setup_choice()
         {
-            data.SetLinkText(CTB_LinkText.getText());
+            linkData.SetLinkText(CTB_LinkText.getText());
 
-            if (data.GetLink != null)
+            if (linkData.GetLink != null)
             {
-                CB_LinkButton.setContent(data.GetLinkText);
-                CB_LinkButton.setTooltip(data.GetLink);
+                contentData.Clear();
+
+                contentData.AddValue("Link", linkData.GetLink);
+                contentData.AddValue("LinkText", linkData.GetLinkText);
+
+                CB_LinkButton.setContent(linkData.GetLinkText);
+                CB_LinkButton.setTooltip(linkData.GetLink);
 
                 //thx to https://www.brad-smith.info/blog/archives/164 for IconTools.cs
-                Icon icon = IconTools.GetIconForFile(data.GetLink, ShellIconSize.LargeIcon);
+                Icon icon = IconTools.GetIconForFile(linkData.GetLink, ShellIconSize.LargeIcon);
 
                 if (icon != null)
                 {
@@ -131,7 +169,7 @@ namespace AidingElementsUserInterface.Elements
 
             SP_Choice.Visibility = Visibility.Collapsed;
 
-            L_LinkText.Content = data.GetLinkText;
+            L_LinkText.Content = linkData.GetLinkText;
             L_LinkText.Visibility = Visibility.Visible;
 
             linked = true;
@@ -158,7 +196,7 @@ namespace AidingElementsUserInterface.Elements
                 {
                     if (linked)
                     {
-                        logic.executeLink(data.GetLink);
+                        logic.executeLink(linkData.GetLink);
                     }
                     else
                     {

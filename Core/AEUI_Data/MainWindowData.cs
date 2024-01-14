@@ -16,10 +16,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     internal class MainWindowData : CoreData
     {
         // main window size values
-        internal Point initialPosition { get; set; }
-
-        internal int mainWindowHeight { get; set; }
-        internal int mainWindowWidth { get; set; }
+        internal Point initialPosition { get; set; }                
         internal string? language { get; set; }
 
         internal MainWindowData(bool load)
@@ -28,17 +25,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal MainWindowData()
         {
+            //CoreData properties
+            height = 480;
+            width = 640;
+
+            //MainWindowData properties
             initialPosition = new Point(25, 25);
-
-            mainWindowHeight = 480;
-            mainWindowWidth = 640;
-
             language = "english";
         }
 
         internal MainWindowData(CoreData coreData)
         {
-            brushtype = coreData.brushtype;
+            //CoreData properties
             background = coreData.background;
             borderbrush = coreData.borderbrush;
             foreground = coreData.foreground;
@@ -50,11 +48,13 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
 
+            height = 480;
+            width = 640;
+
+            imageFilePath = coreData.imageFilePath;
+
+            //MainWindowData properties
             initialPosition = new Point(25, 25);
-
-            mainWindowHeight = 480;
-            mainWindowWidth = 640;
-
             language = "english";
         }
     }

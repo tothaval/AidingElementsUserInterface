@@ -17,13 +17,18 @@ using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.MyNote;
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
+using static System.Windows.Forms.LinkLabel;
+using Link = AidingElementsUserInterface.Elements.Link;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -71,22 +76,19 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                     xmlDocument.Load(filename);
 
-                    XmlNode? node = xmlDocument.SelectSingleNode("Container");
+                    XmlNode? node_Container = xmlDocument.SelectSingleNode("Container");
 
-                    ContainerData? containerData;
 
-                    Point container_position;
-
-                    UserControl userControl = new UserControl();
-
-                    if (node != null)
+                    if (node_Container != null)
                     {
-                        containerData = loadContainerData(node);
+                        ContainerData containerData = loadContainerData(node_Container);
 
-                        XmlNode node_Content = node.SelectSingleNode("Content");
+                        XmlNode node_Content = node_Container.SelectSingleNode("Content");
 
                         if (node_Content != null)
                         {
+                            UserControl userControl = new UserControl();
+
                             XmlNode node_Type = node_Content.SelectSingleNode("Type");
 
                             if (node_Type != null)
@@ -95,11 +97,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                                 if (type != null)
                                 {
-                                    XmlNode? node_LinkData = node_Content.SelectSingleNode("LinkData");
+                                    XmlNode? node_Data = node_Content.SelectSingleNode("Data");
 
-                                    if (node_LinkData != null)
+                                    if (node_Data != null)
                                     {
-                                        userControl = LinkData_load(type, node_LinkData);
+                                        //containerData = loadContentData(node_Data);
+                                        userControl = ContentData_load(type, node_Data);
                                     }
                                     else
                                     {
@@ -127,7 +130,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                                 }
                             }
 
-                            XmlNode node_Position = node.SelectSingleNode("Position");
+                            Point container_position;
+                            XmlNode node_Position = node_Container.SelectSingleNode("Position");
 
                             if (node_Position != null)
                             {
@@ -148,15 +152,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                                 containerData = new ContainerData();
                             }
 
+                            containerData.SetElement(userControl);
 
-                            CoreContainer coreContainer = new CoreContainer();                            
+                            CoreContainer coreContainer = new CoreContainer();
                             coreContainer.setContainerData(containerData);
-
-                            coreContainer.GetContainerData().ApplyInheritanceDataOverwrite<CanvasData>(new SharedLogic().GetDataHandler().GetCanvasData());
-
                             coreContainer.setPosition(container_position);
-
-                            coreContainer.GetContainerData().setContent(userControl);
 
                             container_list.Add(coreContainer);
                         }
@@ -185,30 +185,24 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
 
-                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, container.GetContainerData());
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, container.GetContainerData().settings);
 
                 if (aux_node != null)
                 {
                     node_ContainerData.AppendChild(aux_node);
                 }
 
-                XmlNode node_containerLocation = xmlDocument.CreateElement("containerLocation");
-                node_containerLocation.InnerText = container.GetContainerData().containerLocation;
-                node_ContainerData.AppendChild(node_containerLocation);
+                XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasName");
+                node_CanvasName.InnerText = container.GetContainerData().CanvasName;
+                node_ContainerData.AppendChild(node_CanvasName);
 
-                XmlNode node_imageIsBackground = xmlDocument.CreateElement("imageIsBackground");
-                node_imageIsBackground.InnerText = container.GetContainerData().imageIsBackground.ToString();
-                node_ContainerData.AppendChild(node_imageIsBackground);
-
-                XmlNode node_imageFilePath = xmlDocument.CreateElement("imageFilePath");
-                node_imageFilePath.InnerText = container.GetContainerData().imageFilePath;
-                node_ContainerData.AppendChild(node_imageFilePath);
+                XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
+                node_ContainerDataFilename.InnerText = $"{counter}.xml";
+                node_ContainerData.AppendChild(node_ContainerDataFilename);
 
                 XmlNode node_z_position = xmlDocument.CreateElement("z_position");
                 node_z_position.InnerText = container.GetContainerData().z_position.ToString();
                 node_ContainerData.AppendChild(node_z_position);
-
-
 
                 node.AppendChild(node_ContainerData);
 
@@ -227,7 +221,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 node_Position.AppendChild(node_position_y);
 
                 node.AppendChild(node_Position);
-
 
                 try
                 {
@@ -248,37 +241,32 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             XmlNode node_Content = xmlDocument.CreateElement("Content");
 
             XmlNode type = xmlDocument.CreateElement("Type");
-            Type t = container.GetContainerData().getContent().GetType();
+            Type t = container.GetContainerData().GetElement().GetType();
             type.InnerText = t.Name;
             node_Content.AppendChild(type);
 
-            if (t == typeof(FileLink) || t == typeof(Link))
+            XmlNode node_ContentData = xmlDocument.CreateElement("Data");
+            XmlNode? aux_ContentData = null;
+
+            ContentData? contentData = null;
+
+            if (t == typeof(FileLink))
             {
-                XmlNode node_LinkData = xmlDocument.CreateElement("LinkData");
-                XmlNode? aux_LinkData;
+                FileLink fileLink = (FileLink)container.GetContainerData().GetElement();
+                contentData = fileLink.GetContentData();
+            }
 
-                if (t == typeof(FileLink))
-                {
-                    FileLink fileLink = (FileLink)container.GetContainerData().getContent();
-                    aux_LinkData = saveLinkData(xmlDocument, node_LinkData, fileLink.data);
+            if (t == typeof(Link))
+            {
+                Link link = (Link)container.GetContainerData().GetElement();
+                contentData = link.GetContentData();
+            }
 
-                    if (aux_LinkData != null)
-                    {
-                        node_Content.AppendChild(aux_LinkData);
-                    }
-                }
+            aux_ContentData = saveContent(xmlDocument, node_ContentData, contentData);
 
-                if (t == typeof(Link))
-                {
-                    Link link = (Link)container.GetContainerData().getContent();
-
-                    aux_LinkData = saveLinkData(xmlDocument, node_LinkData, link.data);
-
-                    if (aux_LinkData != null)
-                    {
-                        node_Content.AppendChild(aux_LinkData);
-                    }
-                }
+            if (aux_ContentData != null)
+            {
+                node_Content.AppendChild(aux_ContentData);
             }
 
             return node_Content;
@@ -286,16 +274,40 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // Core loading and saving via XML
         #region Core
+        internal XmlNode? saveContent(XmlDocument xmlDocument, XmlNode node, ContentData data)
+        {
+            if (data != null)
+            {
+                foreach (string key in data.GetValuesDictionary().Keys)
+                {
+                    XmlNode newNode = xmlDocument.CreateElement(key);
+                    newNode.InnerText = data.GetValuesDictionary()[key].ToString();
 
+                    node.AppendChild(newNode);
+                }
+
+                //XmlNode link = xmlDocument.CreateElement("Link");
+                //link.InnerText = contentData.GetLink;
+                //node_Container.AppendChild(link);
+
+                //XmlNode linkText = xmlDocument.CreateElement("LinkText");
+                //linkText.InnerText = contentData.GetLinkText;
+                //node_Container.AppendChild(linkText);
+
+                return node;
+            }
+
+            return null;
+        }
         // ButtonData
-        // + color data? OR replace color values in core data OR if colordata == null, use coredata
+        // + color linkData? OR replace color values in core linkData OR if colordata == null, use coredata
         #region ButtonData
         #region ButtonData loading
-        internal ButtonData? ButtonData_load()
+        internal CoreData? ButtonData_load()
         {
             SharedLogic logic = new SharedLogic();
 
-            ButtonData buttonData = new ButtonData(true);
+            CoreData buttonData = new CoreData(true);
             XmlDocument xmlDocument = new XmlDocument();
 
             if (File.Exists(ButtonData_file))
@@ -315,7 +327,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                         if (aux_data != null)
                         {
-                            buttonData.apply_CoreData(aux_data);
+                            buttonData = aux_data;
                         }
 
                         buttonData.height = Double.Parse(node_ButtonData.SelectSingleNode("height").InnerText);
@@ -335,7 +347,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion ButtonData loading
 
         #region ButtonData saving
-        internal void save_ButtonData(ButtonData buttonData)
+        internal void save_ButtonData(CoreData buttonData)
         {
             if (buttonData != null)
             {
@@ -382,16 +394,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         internal void ButtonData_save()
         {
-            ButtonData buttonData = new SharedLogic().GetDataHandler().GetButtonData();
+            CoreData buttonData = new SharedLogic().GetDataHandler().GetButtonData();
 
-           save_ButtonData(buttonData);
+            save_ButtonData(buttonData);
         }
         #endregion ButtonData saving
         #endregion ButtonData
 
 
         // CanvasData
-        // + color data? OR replace color values in core data OR if colordata == null, use coredata
+        // + color linkData? OR replace color values in core linkData OR if colordata == null, use coredata
         #region CanvasData
         #region CanvasData loading
         internal CanvasData? CanvasData_load()
@@ -551,29 +563,18 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode? node_CoreData = NodeCheck(node_ContainerData, "CoreData");
 
                 CoreData? aux_data = loadCoreData(node_CoreData);
-
                 if (aux_data != null)
                 {
-                    containerData.apply_CoreData(aux_data);
+                    containerData = new ContainerData(aux_data);
                 }
 
-                XmlNode? containerLocation = NodeCheck(node_ContainerData, "containerLocation");
+                XmlNode? containerLocation = NodeCheck(node_ContainerData, "CanvasName");
                 if (containerLocation != null)
                 {
-                    containerData.containerLocation = containerLocation.InnerText;
+                    containerData.CanvasName = containerLocation.InnerText;
                 }
 
-                XmlNode? imageIsBackground = NodeCheck(node_ContainerData, "imageIsBackground");
-                if (imageIsBackground != null)
-                {
-                    containerData.imageIsBackground = Boolean.Parse(imageIsBackground.InnerText);
-                }
-
-                XmlNode? imageFilePath = NodeCheck(node_ContainerData, "imageFilePath");
-                if (imageFilePath != null)
-                {
-                    containerData.imageFilePath = imageFilePath.InnerText;
-                }
+                containerData.ContainerDataFilename = node.OwnerDocument.Name;
 
                 XmlNode? z_position = NodeCheck(node_ContainerData, "z_position");
                 if (z_position != null)
@@ -625,20 +626,93 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return null;
         }
 
-        private CoreData? loadCoreData(XmlNode node)
+
+        private ColorData? loadColorData(XmlNode node, string ColorDataNode)
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreData coreData = new CoreData();
+            ColorData colorData = new ColorData(true);
+
 
             if (node != null)
             {
-                coreData.brushtype = node.SelectSingleNode("brushtype").InnerText;
+                XmlNode? node_ColorDataNode = node.SelectSingleNode(ColorDataNode);
 
-                coreData.background = logic.ParseColor(node.SelectSingleNode("background").InnerText);
-                coreData.borderbrush = logic.ParseColor(node.SelectSingleNode("borderbrush").InnerText);
-                coreData.foreground = logic.ParseColor(node.SelectSingleNode("foreground").InnerText);
-                coreData.highlight = logic.ParseColor(node.SelectSingleNode("highlight").InnerText);
+
+                XmlNode? brushtype = node_ColorDataNode.SelectSingleNode("brushtype");
+                if (brushtype != null)
+                {
+                    colorData.brushtype = brushtype.InnerText;
+                }
+
+                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
+                if (gradiantEndPoint != null)
+                {
+                    colorData.gradiantEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
+                }
+
+                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradiantOrigin");
+                if (gradiantOrigin != null)
+                {
+                    colorData.gradiantOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
+                }
+
+                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradiantStartPoint");
+                if (gradiantStartPoint != null)
+                {
+                    colorData.gradiantStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
+                }
+
+                XmlNode? color1_string = node_ColorDataNode.SelectSingleNode("color1_string");
+                if (color1_string != null)
+                {
+                    colorData.color1_string = color1_string.InnerText;
+                }
+
+                XmlNode? color2_string = node_ColorDataNode.SelectSingleNode("color2_string");
+                if (color2_string != null)
+                {
+                    colorData.color2_string = color2_string.InnerText;
+                }
+
+                XmlNode? color3_string = node_ColorDataNode.SelectSingleNode("color3_string");
+                if (color3_string != null)
+                {
+                    colorData.color3_string = color3_string.InnerText;
+                }
+
+                XmlNode? color4_string = node_ColorDataNode.SelectSingleNode("color4_string");
+                if (color4_string != null)
+                {
+                    colorData.color4_string = color4_string.InnerText;
+                }
+            }
+
+            return colorData;
+        }
+
+
+
+        private CoreData? loadCoreData(XmlNode node)
+        {
+            SharedLogic logic = new SharedLogic();
+            CoreData coreData = new CoreData(true);
+
+            if (node != null)
+            {
+                coreData.imageIsBackground = bool.Parse(node.SelectSingleNode("imageIsBackground").InnerText);
+
+                ColorData aux_background = loadColorData(node, "background");
+                if (aux_background != null) { coreData.background = aux_background; }
+
+                ColorData aux_borderbrush = loadColorData(node, "borderbrush");
+                if (aux_borderbrush != null) { coreData.borderbrush = aux_borderbrush; }
+
+                ColorData aux_foreground = loadColorData(node, "foreground");
+                if (aux_foreground != null) { coreData.foreground = aux_foreground; }
+
+                ColorData aux_highlight = loadColorData(node, "highlight");
+                if (aux_highlight != null) { coreData.highlight = aux_highlight; }
 
                 coreData.cornerRadius = logic.ParseCornerRadius(node.SelectSingleNode("cornerRadius").InnerText);
 
@@ -646,6 +720,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 coreData.fontSize = Int32.Parse(node.SelectSingleNode("fontSize").InnerText);
                 coreData.fontFamily = new FontFamily(node.SelectSingleNode("fontFamily").InnerText);
+
+                coreData.height = Double.Parse(node.SelectSingleNode("height").InnerText);
+                coreData.width = Double.Parse(node.SelectSingleNode("width").InnerText);
+
+                coreData.imageFilePath = node.SelectSingleNode("imageFilePath").InnerText;
 
                 return coreData;
             }
@@ -686,29 +765,82 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             }
         }
 
+        internal XmlNode? saveColorData(XmlDocument xmlDocument, ColorData data, string ColorDataNode)
+        {
+            if (data != null)
+            {
+                XmlNode _ColorDataNode = xmlDocument.CreateElement(ColorDataNode);
+
+                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
+                brushtype.InnerText = data.brushtype.ToString();
+                _ColorDataNode.AppendChild(brushtype);
+
+                XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradiantEndPoint");
+                gradiantEndPoint.InnerText = data.gradiantEndPoint.ToString();
+                _ColorDataNode.AppendChild(gradiantEndPoint);
+
+                XmlNode gradiantOrigin = xmlDocument.CreateElement("gradiantOrigin");
+                gradiantOrigin.InnerText = data.gradiantOrigin.ToString();
+                _ColorDataNode.AppendChild(gradiantOrigin);
+
+                XmlNode gradiantStartPoint = xmlDocument.CreateElement("gradiantStartPoint");
+                gradiantStartPoint.InnerText = data.gradiantStartPoint.ToString();
+                _ColorDataNode.AppendChild(gradiantStartPoint);
+
+                XmlNode color1_string = xmlDocument.CreateElement("color1_string");
+                color1_string.InnerText = data.color1_string;
+                _ColorDataNode.AppendChild(color1_string);
+
+                XmlNode color2_string = xmlDocument.CreateElement("color2_string");
+                color2_string.InnerText = data.color2_string.ToString();
+                _ColorDataNode.AppendChild(color2_string);
+
+                XmlNode color3_string = xmlDocument.CreateElement("color3_string");
+                color3_string.InnerText = data.color3_string;
+                _ColorDataNode.AppendChild(color3_string);
+
+                XmlNode color4_string = xmlDocument.CreateElement("color4_string");
+                color4_string.InnerText = data.color4_string;
+                _ColorDataNode.AppendChild(color4_string);
+
+                return _ColorDataNode;
+            }
+
+            return null;
+        }
+
+
         internal XmlNode? saveCoreData(XmlDocument xmlDocument, XmlNode node, CoreData data)
         {
             if (data != null)
             {
-                XmlNode brushtype = xmlDocument.CreateElement("brushtype");
-                brushtype.InnerText = data.brushtype;
-                node.AppendChild(brushtype);
+                XmlNode imageIsBackground = xmlDocument.CreateElement("imageIsBackground");
+                imageIsBackground.InnerText = data.imageIsBackground.ToString();
+                node.AppendChild(imageIsBackground);
 
-                XmlNode background = xmlDocument.CreateElement("background");
-                background.InnerText = data.background.ToString();
-                node.AppendChild(background);
+                XmlNode? aux_background = saveColorData(xmlDocument, data.background, "background");
+                if (aux_background != null)
+                {
+                    node.AppendChild(aux_background);
+                }
 
-                XmlNode borderbrush = xmlDocument.CreateElement("borderbrush");
-                borderbrush.InnerText = data.borderbrush.ToString();
-                node.AppendChild(borderbrush);
+                XmlNode? aux_borderbrush = saveColorData(xmlDocument, data.borderbrush, "borderbrush");
+                if (aux_borderbrush != null)
+                {
+                    node.AppendChild(aux_borderbrush);
+                }
 
-                XmlNode foreground = xmlDocument.CreateElement("foreground");
-                foreground.InnerText = data.foreground.ToString();
-                node.AppendChild(foreground);
+                XmlNode? aux_foreground = saveColorData(xmlDocument, data.foreground, "foreground");
+                if (aux_foreground != null)
+                {
+                    node.AppendChild(aux_foreground);
+                }
 
-                XmlNode highlight = xmlDocument.CreateElement("highlight");
-                highlight.InnerText = data.highlight.ToString();
-                node.AppendChild(highlight);
+                XmlNode? aux_highlight = saveColorData(xmlDocument, data.highlight, "highlight");
+                if (aux_highlight != null)
+                {
+                    node.AppendChild(aux_highlight);
+                }
 
                 XmlNode cornerRadius = xmlDocument.CreateElement("cornerRadius");
                 cornerRadius.InnerText = data.cornerRadius.ToString();
@@ -726,6 +858,19 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 fontFamily.InnerText = data.fontFamily.ToString();
                 node.AppendChild(fontFamily);
 
+                XmlNode height = xmlDocument.CreateElement("height");
+                height.InnerText = data.height.ToString();
+                node.AppendChild(height);
+
+                XmlNode width = xmlDocument.CreateElement("width");
+                width.InnerText = data.width.ToString();
+                node.AppendChild(width);
+
+                XmlNode imageFilePath = xmlDocument.CreateElement("imageFilePath");
+                imageFilePath.InnerText = data.imageFilePath;
+                node.AppendChild(imageFilePath);
+
+
                 return node;
             }
 
@@ -737,35 +882,43 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // LinkData
         #region LinkData
         #region LinkData loading
-        private UserControl? LinkData_load(Type type, XmlNode node_LinkData)
+        private UserControl? ContentData_load(Type type, XmlNode node_ContentData)
         {
-            LinkData? aux_linkData = loadLinkData(node_LinkData);
+            ContentData contentData = loadContentData(node_ContentData);
+            UserControl userControl = null;
 
-            if (aux_linkData != null)
+            if (contentData != null)
             {
                 if (type == typeof(FileLink))
                 {
-                    FileLink fileLink = new FileLink();
+                    userControl = new FileLink(contentData);
 
-                    fileLink.load(aux_linkData);
-
-                    return fileLink;
                 }
 
                 if (type == typeof(Link))
                 {
-
-                    Link link = new Link();
-
-                    link.load(aux_linkData);
-
-                    return link;
+                    userControl = new Link(contentData);
                 }
+            }
+
+            return userControl;
+        }
+        private ContentData? loadContentData(XmlNode node)
+        {
+            ContentData contentData = new ContentData();
+
+            if (node != null)
+            {
+                foreach (XmlNode item in node.ChildNodes)
+                {
+                    contentData.AddValue(item.Name, item.InnerText);
+                }
+
+                return contentData;
             }
 
             return null;
         }
-
         private LinkData? loadLinkData(XmlNode node)
         {
             LinkData linkData = new LinkData();
@@ -859,18 +1012,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                                 ;
                         }
 
-                        XmlNode? node_mainWindowHeight = node_MainWindowData.SelectSingleNode("mainWindowHeight");
-                        if (node_mainWindowHeight != null)
-                        {
-                            mainWindowData.mainWindowHeight = Int32.Parse(node_mainWindowHeight.InnerText);
-                        }
-
-                        XmlNode? node_mainWindowWidth = node_MainWindowData.SelectSingleNode("mainWindowWidth");
-                        if (node_mainWindowWidth != null)
-                        {
-                            mainWindowData.mainWindowWidth = Int32.Parse(node_mainWindowWidth.InnerText);
-                        }
-
                         XmlNode? node_language = node_MainWindowData.SelectSingleNode("language");
                         if (node_language != null)
                         {
@@ -905,7 +1046,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
 
-                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, coreData_data);
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, mainWindowData);
 
                 if (aux_node != null)
                 {
@@ -919,14 +1060,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode initialPositionY = xmlDocument.CreateElement("initialPositionY");
                 initialPositionY.InnerText = ((int)mainWindowData.initialPosition.Y).ToString();
                 node_MainWindowData.AppendChild(initialPositionY);
-
-                XmlNode mainWindowHeight = xmlDocument.CreateElement("mainWindowHeight");
-                mainWindowHeight.InnerText = ((int)mainWindowData.mainWindowHeight).ToString();
-                node_MainWindowData.AppendChild(mainWindowHeight);
-
-                XmlNode mainWindowWidth = xmlDocument.CreateElement("mainWindowWidth");
-                mainWindowWidth.InnerText = ((int)mainWindowData.mainWindowWidth).ToString();
-                node_MainWindowData.AppendChild(mainWindowWidth);
 
                 XmlNode language = xmlDocument.CreateElement("language");
                 language.InnerText = mainWindowData.language;
@@ -950,11 +1083,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // TextBoxData
         #region TextBoxData
         #region TextBoxData loading
-        internal TextBoxData? TextBoxData_load()
+        internal CoreData? TextBoxData_load()
         {
             SharedLogic logic = new SharedLogic();
 
-            TextBoxData textBoxData = new TextBoxData(true);
+            CoreData textBoxData = new CoreData(true);
             XmlDocument xmlDocument = new XmlDocument();
 
 
@@ -981,11 +1114,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
                         }
 
-                        textBoxData.height = Double.Parse(node_TextBoxData.SelectSingleNode("height").InnerText);
-                        textBoxData.width = Double.Parse(node_TextBoxData.SelectSingleNode("width").InnerText);
-
-                        textBoxData.imageFilePath = node_TextBoxData.SelectSingleNode("imageFilePath").InnerText;
-
                         return textBoxData;
                     }
                 }
@@ -1001,7 +1129,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #region TextBoxData saving
         internal void TextBoxData_save()
         {
-            TextBoxData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+            CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
 
             if (textBoxData != null)
             {
@@ -1019,18 +1147,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 {
                     node_TextBoxData.AppendChild(aux_node);
                 }
-
-                XmlNode mainWindowHeight = xmlDocument.CreateElement("height");
-                mainWindowHeight.InnerText = textBoxData.height.ToString();
-                node_TextBoxData.AppendChild(mainWindowHeight);
-
-                XmlNode mainWindowWidth = xmlDocument.CreateElement("width");
-                mainWindowWidth.InnerText = textBoxData.width.ToString();
-                node_TextBoxData.AppendChild(mainWindowWidth);
-
-                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
-                buttonImageFilePath.InnerText = textBoxData.imageFilePath;
-                node_TextBoxData.AppendChild(buttonImageFilePath);
 
                 node.AppendChild(node_TextBoxData);
 
@@ -1184,7 +1300,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 xmlDocument.Load(FlatShareCC_data_file);
 
                 XmlNode SharedApartmentCalculator = xmlDocument.SelectSingleNode("FlatShareCostCalculator");
-                XmlNode initial_contract = SharedApartmentCalculator.SelectSingleNode("data");
+                XmlNode initial_contract = SharedApartmentCalculator.SelectSingleNode("linkData");
 
                 if (SharedApartmentCalculator != null && initial_contract != null)
                 {
@@ -1349,7 +1465,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             node.AppendChild(data);
 
             xmlDocument.Save(
-                $@".\data\{costUpdateData.cost_update_received.Year}_" +
+                $@".\linkData\{costUpdateData.cost_update_received.Year}_" +
                 $@"{costUpdateData.cost_update_received.Month}_" +
                 $@"{costUpdateData.cost_update_received.Day}_" +
                 $@"{costUpdateData.cause}.xml"
@@ -1364,7 +1480,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             XmlNode node = xmlDocument.CreateElement("FlatShareCostCalculator");
             xmlDocument.AppendChild(node);
 
-            XmlNode data = xmlDocument.CreateElement("data");
+            XmlNode data = xmlDocument.CreateElement("linkData");
 
             XmlNode living_space = xmlDocument.CreateElement("flat_space");
             living_space.InnerText = flatData.flat_space.ToString();

@@ -21,6 +21,7 @@
             Background="AntiqueWhite"
 
             ClipToBounds="True"
+            Focusable="True"
             
             ScrollViewer.CanContentScroll="True"
             ScrollViewer.HorizontalScrollBarVisibility="Auto"

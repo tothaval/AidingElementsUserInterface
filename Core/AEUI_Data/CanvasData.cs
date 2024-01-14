@@ -15,20 +15,21 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class CanvasData : CoreData
     {
+        // name of canvas
         internal string canvasName { get; set; }
 
-        internal int grouping_displacement { get; set; }
-
-        internal string imageFilePath { get; set; }
-
-        internal int z_level_MAX { get; set; }
-
-        internal int z_level_MIN { get; set; }
-
-        internal int dragLevel;
-        internal int hoverLevel;
+        // element grid width and height
         internal GridLength element_spacing;
 
+        // selection group positioning
+        internal int grouping_displacement { get; set; }
+
+
+        // z positioning
+        internal int dragLevel;
+        internal int hoverLevel;
+        internal int z_level_MAX { get; set; }
+        internal int z_level_MIN { get; set; }
 
         public CanvasData(bool load)
         {
@@ -50,7 +51,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public CanvasData(CoreData coreData)
         {
-            brushtype = coreData.brushtype;
             background = coreData.background;
             borderbrush = coreData.borderbrush;
             foreground = coreData.foreground;

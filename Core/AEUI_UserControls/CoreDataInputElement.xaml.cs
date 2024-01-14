@@ -1,7 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      CoreDataInputElement element 
  * 
- * basic element for entering and display of data
+ * basic element for entering and display of linkData
  * 
  * init:        2023|12|03
  * DEV:         Stephan Kammel

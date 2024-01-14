@@ -1,0 +1,45 @@
+2024|01|14
+autor:
+Stephan Kammel(fractal void)
+
+development plan
+
+implement rerendering of UI features during runtime
+	PropertyChanged events 
+		source OptionElement, call when saving values
+		target relevant userControls | controls | classes
+		mode	twoway
+	XmlDataProvider
+		implement resources/resourcedictionaries in app.xaml
+		load on start up
+	DynamicResource
+		change every relevant property to a Binding or DynamicResource
+
+finish development of OptionsElement
+	integrate ComboBox and a functionality to select 
+		which data should be displayed for change
+	integrate propertychanged stuff and INotifyPropertyChanged interface
+	delete OptionsElement_ButtonData
+		
+	later: harden the OptionElement against input errors
+
+image element, z-indexer, timer
+	integrate and transform these ysui predecessors for aeui
+
+	image element
+		implement a scaleTransform on Mousewheel events to zoom in and out
+		implement setup and reset of linked pictures
+		implement a "to background of selection" or "to canvas background"
+
+random element, corematrix classes
+	continue development of random element
+		add button "random" for values between RandomMin and RandomMax
+		use button "base10" for values between 0-9|1-10
+		use button "base6"  for values between 1-6, 
+			integrate option for dice pictures
+
+	finalize corematrix classes for intermediary use
+
+update development plan
+(f.e. start development on ColorOptions, start development of Container properties change tools
+	continue integration of ysui functionality, refactor, comment, uml)

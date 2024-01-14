@@ -59,7 +59,7 @@ namespace AidingElementsUserInterface.Elements
 
             foreach (CoreContainer item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
             {
-                if (item.GetContainerData().getContent() == __Coordinates)
+                if (item.GetContainerData().GetElement() == __Coordinates)
                 {
                     coreContainer = item;
 
@@ -71,7 +71,7 @@ namespace AidingElementsUserInterface.Elements
 
         private void build()
         {
-            TextBoxData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+            CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
 
             CTB_ElementCoordinates._readonly_caret();
             CTB_MouseCoordinates._readonly_caret();
@@ -80,8 +80,8 @@ namespace AidingElementsUserInterface.Elements
             {
                 uie_textblockseparator.FontSize = textBoxData.fontSize;
                 uie_textblockseparator.FontFamily = textBoxData.fontFamily;
-                uie_textblockseparator.Background = new SolidColorBrush(textBoxData.background);
-                uie_textblockseparator.Foreground = new SolidColorBrush(textBoxData.foreground);
+                uie_textblockseparator.Background = textBoxData.background.GetBrush();
+                uie_textblockseparator.Foreground = textBoxData.foreground.GetBrush();
             }
 
             detectCoreContainer();

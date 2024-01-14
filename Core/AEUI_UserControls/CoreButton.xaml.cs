@@ -10,8 +10,10 @@
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -32,15 +34,16 @@ namespace AidingElementsUserInterface.Core
     /// <para>;deselect(void) ?!internal {} ; </para> 
     /// <para>;enabled(void) ?!internal {} ; </para> 
     /// <para>;select(void) ?!internal {} ; </para> 
-    /// <para>;setContent(void) ?!internal { 0 string  1 Icon } ; </para> 
+    /// <para>;SetElement(void) ?!internal { 0 string  1 Icon } ; </para> 
     /// <para>;setTooltip(void) ?!internal { 0 string } ; </para> 
     /// <para>:CoreButton </para> 
     /// </summary>
     public partial class CoreButton : UserControl
     { 
-        internal ButtonData config;
         private bool selected = false;
         internal bool isSelected => selected;
+
+        internal CoreData config;
 
         // constructors
         #region constructors
@@ -62,66 +65,42 @@ namespace AidingElementsUserInterface.Core
         #endregion constructors
 
 
-        //private static readonly Action EmptyDelegate = delegate { };
-        //public static void Refresh(this UIElement uiElement)
-        //{
-        //    uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
-        //}
-
-
-
         private async void build()
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
         
-            config = data_Handler.LoadButtonData();
-
-            //await Task.Delay(10);
+            config = data_Handler.LoadButtonData(); // über App.xaml und XML Data Provider die ButtonData.xml laden
 
             if (config == null)
             {
-                config = new ButtonData();
+                config = new CoreData();
             }
 
-            data_Handler.AddData(config);
-
             //await Task.Delay(12);
-            
+
             //this.Resources.Remove("buttonColor");
             //this.Resources.Remove("forecolor");
             //this.Resources.Remove("highlight");
             //this.Resources.Remove("radius");
 
-            this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
-            this.Resources.Add("forecolor", new SolidColorBrush(config.foreground));
-            this.Resources.Add("highlight", new SolidColorBrush(config.highlight));
+            this.Resources.Add("backcolor", config.background.GetBrush());
+            this.Resources.Add("forecolor", config.foreground.GetBrush());
+            this.Resources.Add("highlight", config.highlight.GetBrush());
             this.Resources.Add("radius", config.cornerRadius);
 
-            _backgroundImage();
+            this.Resources.Add("borderBrush", config.borderbrush.GetBrush());
 
-            border.BorderBrush = new SolidColorBrush(config.borderbrush);
-            border.CornerRadius = config.cornerRadius;
             border.BorderThickness = config.thickness;
-
-            border.HorizontalAlignment = HorizontalAlignment.Center;
-            border.VerticalAlignment = VerticalAlignment.Center;
 
             button.MaxWidth = config.width * 2;
             button.MinWidth = config.width;
 
-            button.MaxHeight = config.height * 2;
-            button.MinHeight = config.height;
+            this.Resources.Add("maxHeight", config.height * 2);
+            this.Resources.Add("minHeight", config.height);
 
-            //fileLinkElement.Background = config.return_TransparentSolidColorBrush();
-            button.Foreground = new SolidColorBrush(config.foreground);
+            //button.SetResourceReference(Control.StyleProperty, "buttonStyle");
 
-            button.VerticalContentAlignment = VerticalAlignment.Center;
-            button.HorizontalContentAlignment = HorizontalAlignment.Center;
-
-            //fileLinkElement.SetResourceReference(Control.StyleProperty, "buttonStyle");
-
-            Style style = this.FindResource("buttonStyle") as Style;
-            button.Style = style;
+            _backgroundImage();
         }
 
         internal void _backgroundImage()
@@ -131,11 +110,10 @@ namespace AidingElementsUserInterface.Core
                 if (File.Exists(config.imageFilePath))
                 {
                     border.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
-                    this.Resources.Remove("buttonColor");
                 }
                 else
                 {
-                    border.Background = new SolidColorBrush(config.background);
+                    border.Background = config.background.GetBrush();
                 }
             }
         }
@@ -149,11 +127,11 @@ namespace AidingElementsUserInterface.Core
         {
             
 
-            this.Resources.Remove("buttonColor");
+            //this.Resources.Remove("buttonColor");
             this.Resources.Remove("highlight");
 
-            this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
-            this.Resources.Add("highlight", new SolidColorBrush(config.highlight));
+           //this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
+            this.Resources.Add("highlight", config.highlight.GetBrush());
 
             Style style = this.FindResource("buttonStyle") as Style;
             button.Style = style;
@@ -168,11 +146,11 @@ namespace AidingElementsUserInterface.Core
 
         internal void select()
         {
-            this.Resources.Remove("buttonColor");
+            //this.Resources.Remove("buttonColor");
             this.Resources.Remove("highlight");
 
-            this.Resources.Add("buttonColor", new SolidColorBrush(config.highlight));
-            this.Resources.Add("highlight", new SolidColorBrush(config.background));
+            //this.Resources.Add("buttonColor", new SolidColorBrush(config.highlight));
+            this.Resources.Add("highlight", config.background.GetBrush());
 
             Style style = this.FindResource("buttonStyle") as Style;
             button.Style = style;
@@ -188,23 +166,26 @@ namespace AidingElementsUserInterface.Core
         internal void setContent(Icon icon)
         {
             System.Windows.Controls.Image image = new System.Windows.Controls.Image();
-
             ImageSource imso = SharedLogic.ToImageSource(icon);
             image.Source = imso;
 
             button.Content = image;
         }
 
-        internal void setShapeAsContent(Shape shape)
-        {
-            config = new ButtonData(new SharedLogic().GetDataHandler().GetCoreData());
+        //internal void SetElement(string content, Icon icon)
+        //{
+        //    // after some research: function test method for reflection and learning
 
-            //shape.Fill = config.btnBackColor;
-            //shape.Stroke = config.btnForeColor;
-            shape.StrokeThickness = 3;
+        //    StackPanel stackPanel = new StackPanel() { Orientation = Orientation.Vertical };
+        //    TextBlock textBlock = new TextBlock() { Text = content };
+        //    System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+        //    ImageSource imso = SharedLogic.ToImageSource(icon);
+        //    image.Source = imso;
+        //    stackPanel.Children.Add(textBlock);
+        //    stackPanel.Children.Add(image);
 
-            button.Content = shape;
-        }
+        //    button.Content = stackPanel;
+        //}
 
         internal void setTooltip(string tooltip)
         {
