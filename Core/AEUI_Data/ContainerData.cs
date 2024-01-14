@@ -3,7 +3,7 @@
  *      
  * inherits from: CoreData class
  * 
- * container element properties
+ * container properties
  * 
  * init:        2023|11|29
  * DEV:         Stephan Kammel
@@ -21,14 +21,13 @@ using UserControl = System.Windows.Controls.UserControl;
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
 
-    internal class ContainerData : CanvasData
+    internal class ContainerData
     {
-        private UserControl content = new UserControl();
+        internal CoreData settings { get; set; }
+        internal UserControl element { get; set; }
 
-        internal string containerLocation { get; set; }
-
-        internal bool imageIsBackground = false;
-        internal string imageFilePath { get; set; }
+        internal string? CanvasName { get; set; }
+        internal string? ContainerDataFilename { get; set; }
 
         internal int z_position;
 
@@ -36,86 +35,40 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         {
         }
 
+        public ContainerData(CoreData coreData)
+        {
+            settings = coreData;
+        }
+
         public ContainerData(UserControl _content)
         {
-            content = _content;
+            element = _content;
 
             z_position = 0;
         }
 
         public ContainerData(CoreData coreData, UserControl _content)
         {
-            ApplyInheritanceDataOverwrite<CoreData>(coreData);
+            UpdateCoreData(coreData);
 
-            content = _content;
+            element = _content;
 
             z_position = 0;
         }
 
-        //public ContainerData(CanvasData canvasData, UserControl _content)
-        //{
-        //    //ApplyInheritanceDataOverwrite<CanvasData>(canvasData);
-
-        //    containerLocation = canvasData.canvasName;
-
-        //    content = _content;
-
-        //    z_position = 0;
-        //}
-        internal void ApplyInheritanceDataOverwrite<T>(T dataclass)
+        internal void UpdateCoreData(CoreData coreData)
         {
-            if (dataclass is CoreData coreData)
-            {
-                brushtype = coreData.brushtype;
-                background = coreData.background;
-                borderbrush = coreData.borderbrush;
-                foreground = coreData.foreground;
-                highlight = coreData.highlight;
-
-                cornerRadius = coreData.cornerRadius;
-                thickness = coreData.thickness;
-
-                fontSize = coreData.fontSize;
-                fontFamily = coreData.fontFamily;
-
-            }
-            //else if (dataclass is CanvasData canvasData)
-            //{
-            //    brushtype = canvasData.brushtype;
-            //    background = canvasData.background;
-            //    borderbrush = canvasData.borderbrush;
-            //    foreground = canvasData.foreground;
-            //    highlight = canvasData.highlight;
-
-            //    cornerRadius = canvasData.cornerRadius;
-            //    thickness = canvasData.thickness;
-
-            //    fontSize = canvasData.fontSize;
-            //    fontFamily = canvasData.fontFamily;
-
-            //    canvasName = canvasData.canvasName;
-            //    imageFilePath = canvasData.imageFilePath;
-
-            //    grouping_displacement = canvasData.grouping_displacement;
-            //    z_level_MIN = canvasData.z_level_MIN;
-            //    z_level_MAX = canvasData.z_level_MAX;
-
-            //    dragLevel = canvasData.dragLevel;
-            //    hoverLevel = canvasData.hoverLevel;
-            //    element_spacing = canvasData.element_spacing;
-
-            //    containerLocation = canvasData.canvasName;
-            //}
+            settings = coreData;
         }
 
-        internal UserControl getContent()
+        internal UserControl GetElement()
         {
-            return content;
+            return element;
         }
 
-        internal void setContent(UserControl userControl)
+        internal void SetElement(UserControl userControl)
         {
-            this.content = userControl;
+            this.element = userControl;
         }
     }
 }

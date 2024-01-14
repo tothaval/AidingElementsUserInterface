@@ -32,7 +32,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private Point dragPoint = new Point();        
 
         private bool elementDrag = false;
-
         private bool container_is_selected = false;
 
         #region constructors
@@ -48,7 +47,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             InitializeComponent();
         }
 
-        internal CoreContainer(UserControl element, CoreCanvas canvas)
+        internal CoreContainer(UserControl element, ref CoreCanvas canvas)
         {
             InitializeComponent();
 
@@ -75,29 +74,30 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {
-            __CoreContainer.FontSize = containerData.fontSize;
-            __CoreContainer.FontFamily = containerData.fontFamily;
-
             Column_left.Width = canvas.getCanvasData().element_spacing;
             Column_right.Width = canvas.getCanvasData().element_spacing;
 
             Row_top.Height = canvas.getCanvasData().element_spacing;
             Row_bottom.Height = canvas.getCanvasData().element_spacing;
 
+
+            __CoreContainer.FontSize = containerData.settings.fontSize;
+            __CoreContainer.FontFamily = containerData.settings.fontFamily;
+
             Background = new SolidColorBrush(Colors.Transparent);
-            Foreground = new SolidColorBrush(containerData.foreground);
+            Foreground = containerData.settings.foreground.GetBrush();
 
-            element_border.CornerRadius = containerData.cornerRadius;
-            element_border.BorderThickness = containerData.thickness;
+            element_border.CornerRadius = containerData.settings.cornerRadius;
+            element_border.BorderThickness = containerData.settings.thickness;
 
-            element_border.Background = new SolidColorBrush(containerData.background);
-            element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
+            element_border.Background = containerData.settings.background.GetBrush();
+            element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
 
-            configure_CORE_ContainerElement();
+            register_events();
         }
 
 
-        private void configure_CORE_ContainerElement()
+        private void register_events()
         {
             element_border.MouseEnter += Element_border_MouseEnter;
             element_border.MouseLeave += Element_border_MouseLeave;
@@ -132,19 +132,19 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             await Task.Delay(2);
 
-            if (containerData.getContent() == null)
+            if (containerData.GetElement() == null)
             {
-                containerData.setContent(new UserControl());
+                containerData.SetElement(new UserControl());
             }
 
             content_border.Child = null;
 
-            content_border.Child = containerData.getContent();
+            content_border.Child = containerData.GetElement();
 
             build();
         }
 
-        internal async void load_Container()
+        internal void load_Container()
         {
             initialize_container();
         }
@@ -154,7 +154,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             container_is_selected = false;
 
-            element_border.BorderBrush = new SolidColorBrush(containerData.borderbrush);
+            element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
 
             if (remove_from_list)
             {
@@ -173,7 +173,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         internal void select()
         {
             container_is_selected = true;
-            element_border.BorderBrush = new SolidColorBrush(containerData.highlight);
+            element_border.BorderBrush = containerData.settings.highlight.GetBrush();
 
             canvas.add_selected_item(this);
         }
@@ -190,7 +190,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
         }
 
-        internal void setCanvas(CoreCanvas coreCanvas)
+        internal void setCanvas(ref CoreCanvas coreCanvas)
         {
             this.canvas = coreCanvas;
         }

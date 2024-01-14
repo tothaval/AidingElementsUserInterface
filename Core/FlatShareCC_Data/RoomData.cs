@@ -3,7 +3,7 @@
  * 
  * inherits from:
  * 
- * FlatShareCC data class
+ * FlatShareCC linkData class
  * 
  * init:        2023|12|03
  * DEV:         Stephan Kammel

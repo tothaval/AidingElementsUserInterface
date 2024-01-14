@@ -17,7 +17,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     internal class OptionsElement_ButtonData : CoreContainer
     {
-        private ButtonData buttonData;
+        private CoreData buttonData;
         private Data_Handler handler;
 
         private WrapPanel wrapPanel = new WrapPanel() { Orientation = Orientation.Vertical };
@@ -41,7 +41,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             build();
         }
 
-        public OptionsElement_ButtonData(ButtonData buttonData)
+        public OptionsElement_ButtonData(CoreData buttonData)
         {
             this.buttonData = buttonData;
 
@@ -116,7 +116,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             buttonData.height = double.Parse(CVC_height.Value);
             buttonData.width = double.Parse(CVC_width.Value);
 
-            handler.SetData(buttonData);
+            handler.SetButtonData(buttonData);
+
+            //Application.Current.Resources["radius"] = buttonData.cornerRadius;
         }
     }
 }

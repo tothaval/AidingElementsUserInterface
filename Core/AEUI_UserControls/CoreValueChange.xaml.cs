@@ -59,7 +59,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 CTB_Value.Visibility = Visibility.Collapsed;
 
                 coreButton = new CoreButton("-");
-                TextBoxData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+                CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
 
                 if (textBoxData != null)
                 {
@@ -117,11 +117,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 {
                     coreButton.setContent(openFileDialog.SafeFileName);
                     coreButton.setTooltip(text);
+
+                    value = text;
                 }
                 else
                 {
                     coreButton.setTooltip(text);
-                    coreButton.setContent(text);
+                    coreButton.setContent(text);     
                 }
             }
         }

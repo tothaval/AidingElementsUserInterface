@@ -30,7 +30,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         // specify whether all selected containers can be moved
         // via leftclick
 
-        // either use double value intakes or data input element
+        // either use double value intakes or linkData input element
         // use checkboxes or radioboxes for binary(yes, no) options
     }
 }

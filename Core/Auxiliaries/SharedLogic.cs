@@ -150,6 +150,17 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return cornerRadius;
         }
 
+        internal Point ParsePoint(string parsed_xml) 
+        {
+            double x, y;
+            string[] split = parsed_xml.Split(';');
+
+            x = double.Parse(split[0]);
+            y = double.Parse(split[1]);
+
+            return new Point(x, y);
+        }
+
         internal Thickness ParseThickness(string parsed_xml)
         {
             Thickness thickness;

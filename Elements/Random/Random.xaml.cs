@@ -70,7 +70,7 @@ namespace AidingElementsUserInterface.Elements
             else
             {
                 border_RandomDisplay.Child = new Ellipse() { Width = 100, Height = 200, Fill = new SolidColorBrush(Colors.Blue) };
-
+                
                 CB_Base6.select();
                 CB_Base10.deselect();
             }

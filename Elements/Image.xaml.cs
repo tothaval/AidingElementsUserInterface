@@ -7,6 +7,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -17,17 +18,14 @@ namespace AidingElementsUserInterface.Elements
     /// </summary>
     public partial class Image : UserControl
     {
+
+        // use scale transform to zoom in or out using mousewheel
         public Image()
         {
             InitializeComponent();
         }
 
         private void __Image_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void __Image_Loaded_1(object sender, RoutedEventArgs e)
         {
 
         }

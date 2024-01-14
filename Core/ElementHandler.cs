@@ -31,11 +31,11 @@ namespace AidingElementsUserInterface.Core
 
         internal async void addElement(CoreContainer container, CoreCanvas canvas)
         {
-            container.GetContainerData().containerLocation = canvas.Name;
+            container.GetContainerData().CanvasName = canvas.Name;
 
             containerLocations.Add(container, canvas);
 
-            containerContents.Add(container, container.GetContainerData().getContent());
+            containerContents.Add(container, container.GetContainerData().GetElement());
 
 
         }
@@ -47,7 +47,7 @@ namespace AidingElementsUserInterface.Core
 
         internal bool removeElement(CoreContainer container)
         {
-            if (container.GetContainerData().getContent() is FlatShareCC flatShareCC)
+            if (container.GetContainerData().GetElement() is FlatShareCC flatShareCC)
             {
                 flatShareCC.end_this();
             }

@@ -18,6 +18,7 @@
         Title="Aiding Elements User Interface"
                 
         WindowStartupLocation="Manual"
+        ResizeMode="CanResizeWithGrip"
 
         FontFamily="Verdana"
         Focusable="True"               
@@ -119,7 +120,21 @@
                               
                           Click="MI_OPTIONS_textboxes_Click"/>
                     </MenuItem>
-                    
+
+                    <Separator />
+
+                    <MenuItem x:Name="MI_minimize"
+                          Header="minimize"
+                              
+                          Click="MI_minimize_Click"/>
+                    <Separator />
+
+                    <MenuItem x:Name="MI_maximize"
+                              Header="fullscreen"
+                              IsCheckable="True"
+                              Click="MI_maximize_Click"/>
+                    <Separator />
+
                     <Separator />
                     
                     <MenuItem x:Name="MI_quit"

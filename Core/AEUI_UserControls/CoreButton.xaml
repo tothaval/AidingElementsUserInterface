@@ -14,23 +14,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:data="clr-namespace:AidingElementsUserInterface.Core.AEUI_Data"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.Resources>
+        <XmlDataProvider x:Key="xml_data"
+                         Source="\data\Core\buttondata.xml"
+                         XPath="Core\ButtonData">
+            
+        </XmlDataProvider>
         <Style x:Key="buttonStyle" TargetType="Button">
+            <Setter Property="MinHeight" Value="{DynamicResource minHeight}"/>
+            <Setter Property="MaxHeight" Value="{DynamicResource maxHeight}"/>
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{DynamicResource forecolor}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Name="btn" BorderThickness="0" 
-                            Background="{DynamicResource buttonColor}"
-                              BorderBrush="{DynamicResource forecolor}"
-                            CornerRadius="{DynamicResource radius}">
+                                BorderBrush="{DynamicResource borderBrush}"
+                                CornerRadius="{DynamicResource radius}">
                             <ContentPresenter 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
-                                Margin="5,0,5,0"
+                                Margin="5,2,5,2"
                             >
                             </ContentPresenter>
                         </Border>
@@ -48,8 +57,13 @@
         </Style>
 
     </UserControl.Resources>
-    <Border x:Name="border">
-        <Button x:Name="button"/>
+    <Border x:Name="border"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            BorderBrush="{DynamicResource borderBrush}"
+            CornerRadius="{DynamicResource radius}"
+            >
+        <Button x:Name="button" Style="{DynamicResource buttonStyle}"/>
     </Border>
 </UserControl>
 <!-- end of file -->

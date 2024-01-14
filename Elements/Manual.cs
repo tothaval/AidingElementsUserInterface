@@ -75,7 +75,7 @@ namespace AidingElementsUserInterface.Elements
             this.FontSize = config.fontSize;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Foreground = new SolidColorBrush(config.foreground);
+            Foreground = config.foreground.GetBrush();
 
             content_border.Child = verticalWrapPanel;
 

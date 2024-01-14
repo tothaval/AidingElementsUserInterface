@@ -3,7 +3,7 @@
  * 
  * inherits from:
  * 
- * basic units data class
+ * basic units linkData class
  * 
  * init:        2023|12|03
  * DEV:         Stephan Kammel

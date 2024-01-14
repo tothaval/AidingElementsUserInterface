@@ -1,7 +1,7 @@
 ﻿/* Aiding Elements User Interface
  *      Data_Handler class
  * 
- * basic data classes management class
+ * basic linkData classes management class
  * 
  * init:        2023|12|12
  * DEV:         Stephan Kammel
@@ -11,157 +11,71 @@
  * should the code be rewritten using generic types to reduce overloaded methods count or 
  * should it be redesigned using f.e. abstract methods and override?
  * 
- * intention is to ensure only one instance of a core data type exists at any time while running,
+ * intention is to ensure only one instance of a core linkData type exists at any time while running,
  * 
  * because more are not needed, since it is not yet planned to implement fully independent
  * customizable elements within elements.
- * a change in options to alter a color should always effect the related core data type and
+ * a change in options to alter a color should always effect the related core linkData type and
  * every element depending on it
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 
 using System.Collections.ObjectModel;
+using System.Windows.Media;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class Data_Handler
     {
-        private ButtonData buttonData;
+        private CoreData buttonData;
         private CanvasData canvasData;
         private CoreData coreData;
         private MainWindowData mainWindowData;
-        private TextBoxData textBoxData;
+        private CoreData textBoxData;
 
 
         private ObservableCollection<object> data_objects;
 
         public Data_Handler()
         {
-            data_objects = new ObservableCollection<object>();
+            data_objects = new ObservableCollection<object>();                        
         }
 
-        // data management
+        // linkData management
         #region data management
 
         // AddData 
         #region AddData method group
-        public void AddData(ButtonData data)
+        public void AddButtonData(CoreData data)
         {
-            buttonData = null;
-
-            int index = 0;
-
-            foreach (object item in data_objects)
-            {
-                if (item.GetType() == typeof(ButtonData))
-                {
-                    data_objects[data_objects.IndexOf(item)] = data;
-
-                    index++;
-
-                    break;
-                }
-            }
-
-            if (index == 0)
-            {
-                data_objects.Add(data);
-            }
+            data_objects.Add(data);
 
             buttonData = data;
         }
 
-        public void AddData(CanvasData data)
+        public void AddCanvasData(CanvasData data)
         {
-            int index = 0;
-
-            foreach (object item in data_objects)
-            {
-                if (item.GetType() == typeof(CanvasData))
-                {
-                    data_objects[data_objects.IndexOf(item)] = data;
-
-                    index++;
-
-                    break;
-                }
-            }
-
-            if (index == 0)
-            {
-                data_objects.Add(data);
-            }
+            data_objects.Add(data);
 
             canvasData = data;
         }
 
-        public void AddData(CoreData data)
+        public void AddCoreData(CoreData data)
         {
-            int index = 0;
-
-            foreach (object item in data_objects)
-            {
-                if (item.GetType() == typeof(CoreData))
-                {
-                    data_objects[data_objects.IndexOf(item)] = data;
-
-                    index++;
-
-                    break;
-                }
-            }
-
-            if (index == 0)
-            {
-                data_objects.Add(data);
-            }
+            data_objects.Add(data);
 
             coreData = data;
         }
-        public void AddData(MainWindowData data)
+        public void AddMainWindowData(MainWindowData data)
         {
-            int index = 0;
-
-            foreach (object item in data_objects)
-            {
-                if (item.GetType() == typeof(MainWindowData))
-                {
-                    data_objects[data_objects.IndexOf(item)] = data;
-
-                    index++;
-
-                    break;
-                }
-            }
-
-            if (index == 0)
-            {
-                data_objects.Add(data);
-            }
+            data_objects.Add(data);
 
             mainWindowData = data;
         }
 
-        public void AddData(TextBoxData data)
+        public void AddTextBoxData(CoreData data)
         {
-            int index = 0;
-
-            foreach (object item in data_objects)
-            {
-                if (item.GetType() == typeof(TextBoxData))
-                {
-                    data_objects[data_objects.IndexOf(item)] = data;
-
-                    index++;
-
-                    break;
-                }
-            }
-
-            if (index == 0)
-            {
-                data_objects.Add(data);
-            }
+            data_objects.Add(data);
 
             textBoxData = data;
         }
@@ -169,7 +83,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // Get...Data()
         #region get data methods
-        public ButtonData? GetButtonData()
+        public CoreData? GetButtonData()
         {
             return buttonData;
         }
@@ -186,7 +100,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return mainWindowData;
         }
 
-        public TextBoxData? GetTextBoxData()
+        public CoreData? GetTextBoxData()
         {
             return textBoxData;
         }
@@ -194,17 +108,17 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // Load...Data()
         #region load data methods
-        public ButtonData? LoadButtonData()
+        public CoreData? LoadButtonData()
         {
-            ButtonData buttonData = new XML_Handler(new ButtonData()).ButtonData_load();
+            CoreData buttonData = new XML_Handler(new CoreData()).ButtonData_load();
 
             if (buttonData != null)
             {
-                AddData(buttonData);
+                AddButtonData(buttonData);
             }
             else
             {
-                AddData(new ButtonData());
+                AddButtonData(new CoreData());
             }
 
             return GetButtonData();
@@ -215,11 +129,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             if (canvasData != null)
             {
-                AddData(canvasData);
+                AddCanvasData(canvasData);
             }
             else
             {
-                AddData(new ButtonData());
+                AddCanvasData(new CanvasData());
             }
 
             return GetCanvasData();
@@ -231,11 +145,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             if (coreData != null)
             {
-                AddData(coreData);
+                AddCoreData(coreData);
             }
             else
             {
-                AddData(new CoreData());
+                AddCoreData(new CoreData());
             }
 
             return GetCoreData();
@@ -247,27 +161,27 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             if (mainWindowData != null)
             {
-                AddData(mainWindowData);
+                AddMainWindowData(mainWindowData);
             }
             else
             {
-                AddData(new MainWindowData());
+                AddMainWindowData(new MainWindowData());
             }
 
             return GetMainWindowData();
         }
 
-        public TextBoxData? LoadTextBoxData()
+        public CoreData? LoadTextBoxData()
         {
-            TextBoxData textboxData = new XML_Handler(new TextBoxData()).TextBoxData_load();
+            CoreData textboxData = new XML_Handler(new CoreData()).TextBoxData_load();
 
             if (textboxData != null)
             {
-                AddData(textboxData);
+                AddTextBoxData(textboxData);
             }
             else
             {
-                AddData(new TextBoxData());
+                AddTextBoxData(new CoreData());
             }
 
             return GetTextBoxData();
@@ -277,57 +191,33 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // RemoveData
         #region RemoveData method group
-        public void RemoveData(ButtonData data)
-        {
-            data_objects.Remove(data);
-        }
-        public void RemoveData(CanvasData data)
-        {
-            data_objects.Remove(data);
-        }
 
-        public void RemoveData(CoreData data)
-        {
-            data_objects.Remove(data);
-        }
-
-        public void RemoveData(MainWindowData data)
-        {
-            data_objects.Remove(data);
-        }
-
-        public void RemoveData(TextBoxData data)
-        {
-            data_objects.Remove(data);
-        }
         #endregion RemoveData method group
 
         // SetData
         #region SetData method group
-        public void SetData(ButtonData data)
+        public void SetButtonData(CoreData data)
         {
-            RemoveData(buttonData);
-
-            AddData(data);
+            AddButtonData(data);            
 
             new XML_Handler(data).save_ButtonData(data);
         }
-        public void SetData(CanvasData data)
+        public void SetCanvasData(CanvasData data)
         {
             canvasData = data;
         }
 
-        public void SetData(CoreData data)
+        public void SetCoreData(CoreData data)
         {
             coreData = data;
         }
 
-        public void SetData(MainWindowData data)
+        public void SetMainWindowData(MainWindowData data)
         {
             mainWindowData = data;
         }
 
-        public void SetData(TextBoxData data)
+        public void SetTextBoxData(CoreData data)
         {
             textBoxData = data;
         }

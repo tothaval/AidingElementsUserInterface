@@ -1,27 +1,65 @@
 <Container>
   <ContainerData>
     <CoreData>
-      <brushtype>SolidColorBrush</brushtype>
-      <background>#FFFFEBCD</background>
-      <borderbrush>#FF000000</borderbrush>
-      <foreground>#FF2F4F4F</foreground>
-      <highlight>#FFF0FFFF</highlight>
+      <imageIsBackground>False</imageIsBackground>
+      <background>
+        <brushtype>SolidColorBrush</brushtype>
+        <gradiantEndPoint>0,5;0</gradiantEndPoint>
+        <gradiantOrigin>0,5;0,5</gradiantOrigin>
+        <gradiantStartPoint>0,5;1</gradiantStartPoint>
+        <color1_string>#FFFFEBCD</color1_string>
+        <color2_string>#FFFFEBCD</color2_string>
+        <color3_string>#FFFFEBCD</color3_string>
+        <color4_string>#FFFFEBCD</color4_string>
+      </background>
+      <borderbrush>
+        <brushtype>SolidColorBrush</brushtype>
+        <gradiantEndPoint>0,5;0</gradiantEndPoint>
+        <gradiantOrigin>0,5;0,5</gradiantOrigin>
+        <gradiantStartPoint>0,5;1</gradiantStartPoint>
+        <color1_string>#FF000000</color1_string>
+        <color2_string>#FF000000</color2_string>
+        <color3_string>#FF000000</color3_string>
+        <color4_string>#FF000000</color4_string>
+      </borderbrush>
+      <foreground>
+        <brushtype>SolidColorBrush</brushtype>
+        <gradiantEndPoint>0,5;0</gradiantEndPoint>
+        <gradiantOrigin>0,5;0,5</gradiantOrigin>
+        <gradiantStartPoint>0,5;1</gradiantStartPoint>
+        <color1_string>#FF2F4F4F</color1_string>
+        <color2_string>#FF2F4F4F</color2_string>
+        <color3_string>#FF2F4F4F</color3_string>
+        <color4_string>#FF2F4F4F</color4_string>
+      </foreground>
+      <highlight>
+        <brushtype>SolidColorBrush</brushtype>
+        <gradiantEndPoint>0,5;0</gradiantEndPoint>
+        <gradiantOrigin>0,5;0,5</gradiantOrigin>
+        <gradiantStartPoint>0,5;1</gradiantStartPoint>
+        <color1_string>#FF0FFF0F</color1_string>
+        <color2_string>#FF0FFF0F</color2_string>
+        <color3_string>#FF0FFF0F</color3_string>
+        <color4_string>#FF0FFF0F</color4_string>
+      </highlight>
       <cornerRadius>14,14,14,14</cornerRadius>
       <thickness>2,2,2,2</thickness>
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
+      <height>25</height>
+      <width>50</width>
+      <imageFilePath>
+      </imageFilePath>
     </CoreData>
-    <containerLocation>canvas</containerLocation>
-    <imageIsBackground>False</imageIsBackground>
-    <imageFilePath>
-    </imageFilePath>
-    <z_position>1400</z_position>
+    <CanvasName>canvas</CanvasName>
+    <ContainerDataFilename>2.xml</ContainerDataFilename>
+    <z_position>200</z_position>
   </ContainerData>
   <Content>
-    <Type>OptionsElement_ButtonData</Type>
+    <Type>Manual</Type>
   </Content>
   <Position>
-    <x>401</x>
-    <y>362</y>
+    <x>58</x>
+    <y>329</y>
   </Position>
 </Container>

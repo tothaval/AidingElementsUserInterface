@@ -95,24 +95,21 @@ namespace AidingElementsUserInterface
             __MainWindow.Left = mainWindowData.initialPosition.X;
             __MainWindow.Top = mainWindowData.initialPosition.Y;
 
-            __MainWindow.Width = mainWindowData.mainWindowWidth;
-            __MainWindow.Height = mainWindowData.mainWindowHeight;
+            __MainWindow.Width = mainWindowData.width;
+            __MainWindow.Height = mainWindowData.height;
 
-            //MessageBox.Show($"{coreData.mainWindowWidth}\n{coreData.fontSize}\n{coreData.highlight}" +
+            //MessageBox.Show($"{coreData.width}\n{coreData.fontSize}\n{coreData.highlight}" +
             //    $"\n{coreData.brushtype}" +
             //    $"\n{coreData.cornerRadius}");
 
 
-            data_Handler.AddData(mainWindowData);
+            data_Handler.AddMainWindowData(mainWindowData);
         }
 
         private void load_borderDefaults()
         {
-            if (mainWindowData.brushtype.Equals("SolidColorBrush"))
-            {
-                border.Background = new SolidColorBrush(mainWindowData.background);
-                border.BorderBrush = new SolidColorBrush(mainWindowData.borderbrush);
-            }
+            border.Background = mainWindowData.background.GetBrush();
+            border.BorderBrush = mainWindowData.borderbrush.GetBrush();
 
             border.CornerRadius = mainWindowData.cornerRadius;
             border.BorderThickness = mainWindowData.thickness;
@@ -270,8 +267,10 @@ namespace AidingElementsUserInterface
         {
             System.Windows.Size size = e.NewSize;
 
-            mainWindowData.mainWindowWidth = (int)size.Width;
-            mainWindowData.mainWindowHeight = (int)size.Height;
+            mainWindowData.width = (int)size.Width;
+            mainWindowData.height = (int)size.Height;
+
+            data_Handler.SetMainWindowData(mainWindowData);
 
             e.Handled = true;
         }
@@ -391,6 +390,23 @@ namespace AidingElementsUserInterface
         }
         #endregion selection control menu item clicks
 
+        private void MI_minimize_Click(object sender, RoutedEventArgs e)
+        {
+            __MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        private void MI_maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (__MainWindow.WindowState == WindowState.Maximized)
+            {
+                __MainWindow.WindowState = WindowState.Normal;
+                MI_maximize.IsChecked = false;
+            }
+            else
+            {
+                __MainWindow.WindowState = WindowState.Maximized;
+            }
+        }
     }
 }
 /*  END OF FILE
