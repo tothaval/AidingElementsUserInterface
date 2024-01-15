@@ -33,7 +33,7 @@ namespace AidingElementsUserInterface.Elements
         private SharedLogic logic = new SharedLogic();
 
 
-        internal Link()
+        public Link()
         {
             InitializeComponent();
 

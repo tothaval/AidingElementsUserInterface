@@ -53,13 +53,13 @@
     </CoreData>
     <CanvasName>canvas</CanvasName>
     <ContainerDataFilename>1.xml</ContainerDataFilename>
-    <z_position>0</z_position>
+    <z_position>200</z_position>
   </ContainerData>
   <Content>
     <Type>Coordinates</Type>
   </Content>
   <Position>
-    <x>428</x>
-    <y>84</y>
+    <x>248</x>
+    <y>29</y>
   </Position>
 </Container>

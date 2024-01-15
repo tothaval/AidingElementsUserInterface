@@ -13,13 +13,45 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                 xmlns:local="clr-namespace:AidingElementsUserInterface.Elements"
-                 xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
-                 mc:Ignorable="d" 
-                 d:DesignHeight="450" d:DesignWidth="800"
-                 Loaded="__Image_Loaded"
-                 >
-    <Border x:Name="border">
+                 xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
+             xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+                 Loaded="__Image_Loaded">
+    <Border x:Name="border" ClipToBounds="True">
+        <StackPanel>
+            <ScrollViewer x:Name="scrollviewer"
+                          CanContentScroll="True"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto"
+                          MouseDoubleClick="scrollviewer_MouseDoubleClick">
+            <Image x:Name="image" Visibility="Collapsed"
+                   MouseWheel="image_MouseWheel"
+                   />
+            </ScrollViewer>
+            <StackPanel x:Name="SP_Choice">
+                <core:CoreButton x:Name="CB_ImageLink"
+                                 Margin="1"/>
+                <core:CoreTextBox x:Name="CTB_LinkText"
+                                  Margin="1"
+                                  Visibility="Collapsed"/>
+                <local:CoreValueChange x:Name="CVC_width"
+                                      Margin="1"
+                                      Visibility ="Collapsed"/>
+                <local:CoreValueChange x:Name="CVC_height"
+                                      Margin="1"
+                                      Visibility ="Collapsed"/>
+            </StackPanel>
+            <core:CoreButton x:Name="CB_LinkButton"
+                             Margin="1"
+                             Visibility="Collapsed"/>
+            <Label x:Name="L_LinkText" 
+                   Visibility="Collapsed" 
+                   Padding="0"
+                   Margin="0" 
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"/>
+        </StackPanel>
     </Border>
 </UserControl>
 <!-- end of file -->

@@ -77,9 +77,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
                     // Create four gradient stops.
                     brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 0.0));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 0.25));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 0.75));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 1.0));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color2_string), 0.25));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color3_string), 0.75));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color4_string), 1.0));
 
                     return brush;
                 }

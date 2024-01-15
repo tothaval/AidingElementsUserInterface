@@ -19,14 +19,17 @@
                 
         WindowStartupLocation="Manual"
         ResizeMode="CanResizeWithGrip"
-
+        
         FontFamily="Verdana"
         Focusable="True"               
         
-        UseLayoutRounding="False" 
+        WindowStyle="None" 
+        
         AllowDrop="True"
         AllowsTransparency="True" 
-        WindowStyle="None" 
+
+        Background="Transparent"
+        
         ScrollViewer.VerticalScrollBarVisibility="Auto"
                 
         Closing="Window_Closing"
@@ -51,8 +54,8 @@
         </WindowChrome>
     </WindowChrome.WindowChrome>
 
-    <Border x:Name="border">
-        <Grid x:Name="grid">
+    <Border x:Name="border" Background="Transparent">
+        <Grid x:Name="grid" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7"/>
                 <ColumnDefinition Width="auto" />

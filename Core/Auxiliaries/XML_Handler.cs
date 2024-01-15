@@ -250,17 +250,25 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             ContentData? contentData = null;
 
-            if (t == typeof(FileLink))
+            if (t == typeof(Elements.FileLink))
             {
-                FileLink fileLink = (FileLink)container.GetContainerData().GetElement();
+                Elements.FileLink fileLink = (Elements.FileLink)container.GetContainerData().GetElement();
                 contentData = fileLink.GetContentData();
             }
 
-            if (t == typeof(Link))
+            if (t == typeof(Elements.Image))
             {
-                Link link = (Link)container.GetContainerData().GetElement();
+                Elements.Image image = (Elements.Image)container.GetContainerData().GetElement();
+                contentData = image.GetContentData();
+            }
+
+            if (t == typeof(Elements.Link))
+            {
+                Elements.Link link = (Elements.Link)container.GetContainerData().GetElement();
                 contentData = link.GetContentData();
             }
+
+
 
             aux_ContentData = saveContent(xmlDocument, node_ContentData, contentData);
 
@@ -330,11 +338,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             buttonData = aux_data;
                         }
 
-                        buttonData.height = Double.Parse(node_ButtonData.SelectSingleNode("height").InnerText);
-                        buttonData.width = Double.Parse(node_ButtonData.SelectSingleNode("width").InnerText);
-
-                        buttonData.imageFilePath = node_ButtonData.SelectSingleNode("imageFilePath").InnerText;
-
                         return buttonData;
                     }
                 }
@@ -365,18 +368,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 {
                     node_ButtonData.AppendChild(aux_node);
                 }
-
-                XmlNode mainWindowHeight = xmlDocument.CreateElement("height");
-                mainWindowHeight.InnerText = buttonData.height.ToString();
-                node_ButtonData.AppendChild(mainWindowHeight);
-
-                XmlNode mainWindowWidth = xmlDocument.CreateElement("width");
-                mainWindowWidth.InnerText = buttonData.width.ToString();
-                node_ButtonData.AppendChild(mainWindowWidth);
-
-                XmlNode buttonImageFilePath = xmlDocument.CreateElement("imageFilePath");
-                buttonImageFilePath.InnerText = buttonData.imageFilePath;
-                node_ButtonData.AppendChild(buttonImageFilePath);
 
                 node.AppendChild(node_ButtonData);
 
@@ -434,7 +425,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                         canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
 
                         canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
-                        canvasData.imageFilePath = node_CanvasData.SelectSingleNode("imageFilePath").InnerText;
 
                         canvasData.z_level_MAX = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MAX").InnerText);
                         canvasData.z_level_MIN = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MIN").InnerText);
@@ -505,11 +495,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
                 node_CanvasData.AppendChild(grouping_displacement);
 
-
-                XmlNode imageFilePath = xmlDocument.CreateElement("imageFilePath");
-                imageFilePath.InnerText = canvasData.imageFilePath;
-                node_CanvasData.AppendChild(imageFilePath);
-
                 XmlNode mainWindowHeight = xmlDocument.CreateElement("z_level_MAX");
                 mainWindowHeight.InnerText = canvasData.z_level_MAX.ToString();
                 node_CanvasData.AppendChild(mainWindowHeight);
@@ -574,7 +559,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     containerData.CanvasName = containerLocation.InnerText;
                 }
 
-                containerData.ContainerDataFilename = node.OwnerDocument.Name;
+                XmlNode? ContainerDataFilename = NodeCheck(node_ContainerData, "ContainerDataFilename");
+                if (ContainerDataFilename != null)
+                {
+                    containerData.ContainerDataFilename = ContainerDataFilename.InnerText;
+                }
 
                 XmlNode? z_position = NodeCheck(node_ContainerData, "z_position");
                 if (z_position != null)
@@ -879,6 +868,89 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion CoreData saving
         #endregion CoreData
 
+        #region LabelData
+        #region LabelData loading
+        internal CoreData? LabelData_load()
+        {
+            SharedLogic logic = new SharedLogic();
+
+            CoreData buttonData = new CoreData(true);
+            XmlDocument xmlDocument = new XmlDocument();
+
+            if (File.Exists(ButtonData_file))
+            {
+                xmlDocument.Load(ButtonData_file);
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
+
+                if (node != null)
+                {
+                    XmlNode node_ButtonData = node.SelectSingleNode("LabelData");
+
+                    if (node_ButtonData != null)
+                    {
+                        XmlNode node_CoreData = node_ButtonData.SelectSingleNode("CoreData");
+
+                        CoreData aux_data = loadCoreData(node_CoreData);
+
+                        if (aux_data != null)
+                        {
+                            buttonData = aux_data;
+                        }
+
+                        return buttonData;
+                    }
+                }
+
+                return null;
+            }
+
+            return null;
+        }
+        #endregion LabelData loading
+
+        #region LabelData saving
+        internal void save_LabelData(CoreData labelData)
+        {
+            if (labelData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_ButtonData = xmlDocument.CreateElement("LabelData");
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, labelData);
+
+                if (aux_node != null)
+                {
+                    node_ButtonData.AppendChild(aux_node);
+                }
+
+                node.AppendChild(node_ButtonData);
+
+                try
+                {
+                    xmlDocument.Save(ButtonData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+
+        internal void LabelData_save()
+        {
+            CoreData labelData = new SharedLogic().GetDataHandler().GetLabelData();
+
+            save_LabelData(labelData);
+        }
+        #endregion LabelData saving
+        #endregion LabelData
+
         // LinkData
         #region LinkData
         #region LinkData loading
@@ -895,6 +967,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 }
 
+                if (type == typeof(Elements.Image))
+                {
+                    userControl = new Elements.Image(contentData);
+                }
+
                 if (type == typeof(Link))
                 {
                     userControl = new Link(contentData);
@@ -907,7 +984,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             ContentData contentData = new ContentData();
 
-            if (node != null)
+            if (node != null && contentData != null)
             {
                 foreach (XmlNode item in node.ChildNodes)
                 {

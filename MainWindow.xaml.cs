@@ -19,6 +19,9 @@ using AidingElementsUserInterface.Elements.MyNote;
 using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
+using System.Windows.Media.Imaging;
+using System;
+using System.IO;
 
 namespace AidingElementsUserInterface
 {
@@ -82,6 +85,20 @@ namespace AidingElementsUserInterface
             //    coreCanvas.RemoveFlatShareCC();
             //}
         }
+        internal void _backgroundImage()
+        {
+            if (mainWindowData.imageFilePath != null)
+            {
+                if (File.Exists(mainWindowData.imageFilePath))
+                {
+                    border.Background = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
+                }
+                else
+                {
+                    border.Background = mainWindowData.background.GetBrush();
+                }
+            }
+        }
 
         private void load_MainWindowData()
         {
@@ -108,11 +125,12 @@ namespace AidingElementsUserInterface
 
         private void load_borderDefaults()
         {
-            border.Background = mainWindowData.background.GetBrush();
-            border.BorderBrush = mainWindowData.borderbrush.GetBrush();
-
             border.CornerRadius = mainWindowData.cornerRadius;
             border.BorderThickness = mainWindowData.thickness;
+
+            border.BorderBrush = mainWindowData.borderbrush.GetBrush();
+
+            _backgroundImage();
         }
 
 

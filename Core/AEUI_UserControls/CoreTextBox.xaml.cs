@@ -54,7 +54,6 @@ namespace AidingElementsUserInterface.Core
 
             config = data_Handler.LoadTextBoxData();
 
-            _backgroundImage();
 
             border.BorderBrush = config.borderbrush.GetBrush();
             border.CornerRadius = config.cornerRadius;
@@ -64,6 +63,8 @@ namespace AidingElementsUserInterface.Core
             textbox.Foreground = config.foreground.GetBrush();
 
             textbox.CaretBrush = config.foreground.GetBrush();
+
+            _backgroundImage();
 
             if (!no_limits)
             {

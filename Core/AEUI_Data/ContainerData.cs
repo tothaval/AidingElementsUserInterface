@@ -9,6 +9,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,6 +34,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public ContainerData()
         {
+            settings = new SharedLogic().GetDataHandler().GetCoreData();
+
+            if (settings == null)
+            {
+                settings = new CoreData();
+            }
         }
 
         public ContainerData(CoreData coreData)
@@ -64,6 +71,17 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal UserControl GetElement()
         {
             return element;
+        }
+
+        internal void SetCanvasName(string canvasName)
+        {
+            this.CanvasName = canvasName;
+            
+        }
+
+        internal void SetContainerDataFilename(string containerDataFilename)
+        {
+            this.ContainerDataFilename = containerDataFilename;
         }
 
         internal void SetElement(UserControl userControl)

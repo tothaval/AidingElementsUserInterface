@@ -7,10 +7,10 @@
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FF00AA00</color1_string>
-        <color2_string>#FF995555</color2_string>
-        <color3_string>#FF559955</color3_string>
-        <color4_string>#FF555599</color4_string>
+        <color1_string>#A7FFEBCD</color1_string>
+        <color2_string>#7AFAEEC9</color2_string>
+        <color3_string>#7AFAEEC2</color3_string>
+        <color4_string>#A7FFEBCD</color4_string>
       </background>
       <borderbrush>
         <brushtype>SolidColorBrush</brushtype>
@@ -46,13 +46,13 @@
       <thickness>2,2,2,2</thickness>
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
-      <height>709</height>
-      <width>1131</width>
+      <height>777</height>
+      <width>1260</width>
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <initialPositionX>486</initialPositionX>
-    <initialPositionY>162</initialPositionY>
+    <initialPositionX>690</initialPositionX>
+    <initialPositionY>155</initialPositionY>
     <language>english</language>
   </MainWindowData>
 </Core>
