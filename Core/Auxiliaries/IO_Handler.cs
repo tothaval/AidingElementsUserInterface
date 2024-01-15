@@ -28,6 +28,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal string ButtonData_file = @".\data\Core\buttondata.xml";
         internal string CanvasData_file = @".\data\Core\canvasdata.xml";
         internal string CoreData_file = @".\data\Core\coredata.xml";
+        internal string LabelData_file = @".\data\Core\labeldata.xml";
         internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
         internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
         // folders

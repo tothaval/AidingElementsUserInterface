@@ -12,11 +12,13 @@ using AidingElementsUserInterface.Core.AEUI_HelperClasses;
 using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -55,6 +57,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             //containerData = new ContainerData(canvas.getCanvasData(), element);
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
+            containerData.SetCanvasName(canvas.getCanvasData().canvasName);
+            containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
 
             initialize_container();
         }
@@ -71,6 +75,20 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             //}
         }
         #endregion constructors
+        internal void _backgroundImage()
+        {
+            if (containerData.settings.imageFilePath != null)
+            {
+                if (File.Exists(containerData.settings.imageFilePath))
+                {
+                    element_border.Background = new ImageBrush(new BitmapImage(new Uri(containerData.settings.imageFilePath)));
+                }
+                else
+                {
+                    element_border.Background = containerData.settings.background.GetBrush();
+                }
+            }
+        }
 
         private void build()
         {
@@ -90,7 +108,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             element_border.CornerRadius = containerData.settings.cornerRadius;
             element_border.BorderThickness = containerData.settings.thickness;
 
-            element_border.Background = containerData.settings.background.GetBrush();
+            _backgroundImage();
             element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
 
             register_events();

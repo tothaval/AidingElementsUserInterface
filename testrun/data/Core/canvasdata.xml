@@ -53,8 +53,6 @@
     </CoreData>
     <canvasName>canvas</canvasName>
     <grouping_displacement>25</grouping_displacement>
-    <imageFilePath>
-    </imageFilePath>
     <z_level_MAX>100</z_level_MAX>
     <z_level_MIN>-100</z_level_MIN>
     <dragLevel>30000</dragLevel>

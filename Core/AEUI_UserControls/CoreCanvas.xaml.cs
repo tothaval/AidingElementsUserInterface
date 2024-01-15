@@ -17,11 +17,14 @@ using AidingElementsUserInterface.Elements.MyNote;
 
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Windows.Media.Imaging;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using DragEventArgs = System.Windows.DragEventArgs;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
@@ -88,6 +91,21 @@ namespace AidingElementsUserInterface.Core
             selected_items.Add(coreContainer);
         }
 
+        internal void _backgroundImage()
+        {
+            if (config.imageFilePath != null)
+            {
+                if (File.Exists(config.imageFilePath))
+                {
+                    canvas.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
+                }
+                else
+                {
+                    canvas.Background = config.background.GetBrush();
+                }
+            }
+        }
+
         private void build()
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
@@ -102,7 +120,7 @@ namespace AidingElementsUserInterface.Core
 
             data_Handler.AddCanvasData(config);
 
-            __CoreCanvas.Background = config.background.GetBrush();
+            _backgroundImage();
 
             __CoreCanvas.BorderBrush = config.borderbrush.GetBrush();
             __CoreCanvas.BorderThickness = config.thickness;
@@ -257,7 +275,7 @@ namespace AidingElementsUserInterface.Core
             System.Windows.Point sender_origin,
             System.Windows.Point new_point)
         {
-            double  x1, y1;
+            double x1, y1;
 
             foreach (CoreContainer item in selected_items)
             {
@@ -317,7 +335,7 @@ namespace AidingElementsUserInterface.Core
         }
 
         private void select_containers()
-        {    
+        {
             var rectangleGeometry = selection_rectangle.RenderedGeometry as RectangleGeometry;
             var hitTestParams = new GeometryHitTestParameters(rectangleGeometry);
 
@@ -349,6 +367,25 @@ namespace AidingElementsUserInterface.Core
 
             VisualTreeHelper.HitTest(
                 canvas, filterCallback, resultCallback, hitTestParams);
+        }
+
+        internal void selectAll()
+        {
+            foreach (CoreContainer item in canvas.Children)
+            {
+                item.select();
+            }
+        }
+
+        internal void selectContainer(int containerId)
+        {
+            foreach (CoreContainer item in canvas.Children)
+            {
+                if (item.GetContainerData().ContainerDataFilename.Equals($"{containerId}.xml"))
+                {
+                    item.select();
+                }
+            }
         }
 
         internal void selectType(Type type)

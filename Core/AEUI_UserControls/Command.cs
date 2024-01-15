@@ -10,6 +10,7 @@
 using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
@@ -45,6 +46,16 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{target}, AidingElementsUserInterface");
                 UserControl userControl;
 
+                if (type == null)
+                {
+                    if (target.Equals("°"))
+                    {
+                        // typelist abarbeiten
+                    }
+                }
+
+                
+
                 if (type != null)
                 {
                     userControl = (UserControl)Activator.CreateInstance(type);
@@ -75,6 +86,28 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{target}, AidingElementsUserInterface");
                 UserControl userControl;
+
+                if (type == null)
+                {
+                    if (target.Equals("°"))
+                    {
+                        new SharedLogic().GetMainWindow().coreCanvas.selectAll();
+                    }
+                    else
+                    {
+                        int number;
+                        try
+                        {
+                            number = Int32.Parse(target);
+
+                            new SharedLogic().GetMainWindow().coreCanvas.selectContainer(number);
+                        }
+                        catch (Exception)
+                        {                        
+                        }                        
+                    }                    
+                }
+
 
                 if (type != null)
                 {

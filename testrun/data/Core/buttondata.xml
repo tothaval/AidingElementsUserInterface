@@ -27,33 +27,29 @@
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FF00EEEE</color1_string>
-        <color2_string>#FF2F4F4F</color2_string>
-        <color3_string>#FF2F4F4F</color3_string>
-        <color4_string>#FF2F4F4F</color4_string>
+        <color1_string>#FFFFFFFF</color1_string>
+        <color2_string>#FFFFFFFF</color2_string>
+        <color3_string>#FFFFFFFF</color3_string>
+        <color4_string>#FFFFFFFF</color4_string>
       </foreground>
       <highlight>
-        <brushtype>RadialGradientBrush</brushtype>
+        <brushtype>LinearGradientBrush</brushtype>
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FF0FFF0F</color1_string>
-        <color2_string>#FF2F4F4F</color2_string>
-        <color3_string>#FF000000</color3_string>
-        <color4_string>#FFFFEBCD</color4_string>
+        <color1_string>#77000000</color1_string>
+        <color2_string>#33000000</color2_string>
+        <color3_string>#77000000</color3_string>
+        <color4_string>#77777777</color4_string>
       </highlight>
       <cornerRadius>12,5,0,7</cornerRadius>
       <thickness>1,1,5,1</thickness>
-      <fontSize>12</fontSize>
+      <fontSize>16</fontSize>
       <fontFamily>Verdana</fontFamily>
       <height>24</height>
       <width>47</width>
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <height>24</height>
-    <width>47</width>
-    <imageFilePath>
-    </imageFilePath>
   </ButtonData>
 </Core>

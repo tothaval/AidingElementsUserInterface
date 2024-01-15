@@ -30,6 +30,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         private CoreData buttonData;
         private CanvasData canvasData;
         private CoreData coreData;
+        private CoreData labelData;
         private MainWindowData mainWindowData;
         private CoreData textBoxData;
 
@@ -66,6 +67,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             coreData = data;
         }
+
+        public void AddLabelData(CoreData data)
+        {
+            data_objects.Add(data);
+
+            labelData = data;
+        }
+
         public void AddMainWindowData(MainWindowData data)
         {
             data_objects.Add(data);
@@ -94,6 +103,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         public CoreData? GetCoreData()
         {
             return coreData;
+        }
+        public CoreData? GetLabelData()
+        {
+            return labelData;
         }
         public MainWindowData? GetMainWindowData()
         {
@@ -154,7 +167,21 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return GetCoreData();
         }
+        public CoreData? LoadLabelData()
+        {
+            CoreData labelData = new XML_Handler(new CoreData()).LabelData_load();
 
+            if (labelData != null)
+            {
+                AddLabelData(labelData);
+            }
+            else
+            {
+                AddLabelData(new CoreData());
+            }
+
+            return GetLabelData();
+        }
         public MainWindowData? LoadMainWindowData()
         {
             MainWindowData mainWindowData = new XML_Handler(new MainWindowData()).MainWindowData_load();
@@ -211,7 +238,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             coreData = data;
         }
+        public void SetLabelData(CoreData data)
+        {
+            AddLabelData(data);
 
+            new XML_Handler(data).save_LabelData(data);
+        }
         public void SetMainWindowData(MainWindowData data)
         {
             mainWindowData = data;

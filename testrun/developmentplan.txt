@@ -9,7 +9,7 @@ implement rerendering of UI features during runtime
 		source OptionElement, call when saving values
 		target relevant userControls | controls | classes
 		mode	twoway
-	XmlDataProvider
+	XmlDataProvider | Xml_handler
 		implement resources/resourcedictionaries in app.xaml
 		load on start up
 	DynamicResource
@@ -23,7 +23,7 @@ finish development of OptionsElement
 		
 	later: harden the OptionElement against input errors
 
-image element, z-indexer, timer
+z-indexer, timer
 	integrate and transform these ysui predecessors for aeui
 
 	image element
@@ -39,6 +39,9 @@ random element, corematrix classes
 			integrate option for dice pictures
 
 	finalize corematrix classes for intermediary use
+
+bugs:
+- selection rectangle is not working properly, selection is sometimes not inside the rectangle
 
 update development plan
 (f.e. start development on ColorOptions, start development of Container properties change tools
