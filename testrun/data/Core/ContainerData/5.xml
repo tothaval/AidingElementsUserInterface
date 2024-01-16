@@ -52,14 +52,14 @@
       </imageFilePath>
     </CoreData>
     <CanvasName>mainWindowCanvas</CanvasName>
-    <ContainerDataFilename>4.xml</ContainerDataFilename>
-    <z_position>600</z_position>
+    <ContainerDataFilename>5.xml</ContainerDataFilename>
+    <z_position>400</z_position>
   </ContainerData>
   <Content>
-    <Type>LocalDrives</Type>
+    <Type>OptionsElement_ButtonData</Type>
   </Content>
   <Position>
-    <x>27</x>
-    <y>172</y>
+    <x>323</x>
+    <y>135</y>
   </Position>
 </Container>

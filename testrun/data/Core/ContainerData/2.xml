@@ -51,15 +51,15 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <CanvasName>canvas</CanvasName>
+    <CanvasName>__CoreCanvas</CanvasName>
     <ContainerDataFilename>2.xml</ContainerDataFilename>
-    <z_position>400</z_position>
+    <z_position>1200</z_position>
   </ContainerData>
   <Content>
     <Type>Manual</Type>
   </Content>
   <Position>
-    <x>70</x>
-    <y>288</y>
+    <x>13</x>
+    <y>427</y>
   </Position>
 </Container>

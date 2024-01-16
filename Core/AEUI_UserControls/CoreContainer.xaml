@@ -18,6 +18,12 @@
         xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
         mc:Ignorable="d" 
         IsHitTestVisible="True"
+        
+        FontSize="{DynamicResource ContainerData_fontSize}"
+        FontFamily="{DynamicResource ContainerData_fontFamily}"
+        
+        Foreground="{DynamicResource ContainerData_foreground}"
+        
         d:DesignHeight="450" d:DesignWidth="800">
         
     <Border x:Name="transparent_border" Background="Transparent" BorderBrush="Transparent">
@@ -38,8 +44,10 @@
             <Border x:Name="element_border"
                     Grid.Column="1"
                     Grid.Row="1" Grid.RowSpan="1"
-                    Background="Transparent"
-                    BorderBrush="Transparent" >
+                    Background="{DynamicResource ContainerData_background}"
+                    BorderBrush="{DynamicResource ContainerData_borderbrush}"
+                    BorderThickness="{DynamicResource ContainerData_thickness}"
+                    CornerRadius="{DynamicResource ContainerData_cornerRadius}">
                 <Grid x:Name="element_grid"
                       Background="Transparent"
                       MouseEnter="element_grid_MouseEnter"
@@ -47,15 +55,15 @@
                       MouseLeave="element_grid_MouseLeave">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Name="Column_left"/>
+                        <ColumnDefinition x:Name="ColumnLeft" Width="{DynamicResource CanvasData_element_spacing}"/>
                         <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition x:Name="Column_right"/>
+                        <ColumnDefinition x:Name="ColumnRight" Width="{DynamicResource CanvasData_element_spacing}"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition x:Name="Row_top" />
+                        <RowDefinition x:Name="RowTop" Height="{DynamicResource CanvasData_element_spacing}"/>
                         <RowDefinition Height="auto" />
-                        <RowDefinition x:Name="Row_bottom" />
+                        <RowDefinition x:Name="RowBottom" Height="{DynamicResource CanvasData_element_spacing}"/>
 
                     </Grid.RowDefinitions>
 

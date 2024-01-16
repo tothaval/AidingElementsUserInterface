@@ -19,8 +19,7 @@
                 
         WindowStartupLocation="Manual"
         ResizeMode="CanResizeWithGrip"
-        
-        FontFamily="Verdana"
+                
         Focusable="True"               
         
         WindowStyle="None" 
@@ -29,6 +28,16 @@
         AllowsTransparency="True" 
 
         Background="Transparent"
+        Foreground="{DynamicResource MainWindow_foreground}"
+        
+        FontSize="{DynamicResource MainWindow_fontSize}"
+        FontFamily="{DynamicResource MainWindow_fontFamily}"        
+        
+        Width="{DynamicResource MainWindow_width}"
+        Height="{DynamicResource MainWindow_height}"
+               
+        Left="{DynamicResource MainWindow_initialPosition_X}"
+        Top="{DynamicResource MainWindow_initialPosition_Y}"
         
         ScrollViewer.VerticalScrollBarVisibility="Auto"
                 
@@ -38,10 +47,11 @@
         Loaded="Window_Loaded"
         MouseDown="Window_MouseDown"
         MouseMove="Window_MouseMove"
-        MouseUp="Window_MouseUp"
+        MouseUp="Window_MouseUp"        
         PreviewKeyDown="Window_PreviewKeyDown"
         PreviewKeyUp="Window_PreviewKeyUp"
         SizeChanged="Window_SizeChanged"
+        SourceInitialized="__MainWindow_SourceInitialized"
         >
 
     <WindowChrome.WindowChrome>
@@ -54,7 +64,74 @@
         </WindowChrome>
     </WindowChrome.WindowChrome>
 
-    <Border x:Name="border" Background="Transparent">
+    <Window.Resources>
+        <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type MenuItem}">
+                        <Grid SnapsToDevicePixels="true">
+                            <DockPanel>
+                                <ContentPresenter x:Name="Icon"
+                                                  ContentSource="Icon"
+                                                  Margin="5,2,5,2" 
+                                                  VerticalAlignment="Center"/>
+                                <Path x:Name="GlyphPanel"
+                                      Fill="{DynamicResource MainWindow_foreground}"
+                                      FlowDirection="LeftToRight"
+                                      Margin="7,2,7,2"
+                                      Visibility="Collapsed"
+                                      VerticalAlignment="Center"/>
+                                <ContentPresenter x:Name="content"
+                                                  ContentSource="Header"
+                                                  Margin="2,5,2,5" 
+                                                  RecognizesAccessKey="True"/>
+                            </DockPanel>
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="true"
+                                   Focusable="false"
+                                   HorizontalOffset="5"
+                                   IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"
+                                   Placement="Relative" VerticalOffset="20">
+
+                                <Border CornerRadius="{DynamicResource MainWindow_cornerRadius}"
+                                    BorderThickness="{DynamicResource MainWindow_thickness}"
+                                        BorderBrush="{DynamicResource MainWindow_borderbrush}"
+                                        Background="{DynamicResource MainWindow_background}">
+                                    <ScrollViewer x:Name="SubMenuScrollViewer"
+                                                  CanContentScroll="true"
+                                                  Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                        <Grid RenderOptions.ClearTypeHint="Enabled">
+                                            <ItemsPresenter x:Name="ItemsPresenter"
+                                                            KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                            Grid.IsSharedSizeScope="true"
+                                                            Margin="10, 2, 10, 2"
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                            KeyboardNavigation.TabNavigation="Cycle"/>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="TextBlock.Foreground" Value="Blue" TargetName="content"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Border x:Name="border"
+            Background="{DynamicResource MainWindow_background}"
+            
+            BorderBrush="{DynamicResource MainWindow_borderbrush}"
+            BorderThickness="{DynamicResource MainWindow_thickness}"
+            
+            CornerRadius="{DynamicResource MainWindow_cornerRadius}"
+            >
         <Grid x:Name="grid" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7"/>
@@ -84,72 +161,71 @@
                   Grid.Column="1"
                   Grid.Row="1"
                   IsMainMenu="True"
-                  Background="Transparent"                  
+                  Background="Transparent"
+                  Foreground="{DynamicResource MainWindow_foreground}"               
                   >
 
-                <MenuItem x:Name="MI_AEUI_CTRL"                          
+                <MenuItem x:Name="MI_AEUI_CTRL"
                           Header="control">
                     <MenuItem x:Name="MI_command"
                           Header="Command"
                               
                           Click="MI_command_Click"/>
+                    <MenuItem x:Name="MI_levelShifter"
+                          Header="LevelShifter"
+                              
+                          Click="MI_levelShifter_Click"/>
 
-                    <Separator />
-                    <MenuItem x:Name="MI_options"
+                    <MenuItem x:Name="MI_options" 
                           Header="options">
                         <MenuItem x:Name="MI_OPTIONS_general"
                           Header="general"
                               
                           Click="MI_OPTIONS_general_Click"/>
 
-                        <Separator />
                         <MenuItem x:Name="MI_OPTIONS_buttons"
                           Header="buttons"
                               
                           Click="MI_OPTIONS_buttons_Click"/>
-                        <Separator />
+
                         <MenuItem x:Name="MI_OPTIONS_canvas"
                           Header="canvas"
                               
                           Click="MI_OPTIONS_canvas_Click"/>
-                        <Separator />
+
                         <MenuItem x:Name="MI_OPTIONS_container"
                           Header="container"
                               
                           Click="MI_OPTIONS_container_Click"/>
-                        <Separator />
+
                         <MenuItem x:Name="MI_OPTIONS_textboxes"
                           Header="textboxes"
                               
                           Click="MI_OPTIONS_textboxes_Click"/>
                     </MenuItem>
 
-                    <Separator />
+
 
                     <MenuItem x:Name="MI_minimize"
                           Header="minimize"
                               
                           Click="MI_minimize_Click"/>
-                    <Separator />
+
 
                     <MenuItem x:Name="MI_maximize"
                               Header="fullscreen"
                               IsCheckable="True"
                               Click="MI_maximize_Click"/>
-                    <Separator />
-
-                    <Separator />
                     
                     <MenuItem x:Name="MI_quit"
                           Header="Quit"
                               
                           Click="MI_quit_Click"/>
-                    <Separator />
-                    <Separator />
+
                     <MenuItem x:Name="MI_shutdown"
                           Header="Shutdown"
                           Click="MI_shutdown_Click"/>
-                    <Separator />
+
                 </MenuItem>
 
                 <MenuItem x:Name="MI_SelectionControl"                          
@@ -158,18 +234,17 @@
                           Header="build Line"
                               
                           Click="MI_group_to_line_Click"/>
-                    <Separator />
+
                     <MenuItem x:Name="MI_group_to_row"
                           Header="build Row"
                               
                           Click="MI_group_to_row_Click"/>
-                    <Separator />
-                    <Separator />
+
                     <MenuItem x:Name="MI_delete"
                               Header="delete"
                               InputGestureText="Ctrl + X"
                               Click="MI_delete_Click"/>
-                    <Separator />
+
                 </MenuItem>
 
                 <MenuItem x:Name="MI_elements"                          
@@ -210,10 +285,14 @@
 
                 <MenuItem x:Name="MI_tools"
                           Header="tools">
+                    <MenuItem x:Name="MI_LocalDrives"
+                          Header="LocalDrives"                              
+                          Click="MI_LocalDrives_Click"/>
+
                     <MenuItem x:Name="MI_Random"
                           Header="Random"                              
                           Click="MI_Random_Click"/>
-                    <Separator />
+
                     <MenuItem x:Name="MI_RightClickChoice"
                           Header="End it!"                              
                           Click="MI_RightClickChoice_Click"/>                    

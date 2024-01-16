@@ -31,6 +31,8 @@ namespace AidingElementsUserInterface.Elements
 
         private async void build()
         {
+            hideContainerNesting(this);
+
             await Task.Delay(12);
 
             WrapPanel wrapPanel = new WrapPanel() { Orientation = Orientation.Vertical };

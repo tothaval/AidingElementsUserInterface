@@ -41,7 +41,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             }
         }
 
-        internal ColorData()
+        internal ColorData(int nr = 1)
         {
             brushtype = "SolidColorBrush";
 
@@ -50,10 +50,30 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             gradiantStartPoint = new Point(0.5, 1);
             gradiantEndPoint = new Point(0.5, 0);
 
-            color1_string = "#FF000000";
+            switch (nr)
+            {
+                case 1:
+                    color1_string = "#FFFFEBCD";
+                    break;
+                case 2:
+                    color1_string = "#FF000000";
+                    break;
+                case 3:
+                    color1_string = "#FF2F4F4F";
+                    break;
+                case 4:
+                    color1_string = "#FF0FFF0F";
+                    break;
+
+                default:
+                    color1_string = "#FF000000";
+                    break;
+
+            }
+
             color2_string = "#FF000000";
-            color3_string = "#FFFFFFFF";
-            color4_string = "#FFEEEE00";
+            color3_string = "#FF2F4F4F";
+            color4_string = "#FF0FFF0F";
         }
 
         internal Brush? GetBrush()

@@ -15,10 +15,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Canvas x:Name="canvas"
+             d:DesignHeight="450" d:DesignWidth="800"
+                 
+                 Background="{DynamicResource CanvasData_background}"
+                 BorderBrush="{DynamicResource CanvasData_borderbrush}"
+                 BorderThickness="{DynamicResource CanvasData_thickness}"
+                 >
+    <Canvas x:Name="canvas"           
             
-            Background="AntiqueWhite"
+            Background="Transparent"
 
             ClipToBounds="True"
             Focusable="True"

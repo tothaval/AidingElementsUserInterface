@@ -12,6 +12,11 @@ using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -52,6 +57,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {
+            hideContainerNesting(this);
+
             CB_saveChanges.button.Click += CB_saveChanges_Click;
             handler = new SharedLogic().GetDataHandler();
 
@@ -71,6 +78,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_height.setText(buttonData.height.ToString());
             CVC_width.setText(buttonData.width.ToString());
 
+            wrapPanel.Background = new SolidColorBrush(Colors.Transparent);
+
             wrapPanel.Children.Add(CVC_cornerRadius);
             wrapPanel.Children.Add(CVC_thickness);
             wrapPanel.Children.Add(CVC_fontSize);
@@ -82,6 +91,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CB_saveChanges);
 
             content_border.Child = wrapPanel;
+            
+            content_border.Background = new SolidColorBrush(Colors.Transparent);
+            content_border.BorderThickness = new Thickness(0);
         }
 
         private void CB_saveChanges_Click(object sender, RoutedEventArgs e)
@@ -116,9 +128,30 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             buttonData.height = double.Parse(CVC_height.Value);
             buttonData.width = double.Parse(CVC_width.Value);
 
-            handler.SetButtonData(buttonData);
+            Application.Current.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            Application.Current.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
+            Application.Current.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
+            Application.Current.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
 
-            //Application.Current.Resources["radius"] = buttonData.cornerRadius;
+            Application.Current.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
+            Application.Current.Resources["ButtonData_thickness"] = buttonData.thickness;
+
+            Application.Current.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
+            Application.Current.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
+
+            Application.Current.Resources["ButtonData_width"] = buttonData.width;
+            Application.Current.Resources["ButtonData_height"] = buttonData.height;
+
+            if (buttonData.imageFilePath != null)
+            {
+                if (File.Exists(buttonData.imageFilePath))
+                {
+                    Application.Current.Resources["ButtonData_image"] = new ImageBrush(new BitmapImage(new Uri(buttonData.imageFilePath)));
+                    Application.Current.Resources["ButtonData_background"] = Application.Current.Resources["ButtonData_image"];
+                }
+            }
+
+            handler.SetButtonData(buttonData);
         }
     }
 }

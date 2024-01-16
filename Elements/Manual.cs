@@ -48,8 +48,15 @@ namespace AidingElementsUserInterface.Elements
         #region element design and functionality
         private void build()
         {
+            hideContainerNesting(this);
+
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
             CoreData config = data_Handler.LoadCoreData();
+
+            if (config == null)
+            {
+                config = new CoreData();
+            }
 
             loadInfoTextStrings();
 
@@ -71,11 +78,8 @@ namespace AidingElementsUserInterface.Elements
             verticalWrapPanel.Children.Add(horizontalWrapPanel);
             verticalWrapPanel.Children.Add(textbox);
 
-            this.FontFamily = config.fontFamily;
-            this.FontSize = config.fontSize;
 
             Background = new SolidColorBrush(Colors.Transparent);
-            Foreground = config.foreground.GetBrush();
 
             content_border.Child = verticalWrapPanel;
 

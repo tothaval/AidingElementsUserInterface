@@ -7,22 +7,21 @@
         CoreTextBox.cs
         ...?
     -->
-<UserControl x:Class="AidingElementsUserInterface.Core.CoreTextBox"
-             x:Name="__CoreTextBox"
+    <UserControl x:Class="AidingElementsUserInterface.Core.AEUI_UserControls.CoreLabel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border x:Name="border"
-            Background="{DynamicResource TextBoxData_background}"
-            BorderBrush="{DynamicResource TextBoxData_borderbrush}"
-            BorderThickness="{DynamicResource TextBoxData_thickness}"
+            Background="{DynamicResource LabelData_background}"
+            BorderBrush="{DynamicResource LabelData_borderbrush}"
+            BorderThickness="{DynamicResource LabelData_thickness}"
             
-            CornerRadius="{DynamicResource TextBoxData_cornerRadius}">
-        <TextBox x:Name="textbox"
+            CornerRadius="{DynamicResource LabelData_cornerRadius}">
+        <TextBlock x:Name="textblock"
                  Padding="2,0,2,0"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -30,16 +29,14 @@
                  ClipToBounds="True"
                  
                  Background="Transparent"
-                 BorderBrush="Transparent"
-                 BorderThickness="0"  
-                 Foreground="{DynamicResource TextBoxData_foreground}"
-                 CaretBrush="{DynamicResource TextBoxData_foreground}"
+                   
+                 Foreground="{DynamicResource LabelData_foreground}"
                  
-                 MinWidth="{DynamicResource TextBoxData_MinWidth}"
-                 MinHeight="{DynamicResource TextBoxData_MinHeight}"
+                 MinWidth="{DynamicResource LabelData_MinWidth}"
+                 MinHeight="{DynamicResource LabelData_MinHeight}"
                  
-                 MaxWidth="{DynamicResource TextBoxData_MaxWidth}"
-                 MaxHeight="{DynamicResource TextBoxData_MaxHeight}"
+                 MaxWidth="{DynamicResource LabelData_MaxWidth}"
+                 MaxHeight="{DynamicResource LabelData_MaxHeight}"
                  
                  TextWrapping="NoWrap"
                  />
