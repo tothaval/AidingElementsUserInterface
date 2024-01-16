@@ -63,7 +63,8 @@ commands via Command element:
 	current features:
 >ELEMENTNAME create new element of type ELEMENTNAME on canvas
  currently implemented elements are:
-	Command, Coordinates, FileLink, Image, Link, Manual, MyNote, OptionsElement_ButtonData,
+	Command, Coordinates, FileLink, Image, LevelShifter, 
+	Link, LocalDrives, Manual, MyNote, OptionsElement_ButtonData,
 	Random, RightClickChoice
 
 <NUMBER select specific container 

@@ -51,15 +51,15 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <CanvasName>canvas</CanvasName>
+    <CanvasName>__CoreCanvas</CanvasName>
     <ContainerDataFilename>0.xml</ContainerDataFilename>
-    <z_position>600</z_position>
+    <z_position>800</z_position>
   </ContainerData>
   <Content>
     <Type>RightClickChoice</Type>
   </Content>
   <Position>
-    <x>501</x>
-    <y>61</y>
+    <x>424</x>
+    <y>39</y>
   </Position>
 </Container>

@@ -39,6 +39,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         #region constructors
         public CoreContainer()
         {
+            ContainerDataResources();
+
             InitializeComponent();
         }
 
@@ -46,23 +48,85 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             this.containerData = containerData;
 
+            ContainerDataResources();
+
             InitializeComponent();
         }
 
         internal CoreContainer(UserControl element, ref CoreCanvas canvas)
         {
+            ContainerDataResources();
+
             InitializeComponent();
 
             this.canvas = canvas;
 
             //containerData = new ContainerData(canvas.getCanvasData(), element);
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
+
             containerData.SetCanvasName(canvas.getCanvasData().canvasName);
+
             containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
 
             initialize_container();
         }
 
+        private void ContainerDataResources()
+        {
+            if (containerData == null)
+            {
+                containerData = new ContainerData(new CoreData());
+            }
+            else
+            {
+                if (containerData.settings == null)
+                {
+                    containerData.settings = new CoreData();
+                }
+            }
+
+            this.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
+            this.Resources["ContainerData_borderbrush"] = containerData.settings.borderbrush.GetBrush();
+            this.Resources["ContainerData_foreground"] = containerData.settings.foreground.GetBrush();
+            this.Resources["ContainerData_highlight"] = containerData.settings.highlight.GetBrush();
+                            
+            this.Resources["ContainerData_cornerRadius"] = containerData.settings.cornerRadius;
+            this.Resources["ContainerData_thickness"] = containerData.settings.thickness;
+                            
+            this.Resources["ContainerData_fontSize"] = (double)containerData.settings.fontSize;
+            this.Resources["ContainerData_fontFamily"] = containerData.settings.fontFamily;
+                            
+            this.Resources["ContainerData_width"] = containerData.settings.width;
+            this.Resources["ContainerData_height"] = containerData.settings.height;
+                            
+            this.Resources["ContainerData_CanvasName"] = containerData.CanvasName;
+                            
+            this.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
+                            
+            this.Resources["ContainerData_z_position"] = containerData.z_position;
+
+
+            if (File.Exists(containerData.settings.imageFilePath))
+            {
+                this.Resources["ContainerData_image"] = new ImageBrush(new BitmapImage(new Uri(containerData.settings.imageFilePath)));
+                this.Resources["ContainerData_background"] = this.Resources["ContainerData_image"];
+            }
+        }
+
+        internal void hideContainerNesting(CoreContainer coreContainer)
+        {
+            coreContainer.element_border.Background = new SolidColorBrush(Colors.Transparent);
+            coreContainer.element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            coreContainer.element_border.BorderThickness = new Thickness(0);
+
+            coreContainer.ColumnLeft.Width = new GridLength(0);
+            coreContainer.ColumnRight.Width = new GridLength(0);
+
+            coreContainer.RowTop.Height = new GridLength(0);
+            coreContainer.RowBottom.Height = new GridLength(0);
+
+            coreContainer.ContainerDataResources();
+        }
 
         private void _loadtimer_Tick(object sender, EventArgs e)
         {
@@ -92,24 +156,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {
-            Column_left.Width = canvas.getCanvasData().element_spacing;
-            Column_right.Width = canvas.getCanvasData().element_spacing;
-
-            Row_top.Height = canvas.getCanvasData().element_spacing;
-            Row_bottom.Height = canvas.getCanvasData().element_spacing;
-
-
-            __CoreContainer.FontSize = containerData.settings.fontSize;
-            __CoreContainer.FontFamily = containerData.settings.fontFamily;
-
             Background = new SolidColorBrush(Colors.Transparent);
-            Foreground = containerData.settings.foreground.GetBrush();
-
-            element_border.CornerRadius = containerData.settings.cornerRadius;
-            element_border.BorderThickness = containerData.settings.thickness;
-
-            _backgroundImage();
-            element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
 
             register_events();
         }

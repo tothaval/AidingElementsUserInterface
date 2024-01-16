@@ -54,6 +54,13 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
+        public CoreButton(bool no_limits)
+        {
+            InitializeComponent();
+
+            build(no_limits);
+        }
+
         public CoreButton(string content)
         {
             InitializeComponent();
@@ -65,7 +72,7 @@ namespace AidingElementsUserInterface.Core
         #endregion constructors
 
 
-        private async void build()
+        private async void build(bool no_limits = false)
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
         
@@ -76,45 +83,19 @@ namespace AidingElementsUserInterface.Core
                 config = new CoreData();
             }
 
-            //await Task.Delay(12);
 
-            //this.Resources.Remove("buttonColor");
-            //this.Resources.Remove("forecolor");
-            //this.Resources.Remove("highlight");
-            //this.Resources.Remove("radius");
-
-            this.Resources.Add("backcolor", config.background.GetBrush());
-            this.Resources.Add("forecolor", config.foreground.GetBrush());
-            this.Resources.Add("highlight", config.highlight.GetBrush());
-            this.Resources.Add("radius", config.cornerRadius);
-
-            this.Resources.Add("borderBrush", config.borderbrush.GetBrush());
-
-            border.BorderThickness = config.thickness;
-
-            button.MaxWidth = config.width * 2;
-            button.MinWidth = config.width;
-
-            this.Resources.Add("maxHeight", config.height * 2);
-            this.Resources.Add("minHeight", config.height);
-
-            //button.SetResourceReference(Control.StyleProperty, "buttonStyle");
-
-            _backgroundImage();
-        }
-
-        internal void _backgroundImage()
-        {
-            if (config.imageFilePath != null)
+            if (no_limits)
             {
-                if (File.Exists(config.imageFilePath))
-                {
-                    border.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
-                }
-                else
-                {
-                    border.Background = config.background.GetBrush();
-                }
+                this.Resources["TextBoxData_MinWidth"] = config.width;
+                this.Resources["TextBoxData_MinHeight"] = config.height;
+            }
+            else
+            {
+                this.Resources["TextBoxData_MinWidth"] = config.width;
+                this.Resources["TextBoxData_MinHeight"] = config.height;
+
+                this.Resources["TextBoxData_MaxWidth"] = config.width * 2;
+                this.Resources["TextBoxData_MaxHeight"] = config.height;
             }
         }
 
@@ -125,16 +106,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void deselect()
         {
-            
-
-            //this.Resources.Remove("buttonColor");
-            this.Resources.Remove("highlight");
-
-           //this.Resources.Add("buttonColor", new SolidColorBrush(config.background));
-            this.Resources.Add("highlight", config.highlight.GetBrush());
-
-            Style style = this.FindResource("buttonStyle") as Style;
-            button.Style = style;
+            this.Resources["ButtonData_highlight"] = config.highlight.GetBrush();
 
             selected = false;
         }
@@ -146,14 +118,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void select()
         {
-            //this.Resources.Remove("buttonColor");
-            this.Resources.Remove("highlight");
-
-            //this.Resources.Add("buttonColor", new SolidColorBrush(config.highlight));
-            this.Resources.Add("highlight", config.background.GetBrush());
-
-            Style style = this.FindResource("buttonStyle") as Style;
-            button.Style = style;
+            this.Resources["ButtonData_highlight"] = config.background.GetBrush();
 
             selected = true;
         }

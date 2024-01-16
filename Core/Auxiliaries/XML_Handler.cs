@@ -38,6 +38,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal FlatData flatShareCC_data { get; set; }
         internal MyNote myNote_element { get; set; }
 
+        public XML_Handler() : base(new MainWindowData())
+        {
+
+        }
+
         internal XML_Handler(CoreData coreData) : base(coreData)
         {
 
@@ -154,8 +159,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                             containerData.SetElement(userControl);
 
-                            CoreContainer coreContainer = new CoreContainer();
-                            coreContainer.setContainerData(containerData);
+                            CoreContainer coreContainer = new CoreContainer(containerData);
                             coreContainer.setPosition(container_position);
 
                             container_list.Add(coreContainer);

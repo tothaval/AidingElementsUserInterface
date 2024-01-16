@@ -51,7 +51,7 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <CanvasName>canvas</CanvasName>
+    <CanvasName>__CoreCanvas</CanvasName>
     <ContainerDataFilename>1.xml</ContainerDataFilename>
     <z_position>200</z_position>
   </ContainerData>

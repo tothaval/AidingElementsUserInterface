@@ -24,10 +24,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     /// </summary>
     public partial class CoreValueChange : UserControl
     {
-        private bool has_button = false;
-        private CoreButton coreButton;
+        internal CoreButton coreButton;
 
+        private bool has_button = false;
+        private bool prevent_default_click = false;
+
+        internal object _object;
         internal string value;
+
+        internal object _Object => _object;
         internal string Value => value;
 
         public CoreValueChange()
@@ -41,40 +46,83 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             InitializeComponent();
 
-            TB_value_identifier.Text = value_identifier;
+            TB_value_identifier.setText(value_identifier);
             //CTB_Value.textbox.HorizontalContentAlignment = HorizontalAlignment.Right;
             CTB_Value.textbox.TextAlignment = TextAlignment.Right;
 
             build();
         }
 
-        public CoreValueChange(string value_identifier, bool has_button)
+        public CoreValueChange(bool has_button, bool prevent_default_click, bool no_limits, string value_identifier )
         {
             this.has_button = has_button;
+            this.prevent_default_click = prevent_default_click;
 
-            InitializeComponent();            
+            InitializeComponent();
 
             if (has_button)
             {
                 CTB_Value.Visibility = Visibility.Collapsed;
 
-                coreButton = new CoreButton("-");
-                CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+                if (no_limits)
+                {
+                    coreButton = new CoreButton(true);
+                    // so it blends in with the surrounding textboxes
+                    coreButton.button.Width = coreButton.config.width * 3;
+                    coreButton.button.MaxHeight = coreButton.config.height * 3;
+                    //coreButton.button.Width = coreButton.config.width * 3;
+                    //coreButton.button.Height = coreButton.config.height * 3;
+                }
+                else
+                {
+                    coreButton= new CoreButton(false);
 
+                    CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+                    if (textBoxData != null)
+                    {
+                        // so it blends in with the surrounding textboxes
+                        coreButton.button.MaxWidth = textBoxData.width;
+                        coreButton.button.MaxHeight = textBoxData.height;
+                    }
+                }
+
+                coreButton.Visibility = Visibility.Visible;
+                coreButton.setContent("-");
+            }
+
+            TB_value_identifier.setText(value_identifier);
+
+            build();
+        }
+
+        public CoreValueChange(string value_identifier, bool has_button, bool prevent_default_click = false)
+        {
+            this.has_button = has_button;
+            this.prevent_default_click = prevent_default_click;
+
+            InitializeComponent();            
+
+            if (has_button)
+            {
+                coreButton = new CoreButton(false);
+
+                CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
                 if (textBoxData != null)
                 {
                     // so it blends in with the surrounding textboxes
                     coreButton.button.MaxWidth = textBoxData.width;
                     coreButton.button.MaxHeight = textBoxData.height;
-
-                    coreButton.config.imageFilePath = textBoxData.imageFilePath;
-                    coreButton._backgroundImage();
                 }
 
-                SP_ValueChangeElement.Children.Add(coreButton);
+                CTB_Value.Visibility = Visibility.Collapsed;
+
+                coreButton.Visibility = Visibility.Visible;
+
+                coreButton.setContent("-");
+
             }                        
 
-            TB_value_identifier.Text = value_identifier;
+            TB_value_identifier.setText(value_identifier);
 
             build();
         }
@@ -83,7 +131,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (has_button)
             {
-                coreButton.button.Click += Button_Click;                
+                border_CB.Child = coreButton;
+
+                if (prevent_default_click) return;
+
+                coreButton.button.Click += Button_Click;      
+                
             }
             else
             {
@@ -97,7 +150,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void setIdentifier(string value_identifier)
         {
-            TB_value_identifier.Text = value_identifier;
+            TB_value_identifier.setText(value_identifier);
+        }
+
+        internal void setObject(object _object)
+        {
+            this._object = _object;
         }
 
         internal void setText(string text)
@@ -110,6 +168,14 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
             else
             {
+                if (prevent_default_click) 
+                {
+                    coreButton.setTooltip(text);
+                    coreButton.setContent(text);
+
+                    return; 
+                }
+
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.FileName = text;
 
@@ -165,6 +231,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         }
 
         private void textbox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void UserControl_Initialized(object sender, System.EventArgs e)
         {
 
         }

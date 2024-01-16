@@ -19,23 +19,15 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <XmlDataProvider x:Key="xml_data"
-                         Source="\data\Core\buttondata.xml"
-                         XPath="Core\ButtonData">
-            
-        </XmlDataProvider>
         <Style x:Key="buttonStyle" TargetType="Button">
-            <Setter Property="MinHeight" Value="{DynamicResource minHeight}"/>
-            <Setter Property="MaxHeight" Value="{DynamicResource maxHeight}"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="{DynamicResource forecolor}"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Name="btn" BorderThickness="0" 
-                                BorderBrush="{DynamicResource borderBrush}"
-                                CornerRadius="{DynamicResource radius}">
+                        <Border Name="btn"
+                                Background="{DynamicResource ButtonData_background}"                                
+                                BorderThickness="{DynamicResource ButtonData_thickness}"
+                                BorderBrush="{DynamicResource ButtonData_borderbrush}"
+                                CornerRadius="{DynamicResource ButtonData_cornerRadius}">
                             <ContentPresenter 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
@@ -47,23 +39,22 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="btn" 
                                     Property="Background" 
-                                    Value="{DynamicResource highlight}"/>
+                                    Value="{DynamicResource ButtonData_highlight}"/>
                                 <Setter Property="Opacity" Value="0.91" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="MinHeight" Value="{DynamicResource minHeight}"/>
+            <Setter Property="MinWidth" Value="{DynamicResource minWidth}"/>
+
+            <Setter Property="MaxHeight" Value="{DynamicResource maxHeight}"/>
+            <Setter Property="MaxWidth" Value="{DynamicResource maxWidth}"/>
         </Style>
 
     </UserControl.Resources>
-    <Border x:Name="border"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            BorderBrush="{DynamicResource borderBrush}"
-            CornerRadius="{DynamicResource radius}"
-            >
         <Button x:Name="button" Style="{DynamicResource buttonStyle}"/>
-    </Border>
 </UserControl>
-<!-- end of file -->
+<!-- end of file
+-->

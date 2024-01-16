@@ -52,29 +52,27 @@ namespace AidingElementsUserInterface.Core
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
-            config = data_Handler.LoadTextBoxData();
+            config = data_Handler.LoadTextBoxData(); 
+            data_Handler.AddTextBoxData(config);
 
-
-            border.BorderBrush = config.borderbrush.GetBrush();
-            border.CornerRadius = config.cornerRadius;
-            border.BorderThickness = config.thickness;
-
-            textbox.Background = new SolidColorBrush(Colors.Transparent);
-            textbox.Foreground = config.foreground.GetBrush();
-
-            textbox.CaretBrush = config.foreground.GetBrush();
-
-            _backgroundImage();
-
-            if (!no_limits)
+            if (config == null)
             {
-                textbox.Height = config.height;
-                textbox.MinWidth = config.width;
+                config = new CoreData();
+            }
+
+
+            if (no_limits)
+            {
+                this.Resources["TextBoxData_MinWidth"] = config.width;
+                this.Resources["TextBoxData_MinHeight"] = config.height;
             }
             else
             {
-                textbox.MinHeight = config.height;
-                textbox.MinWidth = config.width;
+                this.Resources["TextBoxData_MinWidth"] = config.width;
+                this.Resources["TextBoxData_MinHeight"] = config.height;
+
+                this.Resources["TextBoxData_MaxWidth"] = config.width * 2;
+                this.Resources["TextBoxData_MaxHeight"] = config.height;
             }
 
             textbox.Padding = new Thickness(7, 3, 7, 3);
@@ -93,22 +91,6 @@ namespace AidingElementsUserInterface.Core
         public void _acceptsTab()
         {
             textbox.AcceptsTab = true;
-        }
-
-        internal void _backgroundImage()
-        {
-            if (config.imageFilePath != null)
-            {
-                if (File.Exists(config.imageFilePath))
-                {
-                    border.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
-                    this.Resources.Remove("buttonColor");
-                }
-                else
-                {
-                    border.Background = config.background.GetBrush();
-                }
-            }
         }
 
         public void _disabled()

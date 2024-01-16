@@ -41,10 +41,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         {
             imageIsBackground = false;
 
-            background = new ColorData();
-            borderbrush = new ColorData();
-            foreground = new ColorData();
-            highlight = new ColorData();
+            background = new ColorData(1);
+            borderbrush = new ColorData(2);
+            foreground = new ColorData(3);
+            highlight = new ColorData(4);
 
             cornerRadius = new CornerRadius(14);
 

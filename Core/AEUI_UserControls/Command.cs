@@ -12,6 +12,7 @@ using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -29,7 +30,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {
-            coreTextBox= new CoreTextBox();
+            hideContainerNesting(this);
+
+            coreTextBox = new CoreTextBox();
             coreTextBox.MinWidth = 100;
 
             this.content_border.Child = coreTextBox;

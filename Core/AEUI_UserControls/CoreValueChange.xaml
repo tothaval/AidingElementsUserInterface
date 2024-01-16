@@ -10,16 +10,17 @@
     <Border x:Name="border">
         <StackPanel Orientation="Horizontal" Margin="2"
                     HorizontalAlignment="Left">
-            <TextBlock x:Name="TB_value_identifier"  
+            <local:CoreLabel x:Name="TB_value_identifier"  
                        
                    Margin="0,0,5,0"               
-                   Width="90"
-                   TextAlignment="Right"
+                   MinWidth="100"
+                             
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center">                
-            </TextBlock>
+            </local:CoreLabel>
             <StackPanel x:Name="SP_ValueChangeElement">
-            <core:CoreTextBox x:Name="CTB_Value" 
+                <Border x:Name="border_CB"/> 
+                <core:CoreTextBox x:Name="CTB_Value" 
                               HorizontalAlignment="Right"
                               Visibility="Visible">
                 </core:CoreTextBox>

@@ -91,25 +91,9 @@ namespace AidingElementsUserInterface.Core
             selected_items.Add(coreContainer);
         }
 
-        internal void _backgroundImage()
-        {
-            if (config.imageFilePath != null)
-            {
-                if (File.Exists(config.imageFilePath))
-                {
-                    canvas.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
-                }
-                else
-                {
-                    canvas.Background = config.background.GetBrush();
-                }
-            }
-        }
-
         private void build()
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
-
 
             config = data_Handler.LoadCanvasData();
 
@@ -120,53 +104,7 @@ namespace AidingElementsUserInterface.Core
 
             data_Handler.AddCanvasData(config);
 
-            _backgroundImage();
-
-            __CoreCanvas.BorderBrush = config.borderbrush.GetBrush();
-            __CoreCanvas.BorderThickness = config.thickness;
-
-            __CoreCanvas.Name = config.canvasName;
-
             load();
-
-            //if (imageIsBackground == false)
-            //{
-            //    if (colorsAreBackground == true)
-            //    {
-            //        config.changeToBackgroundColors(MainWindowCanvas, true);
-
-            //        colorsAreBackground = true;
-            //    }
-            //    else
-            //    {
-            //        border.Background = config.backColor;
-            //        border.BorderBrush = config.foreColor;
-
-            //        MainWindowCanvas.Background = config.canvasColor;
-
-            //        colorsAreBackground = false;
-            //    }
-            //}
-            //else if (imageIsBackground == true)
-            //{
-            //    if (config.imageFilePath != "-" || config.imageFilePath != "")
-            //    {
-            //        try
-            //        {
-            //            MainWindowCanvas.Background = new ImageBrush(new BitmapImage(new Uri(config.imageFilePath)));
-
-            //            colorsAreBackground = false;
-            //            imageIsBackground = true;
-            //        }
-            //        catch (Exception)
-            //        {
-            //            MainWindowCanvas.Background = config.canvasColor;
-            //            border.Background = new LinearGradientBrush(config.backColor.Color, config.foreColor.Color, 0);
-
-            //            colorsAreBackground = false;
-            //        }
-            //    }
-            //}
         }
 
         public void clearCanvasElements()
@@ -332,6 +270,18 @@ namespace AidingElementsUserInterface.Core
         internal void removeFromSelectedItems(CoreContainer coreContainer)
         {
             selected_items.Remove(coreContainer);
+        }
+
+        internal void updateLocalDrives()
+        {
+            foreach (CoreContainer item in canvas.Children)
+            {
+                if (item.GetContainerData().GetElement().GetType() == typeof(LocalDrives))
+                {
+                    LocalDrives localDrives = item.GetContainerData().GetElement() as LocalDrives;
+                    localDrives.updateDriveInfo();
+                }
+            }
         }
 
         private void select_containers()

@@ -22,6 +22,7 @@ using AidingElementsUserInterface.Core.AEUI_UserControls;
 using System.Windows.Media.Imaging;
 using System;
 using System.IO;
+using System.Windows.Interop;
 
 namespace AidingElementsUserInterface
 {
@@ -44,7 +45,6 @@ namespace AidingElementsUserInterface
         {
             InitializeComponent();
 
-
             build();
         }
 
@@ -53,7 +53,7 @@ namespace AidingElementsUserInterface
         {
             load_MainWindowData();
 
-            load_borderDefaults();
+            _backgroundImage();
 
             load_CoreCanvas();
         }
@@ -93,10 +93,6 @@ namespace AidingElementsUserInterface
                 {
                     border.Background = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
                 }
-                else
-                {
-                    border.Background = mainWindowData.background.GetBrush();
-                }
             }
         }
 
@@ -109,30 +105,8 @@ namespace AidingElementsUserInterface
                 mainWindowData = new MainWindowData();
             }
 
-            __MainWindow.Left = mainWindowData.initialPosition.X;
-            __MainWindow.Top = mainWindowData.initialPosition.Y;
-
-            __MainWindow.Width = mainWindowData.width;
-            __MainWindow.Height = mainWindowData.height;
-
-            //MessageBox.Show($"{coreData.width}\n{coreData.fontSize}\n{coreData.highlight}" +
-            //    $"\n{coreData.brushtype}" +
-            //    $"\n{coreData.cornerRadius}");
-
-
             data_Handler.AddMainWindowData(mainWindowData);
         }
-
-        private void load_borderDefaults()
-        {
-            border.CornerRadius = mainWindowData.cornerRadius;
-            border.BorderThickness = mainWindowData.thickness;
-
-            border.BorderBrush = mainWindowData.borderbrush.GetBrush();
-
-            _backgroundImage();
-        }
-
 
         private void load_CoreCanvas()
         {
@@ -340,7 +314,10 @@ namespace AidingElementsUserInterface
         {
             coreCanvas.add_element_to_canvas(new Command());
         }
-
+        private void MI_levelShifter_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new LevelShifter());
+        }
 
         #region control options menu item clicks
         private void MI_OPTIONS_general_Click(object sender, RoutedEventArgs e)
@@ -382,6 +359,11 @@ namespace AidingElementsUserInterface
 
 
         #region tools menu item clicks
+        private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
+        {
+            coreCanvas.add_element_to_canvas(new Elements.LocalDrives());
+        }
+
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {
             coreCanvas.add_element_to_canvas(new Elements.Random());
@@ -423,6 +405,41 @@ namespace AidingElementsUserInterface
             else
             {
                 __MainWindow.WindowState = WindowState.Maximized;
+            }
+        }
+
+         // origin:      https://stackoverflow.com/questions/16245706/check-for-device-change-add-remove-events
+        private IntPtr HwndHandler(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
+        {
+            if (msg == UsbNotification.WmDevicechange)
+            {
+                switch ((int)wparam)
+                {
+                    case UsbNotification.DbtDeviceremovecomplete:
+                        coreCanvas.updateLocalDrives();                        
+                        //updateDriveInfo(); // this is where you do your magic
+                        break;
+                    case UsbNotification.DbtDevicearrival:
+                        coreCanvas.updateLocalDrives();
+                        //updateDriveInfo(); // this is where you do your magic
+                        break;
+                }
+            }
+
+            handled = false;
+            return IntPtr.Zero;
+        }
+
+        private void __MainWindow_SourceInitialized(object sender, EventArgs e)
+        {
+            // origin:      https://stackoverflow.com/questions/16245706/check-for-device-change-add-remove-events
+            // Adds the windows message processing hook and registers USB device add/removal notification.
+            HwndSource source = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
+            if (source != null)
+            {
+                nint windowHandle = source.Handle;
+                source.AddHook(HwndHandler);
+                UsbNotification.RegisterUsbDeviceNotification(windowHandle);
             }
         }
     }
