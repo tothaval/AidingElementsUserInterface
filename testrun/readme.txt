@@ -63,13 +63,14 @@ commands via Command element:
 	current features:
 >ELEMENTNAME create new element of type ELEMENTNAME on canvas
  currently implemented elements are:
-	Command, Coordinates, FileLink, Image, LevelShifter, 
-	Link, LocalDrives, Manual, MyNote, OptionsElement_ButtonData,
-	Random, RightClickChoice
+	Command, Coordinates, CoreOptions, FileLink, Image, LevelShifter, 
+	Link, LocalDrives, Manual, MyNote, Random, RightClickChoice
 
 <NUMBER select specific container 
 <ELEMENTNAME select all elements of type ELEMENTNAME on canvas
 <° select all containers
+
+!.<° force delete all containers
 
 _______________________________________________
 Troubleshooting:

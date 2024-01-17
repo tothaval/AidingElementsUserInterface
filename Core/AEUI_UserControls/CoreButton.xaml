@@ -23,7 +23,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Name="btn"
+                        <Border x:Name="btn"
                                 Background="{DynamicResource ButtonData_background}"                                
                                 BorderThickness="{DynamicResource ButtonData_thickness}"
                                 BorderBrush="{DynamicResource ButtonData_borderbrush}"

@@ -31,7 +31,10 @@
     <Compile Update="Core\AEUI_UserControls\CoreTextBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Core\AEUI_UserControls\LevelShifter.xaml.cs">
+    <Compile Update="Core\AEUI_UserControls\LevelShift.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\SetupData.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Coordinates.xaml.cs">
@@ -132,7 +135,10 @@
     <Page Update="Core\AEUI_UserControls\CoreValueChange.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Core\AEUI_UserControls\LevelShifter.xaml">
+    <Page Update="Core\AEUI_UserControls\LevelShift.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\SetupData.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Coordinates.xaml">

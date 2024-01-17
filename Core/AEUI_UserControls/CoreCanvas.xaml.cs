@@ -9,6 +9,7 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.AEUI_Logic;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements;
@@ -43,13 +44,21 @@ namespace AidingElementsUserInterface.Core
 
         private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
 
+        private CallCentral callCentral;
+
         public CoreCanvas()
         {
             InitializeComponent();
 
             build();
+
+            callCentral = new CallCentral(ref __CoreCanvas);
         }
 
+        internal CallCentral GetCentral()
+        {
+            return callCentral;
+        }
 
         internal void add_element_to_canvas(UserControl content)
         {
