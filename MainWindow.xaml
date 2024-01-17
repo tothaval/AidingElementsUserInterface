@@ -176,41 +176,15 @@
                               
                           Click="MI_levelShifter_Click"/>
 
-                    <MenuItem x:Name="MI_options" 
-                          Header="options">
-                        <MenuItem x:Name="MI_OPTIONS_general"
-                          Header="general"
-                              
-                          Click="MI_OPTIONS_general_Click"/>
-
-                        <MenuItem x:Name="MI_OPTIONS_buttons"
-                          Header="buttons"
-                              
-                          Click="MI_OPTIONS_buttons_Click"/>
-
-                        <MenuItem x:Name="MI_OPTIONS_canvas"
-                          Header="canvas"
-                              
-                          Click="MI_OPTIONS_canvas_Click"/>
-
-                        <MenuItem x:Name="MI_OPTIONS_container"
-                          Header="container"
-                              
-                          Click="MI_OPTIONS_container_Click"/>
-
-                        <MenuItem x:Name="MI_OPTIONS_textboxes"
-                          Header="textboxes"
-                              
-                          Click="MI_OPTIONS_textboxes_Click"/>
-                    </MenuItem>
-
-
-
+                    <MenuItem x:Name="MI_options"                               
+                          Header="options"
+                          Click="MI_OPTIONS_Click"/>
+  
+                    
                     <MenuItem x:Name="MI_minimize"
                           Header="minimize"
                               
                           Click="MI_minimize_Click"/>
-
 
                     <MenuItem x:Name="MI_maximize"
                               Header="fullscreen"
@@ -225,7 +199,6 @@
                     <MenuItem x:Name="MI_shutdown"
                           Header="Shutdown"
                           Click="MI_shutdown_Click"/>
-
                 </MenuItem>
 
                 <MenuItem x:Name="MI_SelectionControl"                          
@@ -242,7 +215,6 @@
 
                     <MenuItem x:Name="MI_delete"
                               Header="delete"
-                              InputGestureText="Ctrl + X"
                               Click="MI_delete_Click"/>
 
                 </MenuItem>

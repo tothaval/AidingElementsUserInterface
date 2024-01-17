@@ -1,5 +1,5 @@
 ﻿/* Aiding Elements User Interface
- *      LevelShifter element 
+ *      LevelShift element 
  * 
  * basic element to set z-index and shift containers to a specific z-index
  * as well as z-index visibility
@@ -26,11 +26,11 @@ using System.Windows.Shapes;
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     /// <summary>
-    /// Interaktionslogik für LevelShifter.xaml
+    /// Interaktionslogik für LevelShift.xaml
     /// </summary>
-    public partial class LevelShifter : UserControl
+    public partial class LevelShift : UserControl
     {
-        public LevelShifter()
+        public LevelShift()
         {
             InitializeComponent();
         }

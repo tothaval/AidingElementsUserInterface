@@ -113,6 +113,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
         }
 
+        internal ref CoreCanvas GetCanvas()
+        {
+            return ref canvas;
+        }
+
         internal void hideContainerNesting(CoreContainer coreContainer)
         {
             coreContainer.element_border.Background = new SolidColorBrush(Colors.Transparent);

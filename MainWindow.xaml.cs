@@ -23,6 +23,8 @@ using System.Windows.Media.Imaging;
 using System;
 using System.IO;
 using System.Windows.Interop;
+using AidingElementsUserInterface.Core.AEUI_Logic;
+using System.Windows.Controls;
 
 namespace AidingElementsUserInterface
 {
@@ -38,7 +40,7 @@ namespace AidingElementsUserInterface
 
         internal ElementHandler element_handler = new ElementHandler();
 
-        internal SharedLogic logic = new SharedLogic();
+        internal SharedLogic logic = new SharedLogic();        
 
 
         public MainWindow()
@@ -65,7 +67,7 @@ namespace AidingElementsUserInterface
         {
             if (MI_MyNote.IsChecked)
             {
-                coreCanvas.add_element_to_canvas(new MyNote());
+                coreCanvas.GetCentral().ExecuteCommandRequest($">MyNote");
             }
             else
             {
@@ -78,7 +80,7 @@ namespace AidingElementsUserInterface
             // disabled until fixed
             //if (MI_FlatShareCC.IsChecked)
             //{
-            //    coreCanvas.add_element_to_canvas(new FlatShareCC());
+            //coreCanvas.GetCentral().ExecuteCommandRequest($">FlatShareCC");
             //}
             //else
             //{
@@ -155,17 +157,10 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.X)
-            {
-                if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-                {
-                    coreCanvas.delete_selected_items();
-                }
-            }
 
             if (e.Key == Key.F1)
             {
-                coreCanvas.add_element_to_canvas(new Manual());
+                coreCanvas.GetCentral().ExecuteCommandRequest($">Manual");
             }
 
             if (e.Key == Key.F2)
@@ -273,22 +268,22 @@ namespace AidingElementsUserInterface
         #region elements menu item clicks
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.Coordinates());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_FileLink_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.FileLink());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_Image_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.Image());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_Link_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.Link());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_MyNote_Click(object sender, RoutedEventArgs e)
@@ -305,45 +300,27 @@ namespace AidingElementsUserInterface
         #region about menu item clicks
         private void MI_manual_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.Manual());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
         #endregion about menu item clicks
 
         #region control menu item clicks
         private void MI_command_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Command());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
         private void MI_levelShifter_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new LevelShifter());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         #region control options menu item clicks
-        private void MI_OPTIONS_general_Click(object sender, RoutedEventArgs e)
+        private void MI_OPTIONS_Click(object sender, RoutedEventArgs e)
         {
-
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
-        private void MI_OPTIONS_buttons_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.add_element_to_canvas(new OptionsElement_ButtonData());
-        }
-
-        private void MI_OPTIONS_canvas_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MI_OPTIONS_container_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MI_OPTIONS_textboxes_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+    
         #endregion control options menu item clicks
 
         private void MI_quit_Click(object sender, RoutedEventArgs e)
@@ -361,17 +338,17 @@ namespace AidingElementsUserInterface
         #region tools menu item clicks
         private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.LocalDrives());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.Random());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
 
         private void MI_RightClickChoice_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.add_element_to_canvas(new Elements.RightClickChoice());
+            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
         }
         #endregion tools menu item clicks
 

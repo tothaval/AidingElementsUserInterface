@@ -52,14 +52,14 @@
       </imageFilePath>
     </CoreData>
     <CanvasName>mainWindowCanvas</CanvasName>
-    <ContainerDataFilename>5.xml</ContainerDataFilename>
-    <z_position>800</z_position>
+    <ContainerDataFilename>6.xml</ContainerDataFilename>
+    <z_position>200</z_position>
   </ContainerData>
   <Content>
-    <Type>CoreOptions</Type>
+    <Type>RightClickChoice</Type>
   </Content>
   <Position>
-    <x>541</x>
-    <y>50</y>
+    <x>376</x>
+    <y>172</y>
   </Position>
 </Container>
