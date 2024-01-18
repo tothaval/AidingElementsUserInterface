@@ -491,6 +491,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     node_CanvasData.AppendChild(aux_node);
                 }
 
+                XmlNode last_level = xmlDocument.CreateElement("canvasName");
+                last_level.InnerText = canvasData.last_level.ToString();
+                node_CanvasData.AppendChild(last_level);
+
                 XmlNode canvasName = xmlDocument.CreateElement("canvasName");
                 canvasName.InnerText = canvasData.canvasName;
                 node_CanvasData.AppendChild(canvasName);

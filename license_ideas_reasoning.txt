@@ -1,0 +1,134 @@
+1.
+i won’t take time now to proper research terms and concepts, because it will deviate me from continuing the project, which is more important right now than its distribution once it is finished,
+however, i have gathered some thoughts towards the topic
+
+2.
+the purpose of this document is to showcase these ideas
+
+3.
+this is not a license yet
+
+
+__________________________
+open knowledge license idea:
+-	free usage of concepts, code structures or solutions invented
+	by YourStartUp, YRS, YSUI or AEUI for the following bunches of people(s):
+	
+	- 	non profit or eductional organizations, institutions, works and projects
+	-	enterprises and businesses with an annual income below 1 million euro
+	-	artists and social influencers with an annual income below 1 million euro
+	
+	if you intend to make money out of a concept or solution invented by AEUI or
+	the afformentioned source code sources, you’ll need to aquire a
+	code concept adaptation right outlined further down this read, intented as a
+	separate type of license that can be included or excluded in a okl workplace license,
+	or can 	be aquired separately, the pricing will be based on 1/10 of the business or 	institutional pricing models, will be optionizable to vary within fixed intervals
+
+	if you unintentional make a lot of money out of a non or low profit effort using AEUI 
+	or one of its features, you violate this agreement and therefore you’ll have to pay
+	a penalty of 25.000 euro, which will be donated towards non profit projects
+	and you will have to aquire a proper license
+
+	if you sell elements or themes in an AEUI marketplace, there will be a fee
+	based on business license pricing, 
+
+	in case of participation in marketplace activities registration becomes mandatory
+	and you’ll need to register a bank account or payment service to buy or sell 
+	elements, themes or other services via the marketplace or a AEUI license account
+
+	if you earn money out of advertisement within an AEUI element,
+	there will be a fee based on business license pricing
+
+-	free usage, free of charge distribution, compiling, source altering
+	in local copies etc. for the following bunches of people(s):
+
+	-	educational institutions like schools, kindergardens, universities and the like
+		(not sure in case of (the administration offices of) private educational
+		institutions yet)
+	-	non profit organisations like charity institutions, associations,
+		foundations with benefitiary goals towards society, nature, life and knowledge
+	- 	private citizens
+	-	enterprises or profit oriented businesses with an annual income
+		below 1 million euro
+
+-	public organizations and institutions can aquire an institutional license
+		? separat grantings of rights towards code changes, security measures…
+
+		fixed, not yet defined, price, adjustet for inflation
+		license bundles could be 
+		10-12, 100-120, 1.000-1.200, 10.000-12.000, 100.000-120.000 users
+
+		longterm contract price reduction			annual price per bundle
+		>2 years	new price = fixed price * 0.2  	fifth of initial price
+		>4 years	new price = fixed price * 0.5		half of new price
+		>8 years	new price = fixed price * 0.02	fifth / 10 of new price
+		>16 years	new price = fixed price * 0.05	half / 10 ...
+		>32 years	new price = fixed price * 0.002	fifth / 100 ...
+		>64 years	new price = fixed price * 0.005	half / 100 …
+		unless a law prohibits further exploitation of time, 
+		if so, then pricing shall end according to the law
+
+- 	businesses and enterprises
+		AEUI enterprise workplace license
+		similar to institutional license
+
+		AEUI monetarization right (sell elements, themes, distribute custom AEUIs)
+		relative price, based on product price for software, AEUI elements and AEUI themes
+		relative price, based on product price and in regards toward the rest of the product,  		f.e. manufactored goods, where AEUI or parts of it are a component in a larger			assembly		
+
+		longterm contract price reduction			new relative price per product
+		>2 years	relative price base = product price  * 0.05 five percent 
+		>4 years	relative price base = product price * 0.01	one percent
+		>8 years	relative price base = product price * 0.005	half percent
+		>16 years	relative price base = product price * 0.001	one per mille
+		unless a law prohibits further exploitation of time, 
+		if so, then pricing shall end according to the law
+
+-	buy me license, grants a single lifetime license, applies to private citizens only
+		everyone is allowed to buy AEUI, regardless that it is free, make your price and pay
+
+-	AEUI will distribute money gathered from pricing:
+		50% 	donate towards open  knowledge and open source projects
+		25%	donate towards development aid, nature protection and world hunger projects
+		25%	AEUI and AEUI staff
+	75% should not be an OKL requirement, but an option, because of costs
+		25% – 50% (or starting by 10%) should be the requirement
+
+_______________
+Code and Concept Application and Adaption Right
+- to support the distribution of knowledge and gains in pragmatism, to propagate time savings so that more people have less time wasted in their lives on tech and tech processes
+- CCAAR grants the right to monetarize code structures or the concept of AEUI and its predecessors
+- unless granted otherwise to a project of an public security institution and associated project
+contractors, CCAARs require that the product is released under the open knowledge license (okl)
+- pricing starts on product release, not before, so evaluation and prototyping is free of charge
+- if released under OKL, CCAARs relative price base is:
+		>8 years	relative price base = product price  * 0.005 five per mille 
+		>16 years	relative price base = product price * 0.001 five per mille
+		>32 years	relative price base = product price * 0.0005	half per mille
+- CCAAR pricing can alternatively be done via a granted CCAAR on the product and 10 lifetime workplace licenses or another type of license, that grants the right to use and monetarize the new product that was made possible due to CCAAR sharing
+
+- income generated via CCAAR enabled products (2nd+ generation), that have themselves
+been released under OKL and granted a CCAAR towards a next gen project(3rd+ generation), has a fee towards the original  CCAAR origin/source(1st generation), which is 1% of the income the 2nd generation receives
+
+- no more than two CCAAR generations earn income from next generation CCAARs
+:: example: 
+	origin < 5% < CCAAR 1
+	origin <1% < CCAAR1 < 5 % CCAAR 2
+	origin < 0% < CCAAR1 < 1% < CCAAR 2 < 5% < next gen
+
+- every CCAAR transaction has a fee of 1% towards an non profit OKL foundation
+ that administrates OKL investments and donations and could receive the 75% that
+are intended for donations and investments towards open knowledge and better living
+standards and planetary living conditions.
+
+__________________________
+4.
+the ideas in this document are a rough estimate towards licensing and pricing, so for the most part,
+the project will be accessible free of charge for a majority of low income or non profit users
+
+5.
+until stated otherwise, AEUI is currently not licensed, but the testrun folder within the project is, so feel free to try the demos and builds, that are accessible through that github project folder
+
+
+author: Stephan Kammel (fractal void), 2024|01|18
+mail: 	kammel@posteo.de

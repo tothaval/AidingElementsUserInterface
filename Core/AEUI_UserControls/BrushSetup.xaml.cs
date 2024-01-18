@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     /// <summary>
-    /// Interaktionslogik für SetupData.xaml
+    /// Interaktionslogik für BrushSetup.xaml
     /// </summary>
-    public partial class SetupData : UserControl
+    public partial class BrushSetup : UserControl
     {
-        public SetupData()
+        public BrushSetup()
         {
             InitializeComponent();
         }

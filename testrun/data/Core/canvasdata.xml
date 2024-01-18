@@ -51,7 +51,8 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <canvasName>canvas</canvasName>
+    <canvasName>0</canvasName>
+    <canvasName>0</canvasName>
     <grouping_displacement>25</grouping_displacement>
     <z_level_MAX>100</z_level_MAX>
     <z_level_MIN>-100</z_level_MIN>

@@ -10,7 +10,6 @@
 using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.Auxiliaries;
-using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Texts;
 
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AidingElementsUserInterface.Elements
+namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     public class Manual : CoreContainer
     {
@@ -65,16 +64,16 @@ namespace AidingElementsUserInterface.Elements
             CB_PageLeft.button.Click += CB_PageLeft_Click;
             CB_PageRight.button.Click += CB_PageRight_Click;
 
-            WrapPanel horizontalWrapPanel = new WrapPanel() { Margin = new Thickness(1)};
+            WrapPanel horizontalWrapPanel = new WrapPanel() { Margin = new Thickness(1) };
             horizontalWrapPanel.Children.Add(CB_PageLeft);
             horizontalWrapPanel.Children.Add(CB_PageRight);
 
-            textbox = new CoreTextBox(true) { Margin = new Thickness(1)};
+            textbox = new CoreTextBox(true) { Margin = new Thickness(1) };
             textbox.setText(content_pages[0].ToString());
             textbox._readonly_no_caret();
             textbox._scrolling();
 
-            WrapPanel verticalWrapPanel = new WrapPanel() { Orientation = Orientation.Vertical};
+            WrapPanel verticalWrapPanel = new WrapPanel() { Orientation = Orientation.Vertical };
             verticalWrapPanel.Children.Add(horizontalWrapPanel);
             verticalWrapPanel.Children.Add(textbox);
 

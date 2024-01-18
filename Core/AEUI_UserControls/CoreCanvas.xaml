@@ -7,13 +7,14 @@
         CoreCanvas.cs
         ...?
     -->
-    <UserControl x:Class="AidingElementsUserInterface.Core.CoreCanvas"
+<UserControl x:Class="AidingElementsUserInterface.Core.CoreCanvas"
              x:Name="__CoreCanvas"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:usercontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
                  
@@ -47,12 +48,48 @@
             PreviewKeyDown="canvas_KeyDown"
             PreviewKeyUp="canvas_KeyUp"
             >
+        <Border x:Name="border_level"
+                
+                Visibility="Visible"
+                
+                Panel.ZIndex="30001"  
+                
+                Background="{DynamicResource CanvasData_background}"
+                BorderBrush="{DynamicResource CanvasData_borderbrush}"
+                BorderThickness="{DynamicResource CanvasData_thickness}"
+                CornerRadius="{DynamicResource CanvasData_cornerRadius}"
+                >
+            <Grid x:Name="border_level_grid"
+                  Background="Transparent">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border x:Name="border_LevelBar"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        >
+                    <usercontrols:LevelBar x:Name="_LevelBar"/>
+                </Border>
+
+            </Grid>
+
+        </Border>
 
     </Canvas>
 </UserControl>
 
 <!--KeyDown="canvas_KeyDown"
-            KeyUp="canvas_KeyUp"-->
+            KeyUp="canvas_KeyUp"
     
     
+    Panel.ZIndex="{DynamicResource Level}"-->
+
+
 <!-- end of file -->
