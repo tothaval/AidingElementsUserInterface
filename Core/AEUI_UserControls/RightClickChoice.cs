@@ -10,14 +10,13 @@
  * mail:        kammel@posteo.de
  */
 using AidingElementsUserInterface.Core;
-using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace AidingElementsUserInterface.Elements
+namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
     internal class RightClickChoice : CoreContainer
     {

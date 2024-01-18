@@ -18,7 +18,21 @@ using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
-    //  
+    //  save language xml files in folder languages\LANGUAGE\FILENAME.xml
+    //  major content like manual, license terms or other large aeui system texts
+    //  get a file each, if not too much, every other control text will be saved in one file.
+
+    //  with a content save and load system for xml files, a LanguageData class shall be filled
+    //  or pointed towards the appropriate folder, if every file is named the same, the folder
+    //  is the only relevant criteria for selection, the rest will be done via the xml markup fields
+
+    //  one method in this class must translate all menu item headers before a call to CallCentral
+    //  otherwise the elements will not be found
+
+    //  alternatively replace $">{((MenuItem)sender).Header} with ">ELEMENTCLASSNAME"
+
+    // in consequence, TXT_NAME.cs files will be deleted and replaced with this class and a LanguageData class
+
 
     internal class LanguageProvider
     {

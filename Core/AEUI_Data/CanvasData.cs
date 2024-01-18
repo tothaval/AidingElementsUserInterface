@@ -16,6 +16,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     internal class CanvasData : CoreData
     {
         // name of canvas
+        internal int last_level { get; set; }
+
         internal string canvasName { get; set; }
 
         // element grid width and height
@@ -37,6 +39,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public CanvasData()
         {
+            last_level = 0;
+
             canvasName = "canvas";
             imageFilePath = "";
 
@@ -61,6 +65,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
+
+            last_level = 0;
 
             canvasName = "canvas";
             imageFilePath = "";

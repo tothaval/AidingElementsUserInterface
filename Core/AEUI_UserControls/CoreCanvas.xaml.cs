@@ -111,6 +111,18 @@ namespace AidingElementsUserInterface.Core
                 config = new CanvasData();
             }
 
+            Application.Current.Resources["Level"] = config.last_level;
+            Application.Current.Resources["CurrentLevel"] = config.last_level;
+
+            Application.Current.Resources["LevelBarHeight"] = (double)75;
+
+            Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
+            Application.Current.Resources["LevelShiftOrientationScroll"] = Orientation.Horizontal;
+            Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Vertical;
+
+            //Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
+            //Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Horizontal;
+
             data_Handler.AddCanvasData(config);
 
             load();
@@ -338,12 +350,18 @@ namespace AidingElementsUserInterface.Core
 
         internal void selectContainer(int containerId)
         {
-            foreach (CoreContainer item in canvas.Children)
+            foreach (UserControl child in canvas.Children)
             {
-                if (item.GetContainerData().ContainerDataFilename.Equals($"{containerId}.xml"))
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    item.select();
+                    CoreContainer item = child as CoreContainer;
+
+                    if (item.GetContainerData().ContainerDataFilename.Equals($"{containerId}.xml"))
+                    {
+                        item.select();
+                    }
                 }
+                
             }
         }
 

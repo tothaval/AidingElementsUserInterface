@@ -53,7 +53,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             build();
         }
 
-        public CoreValueChange(bool has_button, bool prevent_default_click, bool no_limits, string value_identifier )
+        public CoreValueChange(bool has_button, bool prevent_default_click, bool no_limits, string value_identifier)
         {
             this.has_button = has_button;
             this.prevent_default_click = prevent_default_click;
@@ -75,7 +75,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 }
                 else
                 {
-                    coreButton= new CoreButton(false);
+                    coreButton = new CoreButton(false);
 
                     CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
                     if (textBoxData != null)
@@ -100,7 +100,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             this.has_button = has_button;
             this.prevent_default_click = prevent_default_click;
 
-            InitializeComponent();            
+            InitializeComponent();
 
             if (has_button)
             {
@@ -120,7 +120,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 coreButton.setContent("-");
 
-            }                        
+            }
 
             TB_value_identifier.setText(value_identifier);
 
@@ -135,8 +135,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 if (prevent_default_click) return;
 
-                coreButton.button.Click += Button_Click;      
-                
+                coreButton.button.Click += Button_Click;
+
             }
             else
             {
@@ -146,6 +146,38 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 CTB_Value.textbox.KeyUp += textbox_KeyUp;
                 CTB_Value.textbox.MouseDoubleClick += textbox_MouseDoubleClick;
             }
+        }
+
+
+        internal void setButtonConfiguration(string value_identifier, bool has_button, bool prevent_default_click)
+        {
+            this.has_button = has_button;
+            this.prevent_default_click = prevent_default_click;
+
+            if (has_button)
+            {
+                coreButton = new CoreButton(false);
+
+                CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
+                if (textBoxData != null)
+                {
+                    // so it blends in with the surrounding textboxes
+                    coreButton.button.MaxWidth = textBoxData.width;
+                    coreButton.button.MaxHeight = textBoxData.height;
+                }
+
+                CTB_Value.Visibility = Visibility.Collapsed;
+
+                coreButton.Visibility = Visibility.Visible;
+
+                coreButton.setContent("-");
+
+            }
+
+            TB_value_identifier.setText(value_identifier);
+
+            build();
+
         }
 
         internal void setIdentifier(string value_identifier)
@@ -168,12 +200,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
             else
             {
-                if (prevent_default_click) 
+                if (prevent_default_click)
                 {
                     coreButton.setTooltip(text);
                     coreButton.setContent(text);
 
-                    return; 
+                    return;
                 }
 
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -189,7 +221,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 else
                 {
                     coreButton.setTooltip(text);
-                    coreButton.setContent(text);     
+                    coreButton.setContent(text);
                 }
             }
         }
