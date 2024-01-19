@@ -199,21 +199,21 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                     if (type != null)
                     {
-                        new SharedLogic().GetMainWindow().coreCanvas.selectType(type);
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.selectType(type);
                         return SIGIL_Codex[codex].SigilIdentifier;
                     }
 
                     type = Type.GetType($"AidingElementsUserInterface.Elements.{target}.{target}, AidingElementsUserInterface");
                     if (type != null)
                     {
-                        new SharedLogic().GetMainWindow().coreCanvas.selectType(type);
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.selectType(type);
                         return SIGIL_Codex[codex].SigilIdentifier;
                     }
 
                     type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{target}, AidingElementsUserInterface");
                     if (type != null)
                     {
-                        new SharedLogic().GetMainWindow().coreCanvas.selectType(type);
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.selectType(type);
                         return SIGIL_Codex[codex].SigilIdentifier;
                     }
                 }

@@ -43,10 +43,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreValueChange CVC_canvasName = new CoreValueChange("canvas name");
         private CoreValueChange CVC_element_spacing = new CoreValueChange("element spacing");
         private CoreValueChange CVC_grouping_displacement = new CoreValueChange("grouping displacement");
-        private CoreValueChange CVC_dragLevel = new CoreValueChange("dragLevel");
-        private CoreValueChange CVC_hoverLevel = new CoreValueChange("hoverLevel");
-        private CoreValueChange CVC_z_level_MAX = new CoreValueChange("z level MAX");
-        private CoreValueChange CVC_z_level_MIN = new CoreValueChange("z level MIN");
         #endregion CanvasData CVCs
 
         #region ContainerData CVCs
@@ -74,6 +70,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreValueChange CVC_language = new CoreValueChange("language");
         #endregion MainWindowData CVCs
 
+        private CoreButton CB_changeSelection = new CoreButton("change selection");
         private CoreButton CB_saveChanges = new CoreButton("save changes");
 
         private enum AEUI_Data_Types
@@ -83,6 +80,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             [Description("canvasdata.xml")]
             Canvas,
+
+            [Description("containerdata.xml")]
+            Container,
 
             [Description("buttondata.xml")]
             Button,
@@ -105,6 +105,17 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             build();
         }
 
+        private void ApplySelectionChange()
+        {
+            if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.Container)
+            {
+                CoreCanvas active_canvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+                active_canvas.ChangeSelectionData(ParseContainerDataCVCs());
+            }
+        }
+
+
         private void CONFIGURATION_CanvasData()
         {
             CanvasData canvasData = new SharedLogic().GetDataHandler().GetCanvasData();
@@ -117,18 +128,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CVC_canvasName);
             wrapPanel.Children.Add(CVC_element_spacing);
             wrapPanel.Children.Add(CVC_grouping_displacement);
-            wrapPanel.Children.Add(CVC_dragLevel);
-            wrapPanel.Children.Add(CVC_hoverLevel);
-            wrapPanel.Children.Add(CVC_z_level_MAX);
-            wrapPanel.Children.Add(CVC_z_level_MIN);
 
             CVC_canvasName.setText(canvasData.canvasName.ToString());
             CVC_element_spacing.setText(canvasData.element_spacing.ToString());
             CVC_grouping_displacement.setText(canvasData.grouping_displacement.ToString());
-            CVC_dragLevel.setText(canvasData.dragLevel.ToString());
-            CVC_hoverLevel.setText(canvasData.hoverLevel.ToString());
-            CVC_z_level_MAX.setText(canvasData.z_level_MAX.ToString());
-            CVC_z_level_MIN.setText(canvasData.z_level_MIN.ToString());
 
             CONFIGURATION_CoreData(canvasData);
 
@@ -181,7 +184,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CVC_height);
             wrapPanel.Children.Add(CVC_width);
 
-            CVC_background.setText("setup brush"); 
+            CVC_background.setText("setup brush");
             CVC_background.coreButton.button.Background = coreData.background.GetBrush();
             CVC_background.setObject(coreData.background);
 
@@ -229,6 +232,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.MainWindow);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Canvas);
+            CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Container);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Button);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Label);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.TextBox);
@@ -242,7 +246,18 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             stackPanel.Children.Add(CBX_dataTypeSelection);
             stackPanel.Children.Add(wrapPanel);
-            stackPanel.Children.Add(CB_saveChanges);
+
+            #region buttonPanel
+            StackPanel buttonPanel = new StackPanel()
+            {
+                Orientation = Orientation.Horizontal,
+            };
+
+            buttonPanel.Children.Add(CB_saveChanges);
+            buttonPanel.Children.Add(CB_changeSelection);
+            #endregion buttonPanel
+
+            stackPanel.Children.Add(buttonPanel);
 
             content_border.Child = stackPanel;
 
@@ -254,6 +269,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void registerEvents()
         {
+            CB_changeSelection.button.Click += CB_changeSelection_Click;
             CB_saveChanges.button.Click += CB_saveChanges_Click;
 
             CBX_dataTypeSelection.SelectionChanged += CBX_dataTypeSelection_SelectionChanged;
@@ -276,6 +292,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     CONFIGURATION_CanvasData();
                     break;
 
+                case (int)AEUI_Data_Types.Container:
+                    CONFIGURATION_ContainerData();
+                    break;
+
                 case (int)AEUI_Data_Types.Button:
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetButtonData());
                     break;
@@ -288,7 +308,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetTextBoxData());
                     break;
 
-                case (int)AEUI_Data_Types.Core:     
+                case (int)AEUI_Data_Types.Core:
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetCoreData());
                     break;
 
@@ -297,11 +317,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
         }
 
-        private void CBX_dataTypeSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private ContainerData ParseContainerDataCVCs()
         {
-            selectionChange(sender);
-        }
+            ContainerData containerData = new ContainerData(ParseCoreDataCVCs());
 
+            containerData.ContainerDataFilename = CVC_ContainerDataFilename.value;
+            containerData.z_position = int.Parse(CVC_z_position.Value);
+
+            return containerData;
+        }
         private CoreData ParseCoreDataCVCs()
         {
             CoreData coreData = new CoreData();
@@ -343,12 +367,67 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void Save_MainWindowData()
         {
+            MainWindowData mainWindowData = new MainWindowData(ParseCoreDataCVCs());
 
+            mainWindowData.initialPosition = new SharedLogic().ParsePoint(CVC_initialPosition.value);
+            mainWindowData.language = CVC_language.value;
+
+            Application.Current.MainWindow.Resources["MainWindowData_background"] = mainWindowData.background.GetBrush();
+            Application.Current.MainWindow.Resources["MainWindowData_borderbrush"] = mainWindowData.borderbrush.GetBrush();
+            Application.Current.MainWindow.Resources["MainWindowData_foreground"] = mainWindowData.foreground.GetBrush();
+            Application.Current.MainWindow.Resources["MainWindowData_highlight"] = mainWindowData.highlight.GetBrush();
+                                    
+            Application.Current.MainWindow.Resources["MainWindowData_cornerRadius"] = mainWindowData.cornerRadius;
+            Application.Current.MainWindow.Resources["MainWindowData_thickness"] = mainWindowData.thickness;
+                               
+            Application.Current.MainWindow.Resources["MainWindowData_fontSize"] = (double)mainWindowData.fontSize;
+            Application.Current.MainWindow.Resources["MainWindowData_fontFamily"] = mainWindowData.fontFamily;
+                             
+            Application.Current.MainWindow.Resources["MainWindowData_width"] = mainWindowData.width;
+            Application.Current.MainWindow.Resources["MainWindowData_height"] = mainWindowData.height;
+
+            if (mainWindowData.imageFilePath != null)
+            {
+                if (File.Exists(mainWindowData.imageFilePath))
+                {
+                    Application.Current.MainWindow.Resources["MainWindowData_image"] = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
+                    Application.Current.MainWindow.Resources["MainWindowData_background"] = Application.Current.MainWindow.Resources["MainWindowData_image"];
+                }
+            }
+
+            handler.SetMainWindowData(mainWindowData);
         }
 
         private void Save_CanvasData()
         {
+            CanvasData canvasData = new CanvasData(ParseCoreDataCVCs());
 
+            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            coreCanvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
+            coreCanvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
+            coreCanvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
+            coreCanvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
+            
+            coreCanvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
+            coreCanvas.Resources["CanvasData_thickness"] = canvasData.thickness;
+            
+            coreCanvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
+            coreCanvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
+            
+            coreCanvas.Resources["CanvasData_width"] = canvasData.width;
+            coreCanvas.Resources["CanvasData_height"] = canvasData.height;
+
+            if (canvasData.imageFilePath != null)
+            {
+                if (File.Exists(canvasData.imageFilePath))
+                {
+                    coreCanvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
+                    coreCanvas.Resources["CanvasData_background"] = coreCanvas.Resources["CanvasData_image"];
+                }
+            }
+
+            handler.SetCanvasData(canvasData);
         }
 
         private void Save_ButtonData()
@@ -359,13 +438,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["ButtonData_borderbrush"] = coreData.borderbrush.GetBrush();
             Application.Current.Resources["ButtonData_foreground"] = coreData.foreground.GetBrush();
             Application.Current.Resources["ButtonData_highlight"] = coreData.highlight.GetBrush();
-                                           
+
             Application.Current.Resources["ButtonData_cornerRadius"] = coreData.cornerRadius;
             Application.Current.Resources["ButtonData_thickness"] = coreData.thickness;
-                                           
+
             Application.Current.Resources["ButtonData_fontSize"] = (double)coreData.fontSize;
             Application.Current.Resources["ButtonData_fontFamily"] = coreData.fontFamily;
-                                           
+
             Application.Current.Resources["ButtonData_width"] = coreData.width;
             Application.Current.Resources["ButtonData_height"] = coreData.height;
 
@@ -380,6 +459,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             handler.SetButtonData(coreData);
         }
+
+        private void Save_ContainerData()
+        {
+            ContainerData containerData = new ContainerData(ParseCoreDataCVCs());
+
+            handler.SetContainerData(containerData);
+        }
+
+
         private void Save_LabelData()
         {
             CoreData coreData = ParseCoreDataCVCs();
@@ -388,13 +476,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["LabelData_borderbrush"] = coreData.borderbrush.GetBrush();
             Application.Current.Resources["LabelData_foreground"] = coreData.foreground.GetBrush();
             Application.Current.Resources["LabelData_highlight"] = coreData.highlight.GetBrush();
-                                           
+
             Application.Current.Resources["LabelData_cornerRadius"] = coreData.cornerRadius;
             Application.Current.Resources["LabelData_thickness"] = coreData.thickness;
-                                           
+
             Application.Current.Resources["LabelData_fontSize"] = (double)coreData.fontSize;
             Application.Current.Resources["LabelData_fontFamily"] = coreData.fontFamily;
-                                           
+
             Application.Current.Resources["LabelData_width"] = coreData.width;
             Application.Current.Resources["LabelData_height"] = coreData.height;
 
@@ -417,13 +505,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["TextBoxData_borderbrush"] = coreData.borderbrush.GetBrush();
             Application.Current.Resources["TextBoxData_foreground"] = coreData.foreground.GetBrush();
             Application.Current.Resources["TextBoxData_highlight"] = coreData.highlight.GetBrush();
-                                           
+
             Application.Current.Resources["TextBoxData_cornerRadius"] = coreData.cornerRadius;
             Application.Current.Resources["TextBoxData_thickness"] = coreData.thickness;
-                                           
+
             Application.Current.Resources["TextBoxData_fontSize"] = (double)coreData.fontSize;
             Application.Current.Resources["TextBoxData_fontFamily"] = coreData.fontFamily;
-                                           
+
             Application.Current.Resources["TextBoxData_width"] = coreData.width;
             Application.Current.Resources["TextBoxData_height"] = coreData.height;
 
@@ -446,13 +534,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["CoreData_borderbrush"] = coreData.borderbrush.GetBrush();
             Application.Current.Resources["CoreData_foreground"] = coreData.foreground.GetBrush();
             Application.Current.Resources["CoreData_highlight"] = coreData.highlight.GetBrush();
-                                           
+
             Application.Current.Resources["CoreData_cornerRadius"] = coreData.cornerRadius;
             Application.Current.Resources["CoreData_thickness"] = coreData.thickness;
-                                           
+
             Application.Current.Resources["CoreData_fontSize"] = (double)coreData.fontSize;
             Application.Current.Resources["CoreData_fontFamily"] = coreData.fontFamily;
-                                           
+
             Application.Current.Resources["CoreData_width"] = coreData.width;
             Application.Current.Resources["CoreData_height"] = coreData.height;
 
@@ -468,6 +556,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             handler.SetCoreData(coreData);
         }
 
+        private void CB_changeSelection_Click(object sender, RoutedEventArgs e)
+        {
+            ApplySelectionChange();
+        }
 
         private void CB_saveChanges_Click(object sender, RoutedEventArgs e)
         {
@@ -480,6 +572,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 case (int)AEUI_Data_Types.Canvas:
                     Save_CanvasData();
+                    break;
+
+                case (int)AEUI_Data_Types.Container:
+                    Save_ContainerData();
                     break;
 
                 case (int)AEUI_Data_Types.Button:
@@ -502,13 +598,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     break;
             }
 
-
-
             //ideas:
             //make new function, build in type check, either here, ore in CoreValueChange by passing in
             // an int type, check string using this function, and using get..()
-
-
+        }
+        private void CBX_dataTypeSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectionChange(sender);
         }
     }
 }

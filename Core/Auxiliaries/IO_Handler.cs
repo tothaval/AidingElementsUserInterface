@@ -22,17 +22,22 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 {
     internal class IO_Handler
     {
+        internal string[] CoreCanvasScreens = new string[10];
+
         // Core paths
         #region Core paths
         // files
         internal string ButtonData_file = @".\data\Core\buttondata.xml";
         internal string CanvasData_file = @".\data\Core\canvasdata.xml";
+        internal string ContainerData_file = @".\data\Core\containerdata.xml";
         internal string CoreData_file = @".\data\Core\coredata.xml";
         internal string LabelData_file = @".\data\Core\labeldata.xml";
         internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
         internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
         // folders
-        internal string Core_xml_folder = @"data\Core\";        
+        internal string Core_xml_folder = @"data\Core\";
+        internal string Core_Screens_folder = @"data\Core\Screens\";
+
         internal string ContainerData_xml_folder = @"data\Core\ContainerData\";
         #endregion Core paths
 
@@ -47,30 +52,59 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal string MyNote_notes_matrix_folder = @"data\MyNote\notes_matrix\";
         internal string MyNote_xml_folder = @"\data\MyNote\";
 
-        internal IO_Handler(CoreData coreData)
+        internal IO_Handler()
         {
-            check_path(Core_xml_folder);
-            check_path(ContainerData_xml_folder);
+            build_path_structure();
         }
 
-        internal IO_Handler(FlatData flatShareCC)
+        private void build_path_structure()
         {
+            if (!check_path(Core_xml_folder))
+            {
+                if (!check_path(Core_Screens_folder))
+                {
+                    for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
+                    {
+                        string screen_folder = $"{Core_Screens_folder}\\{i}\\";
+
+                        if (!check_path(screen_folder))
+                        {
+                            string level_folder = $"{screen_folder}\\Levels\\";
+                            check_path(level_folder);
+
+                            string level_lower = $"{level_folder}\\Lower\\";
+                            check_path(level_lower);
+
+                            string level_upper = $"{level_folder}\\Upper\\";
+                            check_path(level_upper);
+                        }
+                    }
+                }
+
+            }
+
             check_path(FlatShareCC_xml_folder);
+
+            if (!check_path(MyNote_notes_folder))
+            {
+                check_path(MyNote_notes_matrix_folder);
+                check_path(MyNote_xml_folder);
+            }
+
+            check_path(ContainerData_xml_folder);           
+
         }
 
-        internal IO_Handler(MyNote myNote)
-        {
-            check_path(MyNote_notes_folder);
-            check_path(MyNote_notes_matrix_folder);
-            check_path(MyNote_xml_folder);
-        }
-
-        private void check_path(string path)
+        private bool check_path(string path)
         {
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+
+                return false;
             }
+
+            return true;
         }
 
         internal void delete_files(string folderpath)

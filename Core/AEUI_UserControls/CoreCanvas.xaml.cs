@@ -7,6 +7,8 @@
  * init:        2023|11|27
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
+ * 
+ * nicht mal nachvollziehbar. so wenig kann ich tatsächlich.
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_Logic;
@@ -39,6 +41,8 @@ namespace AidingElementsUserInterface.Core
     public partial class CoreCanvas : UserControl
     {
         private CanvasData config;
+        private string canvas_name;
+
         private System.Windows.Point selection_point;
         private System.Windows.Shapes.Rectangle selection_rectangle;
 
@@ -48,6 +52,8 @@ namespace AidingElementsUserInterface.Core
 
         public CoreCanvas()
         {
+            this.canvas_name = "core canvas";
+
             InitializeComponent();
 
             build();
@@ -55,10 +61,17 @@ namespace AidingElementsUserInterface.Core
             callCentral = new CallCentral(ref __CoreCanvas);
         }
 
-        internal CallCentral GetCentral()
+        public CoreCanvas(string canvas_name)
         {
-            return callCentral;
+            this.canvas_name = canvas_name;
+
+            InitializeComponent();
+
+            build();
+
+            callCentral = new CallCentral(ref __CoreCanvas);
         }
+
 
         internal void add_element_to_canvas(UserControl content)
         {
@@ -108,11 +121,11 @@ namespace AidingElementsUserInterface.Core
 
             if (config == null)
             {
-                config = new CanvasData();
+                config = new CanvasData(canvas_name);
             }
 
-            Application.Current.Resources["Level"] = config.last_level;
-            Application.Current.Resources["CurrentLevel"] = config.last_level;
+            Application.Current.Resources["Level"] = 0;
+            Application.Current.Resources["CurrentLevel"] = 0;
 
             Application.Current.Resources["LevelBarHeight"] = (double)75;
 
@@ -125,7 +138,54 @@ namespace AidingElementsUserInterface.Core
 
             data_Handler.AddCanvasData(config);
 
-            load();
+            canvas.ToolTip = canvas_name;
+
+            CanvasDataResources();
+        }
+
+        private void CanvasDataResources()
+        {
+            CanvasData canvasData = config;
+
+            if (canvasData == null)
+            {
+                canvasData = new CanvasData();
+            }
+
+            __CoreCanvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
+            __CoreCanvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
+            __CoreCanvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
+            __CoreCanvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
+
+            __CoreCanvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
+            __CoreCanvas.Resources["CanvasData_thickness"] = canvasData.thickness;
+
+            __CoreCanvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
+            __CoreCanvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
+
+            __CoreCanvas.Resources["CanvasData_width"] = canvasData.width;
+            __CoreCanvas.Resources["CanvasData_height"] = canvasData.height;
+
+            __CoreCanvas.Resources["CanvasData_canvasName"] = canvasData.canvasName;
+            __CoreCanvas.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
+
+            __CoreCanvas.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
+
+
+            if (File.Exists(canvasData.imageFilePath))
+            {
+                __CoreCanvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
+                __CoreCanvas.Resources["CanvasData_background"] = __CoreCanvas.Resources["CanvasData_image"];
+            }
+        }
+
+        internal void ChangeSelectionData(ContainerData containerData)
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                item.ContainerDataResources(containerData);
+            }
+
         }
 
         public void clearCanvasElements()
@@ -135,9 +195,14 @@ namespace AidingElementsUserInterface.Core
 
         internal void delete_selected_items()
         {
-            foreach (CoreContainer item in selected_items)
+            foreach (object child in selected_items)
             {
-                item.remove_Container();
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer item = child as CoreContainer;
+
+                    item.remove_Container();                    
+                }
             }
 
             selected_items.Clear();
@@ -145,9 +210,13 @@ namespace AidingElementsUserInterface.Core
 
         private void deselect_selected_containers()
         {
-            foreach (CoreContainer item in selected_items)
+            foreach (object child in selected_items)
             {
-                item.deselect(false);
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer item = child as CoreContainer;
+                    item.deselect(false);
+                }
             }
 
             selected_items.Clear();
@@ -156,8 +225,12 @@ namespace AidingElementsUserInterface.Core
         internal CanvasData getCanvasData()
         {
             return config;
-        }
+        }   
 
+        internal CallCentral GetCentral()
+        {
+            return callCentral;
+        }
 
         internal System.Windows.Point GetElementPosition(CoreContainer container)
         {
@@ -171,41 +244,32 @@ namespace AidingElementsUserInterface.Core
             int iteration = 1;
             int displacement = config.grouping_displacement;
 
-            foreach (CoreContainer item in selected_items)
+
+            foreach (object child in selected_items)
             {
-                if (horizontal)
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    Canvas.SetLeft(item, iteration * displacement);
-                    Canvas.SetTop(item, displacement);
+                    CoreContainer item = child as CoreContainer;
 
-                    //System.Windows.MessageBox.Show($"{iteration}\n{displacement}\n{iteration * displacement}");
+                    if (horizontal)
+                    {
+                        Canvas.SetLeft(item, iteration * displacement);
+                        Canvas.SetTop(item, displacement);
+
+                        //System.Windows.MessageBox.Show($"{iteration}\n{displacement}\n{iteration * displacement}");
+                    }
+                    else
+                    {
+                        Canvas.SetLeft(item, displacement);
+                        Canvas.SetTop(item, iteration * displacement);
+                    }
+
+                    Canvas.SetZIndex(item, item.GetContainerData().z_position);
+
+                    iteration++;
                 }
-                else
-                {
-                    Canvas.SetLeft(item, displacement);
-                    Canvas.SetTop(item, iteration * displacement);
-                }
-
-                Canvas.SetZIndex(item, item.GetContainerData().z_position);
-
-                iteration++;
             }
         }
-
-        private void load()
-        {
-            XML_Handler xml_Handler = new XML_Handler(new SharedLogic().GetDataHandler().GetCoreData());
-
-            foreach (CoreContainer item in xml_Handler.Container_load())
-            {
-                item.setCanvas(ref __CoreCanvas);
-
-                add_element_to_canvas(item, item.get_dragPoint());
-
-                item.load_Container();
-            }
-        }
-
 
         internal void MapSelection(
             CoreContainer event_sender,
@@ -213,17 +277,21 @@ namespace AidingElementsUserInterface.Core
         {
             double x0, y0, x_diff, y_diff;
 
-            foreach (CoreContainer item in selected_items)
+            foreach (object child in selected_items)
             {
-                if (item != event_sender)
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    x0 = Canvas.GetLeft(item);
-                    y0 = Canvas.GetTop(item);
+                    CoreContainer item = child as CoreContainer;
+                    if (item != event_sender)
+                    {
+                        x0 = Canvas.GetLeft(item);
+                        y0 = Canvas.GetTop(item);
 
-                    x_diff = x0 - sender_origin.X;
-                    y_diff = y0 - sender_origin.Y;
+                        x_diff = x0 - sender_origin.X;
+                        y_diff = y0 - sender_origin.Y;
 
-                    item.setPosition(new Point(x_diff, y_diff));
+                        item.setPosition(new Point(x_diff, y_diff));
+                    }
                 }
             }
         }
@@ -236,15 +304,21 @@ namespace AidingElementsUserInterface.Core
         {
             double x1, y1;
 
-            foreach (CoreContainer item in selected_items)
-            {
-                if (item != event_sender)
-                {
-                    x1 = new_point.X + item.get_dragPoint().X;
-                    y1 = new_point.Y + item.get_dragPoint().Y;
 
-                    Canvas.SetLeft(item, x1);
-                    Canvas.SetTop(item, y1);
+            foreach (object child in selected_items)
+            {
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer item = child as CoreContainer;
+
+                    if (item != event_sender)
+                    {
+                        x1 = new_point.X + item.get_dragPoint().X;
+                        y1 = new_point.Y + item.get_dragPoint().Y;
+
+                        Canvas.SetLeft(item, x1);
+                        Canvas.SetTop(item, y1);
+                    }
                 }
             }
         }
@@ -262,28 +336,38 @@ namespace AidingElementsUserInterface.Core
         }
         internal void RemoveFlatShareCC()
         {
-            foreach (CoreContainer container in canvas.Children)
+            foreach (object child in canvas.Children)
             {
-                if (container.GetContainerData().GetElement().GetType() == typeof(FlatShareCC))
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    new SharedLogic().GetElementHandler().removeElement(container);
+                    CoreContainer item = child as CoreContainer;
 
-                    canvas.Children.Remove(container);
-                    break;
+                    if (item.GetContainerData().GetElement().GetType() == typeof(FlatShareCC))
+                    {
+                        new SharedLogic().GetElementHandler().removeElement(item);
+
+                        canvas.Children.Remove(item);
+                        break;
+                    }
                 }
             }
         }
 
         internal void RemoveMyNote()
         {
-            foreach (CoreContainer container in canvas.Children)
+            foreach (object child in canvas.Children)
             {
-                if (container.GetContainerData().GetElement().GetType() == typeof(MyNote))
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    new SharedLogic().GetElementHandler().removeElement(container);
+                    CoreContainer item = child as CoreContainer;
 
-                    canvas.Children.Remove(container);
-                    break;
+                    if (item.GetContainerData().GetElement().GetType() == typeof(MyNote))
+                    {
+                        new SharedLogic().GetElementHandler().removeElement(item);
+
+                        canvas.Children.Remove(item);
+                        break;
+                    }
                 }
             }
         }
@@ -291,18 +375,6 @@ namespace AidingElementsUserInterface.Core
         internal void removeFromSelectedItems(CoreContainer coreContainer)
         {
             selected_items.Remove(coreContainer);
-        }
-
-        internal void updateLocalDrives()
-        {
-            foreach (CoreContainer item in canvas.Children)
-            {
-                if (item.GetContainerData().GetElement().GetType() == typeof(LocalDrives))
-                {
-                    LocalDrives localDrives = item.GetContainerData().GetElement() as LocalDrives;
-                    localDrives.updateDriveInfo();
-                }
-            }
         }
 
         private void select_containers()
@@ -342,15 +414,22 @@ namespace AidingElementsUserInterface.Core
 
         internal void selectAll()
         {
-            foreach (CoreContainer item in canvas.Children)
+            foreach (object child in canvas.Children)
             {
-                item.select();
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer item = child as CoreContainer;
+
+                    item.select();
+
+                    selected_items.Add(item);
+                }
             }
         }
 
         internal void selectContainer(int containerId)
         {
-            foreach (UserControl child in canvas.Children)
+            foreach (object child in canvas.Children)
             {
                 if (child.GetType() == typeof(CoreContainer))
                 {
@@ -359,6 +438,8 @@ namespace AidingElementsUserInterface.Core
                     if (item.GetContainerData().ContainerDataFilename.Equals($"{containerId}.xml"))
                     {
                         item.select();
+
+                        selected_items.Add(item);
                     }
                 }
                 
@@ -367,11 +448,18 @@ namespace AidingElementsUserInterface.Core
 
         internal void selectType(Type type)
         {
-            foreach (CoreContainer item in canvas.Children)
+            foreach (object child in canvas.Children)
             {
-                if (item.GetContainerData().GetElement().GetType() == type)
+                if (child.GetType() == typeof(CoreContainer))
                 {
-                    item.select();
+                    CoreContainer item = child as CoreContainer;
+
+                    if (item.GetContainerData().GetElement().GetType() == type)
+                    {
+                        item.select();
+
+                        selected_items.Add(item);
+                    }
                 }
             }
         }
@@ -381,6 +469,22 @@ namespace AidingElementsUserInterface.Core
             this.config = data;
         }
 
+        internal void updateLocalDrives()
+        {
+            foreach (object child in canvas.Children)
+            {
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer item = child as CoreContainer;
+
+                    if (item.GetContainerData().GetElement().GetType() == typeof(LocalDrives))
+                    {
+                        LocalDrives localDrives = item.GetContainerData().GetElement() as LocalDrives;
+                        localDrives.updateDriveInfo();
+                    }
+                }
+            }
+        }
 
         // events
         #region events
@@ -420,7 +524,7 @@ namespace AidingElementsUserInterface.Core
                     selection_rectangle = null;
 
                     selection_rectangle = new System.Windows.Shapes.Rectangle();
-                    Canvas.SetZIndex(selection_rectangle, config.dragLevel);
+                    Canvas.SetZIndex(selection_rectangle, CoreCanvasSwitchData.Get_CORECANVAS_DRAG_LEVEL);
 
                     selection_rectangle.Stroke = config.borderbrush.GetBrush();
                     selection_rectangle.StrokeDashArray = new DoubleCollection() { 2, 1, 4, 1 };

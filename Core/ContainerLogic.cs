@@ -9,6 +9,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ namespace AidingElementsUserInterface.Core
             ref bool elementDrag,
             ref CoreContainer CORE_ContainerElement,
             ref int z_position,
-            ref int dragLevel,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
@@ -44,7 +44,7 @@ namespace AidingElementsUserInterface.Core
             dragPoint = Mouse.GetPosition(canvas);
 
             canvas.MapSelection(CORE_ContainerElement, dragPoint);
-            Panel.SetZIndex(CORE_ContainerElement, dragLevel);
+            Panel.SetZIndex(CORE_ContainerElement, CoreCanvasSwitchData.Get_CORECANVAS_DRAG_LEVEL);
         }
 
         public static void DragMove(

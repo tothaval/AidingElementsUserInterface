@@ -53,14 +53,17 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
 
             CVC_Min_Level.setIdentifier("lowest level");
-            CVC_Min_Level.setText(config.z_level_MIN.ToString());
+            CVC_Min_Level.setText((-1 * (int)(CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP/2)).ToString());
             CVC_Max_Level.setIdentifier("upmost level");
-            CVC_Min_Level.setText(config.z_level_MIN.ToString());
-
+            CVC_Min_Level.setText(((int)(CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP / 2)).ToString());
+            
             CVC_Min_Range.setIdentifier("lowest range");
-            CVC_Min_Level.setText(config.z_level_MIN.ToString());
+            //CVC_Min_Level.setText(config.z_level_MIN.ToString());
+            CVC_Min_Level.setText("-100");
+
             CVC_Max_Range.setIdentifier("upmost range");
-            CVC_Min_Level.setText(config.z_level_MIN.ToString());
+            //CVC_Min_Level.setText(config.z_level_MIN.ToString());
+            CVC_Min_Level.setText("100");
 
             CB_ApplyToSelection.setContent("change selection");
 
@@ -85,41 +88,41 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void SB_LevelShift_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
         {
-            int element_count = new SharedLogic().GetMainWindow().coreCanvas.canvas.Children.Count - 1;
+            //int element_count = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.canvas.Children.Count - 1;
 
-            int value_range = 0;
+            //int value_range = 0;
 
-            int min_range = Int32.Parse(CVC_Min_Range.Value);
-            int max_range = Int32.Parse(CVC_Max_Range.Value);
+            //int min_range = Int32.Parse(CVC_Min_Range.Value);
+            //int max_range = Int32.Parse(CVC_Max_Range.Value);
 
-            value_range = config.z_level_MAX - config.z_level_MIN + 1;
+            //value_range = config.z_level_MAX - config.z_level_MIN + 1;
 
-            CVC_Max_Range.setText(value_range.ToString());
+            //CVC_Max_Range.setText(value_range.ToString());
 
-            double value = e.NewValue;
+            //double value = e.NewValue;
 
-            int new_level = (int)(value_range * value / 100);
+            //int new_level = (int)(value_range * value / 100);
 
-            e.Handled = true;
+            //e.Handled = true;
 
-            Application.Current.Resources["CurrentLevel"] = new_level;
+            //Application.Current.Resources["CurrentLevel"] = new_level;
 
-            CL_current_level.setText(new_level.ToString());
+            //CL_current_level.setText(new_level.ToString());
 
-            LevelBar levelBar = new SharedLogic().GetMainWindow().coreCanvas._LevelBar;
+            //LevelBar levelBar = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS._LevelBar;
 
-            string visible = "";
+            //string visible = "";
 
-            if (new_level < min_range || new_level > max_range) // add Range values, make LevelData class
-            {
-                visible = "hidden";
-            }
-            else
-            {
-                visible = "visible";
-            }
+            //if (new_level < min_range || new_level > max_range) // add Range values, make LevelData class
+            //{
+            //    visible = "hidden";
+            //}
+            //else
+            //{
+            //    visible = "visible";
+            //}
 
-            levelBar.update($"{new_level}", $"level {new_level}", "purpose: ", visible, $"{element_count}");
+            //levelBar.update($"{new_level}", $"level {new_level}", "purpose: ", visible, $"{element_count}");
         }
 
         private void SB_LevelShift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

@@ -71,7 +71,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             initialize_container();
         }
 
-        private void ContainerDataResources()
+        internal void ContainerDataResources(ContainerData containerData = null)
         {
             if (containerData == null)
             {
@@ -306,7 +306,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     ref elementDrag,
                     ref __CoreContainer,
                     ref containerData.z_position,
-                    ref canvas.getCanvasData().dragLevel,
                     ref dragPoint,
                     ref canvas
                     );
@@ -376,7 +375,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 int index = containerData.z_position;
 
-                Canvas.SetZIndex(__CoreContainer, index + canvas.getCanvasData().hoverLevel);
+                Canvas.SetZIndex(__CoreContainer, index + CoreCanvasSwitchData.Get_CORECANVAS_HOVER_LEVEL);
 
 
                 //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.z_position}\n{containerData.z_position + containerData.hoverLevel}");

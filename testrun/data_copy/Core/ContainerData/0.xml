@@ -1,5 +1,5 @@
-<Core>
-  <CanvasData>
+<Container>
+  <ContainerData>
     <CoreData>
       <imageIsBackground>False</imageIsBackground>
       <background>
@@ -7,10 +7,10 @@
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FFFFEBCD</color1_string>
+        <color1_string>#FF000000</color1_string>
         <color2_string>#FF000000</color2_string>
-        <color3_string>#FF2F4F4F</color3_string>
-        <color4_string>#FF0FFF0F</color4_string>
+        <color3_string>#FFFFFFFF</color3_string>
+        <color4_string>#FFEEEE00</color4_string>
       </background>
       <borderbrush>
         <brushtype>SolidColorBrush</brushtype>
@@ -19,28 +19,28 @@
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
         <color1_string>#FF000000</color1_string>
         <color2_string>#FF000000</color2_string>
-        <color3_string>#FF2F4F4F</color3_string>
-        <color4_string>#FF0FFF0F</color4_string>
+        <color3_string>#FFFFFFFF</color3_string>
+        <color4_string>#FFEEEE00</color4_string>
       </borderbrush>
       <foreground>
         <brushtype>SolidColorBrush</brushtype>
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FF2F4F4F</color1_string>
+        <color1_string>#FF000000</color1_string>
         <color2_string>#FF000000</color2_string>
-        <color3_string>#FF2F4F4F</color3_string>
-        <color4_string>#FF0FFF0F</color4_string>
+        <color3_string>#FFFFFFFF</color3_string>
+        <color4_string>#FFEEEE00</color4_string>
       </foreground>
       <highlight>
         <brushtype>SolidColorBrush</brushtype>
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FF0FFF0F</color1_string>
+        <color1_string>#FF000000</color1_string>
         <color2_string>#FF000000</color2_string>
-        <color3_string>#FF2F4F4F</color3_string>
-        <color4_string>#FF0FFF0F</color4_string>
+        <color3_string>#FFFFFFFF</color3_string>
+        <color4_string>#FFEEEE00</color4_string>
       </highlight>
       <cornerRadius>14,14,14,14</cornerRadius>
       <thickness>2,2,2,2</thickness>
@@ -51,8 +51,15 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <canvasName>canvas</canvasName>
-    <grouping_displacement>25</grouping_displacement>
-    <element_spacing>8</element_spacing>
-  </CanvasData>
-</Core>
+    <CanvasName>__CoreCanvas</CanvasName>
+    <ContainerDataFilename>0.xml</ContainerDataFilename>
+    <z_position>800</z_position>
+  </ContainerData>
+  <Content>
+    <Type>RightClickChoice</Type>
+  </Content>
+  <Position>
+    <x>424</x>
+    <y>39</y>
+  </Position>
+</Container>

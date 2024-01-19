@@ -26,7 +26,6 @@ namespace AidingElementsUserInterface.Elements
     /// </summary>
     public partial class Coordinates : UserControl
     {
-        CoreCanvas coreCanvas;
         CoreContainer coreContainer;
 
         // constructors
@@ -38,20 +37,7 @@ namespace AidingElementsUserInterface.Elements
             build();
         }
 
-        public Coordinates(CoreCanvas coreCanvas)
-        {
-            InitializeComponent();
-
-            this.coreCanvas = coreCanvas;
-
-            build();
-        }
         #endregion constructors
-
-        internal void addCoreCanvas(CoreCanvas coreCanvas) 
-        {
-            this.coreCanvas = coreCanvas;
-        }
 
         private async void detectCoreContainer()
         {
@@ -85,24 +71,11 @@ namespace AidingElementsUserInterface.Elements
             }
 
             detectCoreContainer();
-
-            registerMouseMove();
         }
 
-        private void getCoreCanvas()
-        {          
-            coreCanvas = new SharedLogic().GetMainWindow().coreCanvas;
-        }
 
-        private async void registerMouseMove()
+        internal void registerMouseMove(ref CoreCanvas coreCanvas)
         {
-            await Task.Delay(5);
-
-            if (coreCanvas == null)
-            {
-                getCoreCanvas();
-            }
-
             coreCanvas.MouseMove += CoreCanvas_MouseMove;
         }
 
@@ -122,7 +95,7 @@ namespace AidingElementsUserInterface.Elements
 
         public void updateMouseCoordinates(MouseEventArgs e)
         {
-            System.Windows.Point position = e.GetPosition(coreCanvas);
+            System.Windows.Point position = e.GetPosition(coreContainer.GetCanvas());
 
             CTB_MouseCoordinates.setText($"{(int)position.X:D4} : {(int)position.Y:D4}");
         }

@@ -6,6 +6,35 @@
  * init:        2023|11|27
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
+ * 
+ * 
+ * AEUI dev goals:
+ * 
+ *  MainWindow frame
+ *      CoreCanvasSwitch (license: hardcoded amount of 11 CoreCanvas elements,
+ *      accessible via switch element, each protectable via security layer with password request
+ *      1 CoreCanvas is reserved for the aeui core and system display stuff, the system canvas
+ *      is placed in a separate border within MainWindow xaml, access via Visibility change
+ *      
+ *      CoreCanvasSwitch loads the current canvas (should it hold the data or discard it(save canvas and remove every object))
+ *      CoreCanvasSwitch responds to 2 buttons right and left of the mainwindow border
+ * 
+ *      also hardcoded are: LevelCap 201 (201 accessible z-layer per canvas, 1 for CanvasSystem stuff, unchangeable)
+ *                          Canvas Max Size 10.000 pixels, a wider canvas than the display should be accessible with a
+ *                          scrollviewer and zoom in/zoom out code from image
+ *                          
+ *                          the caps could be raised with a new license or an expansion right
+ *                          
+ *                          maybe offer a product called (individually compiled license version to hardcode user settings in the .exe)
+ * 
+ * 
+ *  to do
+ *      LevelSystem class
+ *      LevelSystemDisplay usercontrol
+ *      LevelShift
+ *      LevelData
+ *      
+ *      further develop and upgrade Canvas save and load functionality, to accompany for the recent changes
  */
 using System.Windows;
 using System.Windows.Input;
@@ -25,6 +54,7 @@ using System.IO;
 using System.Windows.Interop;
 using AidingElementsUserInterface.Core.AEUI_Logic;
 using System.Windows.Controls;
+using AidingElementsUserInterface.Core.AEUI_SystemControls;
 
 namespace AidingElementsUserInterface
 {
@@ -33,14 +63,17 @@ namespace AidingElementsUserInterface
     /// </summary>
     public partial class MainWindow : Window
     {
-        internal CoreCanvas coreCanvas;
+        private CoreCanvas ACTIVE_CANVAS;
+
         internal MainWindowData mainWindowData;
 
         internal Data_Handler data_Handler = new Data_Handler();
-
         internal ElementHandler element_handler = new ElementHandler();
 
-        internal SharedLogic logic = new SharedLogic();        
+        internal SharedLogic logic = new SharedLogic();
+
+        
+        internal CoreCanvas Get_ACTIVE_CANVAS => ACTIVE_CANVAS;
 
 
         public MainWindow()
@@ -55,9 +88,7 @@ namespace AidingElementsUserInterface
         {
             load_MainWindowData();
 
-            _backgroundImage();
-
-            load_CoreCanvas();
+            MainWindowResources();
         }
 
 
@@ -67,11 +98,11 @@ namespace AidingElementsUserInterface
         {
             if (MI_MyNote.IsChecked)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">MyNote");
+                CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS().GetCentral().ExecuteCommandRequest($">MyNote");
             }
             else
             {
-                coreCanvas.RemoveMyNote();
+                CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS().RemoveMyNote();
             }
         }
 
@@ -80,22 +111,12 @@ namespace AidingElementsUserInterface
             // disabled until fixed
             //if (MI_FlatShareCC.IsChecked)
             //{
-            //coreCanvas.GetCentral().ExecuteCommandRequest($">FlatShareCC");
+            //ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">FlatShareCC");
             //}
             //else
             //{
-            //    coreCanvas.RemoveFlatShareCC();
+            //    ACTIVE_CANVAS.RemoveFlatShareCC();
             //}
-        }
-        internal void _backgroundImage()
-        {
-            if (mainWindowData.imageFilePath != null)
-            {
-                if (File.Exists(mainWindowData.imageFilePath))
-                {
-                    border.Background = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
-                }
-            }
         }
 
         private void load_MainWindowData()
@@ -110,14 +131,39 @@ namespace AidingElementsUserInterface
             data_Handler.AddMainWindowData(mainWindowData);
         }
 
-        private void load_CoreCanvas()
+        private void MainWindowResources()
         {
-            coreCanvas = new CoreCanvas();
-            coreCanvas.Name = "mainWindowCanvas";
+            MainWindowData mainWindowData = this.mainWindowData;
 
-            canvas_border.Child = coreCanvas;
+            if (mainWindowData == null)
+            {
+                mainWindowData = new MainWindowData();
+            }
 
-            Keyboard.Focus(coreCanvas);
+            __MainWindow.Resources["MainWindow_background"] = mainWindowData.background.GetBrush();
+            __MainWindow.Resources["MainWindow_borderbrush"] = mainWindowData.borderbrush.GetBrush();
+            __MainWindow.Resources["MainWindow_foreground"] = mainWindowData.foreground.GetBrush();
+            __MainWindow.Resources["MainWindow_highlight"] = mainWindowData.highlight.GetBrush();
+            
+            __MainWindow.Resources["MainWindow_cornerRadius"] = mainWindowData.cornerRadius;
+            __MainWindow.Resources["MainWindow_thickness"] = mainWindowData.thickness;
+            
+            __MainWindow.Resources["MainWindow_fontSize"] = (double)mainWindowData.fontSize;
+            __MainWindow.Resources["MainWindow_fontFamily"] = mainWindowData.fontFamily;
+            
+            __MainWindow.Resources["MainWindow_width"] = mainWindowData.width;
+            __MainWindow.Resources["MainWindow_height"] = mainWindowData.height;
+            
+            __MainWindow.Resources["MainWindow_initialPosition_X"] = mainWindowData.initialPosition.X;
+            __MainWindow.Resources["MainWindow_initialPosition_Y"] = mainWindowData.initialPosition.Y;
+
+            __MainWindow.Resources["MainWindow_language"] = mainWindowData.language;
+
+            if (File.Exists(mainWindowData.imageFilePath))
+            {
+                __MainWindow.Resources["MainWindow_image"] = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
+                __MainWindow.Resources["MainWindow_background"] = __MainWindow.Resources["MainWindow_image"];
+            }
         }
 
         public void quitAEUI()
@@ -126,7 +172,7 @@ namespace AidingElementsUserInterface
             {
                 mainWindowData.initialPosition = new Point(this.Left, this.Top);
 
-                XML_Handler xml_handler = new XML_Handler(mainWindowData);
+                XML_Handler xml_handler = new XML_Handler();
 
                 xml_handler.ButtonData_save();
                 xml_handler.CanvasData_save();
@@ -141,6 +187,25 @@ namespace AidingElementsUserInterface
             }
 
             Application.Current.Shutdown();
+        }
+
+
+        private void SYSTEM_CANVAS_SWITCH()
+        {
+            if (border_SYSTEM_CANVAS.Visibility == Visibility.Collapsed)
+            {
+                border_CORE_CANVAS_SWITCH.Visibility = Visibility.Collapsed;
+                border_SYSTEM_CANVAS.Visibility = Visibility.Visible;
+
+                ACTIVE_CANVAS = SYSTEM_CANVAS.Get_SYSTEM_CANVAS;
+            }
+            else
+            {
+                border_CORE_CANVAS_SWITCH.Visibility = Visibility.Visible;
+                border_SYSTEM_CANVAS.Visibility = Visibility.Collapsed;
+
+                ACTIVE_CANVAS = CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS();
+            }
         }
 
         #endregion processing
@@ -160,7 +225,10 @@ namespace AidingElementsUserInterface
 
             if (e.Key == Key.F1)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">Manual");
+                if (ACTIVE_CANVAS != null)
+                {
+                    ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">Manual");
+                }
             }
 
             if (e.Key == Key.F2)
@@ -268,22 +336,34 @@ namespace AidingElementsUserInterface
         #region elements menu item clicks
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_FileLink_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_Image_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_Link_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_MyNote_Click(object sender, RoutedEventArgs e)
@@ -298,31 +378,44 @@ namespace AidingElementsUserInterface
         #endregion elements menu item clicks
 
         #region about menu item clicks
-        private void MI_manual_Click(object sender, RoutedEventArgs e)
+        private void MI_Manual_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
         #endregion about menu item clicks
 
         #region control menu item clicks
-        private void MI_command_Click(object sender, RoutedEventArgs e)
+        private void MI_Command_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-        }
-        private void MI_levelShifter_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-        }
-
-        #region control options menu item clicks
-        private void MI_OPTIONS_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
-    
-        #endregion control options menu item clicks
+        private void MI_LevelShift_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                if (ACTIVE_CANVAS._LevelBar.Visibility == Visibility.Collapsed)
+                {
+                    ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+                }
+            }       
+        }
 
+        private void MI_SYSTEM_Click(object sender, RoutedEventArgs e)
+        {
+            SYSTEM_CANVAS_SWITCH();           
+        }
+            
         private void MI_quit_Click(object sender, RoutedEventArgs e)
         {
             logic.QuitApplicationCommand();
@@ -336,34 +429,69 @@ namespace AidingElementsUserInterface
 
 
         #region tools menu item clicks
+
+        private void MI_Adjust_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
         private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_Request_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
 
         private void MI_RightClickChoice_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
         }
         #endregion tools menu item clicks
 
         #region selection control menu item clicks
         private void MI_group_to_line_Click(object sender, RoutedEventArgs e)
         {
-            coreCanvas.group_selected_items(true);
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.group_selected_items(true);
+            }
         }
         private void MI_group_to_row_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.group_selected_items(false);
+            {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.group_selected_items(false);
+            }
         }
         private void MI_delete_Click(object sender, RoutedEventArgs e)
-        {
-            coreCanvas.delete_selected_items();
+                {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.delete_selected_items();
+            }
         }
         #endregion selection control menu item clicks
 
@@ -393,11 +521,11 @@ namespace AidingElementsUserInterface
                 switch ((int)wparam)
                 {
                     case UsbNotification.DbtDeviceremovecomplete:
-                        coreCanvas.updateLocalDrives();                        
+                        ACTIVE_CANVAS.updateLocalDrives();                        
                         //updateDriveInfo(); // this is where you do your magic
                         break;
                     case UsbNotification.DbtDevicearrival:
-                        coreCanvas.updateLocalDrives();
+                        ACTIVE_CANVAS.updateLocalDrives();
                         //updateDriveInfo(); // this is where you do your magic
                         break;
                 }
