@@ -16,8 +16,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     internal class CanvasData : CoreData
     {
         // name of canvas
-        internal int last_level { get; set; }
-
         internal string canvasName { get; set; }
 
         // element grid width and height
@@ -27,29 +25,17 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal int grouping_displacement { get; set; }
 
 
-        // z positioning
-        internal int dragLevel;
-        internal int hoverLevel;
-        internal int z_level_MAX { get; set; }
-        internal int z_level_MIN { get; set; }
-
         public CanvasData(bool load)
         {
         }
 
-        public CanvasData()
-        {
-            last_level = 0;
 
-            canvasName = "canvas";
-            imageFilePath = "";
+        public CanvasData(string canvas_name = "canvas")
+        {
+            canvasName = canvas_name;
 
             grouping_displacement = 25;
-            z_level_MIN = -100;
-            z_level_MAX = 100;
 
-            dragLevel = 30000;
-            hoverLevel = 200;
             element_spacing = new GridLength(8);
         }
 
@@ -66,17 +52,14 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
 
-            last_level = 0;
+            height = coreData.height;
+            width = coreData.width;
+
+            imageFilePath = coreData.imageFilePath;
 
             canvasName = "canvas";
-            imageFilePath = "";
-
             grouping_displacement = 25;
-            z_level_MIN = -100;
-            z_level_MAX = 100;
 
-            dragLevel = 30000;
-            hoverLevel = 200;
             element_spacing = new GridLength(8);
         }
     }

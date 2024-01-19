@@ -1,5 +1,5 @@
 <Core>
-  <CanvasData>
+  <ButtonData>
     <CoreData>
       <imageIsBackground>False</imageIsBackground>
       <background>
@@ -51,8 +51,5 @@
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <canvasName>canvas</canvasName>
-    <grouping_displacement>25</grouping_displacement>
-    <element_spacing>8</element_spacing>
-  </CanvasData>
+  </ButtonData>
 </Core>

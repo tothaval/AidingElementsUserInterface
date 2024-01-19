@@ -74,6 +74,7 @@
                 <Border x:Name="border_LevelBar"
                         Grid.Row="0"
                         Grid.Column="0"
+                        Visibility="Hidden"
                         >
                     <usercontrols:LevelBar x:Name="_LevelBar"/>
                 </Border>

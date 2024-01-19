@@ -97,7 +97,40 @@ namespace AidingElementsUserInterface.Core
                 this.Resources["TextBoxData_MaxWidth"] = config.width * 2;
                 this.Resources["TextBoxData_MaxHeight"] = config.height;
             }
+
+            ButtonDataResources();
         }
+
+        private void ButtonDataResources()
+        {
+            CoreData buttonData = config;
+
+            if (buttonData == null)
+            {
+                buttonData = new CoreData();
+            }
+
+            __CoreButton.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            __CoreButton.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
+            __CoreButton.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
+            __CoreButton.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
+            
+            __CoreButton.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
+            __CoreButton.Resources["ButtonData_thickness"] = buttonData.thickness;
+            
+            __CoreButton.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
+            __CoreButton.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
+            
+            __CoreButton.Resources["ButtonData_width"] = buttonData.width;
+            __CoreButton.Resources["ButtonData_height"] = buttonData.height;
+
+            if (File.Exists(buttonData.imageFilePath))
+            {
+                __CoreButton.Resources["ButtonData_image"] = new ImageBrush(new BitmapImage(new Uri(buttonData.imageFilePath)));
+                __CoreButton.Resources["ButtonData_background"] = __CoreButton.Resources["ButtonData_image"];
+            }
+        }
+
 
         internal void _disabled()
         {

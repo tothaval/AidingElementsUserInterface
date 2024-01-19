@@ -49,7 +49,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 //MessageBox.Show(GetCanvas().Name);
 
-                new SharedLogic().GetMainWindow().coreCanvas.GetCentral().ExecuteCommandRequest(coreTextBox.getText());
+                new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest(coreTextBox.getText());
 
                 // returns null because canvas is null somehow
                 //GetCanvas().GetCentral().ExecuteCommandRequest(coreTextBox.getText());

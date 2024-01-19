@@ -217,7 +217,7 @@ namespace AidingElementsUserInterface.Elements.FlatShareCC
         internal void save_costUpdates()
         {
             TabControl tabControl = UpdateCostsUI_object.MainTabControl;
-            IO_Handler iO_Handler = new IO_Handler(new FlatData());
+            IO_Handler iO_Handler = new IO_Handler();
 
             // alle dateien löschen
             iO_Handler.delete_files(iO_Handler.FlatShareCC_xml_folder, iO_Handler.FlatShareCC_data_file);

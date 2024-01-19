@@ -21,12 +21,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
+using System.Xml.Linq;
 using static System.Windows.Forms.LinkLabel;
 using Link = AidingElementsUserInterface.Elements.Link;
 
@@ -38,22 +41,17 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal FlatData flatShareCC_data { get; set; }
         internal MyNote myNote_element { get; set; }
 
-        public XML_Handler() : base(new MainWindowData())
+        public XML_Handler()
         {
 
         }
 
-        internal XML_Handler(CoreData coreData) : base(coreData)
-        {
-
-        }
-
-        internal XML_Handler(FlatData flatShareCC) : base(flatShareCC)
+        internal XML_Handler(FlatData flatShareCC)
         {
             flatShareCC_data = flatShareCC;
         }
 
-        internal XML_Handler(MyNote myNote) : base(myNote)
+        internal XML_Handler(MyNote myNote)
         {
             myNote_element = myNote;
         }
@@ -65,180 +63,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return xmlNode;
         }
 
-
-        // Container loading and saving via XML
-        #region Container
-        #region Container loading
-        internal ObservableCollection<CoreContainer> Container_load()
-        {
-            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
-
-            foreach (string filename in scan_directory(ContainerData_xml_folder))
-            {
-                if (File.Exists(filename))
-                {
-                    XmlDocument xmlDocument = new XmlDocument();
-
-                    xmlDocument.Load(filename);
-
-                    XmlNode? node_Container = xmlDocument.SelectSingleNode("Container");
-
-
-                    if (node_Container != null)
-                    {
-                        ContainerData containerData = loadContainerData(node_Container);
-
-                        XmlNode node_Content = node_Container.SelectSingleNode("Content");
-
-                        if (node_Content != null)
-                        {
-                            UserControl userControl = new UserControl();
-
-                            XmlNode node_Type = node_Content.SelectSingleNode("Type");
-
-                            if (node_Type != null)
-                            {
-                                Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                if (type != null)
-                                {
-                                    XmlNode? node_Data = node_Content.SelectSingleNode("Data");
-
-                                    if (node_Data != null)
-                                    {
-                                        //containerData = loadContentData(node_Data);
-                                        userControl = ContentData_load(type, node_Data);
-                                    }
-                                    else
-                                    {
-                                        userControl = (UserControl)Activator.CreateInstance(type);
-                                    }
-                                }
-                                else
-                                {
-                                    Type? type_in_folder = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                    if (type_in_folder != null)
-                                    {
-
-                                        userControl = (UserControl)Activator.CreateInstance(type_in_folder);
-                                    }
-                                    else
-                                    {
-                                        Type? core_type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                        if (core_type != null)
-                                        {
-                                            userControl = (UserControl)Activator.CreateInstance(core_type);
-                                        }
-                                    }
-                                }
-                            }
-
-                            Point container_position;
-                            XmlNode node_Position = node_Container.SelectSingleNode("Position");
-
-                            if (node_Position != null)
-                            {
-                                XmlNode node_x = node_Position.SelectSingleNode("x");
-                                XmlNode node_y = node_Position.SelectSingleNode("y");
-
-                                if (node_x != null && node_y != null)
-                                {
-                                    container_position = new Point(
-                                        Double.Parse(node_x.InnerText),
-                                        Double.Parse(node_y.InnerText)
-                                        );
-                                }
-                            }
-
-                            if (containerData == null)
-                            {
-                                containerData = new ContainerData();
-                            }
-
-                            containerData.SetElement(userControl);
-
-                            CoreContainer coreContainer = new CoreContainer(containerData);
-                            coreContainer.setPosition(container_position);
-
-                            container_list.Add(coreContainer);
-                        }
-                    }
-                }
-            }
-
-            return container_list;
-        }
-
-        #endregion Container loading
-
-        #region Container saving
-        internal void Container_save(CoreContainer coreContainer, int counter)
-        {
-            CoreContainer container = coreContainer;
-
-            if (coreContainer != null)
-            {
-                XmlDocument xmlDocument = new XmlDocument();
-
-                XmlNode node = xmlDocument.CreateElement("Container");
-                xmlDocument.AppendChild(node);
-
-                XmlNode node_ContainerData = xmlDocument.CreateElement("ContainerData");
-
-                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
-
-                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, container.GetContainerData().settings);
-
-                if (aux_node != null)
-                {
-                    node_ContainerData.AppendChild(aux_node);
-                }
-
-                XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasName");
-                node_CanvasName.InnerText = container.GetContainerData().CanvasName;
-                node_ContainerData.AppendChild(node_CanvasName);
-
-                XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
-                node_ContainerDataFilename.InnerText = $"{counter}.xml";
-                node_ContainerData.AppendChild(node_ContainerDataFilename);
-
-                XmlNode node_z_position = xmlDocument.CreateElement("z_position");
-                node_z_position.InnerText = container.GetContainerData().z_position.ToString();
-                node_ContainerData.AppendChild(node_z_position);
-
-                node.AppendChild(node_ContainerData);
-
-                XmlNode node_Content = Content_save(xmlDocument, container);
-
-                node.AppendChild(node_Content);
-
-                XmlNode node_Position = xmlDocument.CreateElement("Position");
-
-                XmlNode node_position_x = xmlDocument.CreateElement("x");
-                node_position_x.InnerText = ((int)container.get_dragPoint().X).ToString();
-                node_Position.AppendChild(node_position_x);
-
-                XmlNode node_position_y = xmlDocument.CreateElement("y");
-                node_position_y.InnerText = ((int)container.get_dragPoint().Y).ToString();
-                node_Position.AppendChild(node_position_y);
-
-                node.AppendChild(node_Position);
-
-                try
-                {
-                    xmlDocument.Save($@".\{ContainerData_xml_folder}{counter}.xml");
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-
-        }
-        #endregion Container saving
-        #endregion Container
 
         private XmlNode Content_save(XmlDocument xmlDocument, CoreContainer container)
         {
@@ -430,20 +254,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                         canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
 
-                        canvasData.z_level_MAX = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MAX").InnerText);
-                        canvasData.z_level_MIN = Int32.Parse(node_CanvasData.SelectSingleNode("z_level_MIN").InnerText);
-
-                        XmlNode? dragLevel = NodeCheck(node_CanvasData, "dragLevel");
-                        if (dragLevel != null)
-                        {
-                            canvasData.dragLevel = Int32.Parse(dragLevel.InnerText);
-                        }
-
-                        XmlNode? hoverLevel = NodeCheck(node_CanvasData, "hoverLevel");
-                        if (hoverLevel != null)
-                        {
-                            canvasData.hoverLevel = Int32.Parse(hoverLevel.InnerText);
-                        }
 
                         XmlNode? element_spacing = NodeCheck(node_CanvasData, "element_spacing");
                         if (element_spacing != null)
@@ -472,70 +282,56 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #region CanvasData saving
         internal void CanvasData_save()
         {
-            CanvasData canvasData = new SharedLogic().GetMainWindow().coreCanvas.getCanvasData();
+            CoreCanvas[] screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
 
-            if (canvasData != null)
+
+            for (int i = 0; i < screens.Length; i++)
             {
-                XmlDocument xmlDocument = new XmlDocument();
+                CanvasData canvasData = screens[i].getCanvasData();
 
-                XmlNode node = xmlDocument.CreateElement("Core");
-                xmlDocument.AppendChild(node);
-
-                XmlNode node_CanvasData = xmlDocument.CreateElement("CanvasData");
-                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
-
-                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, canvasData);
-
-                if (aux_node != null)
+                if (canvasData != null)
                 {
-                    node_CanvasData.AppendChild(aux_node);
-                }
+                    XmlDocument xmlDocument = new XmlDocument();
 
-                XmlNode last_level = xmlDocument.CreateElement("canvasName");
-                last_level.InnerText = canvasData.last_level.ToString();
-                node_CanvasData.AppendChild(last_level);
+                    XmlNode node = xmlDocument.CreateElement("Core");
+                    xmlDocument.AppendChild(node);
 
-                XmlNode canvasName = xmlDocument.CreateElement("canvasName");
-                canvasName.InnerText = canvasData.canvasName;
-                node_CanvasData.AppendChild(canvasName);
+                    XmlNode node_CanvasData = xmlDocument.CreateElement("CanvasData");
+                    XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
 
-                XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
-                grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
-                node_CanvasData.AppendChild(grouping_displacement);
+                    XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, canvasData);
 
-                XmlNode mainWindowHeight = xmlDocument.CreateElement("z_level_MAX");
-                mainWindowHeight.InnerText = canvasData.z_level_MAX.ToString();
-                node_CanvasData.AppendChild(mainWindowHeight);
+                    if (aux_node != null)
+                    {
+                        node_CanvasData.AppendChild(aux_node);
+                    }
 
-                XmlNode mainWindowWidth = xmlDocument.CreateElement("z_level_MIN");
-                mainWindowWidth.InnerText = canvasData.z_level_MIN.ToString();
-                node_CanvasData.AppendChild(mainWindowWidth);
+                    XmlNode canvasName = xmlDocument.CreateElement("canvasName");
+                    canvasName.InnerText = canvasData.canvasName;
+                    node_CanvasData.AppendChild(canvasName);
 
-                XmlNode node_dragLevel = xmlDocument.CreateElement("dragLevel");
-                node_dragLevel.InnerText = canvasData.dragLevel.ToString();
-                node_CanvasData.AppendChild(node_dragLevel);
+                    XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
+                    grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
+                    node_CanvasData.AppendChild(grouping_displacement);
 
-                XmlNode node_hoverLevel = xmlDocument.CreateElement("hoverLevel");
-                node_hoverLevel.InnerText = canvasData.hoverLevel.ToString();
-                node_CanvasData.AppendChild(node_hoverLevel);
+                    XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
+                    node_element_spacing.InnerText = canvasData.element_spacing.ToString();
+                    if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
+                    {
+                        node_element_spacing.InnerText = "-1";
+                    }
+                    node_CanvasData.AppendChild(node_element_spacing);
 
-                XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
-                node_element_spacing.InnerText = canvasData.element_spacing.ToString();
-                if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
-                {
-                    node_element_spacing.InnerText = "-1";
-                }
-                node_CanvasData.AppendChild(node_element_spacing);
+                    node.AppendChild(node_CanvasData);
 
-                node.AppendChild(node_CanvasData);
+                    try
+                    {
+                        xmlDocument.Save(CanvasData_file);
+                    }
+                    catch (Exception)
+                    {
 
-                try
-                {
-                    xmlDocument.Save(CanvasData_file);
-                }
-                catch (Exception)
-                {
-
+                    }
                 }
             }
         }
@@ -544,6 +340,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         // ContainerData
         #region ContainerData
+        #region ContainerData loading
         private ContainerData? loadContainerData(XmlNode node)
         {
             ContainerData containerData = new ContainerData();
@@ -583,6 +380,240 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return containerData;
         }
 
+        internal ObservableCollection<CoreContainer> Container_load()
+        {
+            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
+
+            foreach (string filename in scan_directory(ContainerData_xml_folder))
+            {
+                if (File.Exists(filename))
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+
+                    xmlDocument.Load(filename);
+
+                    XmlNode? node_Container = xmlDocument.SelectSingleNode("Container");
+
+
+                    if (node_Container != null)
+                    {
+                        ContainerData containerData = loadContainerData(node_Container);
+
+                        XmlNode node_Content = node_Container.SelectSingleNode("Content");
+
+                        if (node_Content != null)
+                        {
+                            UserControl userControl = new UserControl();
+
+                            XmlNode node_Type = node_Content.SelectSingleNode("Type");
+
+                            if (node_Type != null)
+                            {
+                                Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                if (type != null)
+                                {
+                                    XmlNode? node_Data = node_Content.SelectSingleNode("Data");
+
+                                    if (node_Data != null)
+                                    {
+                                        //containerData = loadContentData(node_Data);
+                                        userControl = ContentData_load(type, node_Data);
+                                    }
+                                    else
+                                    {
+                                        userControl = (UserControl)Activator.CreateInstance(type);
+                                    }
+                                }
+                                else
+                                {
+                                    Type? type_in_folder = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                    if (type_in_folder != null)
+                                    {
+
+                                        userControl = (UserControl)Activator.CreateInstance(type_in_folder);
+                                    }
+                                    else
+                                    {
+                                        Type? core_type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                        if (core_type != null)
+                                        {
+                                            userControl = (UserControl)Activator.CreateInstance(core_type);
+                                        }
+                                    }
+                                }
+                            }
+
+                            Point container_position;
+                            XmlNode node_Position = node_Container.SelectSingleNode("Position");
+
+                            if (node_Position != null)
+                            {
+                                XmlNode node_x = node_Position.SelectSingleNode("x");
+                                XmlNode node_y = node_Position.SelectSingleNode("y");
+
+                                if (node_x != null && node_y != null)
+                                {
+                                    container_position = new Point(
+                                        Double.Parse(node_x.InnerText),
+                                        Double.Parse(node_y.InnerText)
+                                        );
+                                }
+                            }
+
+                            if (containerData == null)
+                            {
+                                containerData = new ContainerData();
+                            }
+
+                            containerData.SetElement(userControl);
+
+                            CoreContainer coreContainer = new CoreContainer(containerData);
+                            coreContainer.setPosition(container_position);
+
+                            container_list.Add(coreContainer);
+                        }
+                    }
+                }
+            }
+
+            return container_list;
+        }
+
+        #endregion Container loading
+
+        #region Container saving
+        internal void Container_save(CoreContainer coreContainer, int counter = 0)
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+            CoreContainer container = coreContainer;
+
+            if (coreContainer != null)
+            {
+                XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
+
+                XmlNode node = node_ContainerData;
+
+                if (node != null)
+                {
+                    XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasName");
+                    node_CanvasName.InnerText = container.GetContainerData().CanvasName;
+                    node.AppendChild(node_CanvasName);
+
+                    XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
+                    node_ContainerDataFilename.InnerText = $"{counter}.xml";
+                    node.AppendChild(node_ContainerDataFilename);
+
+                    XmlNode node_z_position = xmlDocument.CreateElement("z_position");
+                    node_z_position.InnerText = container.GetContainerData().z_position.ToString();
+                    node.AppendChild(node_z_position);
+
+                    XmlNode node_Content = Content_save(xmlDocument, container);
+
+                    if (node_Content != null)
+                    {
+                        node.AppendChild(node_Content);
+                    }
+                }
+
+                XmlNode node_Position = xmlDocument.CreateElement("Position");
+
+                XmlNode node_position_x = xmlDocument.CreateElement("x");
+                node_position_x.InnerText = ((int)container.get_dragPoint().X).ToString();
+                node_Position.AppendChild(node_position_x);
+
+                XmlNode node_position_y = xmlDocument.CreateElement("y");
+                node_position_y.InnerText = ((int)container.get_dragPoint().Y).ToString();
+                node_Position.AppendChild(node_position_y);
+
+                node.AppendChild(node_Position);
+
+                try
+                {
+                    xmlDocument.Save($@".\{ContainerData_xml_folder}{counter}.xml");
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        internal XmlNode? ContainerData_save(XmlDocument xmlDocument, ContainerData containerData)
+        {
+            if (containerData != null)
+            {
+                XmlNode node = xmlDocument.CreateElement("Container");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_ContainerData = xmlDocument.CreateElement("ContainerData");
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, containerData.settings);
+
+                if (aux_node != null)
+                {
+                    node_ContainerData.AppendChild(aux_node);
+                }
+
+                return node_ContainerData;
+            }
+
+            return null;
+        }
+
+        internal void ContainerDataTemplate_save()
+        {
+            XmlDocument xmlDocument = new XmlDocument();
+
+            ContainerData containerData = new SharedLogic().GetDataHandler().GetContainerData();
+
+            XmlNode node_ContainerData = ContainerData_save(xmlDocument, containerData);
+
+            XmlNode node = node_ContainerData;
+
+            if (node != null)
+            {
+                XmlNode node_CanvasName = xmlDocument.CreateElement("CONTAINER_DATA_TEMPLATE");
+                node_CanvasName.InnerText = containerData.CanvasName;
+                node.AppendChild(node_CanvasName);
+
+                XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
+                node_ContainerDataFilename.InnerText = ContainerData_file;
+                node.AppendChild(node_ContainerDataFilename);
+
+                XmlNode node_z_position = xmlDocument.CreateElement("z_position");
+                node_z_position.InnerText = "0";
+                node.AppendChild(node_z_position);
+
+                node.AppendChild(node_ContainerData);
+
+                XmlNode node_Position = xmlDocument.CreateElement("Position");
+
+                XmlNode node_position_x = xmlDocument.CreateElement("x");
+                node_position_x.InnerText = "120";
+                node_Position.AppendChild(node_position_x);
+
+                XmlNode node_position_y = xmlDocument.CreateElement("y");
+                node_position_y.InnerText = "100";
+                node_Position.AppendChild(node_position_y);
+
+                node.AppendChild(node_Position);
+
+                try
+                {
+                    xmlDocument.Save(ContainerData_file);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+        #endregion ContainerData saving
         #endregion ContainerData
 
         // CoreData
@@ -1249,7 +1280,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion TextBoxData saving
         #endregion TextBoxData
 
-        #endregion Core
+#endregion Core
 
 
         // FlatShareCostCalculator loading and saving via XML

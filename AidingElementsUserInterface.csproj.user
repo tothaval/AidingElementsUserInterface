@@ -7,6 +7,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_SystemControls\SystemCanvas.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\Adjust.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\BrushSetup.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_UserControls\CoreContainer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,10 +43,13 @@
     <Compile Update="Core\AEUI_UserControls\CoreTextBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Core\AEUI_UserControls\LevelBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_UserControls\LevelShift.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Core\AEUI_UserControls\SetupData.xaml.cs">
+    <Compile Update="Core\AEUI_UserControls\Request.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Coordinates.xaml.cs">
@@ -108,6 +123,18 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_SystemControls\SystemCanvas.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\Adjust.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\BrushSetup.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_UserControls\CoreContainer.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -135,10 +162,13 @@
     <Page Update="Core\AEUI_UserControls\CoreValueChange.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Core\AEUI_UserControls\LevelBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_UserControls\LevelShift.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Core\AEUI_UserControls\SetupData.xaml">
+    <Page Update="Core\AEUI_UserControls\Request.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Coordinates.xaml">
