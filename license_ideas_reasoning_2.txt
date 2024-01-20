@@ -1,0 +1,47 @@
+
+
+okay
+
+lizenzideen:
+
+lifetime lizenz für jedes individuum oder daseinsformen mit bewusstsein mit kaufrecht
+
+es kann eine registrierung erfolgen
+
+client cluster hub
+
+
+logical link 1 screen öffnet zugang zu kontext, z.b. gruppenchatfeatures,
+ sowie 20 gemeinsam nutztbare level innerhalb der eigenen oberfläche
+logical links können per passwort und authentifizierungsverfahren geschützt werden.
+für kinder, jugendliche und spezifizierte zielgruppen ließen sich filter einbauen,
+die lizenzen den zugang zu derartigen räumen unmöglich machen, zum beispiel filtern
+nach alter, oder wenn es eine insititutionelle lizenz, z.b. einer schule ist, auch
+nach schulzugehörigkeit etc.
+
+weiter gedacht ließe sich das aeui oberflächensystem per netzwerkzugang zu einem
+global verlinkten system entwickeln, in dem per abonoment kostenfreie oder kostenpflichtige
+elemente gebucht und abbestellt werden können, ein klick auf ein abobild oder abotext
+erzeugt ein entsprechendes element auf einem zugang, wo die berechtigte oder abonnierende
+lizenz eingeloggt ist, in einem solchen fall müssten alle elemente die im entsprechenden
+remote screen hinterlegt sind, aus dem netzwerk in den lokalen client geladen werden
+
+aufgrund der bisherigen architektur sind dies sehr wenige daten.
+
+auch Level sollten mit einer Authentifizierung versehbar sein, so ließen sich gezielt einzelne
+Level gegen Gesamtsicht des LevelShift elements und auch gegen direkten Contentzugriff schützen.
+Was in einem solchen Fall mit den gespeicherten und leicht findbaren Contentdaten geschehen muss,
+kann ich derzeit nicht sagen.
+
+Eltern können Lizenzen für Kinder beantragen, die mit zunehmendem Alter automatisch upgegradet
+werden, und zudem den Zugang zu den Vorversionen blockieren, mit Ausnahme für Pädagogen, Ärzte, etc.
+Altersbasierte Contentexchange und Communication transactions könnten zu mehr Sicherheit für
+Kinder und Jugendliche beitragen, zumindest innerhalb eines denkbaren AEUI client cluster systems.
+
+versionen
+
+aeui kids (max 20 € budget per month for transactions within the marketplace)
+aeui youngsters (max budget has to be setup by a parent license for transactions within the marketplace)
+aeui adult version (free version, buy me version, donaters version, business version, institutional version)
+
+aeui security

@@ -228,18 +228,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     string target = shard.Substring(1);
 
                     UserControl userControl;
-                    Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{target}, AidingElementsUserInterface");
 
-                    if (type != null)
-                    {
-                        userControl = (UserControl)Activator.CreateInstance(type);
 
-                        executionRequestOrigin.add_element_to_canvas(userControl);
-
-                        return SIGIL_Codex[codex].SigilIdentifier;
-                    }
-
-                    type = Type.GetType($"AidingElementsUserInterface.Elements.{target}.{target}, AidingElementsUserInterface");
+                    Type? type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_SystemControls.{target}, AidingElementsUserInterface");
                     if (type != null)
                     {
                         userControl = (UserControl)Activator.CreateInstance(type);
@@ -250,6 +241,27 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     }
 
                     type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{target}, AidingElementsUserInterface");
+                    if (type != null)
+                    {
+                        userControl = (UserControl)Activator.CreateInstance(type);
+
+                        executionRequestOrigin.add_element_to_canvas(userControl);
+
+                        return SIGIL_Codex[codex].SigilIdentifier;
+                    }
+
+
+                    type = Type.GetType($"AidingElementsUserInterface.Elements.{target}, AidingElementsUserInterface");
+                    if (type != null)
+                    {
+                        userControl = (UserControl)Activator.CreateInstance(type);
+
+                        executionRequestOrigin.add_element_to_canvas(userControl);
+
+                        return SIGIL_Codex[codex].SigilIdentifier;
+                    }
+
+                    type = Type.GetType($"AidingElementsUserInterface.Elements.{target}.{target}, AidingElementsUserInterface");
                     if (type != null)
                     {
                         userControl = (UserControl)Activator.CreateInstance(type);

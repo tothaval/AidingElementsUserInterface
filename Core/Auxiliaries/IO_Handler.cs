@@ -35,7 +35,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
         internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
         // folders
-        internal string Core_xml_folder = @"data\Core\";
+        internal string Core_xml_folder = @"data\Core\";                
         internal string Core_Screens_folder = @"data\Core\Screens\";
 
         internal string ContainerData_xml_folder = @"data\Core\ContainerData\";
@@ -59,40 +59,41 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         private void build_path_structure()
         {
-            if (!check_path(Core_xml_folder))
+            check_path(Core_xml_folder);
+            check_path(Core_Screens_folder);
+
+            string screen_system_folder = $"{Core_Screens_folder}\\System\\";
+            check_path(screen_system_folder);
+
+            for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
-                if (!check_path(Core_Screens_folder))
-                {
-                    for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
-                    {
-                        string screen_folder = $"{Core_Screens_folder}\\{i}\\";
+                string screen_folder = $"{Core_Screens_folder}\\{i}\\";
+                check_path(screen_folder);
 
-                        if (!check_path(screen_folder))
-                        {
-                            string level_folder = $"{screen_folder}\\Levels\\";
-                            check_path(level_folder);
+                string container_folder = $"{screen_folder}\\Container\\";
+                check_path(container_folder);
 
-                            string level_lower = $"{level_folder}\\Lower\\";
-                            check_path(level_lower);
+                string level_folder = $"{screen_folder}\\Levels\\";
+                check_path(level_folder);
 
-                            string level_upper = $"{level_folder}\\Upper\\";
-                            check_path(level_upper);
-                        }
-                    }
-                }
+                string level_system_folder = $"{screen_folder}\\System\\";
+                check_path(level_system_folder);
+
+                string level_lower = $"{level_folder}\\Lower\\";
+                check_path(level_lower);
+
+                string level_upper = $"{level_folder}\\Upper\\";
+                check_path(level_upper);
 
             }
 
             check_path(FlatShareCC_xml_folder);
 
-            if (!check_path(MyNote_notes_folder))
-            {
-                check_path(MyNote_notes_matrix_folder);
-                check_path(MyNote_xml_folder);
-            }
+            check_path(MyNote_notes_folder);
+            check_path(MyNote_notes_matrix_folder);
+            check_path(MyNote_xml_folder);
 
-            check_path(ContainerData_xml_folder);           
-
+            check_path(ContainerData_xml_folder);
         }
 
         private bool check_path(string path)

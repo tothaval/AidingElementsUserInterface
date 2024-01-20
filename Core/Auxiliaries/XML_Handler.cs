@@ -282,10 +282,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #region CanvasData saving
         internal void CanvasData_save()
         {
-            CoreCanvas[] screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
+           ObservableCollection<CoreCanvas> screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
 
 
-            for (int i = 0; i < screens.Length; i++)
+            for (int i = 0; i < screens.Count; i++)
             {
                 CanvasData canvasData = screens[i].getCanvasData();
 

@@ -47,12 +47,12 @@
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
       <height>480</height>
-      <width>912</width>
+      <width>898</width>
       <imageFilePath>
       </imageFilePath>
     </CoreData>
-    <initialPositionX>628</initialPositionX>
-    <initialPositionY>360</initialPositionY>
+    <initialPositionX>451</initialPositionX>
+    <initialPositionY>334</initialPositionY>
     <language>english</language>
   </MainWindowData>
 </Core>

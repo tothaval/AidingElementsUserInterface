@@ -118,6 +118,28 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             return ref canvas;
         }
 
+
+        internal double getRotation()
+        {
+            RotateTransform rotation = this.RenderTransform as RotateTransform;
+
+            if (rotation != null)
+            {
+                double rotationInDegrees = rotation.Angle;
+
+                return rotationInDegrees;
+            }
+
+            return 0;
+        }
+
+
+
+        internal void setRotation(double angle)
+        {
+            this.RenderTransform = new RotateTransform(angle);
+        }
+
         internal void hideContainerNesting(CoreContainer coreContainer)
         {
             coreContainer.element_border.Background = new SolidColorBrush(Colors.Transparent);

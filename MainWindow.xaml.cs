@@ -55,6 +55,7 @@ using System.Windows.Interop;
 using AidingElementsUserInterface.Core.AEUI_Logic;
 using System.Windows.Controls;
 using AidingElementsUserInterface.Core.AEUI_SystemControls;
+using System.Xml.Serialization;
 
 namespace AidingElementsUserInterface
 {
@@ -64,6 +65,7 @@ namespace AidingElementsUserInterface
     public partial class MainWindow : Window
     {
         private CoreCanvas ACTIVE_CANVAS;
+        private bool SYSTEM_ACTIVE_FLAG = false;
 
         internal MainWindowData mainWindowData;
 
@@ -72,8 +74,15 @@ namespace AidingElementsUserInterface
 
         internal SharedLogic logic = new SharedLogic();
 
-        
+        private LevelData SYSTEM_LEVEL = new LevelData(0, "SYSTEM LEVEL", true, true); // 'system canvas'  'level system level'
+
+
         internal CoreCanvas Get_ACTIVE_CANVAS => ACTIVE_CANVAS;
+        internal bool Get_SYSTEM_ACTIVE_FLAG => SYSTEM_ACTIVE_FLAG;
+        internal void set_ACTIVE_CANVAS(CoreCanvas activeCanvas)
+        {
+            this.ACTIVE_CANVAS = activeCanvas;
+        }
 
 
         public MainWindow()
@@ -198,6 +207,7 @@ namespace AidingElementsUserInterface
                 border_SYSTEM_CANVAS.Visibility = Visibility.Visible;
 
                 ACTIVE_CANVAS = SYSTEM_CANVAS.Get_SYSTEM_CANVAS;
+                SYSTEM_ACTIVE_FLAG = true;
             }
             else
             {
@@ -205,6 +215,7 @@ namespace AidingElementsUserInterface
                 border_SYSTEM_CANVAS.Visibility = Visibility.Collapsed;
 
                 ACTIVE_CANVAS = CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS();
+                SYSTEM_ACTIVE_FLAG = false;
             }
         }
 
@@ -225,36 +236,74 @@ namespace AidingElementsUserInterface
 
             if (e.Key == Key.F1)
             {
-                if (ACTIVE_CANVAS != null)
+                if (!MI_AEUI_CTRL.IsSubmenuOpen)
                 {
-                    ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">Manual");
+                    MI_AEUI_CTRL.IsSubmenuOpen = true;
+                }
+                else
+                {
+                    MI_AEUI_CTRL.IsSubmenuOpen = false;
                 }
             }
 
             if (e.Key == Key.F2)
             {
-                if (MI_MyNote.IsChecked == false)
+                if (!MI_SelectionControl.IsSubmenuOpen)
                 {
-                    MI_MyNote.IsChecked = true;
+                    MI_SelectionControl.IsSubmenuOpen = true;
                 }
                 else
                 {
-                    MI_MyNote.IsChecked = false;
+                    MI_SelectionControl.IsSubmenuOpen = false;
                 }
-                add_MyNote();
             }
 
             if (e.Key == Key.F3)
             {
-                if (MI_FlatShareCC.IsChecked == false)
+                if (!MI_elements.IsSubmenuOpen)
                 {
-                    MI_FlatShareCC.IsChecked = true;
+                    MI_elements.IsSubmenuOpen = true;
                 }
                 else
                 {
-                    MI_FlatShareCC.IsChecked = false;
+                    MI_elements.IsSubmenuOpen = false;
                 }
-                add_FlatShareCC();
+            }
+
+            if (e.Key == Key.F4)
+            {
+                if (!MI_tools.IsSubmenuOpen)
+                {
+                    MI_tools.IsSubmenuOpen = true;
+                }
+                else
+                {
+                    MI_tools.IsSubmenuOpen = false;
+                }
+            }
+
+            if (e.Key == Key.F5)
+            {
+                if (!MI_infobits.IsSubmenuOpen)
+                {
+                    MI_infobits.IsSubmenuOpen = true;
+                }
+                else
+                {
+                    MI_infobits.IsSubmenuOpen = false;
+                }
+            }
+
+            if (e.Key == Key.F6)
+            {
+                if (!MI_about.IsSubmenuOpen)
+                {
+                    MI_about.IsSubmenuOpen = true;
+                }
+                else
+                {
+                    MI_about.IsSubmenuOpen = false;
+                }
             }
         }
 
@@ -396,6 +445,15 @@ namespace AidingElementsUserInterface
             }
         }
 
+        private void MI_CoreOptions_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+
         private void MI_LevelShift_Click(object sender, RoutedEventArgs e)
         {
             if (ACTIVE_CANVAS != null)
@@ -438,6 +496,32 @@ namespace AidingElementsUserInterface
             }
         }
 
+        private void MI_Copy_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_Paste_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_Move_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+
         private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
         {
             if (ACTIVE_CANVAS != null)
@@ -472,6 +556,38 @@ namespace AidingElementsUserInterface
         #endregion tools menu item clicks
 
         #region selection control menu item clicks
+        private void MI_copy_selection_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS().get_selected_items() != null)
+            {
+                int selection_count = CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS().get_selected_items().Count;
+
+                if (selection_count > 0)
+                {
+                    CORE_CANVAS_SWITCH.copy();
+                }
+            }
+        }
+
+        private void MI_paste_selection_Click(object sender, RoutedEventArgs e)
+        {
+            if (CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS() != null)
+            {
+                CORE_CANVAS_SWITCH.paste();
+            }
+        }
+
+        private void MI_move_selection_Click(object sender, RoutedEventArgs e)
+        {
+            if (CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS() != null
+                && !SYSTEM_ACTIVE_FLAG)
+            {
+                CORE_CANVAS_SWITCH.move();
+            }
+        }
+
+
         private void MI_group_to_line_Click(object sender, RoutedEventArgs e)
         {
             if (ACTIVE_CANVAS != null)

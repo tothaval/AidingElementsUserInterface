@@ -10,6 +10,9 @@
     <Compile Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Core\AEUI_SystemControls\LevelSystemDisplay.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_SystemControls\SystemCanvas.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,10 +46,10 @@
     <Compile Update="Core\AEUI_UserControls\CoreTextBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Core\AEUI_UserControls\LevelBar.xaml.cs">
+    <Compile Update="Core\AEUI_SystemControls\LevelBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Core\AEUI_UserControls\LevelShift.xaml.cs">
+    <Compile Update="Core\AEUI_SystemControls\LevelShift.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Core\AEUI_UserControls\Request.xaml.cs">
@@ -126,6 +129,9 @@
     <Page Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Core\AEUI_SystemControls\LevelSystemDisplay.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_SystemControls\SystemCanvas.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -162,10 +168,10 @@
     <Page Update="Core\AEUI_UserControls\CoreValueChange.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Core\AEUI_UserControls\LevelBar.xaml">
+    <Page Update="Core\AEUI_SystemControls\LevelBar.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Core\AEUI_UserControls\LevelShift.xaml">
+    <Page Update="Core\AEUI_SystemControls\LevelShift.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Core\AEUI_UserControls\Request.xaml">

@@ -21,13 +21,13 @@ menu -> control -> System to access system canvas
 in System canvas, LevelShift can be deactivated with click on LevelShift in 
 menu -> tools -> LevelShift
 
-use Command to call CoreOptions, element has been improved, but is unfinished__WIP__
+CoreOptions element has been improved, but is unfinished__WIP__
 
 element control: __WIP__
 	elements can be moved via left mouse button
 
 	ctrl + left click
-		FileLink, Image or Link
+		FileLink, Image or Link or canvas_name(enter for save)
 		 	reset element
 
 	shift + left click on element
@@ -60,20 +60,16 @@ there is a core folder and within that are several ...data.xml files.
 manipulate the values of the files to change AEUIs appearance, __WIP__
 _______________________________________________
 shortcuts:
-F1: instantiate Manual element (english language only), __WIP__
-	
-F2: instantiate MyNote element, an application for the creation of notes
-	to capture ideas, save and load of note contents now works
-	properly, __WIP__
-
-F3: instantiate FlatShareCostCalculator element, __WIP__ currently disabled
+Function Keys F1 ... F10 open main menu items
 
 _______________________________________________
 commands via Command element:
 	current features:
 >ELEMENTNAME create new element of type ELEMENTNAME on canvas
  currently implemented elements are:
-	Command, Coordinates, CoreOptions, FileLink, Image, LevelShifter, 
+
+	Copy, Paste, Move, Adjust, Request, 
+	Command, Coordinates, CoreOptions, FileLink, Image, LevelShift, 
 	Link, LocalDrives, Manual, MyNote, Random, RightClickChoice
 
 <NUMBER select specific container 

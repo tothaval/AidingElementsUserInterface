@@ -27,6 +27,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static AidingElementsUserInterface.Core.AEUI_UserControls.Adjust;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DragEventArgs = System.Windows.DragEventArgs;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
@@ -43,12 +44,16 @@ namespace AidingElementsUserInterface.Core
         private CanvasData config;
         private string canvas_name;
 
+        private LevelSystem levelSystem = new LevelSystem();
+
         private System.Windows.Point selection_point;
         private System.Windows.Shapes.Rectangle selection_rectangle;
 
         private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
 
         private CallCentral callCentral;
+
+
 
         public CoreCanvas()
         {
@@ -72,6 +77,69 @@ namespace AidingElementsUserInterface.Core
             callCentral = new CallCentral(ref __CoreCanvas);
         }
 
+
+
+
+
+        internal void ADJUST_GATE(ADJUST_DATA_STRUCTURE data)
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                Canvas.SetLeft(item, data.x);
+                Canvas.SetTop(item, data.y);
+                item.setRotation(data.rotation);
+
+                item.element_border.Width = data.width;
+                item.element_border.Height = data.height;
+
+                Panel.SetZIndex(item, data.level);
+
+                MessageBox.Show(data.level_visibility_list);
+            }
+        }
+
+
+        internal string get_CANVAS_NAME()
+        {
+            return this.canvas_name;
+        }
+
+        internal ObservableCollection<CoreContainer> get_selected_items()
+        {
+            return selected_items;
+        }
+
+        internal void LevelShiftSelection(int target_level)
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                bool visibility = levelSystem.Get_CURRENT_LEVEL().VISIBILITY_FLAG;
+
+                Panel.SetZIndex(item, target_level);
+
+                item.GetContainerData().z_position = target_level;
+
+                if (visibility)
+                {
+                    item.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    item.Visibility = Visibility.Hidden;
+                }
+
+            }
+        }
+
+        internal void SetVisibility(bool isVisible)
+        {
+
+        }
+
+        internal void set_CANVAS_NAME(string canvas_name)
+        {
+            this.canvas_name = canvas_name;
+        }
 
         internal void add_element_to_canvas(UserControl content)
         {
@@ -124,17 +192,19 @@ namespace AidingElementsUserInterface.Core
                 config = new CanvasData(canvas_name);
             }
 
-            Application.Current.Resources["Level"] = 0;
-            Application.Current.Resources["CurrentLevel"] = 0;
+            canvas.Resources["Level"] = 0;
+            canvas.Resources["CurrentLevel"] = 0;
 
-            Application.Current.Resources["LevelBarHeight"] = (double)75;
+            canvas.Resources["LevelBarHeight"] = (double)75;
 
-            Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
-            Application.Current.Resources["LevelShiftOrientationScroll"] = Orientation.Horizontal;
-            Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Vertical;
+            canvas.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
+            canvas.Resources["LevelShiftOrientationScroll"] = Orientation.Horizontal;
+            canvas.Resources["LevelShiftOrientationInner"] = Orientation.Vertical;
 
             //Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
             //Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Horizontal;
+
+            _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
 
             data_Handler.AddCanvasData(config);
 
@@ -152,30 +222,30 @@ namespace AidingElementsUserInterface.Core
                 canvasData = new CanvasData();
             }
 
-            __CoreCanvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
-            __CoreCanvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
-            __CoreCanvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
-            __CoreCanvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
+            canvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
+            canvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
+            canvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
+            canvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
 
-            __CoreCanvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
-            __CoreCanvas.Resources["CanvasData_thickness"] = canvasData.thickness;
+            canvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
+            canvas.Resources["CanvasData_thickness"] = canvasData.thickness;
 
-            __CoreCanvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
-            __CoreCanvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
-
-            __CoreCanvas.Resources["CanvasData_width"] = canvasData.width;
-            __CoreCanvas.Resources["CanvasData_height"] = canvasData.height;
-
-            __CoreCanvas.Resources["CanvasData_canvasName"] = canvasData.canvasName;
-            __CoreCanvas.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
-
-            __CoreCanvas.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
+            canvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
+            canvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
+            
+            canvas.Resources["CanvasData_width"] = canvasData.width;
+            canvas.Resources["CanvasData_height"] = canvasData.height;
+            
+            canvas.Resources["CanvasData_canvasName"] = canvasData.canvasName;
+            canvas.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
+            
+            canvas.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
 
 
             if (File.Exists(canvasData.imageFilePath))
             {
-                __CoreCanvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
-                __CoreCanvas.Resources["CanvasData_background"] = __CoreCanvas.Resources["CanvasData_image"];
+                canvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
+                canvas.Resources["CanvasData_background"] = canvas.Resources["CanvasData_image"];
             }
         }
 

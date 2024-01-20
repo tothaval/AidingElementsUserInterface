@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_SystemControls"
              xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:core2="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -15,21 +16,48 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
 
         <core:CoreButton x:Name="CB_left"
                                      Grid.Column="0"                    
-                                     Grid.Row="0"                                      
+                                     Grid.Row="1"                                      
                                      />
+
+        <Border x:Name="border_CanvasName"
+                Grid.Column="1"                    
+                Grid.Row="0"    
+                HorizontalAlignment="Center"
+                VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
+                <Border x:Name="CL_SWITCH" Visibility="Visible">
+                    <core2:CoreLabel x:Name="CL_canvasNameDisplay"/>
+
+                </Border>
+
+                <Border x:Name="CTB_SWITCH" Visibility="Collapsed">
+                    <core:CoreTextBox x:Name="CTB_canvasNameChange"/>
+                </Border>
+            </StackPanel>
+            
+        </Border>
 
         <Border x:Name="border"
                     Grid.Column="1"                    
-                    Grid.Row="0"/>       
+                    Grid.Row="1"/>
+        
+        <Border x:Name="border_SecurityLoginField"
+                Grid.Column="1"                    
+                Grid.Row="2"                     
+                Visibility="Collapsed"
+                />
+
 
         <core:CoreButton x:Name="CB_right"
                                      Grid.Column="2"
-                                     Grid.Row="0"      />
+                                     Grid.Row="1"      />
     </Grid>
 </UserControl>

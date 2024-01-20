@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AidingElementsUserInterface.Core.AEUI_Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,20 +30,21 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {   
-            LevelID.setText("0");
-            LevelName.setText("level name");
-            LevelPurpose.setText("level purpose");
-            LevelVisibility.setText("level visibility");
-            LevelElementCount.setText("level element count");
         }
 
-        internal void update(string ID, string Name, string Purpose, string Visibility, string ElementCount)
+        internal void update(LevelData levelData)
         {
-            LevelID.setText(ID);
-            LevelName.setText(Name);
-            LevelPurpose.setText(Purpose);
-            LevelVisibility.setText(Visibility);
-            LevelElementCount.setText(ElementCount);
+            CL_LevelId.setText(levelData.LEVEL.ToString());
+
+            CL_LevelName.setText(levelData.NAME.ToString());
+            CL_LevelDescription.setText(levelData.DESCRIPTION.ToString());
+
+            CL_LevelLogin.setText(levelData.LOGIN_FLAG.ToString());
+
+            CL_LevelSecurityPanel.setText(levelData.SECURITY_FLAG.ToString());
+
+            CL_LevelElementCount.setText(levelData.ELEMENT_COUNT.ToString());
+
         }
     }
 }

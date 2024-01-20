@@ -233,6 +233,13 @@ namespace AidingElementsUserInterface.Core
 
         public void setText(string text)
         {
+            bool test = double.TryParse(text, out double result);
+
+            if (test)
+            {
+                textbox.Text = result.ToString("#.##");
+            }
+
             textbox.Text = text;
         }
         #endregion element design and functionality
