@@ -4,32 +4,19 @@ Stephan Kammel(fractal void)
 
 development plan
 
-implement rerendering of UI features during runtime
-	PropertyChanged events 
-		source OptionElement, call when saving values
-		target relevant userControls | controls | classes
-		mode	twoway
-	XmlDataProvider | Xml_handler
-		implement resources/resourcedictionaries in app.xaml
-		load on start up
-	DynamicResource
-		change every relevant property to a Binding or DynamicResource
 
-finish development of OptionsElement
-	integrate ComboBox and a functionality to select 
-		which data should be displayed for change
-	integrate propertychanged stuff and INotifyPropertyChanged interface
-	delete OptionsElement_ButtonData
-		
+finish new level system, fix save and load of containers
+update development plan with proper document
+update license ideas
+
+finish development of OptionsElement		
 	later: harden the OptionElement against input errors
 
-z-indexer, timer
-	integrate and transform these ysui predecessors for aeui
+timer -> Clock, timer with setup
+	
 
-	image element
-		implement a scaleTransform on Mousewheel events to zoom in and out
-		implement setup and reset of linked pictures
-		implement a "to background of selection" or "to canvas background"
+integrate and transform these ysui predecessors for aeui
+
 
 random element, corematrix classes
 	continue development of random element

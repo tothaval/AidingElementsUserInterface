@@ -167,12 +167,19 @@
                   >
 
                 <MenuItem x:Name="MI_AEUI_CTRL"
-                          Header="control">
+                          Header="control"                          
+                          >
 
                     <MenuItem x:Name="MI_Command"
                           Header="Command"
                               
                           Click="MI_Command_Click"/>
+
+
+                    <MenuItem x:Name="MI_CoreOptions"
+                          Header="CoreOptions"
+                              
+                          Click="MI_CoreOptions_Click"/>  
 
                     <MenuItem x:Name="MI_SYSTEMCANVAS"                               
                           Header="System"
@@ -200,6 +207,22 @@
 
                 <MenuItem x:Name="MI_SelectionControl"                          
                           Header="selection">
+
+
+                    <MenuItem x:Name="MI_copy_selection"
+                              Header="copy"
+                              Click="MI_copy_selection_Click"/>
+
+
+                    <MenuItem x:Name="MI_paste_selection"
+                              Header="paste"
+                              Click="MI_paste_selection_Click"/>
+
+
+                    <MenuItem x:Name="MI_move_selection"
+                              Header="move"
+                              Click="MI_move_selection_Click"/>
+
                     <MenuItem x:Name="MI_group_to_line"
                           Header="build Line"
                               
@@ -209,6 +232,9 @@
                           Header="build Row"
                               
                           Click="MI_group_to_row_Click"/>
+                    
+                    
+                    
 
                     <MenuItem x:Name="MI_delete"
                               Header="delete"
@@ -258,7 +284,22 @@
                           Header="Adjust"
                               
                           Click="MI_Adjust_Click"/>
-                    
+
+                    <MenuItem x:Name="MI_Copy"
+                          Header="Copy"
+                              
+                          Click="MI_Copy_Click"/>
+
+                    <MenuItem x:Name="MI_Paste"
+                          Header="Paste"
+                              
+                          Click="MI_Paste_Click"/>
+
+                    <MenuItem x:Name="MI_Move"
+                          Header="Move"
+                              
+                          Click="MI_Move_Click"/>
+
                     <MenuItem x:Name="MI_LevelShift"
                           Header="LevelShift"
                               

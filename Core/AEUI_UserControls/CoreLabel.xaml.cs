@@ -122,6 +122,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         public void setText(string text)
         {
+            bool test = double.TryParse(text, out double result);
+
+            if (test)
+            {
+                textblock.Text = result.ToString("#.##");
+            }
+
             textblock.Text = text;
         }
     }
