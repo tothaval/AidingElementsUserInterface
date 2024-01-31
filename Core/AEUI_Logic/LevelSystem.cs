@@ -152,5 +152,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             return _levels[current_level];
         }
 
+        internal void SetCurrentLevel(int level)
+        {
+            current_level = level;
+        }
+
     }
 }

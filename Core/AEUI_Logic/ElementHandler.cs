@@ -10,12 +10,11 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 
-namespace AidingElementsUserInterface.Core
+namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
     internal class ElementHandler : ElementServer
     {
@@ -86,7 +85,7 @@ namespace AidingElementsUserInterface.Core
         // container element children count.
         // somehow filter, if a canvas is the same in container_locations collection, 
         // start with foreach value canvas in container_locations... count per int within the loop
-        
+
         // think really hard about loading order of canvas files
         // (not yet necessary, because canvas instantiation not yet implemented.)
 

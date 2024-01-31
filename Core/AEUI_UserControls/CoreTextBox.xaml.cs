@@ -32,18 +32,20 @@ namespace AidingElementsUserInterface.Core
             build();
         }
 
-        public CoreTextBox(bool no_limits)
+        public CoreTextBox(bool no_limits, string content = "")
         {
             InitializeComponent();
 
-            build(no_limits);
+            setText(content);
+
+            build(no_limits);            
         }
 
         public CoreTextBox(string content)
         {
             InitializeComponent();
 
-            textbox.Text = content;
+            setText(content);
 
             build();
         }

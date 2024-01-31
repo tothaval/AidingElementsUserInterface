@@ -157,187 +157,201 @@
                      Grid.Column="0"
                      Opacity="0"/>
 
-            <Menu x:Name="menu"
-                  Grid.Column="1"
-                  Grid.ColumnSpan="3"
-                  Grid.Row="1"
-                  IsMainMenu="True"
-                  Background="Transparent"
-                  Foreground="{DynamicResource MainWindow_foreground}"               
-                  >
+            <StackPanel Grid.Column="1"
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+                <Border>
+                    <Menu x:Name="menu"
+                          IsMainMenu="True"
+                          Background="Transparent"
+                          Foreground="{DynamicResource MainWindow_foreground}"               
+                          >
 
-                <MenuItem x:Name="MI_AEUI_CTRL"
+                        <MenuItem x:Name="MI_AEUI_CTRL"
                           Header="control"                          
                           >
 
-                    <MenuItem x:Name="MI_Command"
+                            <MenuItem x:Name="MI_Command"
                           Header="Command"
                               
                           Click="MI_Command_Click"/>
 
 
-                    <MenuItem x:Name="MI_CoreOptions"
+                            <MenuItem x:Name="MI_CoreOptions"
                           Header="CoreOptions"
                               
-                          Click="MI_CoreOptions_Click"/>  
+                          Click="MI_CoreOptions_Click"/>
 
-                    <MenuItem x:Name="MI_SYSTEMCANVAS"                               
+                            <MenuItem x:Name="MI_SYSTEMCANVAS"                               
                           Header="System"
                           Click="MI_SYSTEM_Click"/>
 
-                    <MenuItem x:Name="MI_minimize"
+
+                            <MenuItem x:Name="MI_LEVELSYSTEM"                               
+                          Header="LevelSystem"
+                          Click="MI_LEVELSYSTEM_Click"/>
+
+
+                            <MenuItem x:Name="MI_minimize"
                           Header="minimize"
                               
                           Click="MI_minimize_Click"/>
 
-                    <MenuItem x:Name="MI_maximize"
+                            <MenuItem x:Name="MI_maximize"
                               Header="fullscreen"
                               IsCheckable="True"
                               Click="MI_maximize_Click"/>
 
-                    <MenuItem x:Name="MI_quit"
+                            <MenuItem x:Name="MI_quit"
                           Header="Quit"
                               
                           Click="MI_quit_Click"/>
 
-                    <MenuItem x:Name="MI_shutdown"
+                            <MenuItem x:Name="MI_shutdown"
                           Header="Shutdown"
                           Click="MI_shutdown_Click"/>
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem x:Name="MI_SelectionControl"                          
+                        <MenuItem x:Name="MI_SelectionControl"                          
                           Header="selection">
 
 
-                    <MenuItem x:Name="MI_copy_selection"
+                            <MenuItem x:Name="MI_copy_selection"
                               Header="copy"
                               Click="MI_copy_selection_Click"/>
 
 
-                    <MenuItem x:Name="MI_paste_selection"
+                            <MenuItem x:Name="MI_paste_selection"
                               Header="paste"
                               Click="MI_paste_selection_Click"/>
 
 
-                    <MenuItem x:Name="MI_move_selection"
+                            <MenuItem x:Name="MI_move_selection"
                               Header="move"
                               Click="MI_move_selection_Click"/>
 
-                    <MenuItem x:Name="MI_group_to_line"
+                            <MenuItem x:Name="MI_group_to_line"
                           Header="build Line"
                               
                           Click="MI_group_to_line_Click"/>
 
-                    <MenuItem x:Name="MI_group_to_row"
+                            <MenuItem x:Name="MI_group_to_row"
                           Header="build Row"
                               
                           Click="MI_group_to_row_Click"/>
-                    
-                    
-                    
 
-                    <MenuItem x:Name="MI_delete"
+
+
+
+                            <MenuItem x:Name="MI_delete"
                               Header="delete"
                               Click="MI_delete_Click"/>
 
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem x:Name="MI_elements"                          
+                        <MenuItem x:Name="MI_elements"                          
                           Header="elements">
 
-                    <MenuItem x:Name="MI_Coordinates"
+                            <MenuItem x:Name="MI_Coordinates"
                               Header="Coordinates"
                               
                               Click="MI_Coordinates_Click"/>
 
-                    <MenuItem x:Name="MI_FileLink"
+                            <MenuItem x:Name="MI_FileLink"
                               Header="FileLink"
                               
                               Click="MI_FileLink_Click"/>
 
-                    <MenuItem x:Name="MI_Image"
+                            <MenuItem x:Name="MI_Image"
                               Header="Image"
                               
                               Click="MI_Image_Click"/>
 
-                    <MenuItem x:Name="MI_Link"
+                            <MenuItem x:Name="MI_Link"
                               Header="Link"
                               
                               Click="MI_Link_Click"/>
 
-                    <MenuItem x:Name="MI_MyNote"
+                            <MenuItem x:Name="MI_MyNote"
                               Header="MyNote"
                               IsCheckable="True"
                               InputGestureText="F2"
                               Click="MI_MyNote_Click"/>
 
-                    <MenuItem x:Name="MI_FlatShareCC"
+                            <MenuItem x:Name="MI_FlatShareCC"
                               Header="FlatShare CC"
                               IsCheckable="True"
                               InputGestureText="F3"
                               Click="MI_FlatShareCC_Click"/>
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem x:Name="MI_tools"
+                        <MenuItem x:Name="MI_tools"
                           Header="tools">
-                    <MenuItem x:Name="MI_Adjust"
+                            <MenuItem x:Name="MI_Adjust"
                           Header="Adjust"
                               
                           Click="MI_Adjust_Click"/>
 
-                    <MenuItem x:Name="MI_Copy"
+                            <MenuItem x:Name="MI_Copy"
                           Header="Copy"
                               
                           Click="MI_Copy_Click"/>
 
-                    <MenuItem x:Name="MI_Paste"
+                            <MenuItem x:Name="MI_Paste"
                           Header="Paste"
                               
                           Click="MI_Paste_Click"/>
 
-                    <MenuItem x:Name="MI_Move"
+                            <MenuItem x:Name="MI_Move"
                           Header="Move"
                               
                           Click="MI_Move_Click"/>
 
-                    <MenuItem x:Name="MI_LevelShift"
+                            <MenuItem x:Name="MI_LevelShift"
                           Header="LevelShift"
                               
                           Click="MI_LevelShift_Click"/>
 
-                    <MenuItem x:Name="MI_LocalDrives"
+                            <MenuItem x:Name="MI_LocalDrives"
                           Header="LocalDrives"                              
                           Click="MI_LocalDrives_Click"/>
 
-                    <MenuItem x:Name="MI_Random"
+                            <MenuItem x:Name="MI_Random"
                           Header="Random"                              
                           Click="MI_Random_Click"/>
 
-                    <MenuItem x:Name="MI_Request"
+                            <MenuItem x:Name="MI_Request"
                           Header="Request"
                               
                           Click="MI_Request_Click"/>
 
-                    <MenuItem x:Name="MI_RightClickChoice"
+                            <MenuItem x:Name="MI_RightClickChoice"
                           Header="End it!"                              
                           Click="MI_RightClickChoice_Click"/>
 
 
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem x:Name="MI_infobits"
+                        <MenuItem x:Name="MI_infobits"
                           Header="infobits">
-                </MenuItem>
+                        </MenuItem>
 
-                <MenuItem x:Name="MI_about"
+                        <MenuItem x:Name="MI_about"
                           Header="about">
 
-                    <MenuItem x:Name="MI_Manual"
+                            <MenuItem x:Name="MI_Manual"
                               Header="Manual"
                               InputGestureText="F1"
                               Click="MI_Manual_Click"/>
-                </MenuItem>
-            </Menu>
+                        </MenuItem>
+                    </Menu>
+                </Border>
+
+                <Border x:Name="border_USER_LICENSE_LOGIN">
+                    <systemcontrols:UserLicenseLogin x:Name="ULL_placeholder"/>
+                </Border>
+
+            </StackPanel>
 
             <Border x:Name="border_CORE_CANVAS_SWITCH"
                         Visibility="Visible"

@@ -79,8 +79,6 @@ namespace AidingElementsUserInterface.Core
 
 
 
-
-
         internal void ADJUST_GATE(ADJUST_DATA_STRUCTURE data)
         {
             foreach (CoreContainer item in selected_items)
@@ -98,48 +96,6 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
-
-        internal string get_CANVAS_NAME()
-        {
-            return this.canvas_name;
-        }
-
-        internal ObservableCollection<CoreContainer> get_selected_items()
-        {
-            return selected_items;
-        }
-
-        internal void LevelShiftSelection(int target_level)
-        {
-            foreach (CoreContainer item in selected_items)
-            {
-                bool visibility = levelSystem.Get_CURRENT_LEVEL().VISIBILITY_FLAG;
-
-                Panel.SetZIndex(item, target_level);
-
-                item.GetContainerData().z_position = target_level;
-
-                if (visibility)
-                {
-                    item.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    item.Visibility = Visibility.Hidden;
-                }
-
-            }
-        }
-
-        internal void SetVisibility(bool isVisible)
-        {
-
-        }
-
-        internal void set_CANVAS_NAME(string canvas_name)
-        {
-            this.canvas_name = canvas_name;
-        }
 
         internal void add_element_to_canvas(UserControl content)
         {
@@ -207,8 +163,6 @@ namespace AidingElementsUserInterface.Core
             _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
 
             data_Handler.AddCanvasData(config);
-
-            canvas.ToolTip = canvas_name;
 
             CanvasDataResources();
         }
@@ -295,12 +249,32 @@ namespace AidingElementsUserInterface.Core
         internal CanvasData getCanvasData()
         {
             return config;
-        }   
+        }
+        internal string get_CANVAS_NAME()
+        {
+            return this.canvas_name;
+        }
 
         internal CallCentral GetCentral()
         {
             return callCentral;
         }
+
+        internal LevelBar GetLevelBar()
+        {
+            return _LevelBar;
+        }
+
+        internal LevelSystem GetLevelSystem()
+        {
+            return levelSystem;
+        }
+
+        internal ObservableCollection<CoreContainer> get_selected_items()
+        {
+            return selected_items;
+        }
+
 
         internal System.Windows.Point GetElementPosition(CoreContainer container)
         {
@@ -338,6 +312,28 @@ namespace AidingElementsUserInterface.Core
 
                     iteration++;
                 }
+            }
+        }
+
+        internal void LevelShiftSelection(int target_level)
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                bool visibility = levelSystem.Get_CURRENT_LEVEL().VISIBILITY_FLAG;
+
+                Panel.SetZIndex(item, target_level);
+
+                item.GetContainerData().z_position = target_level;
+
+                if (visibility)
+                {
+                    item.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    item.Visibility = Visibility.Hidden;
+                }
+
             }
         }
 
@@ -538,6 +534,16 @@ namespace AidingElementsUserInterface.Core
         {
             this.config = data;
         }
+        internal void set_CANVAS_NAME(string canvas_name)
+        {
+            this.canvas_name = canvas_name;
+        }
+
+        internal void SetVisibility(bool isVisible)
+        {
+
+        }
+
 
         internal void updateLocalDrives()
         {
@@ -613,6 +619,9 @@ namespace AidingElementsUserInterface.Core
             else if (e.ChangedButton == MouseButton.Right)
             {
                 add_element_to_canvas(new RightClickChoice(), e);
+
+
+                canvas.ToolTip = canvas.ActualWidth.ToString() + "\n" + canvas.RenderSize.Height.ToString();
 
                 e.Handled = true;
             }

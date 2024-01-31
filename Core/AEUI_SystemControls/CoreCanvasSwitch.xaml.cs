@@ -26,7 +26,6 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
     {
         private int ACTIVE_CANVAS_ID;
 
-
         private ObservableCollection<CoreContainer> _copySelection;
         private ObservableCollection<CoreCanvas> coreCanvasScreens = new ObservableCollection<CoreCanvas>();
         internal ObservableCollection<CoreCanvas> Get_coreCanvasScreens => coreCanvasScreens;

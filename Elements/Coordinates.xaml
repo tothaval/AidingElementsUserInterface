@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Elements"
-             xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:core="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Loaded="__Coordinates_Loaded"
@@ -14,7 +14,6 @@
     <Grid x:Name="content_grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -24,24 +23,21 @@
         </Grid.RowDefinitions>
 
         <Border x:Name="ui_border_textbox_elementCoords"
-                Grid.Column="0" Grid.ColumnSpan="2"
+                Grid.Column="0" 
                 Grid.Row="0" Grid.RowSpan="1" >
-            <core:CoreTextBox x:Name="CTB_ElementCoordinates">
-                
-            </core:CoreTextBox>
+            <core:CoreLabel x:Name="CL_ElementCoordinates"/>
         </Border>
 
         <TextBlock x:Name="uie_textblockseparator"
-                       Grid.Column="0" Grid.ColumnSpan="2"
+                       Grid.Column="0" 
                        Grid.Row="1" Grid.RowSpan="1" Margin="0,3,0,3"
                        TextWrapping="NoWrap">-------</TextBlock>
 
         <Border x:Name="ui_border_textbox_mouseCoords"
-                       Grid.Column="0" Grid.ColumnSpan="2"
+                       Grid.Column="0"
                        Grid.Row="2" Grid.RowSpan="1">
-            <core:CoreTextBox x:Name="CTB_MouseCoordinates">
-
-            </core:CoreTextBox>
+            <core:CoreLabel x:Name="CL_MouseCoordinates"/>
         </Border>
+        
     </Grid>
 </UserControl>

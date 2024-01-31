@@ -52,33 +52,35 @@
 
 
         <Canvas x:Name="canvas"           
-            Grid.Row="1"
-            Grid.RowSpan="2"
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                
+                Background="Transparent"
+                
+                ClipToBounds="True"
+                Focusable="True"
+                
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Auto" 
             
-            Background="Transparent"
-
-            ClipToBounds="True"
-            Focusable="True"
+                SnapsToDevicePixels="True"            
+                                     
+                Height="{DynamicResource CanvasData_height}"
+                Width="{DynamicResource CanvasData_width}"
+                
+                Drop="canvas_Drop"
+                
+                Loaded="canvas_Loaded"
+                MouseDown="canvas_MouseDown"
+                MouseLeftButtonDown="canvas_MouseLeftButtonDown"
+                MouseMove="canvas_MouseMove"
+                MouseUp="canvas_MouseUp"
+                PreviewDragOver="canvas_PreviewDragOver"
             
-            ScrollViewer.CanContentScroll="True"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            ScrollViewer.VerticalScrollBarVisibility="Auto" 
-            
-            SnapsToDevicePixels="True"            
-            
-            
-            Drop="canvas_Drop"
-            
-            Loaded="canvas_Loaded"
-            MouseDown="canvas_MouseDown"
-            MouseLeftButtonDown="canvas_MouseLeftButtonDown"
-            MouseMove="canvas_MouseMove"
-            MouseUp="canvas_MouseUp"
-            PreviewDragOver="canvas_PreviewDragOver"
-            
-            PreviewKeyDown="canvas_KeyDown"
-            PreviewKeyUp="canvas_KeyUp"
-            >
+                PreviewKeyDown="canvas_KeyDown"
+                PreviewKeyUp="canvas_KeyUp"
+                >
         <Border x:Name="border_level"
                 
                 Visibility="Visible"

@@ -26,8 +26,5 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             InitializeComponent();
         }
 
-
-
-
     }
 }

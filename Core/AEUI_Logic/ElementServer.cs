@@ -15,7 +15,7 @@ using AidingElementsUserInterface.Elements.FlatShareCC;
 using System.Windows.Controls;
 //using System.Windows.Forms;
 
-namespace AidingElementsUserInterface.Core
+namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
     internal class ElementServer
     {
@@ -53,7 +53,7 @@ namespace AidingElementsUserInterface.Core
 
         internal FlatShareCC returnFlatShareCC()
         {
-                return flatShareCC;      
+            return flatShareCC;
         }
         #endregion element instantiation
     }
