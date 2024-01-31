@@ -19,7 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace AidingElementsUserInterface.Core
+namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
     internal static class ContainerLogic
     {
@@ -38,7 +38,7 @@ namespace AidingElementsUserInterface.Core
             }
 
             // start dragging
-            elementDrag = true;      
+            elementDrag = true;
 
             // save start point of dragging
             dragPoint = Mouse.GetPosition(canvas);

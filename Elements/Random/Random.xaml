@@ -13,7 +13,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AidingElementsUserInterface.Elements"
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"             
@@ -22,11 +22,22 @@
         <StackPanel Orientation="Vertical">
             <StackPanel x:Name="SP_Choice"
                         Orientation="Horizontal">
-                <core:CoreButton x:Name="CB_Base10"
-                                 Padding="1"/>
                 <core:CoreButton x:Name="CB_Base6"
                                  Padding="1"/>
+                <core:CoreButton x:Name="CB_Base10"
+                                 Padding="1"/>
+                <core:CoreButton x:Name="CB_BaseRange"
+                                 Padding="1"/>
+
+                <StackPanel x:Name="SP_RandomRange"
+                            Orientation="Horizontal"
+                            Visibility="Collapsed">
+                    <local:CoreValueChange x:Name="CVC_MinRange"/>
+
+                    <local:CoreValueChange x:Name="CVC_MaxRange"/>
+                </StackPanel>                
             </StackPanel>
+            
             <Border x:Name="border_RandomDisplay"
                     Padding="1">                
             </Border>

@@ -27,6 +27,7 @@
  *                          
  *                          maybe offer a product called (individually compiled license version to hardcode user settings in the .exe)
  * 
+ *  mind fuck stuff: probably my keyboard, but left alt can only be executed via ctrl+ left alt
  * 
  *  to do
  *      LevelSystem class
@@ -82,6 +83,7 @@ namespace AidingElementsUserInterface
         internal void set_ACTIVE_CANVAS(CoreCanvas activeCanvas)
         {
             this.ACTIVE_CANVAS = activeCanvas;
+            ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
         }
 
 
@@ -98,6 +100,8 @@ namespace AidingElementsUserInterface
             load_MainWindowData();
 
             MainWindowResources();
+
+            ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
         }
 
 
@@ -234,6 +238,19 @@ namespace AidingElementsUserInterface
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
 
+            if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+            {
+                if (ACTIVE_CANVAS._LevelBar.Visibility == Visibility.Collapsed)
+                {
+                    ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
             if (e.Key == Key.F1)
             {
                 if (!MI_AEUI_CTRL.IsSubmenuOpen)
@@ -309,6 +326,12 @@ namespace AidingElementsUserInterface
 
         private void Window_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.LeftAlt || e.Key == Key.RightAlt)
+            {
+
+                e.Handled = true;
+            }
+
             if (e.Key == Key.F1)
             {
 
@@ -454,7 +477,14 @@ namespace AidingElementsUserInterface
         }
 
 
-        private void MI_LevelShift_Click(object sender, RoutedEventArgs e)
+
+        private void MI_SYSTEM_Click(object sender, RoutedEventArgs e)
+        {
+            SYSTEM_CANVAS_SWITCH();           
+        }
+
+
+        private void MI_LEVELSYSTEM_Click(object sender, RoutedEventArgs e)
         {
             if (ACTIVE_CANVAS != null)
             {
@@ -466,14 +496,9 @@ namespace AidingElementsUserInterface
                 {
                     ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
                 }
-            }       
+            }
         }
 
-        private void MI_SYSTEM_Click(object sender, RoutedEventArgs e)
-        {
-            SYSTEM_CANVAS_SWITCH();           
-        }
-            
         private void MI_quit_Click(object sender, RoutedEventArgs e)
         {
             logic.QuitApplicationCommand();
@@ -521,6 +546,13 @@ namespace AidingElementsUserInterface
             }
         }
 
+        private void MI_LevelShift_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
 
         private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
         {
@@ -529,6 +561,7 @@ namespace AidingElementsUserInterface
                 ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
             }
         }
+
 
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {

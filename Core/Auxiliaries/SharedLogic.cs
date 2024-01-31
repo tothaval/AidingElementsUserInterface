@@ -9,6 +9,7 @@
  * 
  * origin:      MyNote_2023_11_01
  */
+using AidingElementsUserInterface.Core.AEUI_Logic;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Texts;
 

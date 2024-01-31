@@ -16,6 +16,9 @@
     <Compile Update="Core\AEUI_SystemControls\SystemCanvas.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Core\AEUI_SystemControls\UserLicenseLogin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_UserControls\Adjust.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +56,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Core\AEUI_UserControls\Request.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Clock.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Coordinates.xaml.cs">
@@ -135,6 +141,9 @@
     <Page Update="Core\AEUI_SystemControls\SystemCanvas.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Core\AEUI_SystemControls\UserLicenseLogin.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_UserControls\Adjust.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -175,6 +184,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Core\AEUI_UserControls\Request.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Clock.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Coordinates.xaml">

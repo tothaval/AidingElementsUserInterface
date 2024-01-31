@@ -11,6 +11,7 @@ using AidingElementsUserInterface.Core.AEUI_Logic;
 using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -22,7 +23,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     internal class Command : CoreContainer
     {
         private CoreTextBox coreTextBox;
-        private string input_command;
+        private StringBuilder input_command = new StringBuilder();
 
         public Command()
         {
@@ -42,17 +43,24 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             coreTextBox.textbox.KeyUp += coreTextBox_KeyUp;
         }
+
+        internal CoreTextBox GetCoreTextBox()
+        {
+            return coreTextBox;
+        }
+
+        internal StringBuilder GetInputCommand()
+        {
+            return input_command;
+        }
        
         private void coreTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter || e.Key == System.Windows.Input.Key.Return)
             {
-                //MessageBox.Show(GetCanvas().Name);
+                input_command.Append(coreTextBox.getText());
 
                 new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest(coreTextBox.getText());
-
-                // returns null because canvas is null somehow
-                //GetCanvas().GetCentral().ExecuteCommandRequest(coreTextBox.getText());
             }
         }
     }

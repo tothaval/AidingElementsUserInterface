@@ -27,6 +27,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public CanvasData(bool load)
         {
+
+            height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
+            width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
+
         }
 
 
@@ -37,6 +41,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             grouping_displacement = 25;
 
             element_spacing = new GridLength(8);
+
+            height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
+            width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
+
         }
 
         public CanvasData(CoreData coreData)
@@ -52,8 +60,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             fontSize = coreData.fontSize;
             fontFamily = coreData.fontFamily;
 
-            height = coreData.height;
-            width = coreData.width;
+            height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
+            width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
 
             imageFilePath = coreData.imageFilePath;
 

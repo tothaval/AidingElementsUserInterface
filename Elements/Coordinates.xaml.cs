@@ -59,9 +59,6 @@ namespace AidingElementsUserInterface.Elements
         {
             CoreData textBoxData = new SharedLogic().GetDataHandler().GetTextBoxData();
 
-            CTB_ElementCoordinates._readonly_caret();
-            CTB_MouseCoordinates._readonly_caret();
-
             if (textBoxData != null)
             {
                 uie_textblockseparator.FontSize = textBoxData.fontSize;
@@ -71,10 +68,12 @@ namespace AidingElementsUserInterface.Elements
             }
 
             detectCoreContainer();
+
+            registerMouseMove(new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS);
         }
 
 
-        internal void registerMouseMove(ref CoreCanvas coreCanvas)
+        internal void registerMouseMove(CoreCanvas coreCanvas)
         {
             coreCanvas.MouseMove += CoreCanvas_MouseMove;
         }
@@ -89,7 +88,7 @@ namespace AidingElementsUserInterface.Elements
         {           
             if (coreContainer != null)
             {
-                CTB_ElementCoordinates.setText($"{(int)Canvas.GetLeft(coreContainer):D4} : {(int)Canvas.GetTop(coreContainer):D4}");
+                CL_ElementCoordinates.setText($"{(int)Canvas.GetLeft(coreContainer):D4} : {(int)Canvas.GetTop(coreContainer):D4}");
             }
         }
 
@@ -97,7 +96,7 @@ namespace AidingElementsUserInterface.Elements
         {
             System.Windows.Point position = e.GetPosition(coreContainer.GetCanvas());
 
-            CTB_MouseCoordinates.setText($"{(int)position.X:D4} : {(int)position.Y:D4}");
+            CL_MouseCoordinates.setText($"{(int)position.X:D4} : {(int)position.Y:D4}");
         }
         
 

@@ -23,6 +23,34 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         public Request()
         {
             InitializeComponent();
+
+            build();
+            registerEvents();
         }
+
+        private void build()
+        {     
+        }
+
+        private void registerEvents()
+        {
+            C_Console.GetCoreTextBox().textbox.KeyDown += Textbox_KeyDown;
+            C_Console.GetCoreTextBox().textbox.KeyUp += Textbox_KeyUp; ;
+
+        }
+
+        private void Textbox_KeyUp(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Textbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                LS_Protocol.update_log(C_Console);
+            }            
+        }
+
     }
 }

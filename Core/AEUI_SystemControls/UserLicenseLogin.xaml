@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="AidingElementsUserInterface.Core.AEUI_SystemControls.UserLicenseLogin"
+             x:Name="__UserLicenseLogin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
+             xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_SystemControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Border x:Name="border">
+        <StackPanel Orientation="Horizontal">
+
+            <Label Width="100" />
+            <core:CoreTextBox x:Name="CTB_UserLicense"/>
+            <core:CoreTextBox x:Name="CTB_UserPassword"/>
+
+            <Label Width="100" />
+            
+            <Menu>
+                <MenuItem x:Name="MI_Abonoments"
+                          Header="Abonoments"
+                          
+                          Click="MI_Abonoments_Click"/>
+
+                <MenuItem x:Name="MI_Extensions"
+                          Header="Extensions"
+                          
+                          Click="MI_Extensions_Click"/>
+
+                <MenuItem x:Name="MI_Themes"
+                          Header="Themes"
+                          
+                          Click="MI_Themes_Click"/>
+
+                <MenuItem x:Name="MI_Own"
+                          Header="MyOwn"
+                          
+                          Click="MI_Own_Click"/>
+            </Menu>
+
+            <Label Width="100" />
+            
+            <core:CoreButton x:Name="CB_LogOut" />
+
+        </StackPanel>
+    </Border>
+</UserControl>
