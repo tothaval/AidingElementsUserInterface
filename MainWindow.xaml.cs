@@ -57,6 +57,7 @@ using AidingElementsUserInterface.Core.AEUI_Logic;
 using System.Windows.Controls;
 using AidingElementsUserInterface.Core.AEUI_SystemControls;
 using System.Xml.Serialization;
+using System.Windows.Controls.Primitives;
 
 namespace AidingElementsUserInterface
 {
@@ -457,6 +458,31 @@ namespace AidingElementsUserInterface
                 ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
             }
         }
+
+
+        private void MI_Version_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_License_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_Documentation_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
         #endregion about menu item clicks
 
         #region control menu item clicks
@@ -510,6 +536,14 @@ namespace AidingElementsUserInterface
         }
         #endregion control menu item clicks
 
+        #region infobits menu item clicks
+        private void MI_SessionRuntime_IB_Click(object sender, RoutedEventArgs e)
+        {
+            new CoreToolTip("SessionRuntime");
+
+            e.Handled = true;
+        }
+        #endregion infobits menu item clicks
 
         #region tools menu item clicks
 
@@ -572,6 +606,23 @@ namespace AidingElementsUserInterface
         }
 
         private void MI_Request_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+
+        private void MI_Stopwatch_Click(object sender, RoutedEventArgs e)
+        {
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+        }
+
+        private void MI_Clock_Click(object sender, RoutedEventArgs e)
         {
             if (ACTIVE_CANVAS != null)
             {
@@ -696,6 +747,7 @@ namespace AidingElementsUserInterface
                 UsbNotification.RegisterUsbDeviceNotification(windowHandle);
             }
         }
+
     }
 }
 /*  END OF FILE

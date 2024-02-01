@@ -1,4 +1,13 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
+﻿/* Aiding Elements User Interface
+ *      LevelSystem 
+ *  
+ * 
+ * 
+ * init:        2024|01|28
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using System;
 using System.Collections.Generic;
@@ -84,7 +93,16 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal LevelData? Get_CURRENT_LEVEL()
         {
-            return _levels[current_level];
+            if (current_level < 0)
+            {
+                int difference = 100 - current_level;
+
+                return _levels[difference];
+            }
+            else
+            {
+                return _levels[current_level];
+            }            
         }
 
         internal LevelData? Get_ZERO_LEVEL()
@@ -159,3 +177,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

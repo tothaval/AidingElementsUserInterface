@@ -54,23 +54,28 @@ namespace AidingElementsUserInterface.Core
         private CallCentral callCentral;
 
 
-
         public CoreCanvas()
         {
-            this.canvas_name = "core canvas";
-
             InitializeComponent();
+
+            this.canvas_name = "core canvas";
+            this.config = new CanvasData();
+            CanvasDataResources(config);
 
             build();
 
             callCentral = new CallCentral(ref __CoreCanvas);
         }
 
-        public CoreCanvas(string canvas_name)
+        internal CoreCanvas(string canvas_name, CanvasData canvasData)
         {
-            this.canvas_name = canvas_name;
-
             InitializeComponent();
+            
+            this.canvas_name = canvas_name;
+            this.config = canvasData;
+
+            CanvasDataResources(canvasData);
+
 
             build();
 
@@ -141,12 +146,10 @@ namespace AidingElementsUserInterface.Core
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
 
-            config = data_Handler.LoadCanvasData();
-
-            if (config == null)
-            {
-                config = new CanvasData(canvas_name);
-            }
+            //if (config == null)
+            //{
+            //    config = new CanvasData(canvas_name);
+            //}
 
             canvas.Resources["Level"] = 0;
             canvas.Resources["CurrentLevel"] = 0;
@@ -163,14 +166,10 @@ namespace AidingElementsUserInterface.Core
             _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
 
             data_Handler.AddCanvasData(config);
-
-            CanvasDataResources();
         }
 
-        private void CanvasDataResources()
+        private void CanvasDataResources(CanvasData canvasData)
         {
-            CanvasData canvasData = config;
-
             if (canvasData == null)
             {
                 canvasData = new CanvasData();
@@ -252,7 +251,7 @@ namespace AidingElementsUserInterface.Core
         }
         internal string get_CANVAS_NAME()
         {
-            return this.canvas_name;
+            return canvas_name;
         }
 
         internal CallCentral GetCentral()
@@ -308,7 +307,7 @@ namespace AidingElementsUserInterface.Core
                         Canvas.SetTop(item, iteration * displacement);
                     }
 
-                    Canvas.SetZIndex(item, item.GetContainerData().z_position);
+                    Panel.SetZIndex(item, item.GetContainerData().level);
 
                     iteration++;
                 }
@@ -323,7 +322,7 @@ namespace AidingElementsUserInterface.Core
 
                 Panel.SetZIndex(item, target_level);
 
-                item.GetContainerData().z_position = target_level;
+                item.GetContainerData().level = target_level;
 
                 if (visibility)
                 {
@@ -539,9 +538,38 @@ namespace AidingElementsUserInterface.Core
             this.canvas_name = canvas_name;
         }
 
-        internal void SetVisibility(bool isVisible)
+        internal void SetVisibility(int newLevel, string state)
         {
+            foreach (UIElement child in canvas.Children)
+            {
+                if (child.GetType() == typeof(CoreContainer))
+                {
+                    CoreContainer sinnlos = child as CoreContainer;
 
+                    if(sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
+                    {
+                        if (state.Equals("all"))
+                        {
+                            child.Visibility = Visibility.Visible;
+                        }
+                        if (state.Equals("range"))
+                        {
+
+                        }
+                        if (state.Equals("level"))
+                        {
+                            if (Panel.GetZIndex(child) == newLevel && state.Equals("level"))
+                            {
+                                child.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                child.Visibility = Visibility.Collapsed;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -621,11 +649,16 @@ namespace AidingElementsUserInterface.Core
                 add_element_to_canvas(new RightClickChoice(), e);
 
 
-                canvas.ToolTip = canvas.ActualWidth.ToString() + "\n" + canvas.RenderSize.Height.ToString();
+                SetCanvasToolTip(canvas.ActualWidth.ToString() + "\n" + canvas.RenderSize.Height.ToString());
 
                 e.Handled = true;
             }
 
+        }
+
+        internal void SetCanvasToolTip(string tip)
+        {
+            canvas.ToolTip = tip;
         }
 
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -1,4 +1,14 @@
-﻿using AidingElementsUserInterface.Core.AEUI_UserControls;
+﻿/* Aiding Elements User Interface
+ *      LogStat element
+ *  
+ * serves as a monitor for Command request feedback and other protocol, technical or os/system data
+ * 
+ * init:        2024|01|31
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_HelperClasses;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using System;
@@ -44,10 +54,16 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
             logEntry.content = commandText;
             
-            command_logs.Add(logEntry);            
+            command_logs.Add(logEntry);
+
+            int screen_index = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens.IndexOf(
+                new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS()
+                );
+
+            SystemPulseTimer systemPulse = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_systemPulseTimers[screen_index];
 
             CTB_Log.appendText(
-                $"\n{logEntry.id}: {logEntry.dateTime}\t{logEntry.title} {logEntry.content}"
+                $"\n{logEntry.id}: {logEntry.dateTime}\t{systemPulse.GetSessionRuntime()}\t {logEntry.title} {logEntry.content}"
                 );
         }
 
@@ -65,3 +81,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

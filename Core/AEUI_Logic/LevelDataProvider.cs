@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      LevelDataProvider 
+ *  
+ * 
+ * 
+ * init:        2024|01|28
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,3 +19,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
     {
     }
 }
+
+/*  END OF FILE
+ * 
+ * 
+ */

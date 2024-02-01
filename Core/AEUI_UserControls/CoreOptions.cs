@@ -146,7 +146,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CVC_z_position);
 
             CVC_ContainerDataFilename.setText(containerData.ContainerDataFilename);
-            CVC_z_position.setText(containerData.z_position.ToString());
+            CVC_z_position.setText(containerData.level.ToString());
 
             CONFIGURATION_CoreData(containerData.settings);
 
@@ -273,6 +273,54 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_saveChanges.button.Click += CB_saveChanges_Click;
 
             CBX_dataTypeSelection.SelectionChanged += CBX_dataTypeSelection_SelectionChanged;
+
+            CVC_background.coreButton.button.Click += CVC_background_Click;
+            CVC_borderbrush.coreButton.button.Click += CVC_borderbrush_Click;
+            CVC_foreground.coreButton.button.Click += CVC_foreground_Click;
+            CVC_highlight.coreButton.button.Click += CVC_highlight_Click;
+
+
+        }
+
+        private void CVC_background_Click(object sender, RoutedEventArgs e)
+        {
+            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            if (coreCanvas != null)
+            {
+                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
+                // container bauen oder parameter übergeben
+            }
+        }
+        private void CVC_borderbrush_Click(object sender, RoutedEventArgs e)
+        {
+            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            if (coreCanvas != null)
+            {
+                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
+                // container bauen und ausgewähltes Enum als data parameter übergeben oder Central upgraden für andere constructors
+            }
+        }
+        private void CVC_foreground_Click(object sender, RoutedEventArgs e)
+        {
+            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            if (coreCanvas != null)
+            {
+                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
+                // container bauen oder parameter übergeben
+            }
+        }
+        private void CVC_highlight_Click(object sender, RoutedEventArgs e)
+        {
+            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            if (coreCanvas != null)
+            {
+                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
+                // container bauen oder parameter übergeben
+            }
         }
 
         private void selectionChange(object sender)
@@ -322,7 +370,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerData containerData = new ContainerData(ParseCoreDataCVCs());
 
             containerData.ContainerDataFilename = CVC_ContainerDataFilename.value;
-            containerData.z_position = int.Parse(CVC_z_position.Value);
+            containerData.level = int.Parse(CVC_z_position.Value);
 
             return containerData;
         }

@@ -93,6 +93,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             }
         }
 
+
         internal void REMOVE_level_item(CoreContainer item)
         {
             level_items.Remove(item);

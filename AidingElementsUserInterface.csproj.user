@@ -55,6 +55,9 @@
     <Compile Update="Core\AEUI_SystemControls\LevelShift.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Core\AEUI_UserControls\CoreToolTip.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_UserControls\Request.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -62,6 +65,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Coordinates.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Documentation.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\FileLink.xaml.cs">
@@ -100,6 +106,9 @@
     <Compile Update="Elements\Image.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Elements\License.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Elements\Link.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -128,6 +137,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Random\Random.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Stopwatch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Elements\Version.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -174,6 +189,9 @@
     <Page Update="Core\AEUI_UserControls\CoreTextBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Core\AEUI_UserControls\CoreToolTip.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_UserControls\CoreValueChange.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -190,6 +208,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Coordinates.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Documentation.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\FileLink.xaml">
@@ -228,6 +249,9 @@
     <Page Update="Elements\Image.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Elements\License.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Elements\Link.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -256,6 +280,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Random\Random.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Stopwatch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Version.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

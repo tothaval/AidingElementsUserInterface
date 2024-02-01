@@ -225,14 +225,15 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // + color linkData? OR replace color values in core linkData OR if colordata == null, use coredata
         #region CanvasData
         #region CanvasData loading
-        internal CanvasData? CanvasData_load()
+        internal CanvasData? CanvasData_load(string path)
         {
-            CanvasData canvasData = new CanvasData(true);
-            XmlDocument xmlDocument = new XmlDocument();
-
-            if (File.Exists(CanvasData_file))
+            if (File.Exists(@$"{path}"))
             {
-                xmlDocument.Load(CanvasData_file);
+                XmlDocument xmlDocument = new XmlDocument();
+                CanvasData canvasData = new CanvasData();
+
+                xmlDocument.Load(path);
+
                 XmlNode node = xmlDocument.SelectSingleNode("Core");
 
                 if (node != null)
@@ -268,11 +269,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             }
                         }
 
-                        return canvasData;
                     }
                 }
 
-                return null;
+                return canvasData;
             }
 
             return null;
@@ -282,7 +282,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #region CanvasData saving
         internal void CanvasData_save()
         {
-           ObservableCollection<CoreCanvas> screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
+            ObservableCollection<CoreCanvas> screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
 
 
             for (int i = 0; i < screens.Count; i++)
@@ -326,7 +326,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                     try
                     {
-                        xmlDocument.Save(CanvasData_file);
+                        xmlDocument.Save($@".\{Core_Screens_folder}\{i}\{CanvasData_file}");
                     }
                     catch (Exception)
                     {
@@ -370,10 +370,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     containerData.ContainerDataFilename = ContainerDataFilename.InnerText;
                 }
 
-                XmlNode? z_position = NodeCheck(node_ContainerData, "z_position");
+                XmlNode? z_position = NodeCheck(node_ContainerData, "level");
                 if (z_position != null)
                 {
-                    containerData.z_position = Int32.Parse(z_position.InnerText);
+                    containerData.level = Int32.Parse(z_position.InnerText);
                 }
             }
 
@@ -506,8 +506,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     node_ContainerDataFilename.InnerText = $"{counter}.xml";
                     node.AppendChild(node_ContainerDataFilename);
 
-                    XmlNode node_z_position = xmlDocument.CreateElement("z_position");
-                    node_z_position.InnerText = container.GetContainerData().z_position.ToString();
+                    XmlNode node_z_position = xmlDocument.CreateElement("level");
+                    node_z_position.InnerText = container.GetContainerData().level.ToString();
                     node.AppendChild(node_z_position);
 
                     XmlNode node_Content = Content_save(xmlDocument, container);
@@ -585,7 +585,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 node_ContainerDataFilename.InnerText = ContainerData_file;
                 node.AppendChild(node_ContainerDataFilename);
 
-                XmlNode node_z_position = xmlDocument.CreateElement("z_position");
+                XmlNode node_z_position = xmlDocument.CreateElement("level");
                 node_z_position.InnerText = "0";
                 node.AppendChild(node_z_position);
 
@@ -1280,7 +1280,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         #endregion TextBoxData saving
         #endregion TextBoxData
 
-#endregion Core
+        #endregion Core
 
 
         // FlatShareCostCalculator loading and saving via XML

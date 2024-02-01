@@ -111,3 +111,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

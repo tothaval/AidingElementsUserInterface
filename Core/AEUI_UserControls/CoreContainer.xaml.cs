@@ -104,7 +104,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                             
             this.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
                             
-            this.Resources["ContainerData_z_position"] = containerData.z_position;
+            this.Resources["ContainerData_z_position"] = containerData.level;
 
 
             if (File.Exists(containerData.settings.imageFilePath))
@@ -328,7 +328,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 ContainerLogic.DragStart(
                     ref elementDrag,
                     ref __CoreContainer,
-                    ref containerData.z_position,
+                    ref containerData.level,
                     ref dragPoint,
                     ref canvas
                     );
@@ -364,7 +364,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 ContainerLogic.DragStop(
                     ref elementDrag,
                     ref __CoreContainer,
-                    ref containerData.z_position
+                    ref containerData.level
                     );
 
                 dragPoint = new Point(Canvas.GetLeft(__CoreContainer), Canvas.GetTop(__CoreContainer));
@@ -396,12 +396,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (containerData != null)
             {
-                int index = containerData.z_position;
+                int index = containerData.level;
 
                 Canvas.SetZIndex(__CoreContainer, index + CoreCanvasSwitchData.Get_CORECANVAS_HOVER_LEVEL);
 
 
-                //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.z_position}\n{containerData.z_position + containerData.hoverLevel}");
+                //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.level}\n{containerData.level + containerData.hoverLevel}");
             }
 
             e.Handled = true; 
@@ -411,7 +411,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (containerData != null)
             {
-                Canvas.SetZIndex(__CoreContainer, containerData.z_position);
+                Canvas.SetZIndex(__CoreContainer, containerData.level);
             }
 
             e.Handled = true;

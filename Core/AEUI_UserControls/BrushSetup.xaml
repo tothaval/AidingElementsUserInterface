@@ -1,12 +1,57 @@
 ﻿<UserControl x:Class="AidingElementsUserInterface.Core.AEUI_UserControls.BrushSetup"
+             x:Name="__BrushSetup"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
+             xmlns:core="clr-namespace:AidingElementsUserInterface.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <StackPanel Orientation="Vertical">
+        <StackPanel x:Name="SP_BrushTypeSetup"
+                    Orientation="Horizontal">
+            <core:CoreButton x:Name="CB_SolidColorBrush"/>
+            <core:CoreButton x:Name="CB_RadialGradientBrush"/>
+            <core:CoreButton x:Name="CB_LinearGradientBrush"/>
+            <core:CoreButton x:Name="CB_ImageBrush"/>
+            <core:CoreButton x:Name="CB_DrawingBrush"/>
+            <core:CoreButton x:Name="CB_VisualBrush"/>
+        </StackPanel>
+
+
+        <Grid x:Name="SP_ColorSetup"
+              Margin="0,2,0,2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             
-    </Grid>
+            <Rectangle x:Name="ColorField"
+                       Grid.Column="0"
+                       
+                       MinWidth="150"
+                       MinHeight="150"/>
+            
+            <StackPanel x:Name="SP_ColorSetters"
+                        Orientation="Vertical"
+                        Grid.Column="2">
+                <Slider x:Name="S_Alpha"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="255"
+                        Interval="1"/>
+                <Label/>
+                <Slider x:Name="S_Red"/>
+                <Slider x:Name="S_Green"/>
+                <Slider x:Name="S_Blue"/>
+                <Label/>
+                <Slider x:Name="S_Brightness"/>
+                <Label/>
+                <Slider x:Name="S_Grey"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>    
 </UserControl>

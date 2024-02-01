@@ -30,7 +30,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal string? CanvasName { get; set; }
         internal string? ContainerDataFilename { get; set; }
 
-        internal int z_position;
+        internal int level;
 
         public ContainerData()
         {
@@ -51,7 +51,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         {
             element = _content;
 
-            z_position = 0;
+            level = 0;
         }
 
         public ContainerData(CoreData coreData, UserControl _content)
@@ -60,7 +60,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             element = _content;
 
-            z_position = 0;
+            level = 0;
         }
 
         internal void UpdateCoreData(CoreData coreData)

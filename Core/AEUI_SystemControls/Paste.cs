@@ -1,4 +1,13 @@
-﻿using AidingElementsUserInterface.Core.AEUI_UserControls;
+﻿/* Aiding Elements User Interface
+ *      Paste element 
+ *  
+ * paste selected elements onto active screen
+ * 
+ * init:        2024|01|28
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
@@ -38,3 +47,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

@@ -1,6 +1,17 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
+﻿/* Aiding Elements User Interface
+ *      CoreCanvasSwitch 
+ *  
+ * manages the corecanvas screens
+ * 
+ * init:        2024|01|28
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_Data;
+using AidingElementsUserInterface.Core.AEUI_HelperClasses;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -28,7 +39,14 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
         private ObservableCollection<CoreContainer> _copySelection;
         private ObservableCollection<CoreCanvas> coreCanvasScreens = new ObservableCollection<CoreCanvas>();
+
+        private ObservableCollection<SystemPulseTimer> systemPulseTimers = new ObservableCollection<SystemPulseTimer>();
+
+
+
+
         internal ObservableCollection<CoreCanvas> Get_coreCanvasScreens => coreCanvasScreens;
+        internal ObservableCollection<SystemPulseTimer> Get_systemPulseTimers => systemPulseTimers;
 
         public CoreCanvasSwitch()
         {
@@ -89,7 +107,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             {
                 CL_SWITCH.Visibility = Visibility.Visible;
                 CTB_SWITCH.Visibility = Visibility.Collapsed;
-            }            
+            }
 
             coreCanvasScreens[ACTIVE_CANVAS_ID].set_CANVAS_NAME(CTB_canvasNameChange.getText());
 
@@ -120,25 +138,25 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
 
                 foreach (CoreContainer item in _copySelection)
-                {                  
+                {
                     coreCanvasScreens[ACTIVE_CANVAS_ID].canvas.Children.Add(item);
                 }
 
                 _copySelection.Clear();
-            }            
+            }
         }
         internal void paste()
         {
             if (_copySelection != null)
             {
-                foreach (CoreContainer item in _copySelection)                
+                foreach (CoreContainer item in _copySelection)
                 {
                     Type type = item.GetContainerData().element.GetType();
 
                     coreCanvasScreens[ACTIVE_CANVAS_ID].GetCentral().ExecuteCommandRequest($">{type.Name}");
 
                     // add code to position the element via copying the origin container values                    
-                }                
+                }
             }
         }
 
@@ -147,13 +165,25 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         {
             ACTIVE_CANVAS_ID = 0;
 
-            // 1 corecanvas is reserved for system, that is why i = 1 instead of i = 0;
+            XML_Handler xml = new XML_Handler();
+
+
+            //1 corecanvas is reserved for system, that is why i = 1 instead of i = 0;
             for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
-                coreCanvasScreens.Add(new CoreCanvas($"coreCanvas_{i}"));
+                CanvasData canvasData = new XML_Handler().CanvasData_load(
+                    $"{xml.Core_Screens_folder}{i-1}\\{xml.CanvasData_file}");
+
+                CoreCanvas screen = new CoreCanvas($"{canvasData.canvasName}", canvasData);
+                SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
+
+                coreCanvasScreens.Add(screen);
+                systemPulseTimers.Add(systemPulseTimer);
             }
 
             Set_ACTIVE_CANVAS();
+
+
         }
 
         private void Left()
@@ -236,3 +266,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */
