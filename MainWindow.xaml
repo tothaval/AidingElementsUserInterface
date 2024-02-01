@@ -325,6 +325,18 @@
                               
                           Click="MI_Request_Click"/>
 
+                            <MenuItem x:Name="MI_Clock"
+                          Header="Clock"
+                              
+                          Click="MI_Clock_Click"/>
+
+                            <MenuItem x:Name="MI_Stopwatch"
+                          Header="Stopwatch"
+                              
+                          Click="MI_Stopwatch_Click"/>
+
+
+
                             <MenuItem x:Name="MI_RightClickChoice"
                           Header="End it!"                              
                           Click="MI_RightClickChoice_Click"/>
@@ -334,6 +346,10 @@
 
                         <MenuItem x:Name="MI_infobits"
                           Header="infobits">
+                            <MenuItem x:Name="MI_SessionRuntime_IB"
+                          Header="session runtime"
+                              
+                          Click="MI_SessionRuntime_IB_Click"/>
                         </MenuItem>
 
                         <MenuItem x:Name="MI_about"
@@ -343,6 +359,21 @@
                               Header="Manual"
                               InputGestureText="F1"
                               Click="MI_Manual_Click"/>
+
+                            <MenuItem x:Name="MI_Documentation"
+                              Header="Documentation"
+                              
+                              Click="MI_Documentation_Click"/>
+
+                            <MenuItem x:Name="MI_License"
+                              Header="License"
+                              
+                              Click="MI_License_Click"/>
+
+                            <MenuItem x:Name="MI_Version"
+                              Header="Version"
+                              
+                              Click="MI_Version_Click"/>
                         </MenuItem>
                     </Menu>
                 </Border>

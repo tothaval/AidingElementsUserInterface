@@ -147,21 +147,20 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return GetButtonData();
         }
-        public CanvasData? LoadCanvasData()
-        {
-            CanvasData canvasData = new XML_Handler().CanvasData_load();
 
-            if (canvasData != null)
-            {
-                AddCanvasData(canvasData);
-            }
-            else
-            {
-                AddCanvasData(new CanvasData());
-            }
+        //public CanvasData? LoadCanvasData()
+        //{
+        //    if (canvasData != null)
+        //    {
+        //        AddCanvasData(canvasData);
+        //    }
+        //    else
+        //    {
+        //        AddCanvasData(new CanvasData());
+        //    }
 
-            return GetCanvasData();
-        }
+        //    return GetCanvasData();
+        //}
 
         public CoreData? LoadCoreData()
         {

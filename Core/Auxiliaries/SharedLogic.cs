@@ -9,7 +9,9 @@
  * 
  * origin:      MyNote_2023_11_01
  */
+using AidingElementsUserInterface.Core.AEUI_HelperClasses;
 using AidingElementsUserInterface.Core.AEUI_Logic;
+using AidingElementsUserInterface.Core.AEUI_SystemControls;
 using AidingElementsUserInterface.Elements.FlatShareCC;
 using AidingElementsUserInterface.Texts;
 
@@ -96,6 +98,18 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return null;
         }
+
+        internal SystemPulseTimer GetSystemPulseTimer()
+        {
+            CoreCanvasSwitch coreCanvasSwitch = GetMainWindow().CORE_CANVAS_SWITCH;
+
+            int screen_index = coreCanvasSwitch.Get_coreCanvasScreens.IndexOf(
+                coreCanvasSwitch.Get_ACTIVE_CANVAS()
+                );
+
+            return coreCanvasSwitch.Get_systemPulseTimers[screen_index];
+        }
+
 
         internal FolderBrowserDialog? openFolder()
         {

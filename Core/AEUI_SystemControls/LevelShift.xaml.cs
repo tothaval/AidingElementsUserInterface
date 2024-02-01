@@ -33,7 +33,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     /// </summary>
     public partial class LevelShift : UserControl
     {
-        CanvasData config;
+        string RB_State = "all";
 
         public LevelShift()
         {
@@ -46,24 +46,19 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private void build()
         {
             Data_Handler data_Handler = new SharedLogic().GetDataHandler();
-            config = data_Handler.LoadCanvasData();
 
-            if (config == null)
-            {
-                config = new CanvasData();
-            }
 
             CVC_Min_Level.setIdentifier("lowest level");
-            CVC_Min_Level.setText((-1 * (int)(CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP / 2)).ToString());
+            CVC_Min_Level.setText((-1 * (CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP / 2)).ToString());
             CVC_Max_Level.setIdentifier("upmost level");
-            CVC_Min_Level.setText(((int)(CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP / 2)).ToString());
+            CVC_Min_Level.setText((CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP / 2).ToString());
 
             CVC_Min_Range.setIdentifier("lowest range");
-            //CVC_Min_Level.setText(config.z_level_MIN.ToString());
+
             CVC_Min_Level.setText("-100");
 
             CVC_Max_Range.setIdentifier("upmost range");
-            //CVC_Min_Level.setText(config.z_level_MIN.ToString());
+
             CVC_Min_Level.setText("100");
 
             CB_ApplyToSelection.setContent("change selection");
@@ -103,7 +98,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
             else 
             {
-                new_level = (int)(((CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 101) * value) * -1 / 100);
+                new_level = (int)(((CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 101) * value) * 1 / 100);
+                new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(new_level, RB_State);
             }            
 
             Application.Current.Resources["CurrentLevel"] = new_level;
@@ -111,7 +107,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CL_current_level.setText(new_level.ToString());
             currentLevelSystem.SetCurrentLevel(new_level);
 
-            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelBar().update(currentLevelSystem.Get_CURRENT_LEVEL());
+            LevelData levelData = new LevelData(new_level, "nuub", false, false);
+
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelBar().update(levelData);
 
         }
 
@@ -123,6 +121,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private void RB_Range_Checked(object sender, RoutedEventArgs e)
         {
             SP_Range_CVCs.Visibility = Visibility.Visible;
+
+            RB_State = "range";
         }
 
         private void RB_Range_Unchecked(object sender, RoutedEventArgs e)
@@ -132,12 +132,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void RB_Level_Checked(object sender, RoutedEventArgs e)
         {
-
+            RB_State = "level";
         }
 
         private void RB_All_Checked(object sender, RoutedEventArgs e)
         {
-
+            RB_State = "all";
         }
     }
 }

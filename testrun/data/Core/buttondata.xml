@@ -42,14 +42,13 @@
         <color3_string>#FF2F4F4F</color3_string>
         <color4_string>#FF0FFF0F</color4_string>
       </highlight>
-      <cornerRadius>14,14,14,14</cornerRadius>
+      <cornerRadius>7,7,7,7</cornerRadius>
       <thickness>2,2,2,2</thickness>
-      <fontSize>12</fontSize>
+      <fontSize>20</fontSize>
       <fontFamily>Verdana</fontFamily>
       <height>25</height>
       <width>50</width>
-      <imageFilePath>
-      </imageFilePath>
+      <imageFilePath>E:\Render\FileExtrakt\imgs\Referenzen\adamant4a.jpg</imageFilePath>
     </CoreData>
   </ButtonData>
 </Core>

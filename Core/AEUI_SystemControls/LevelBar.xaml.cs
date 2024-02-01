@@ -1,4 +1,13 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
+﻿/* Aiding Elements User Interface
+ *      LevelBar 
+ *  
+ * 
+ * 
+ * init:        2024|01|28
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,3 +57,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */
