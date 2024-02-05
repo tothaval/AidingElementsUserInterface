@@ -1,7 +1,10 @@
 ﻿/* Aiding Elements User Interface
- *      LevelSystem 
+ *      LevelSystem class
  *  
- * 
+ * this class manages the level mechanic per corecanvas
+ * levels are basically a z-index based depth layer
+ * the z-index functionality is used to hide and show elements
+ * on different z-indices.
  * 
  * init:        2024|01|28
  * DEV:         Stephan Kammel
@@ -9,24 +12,26 @@
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
+using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing.Design;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
     internal class LevelSystem
     {
-
-        private ObservableCollection<CoreContainer> _container = new ObservableCollection<CoreContainer>();
-        
+        // the question remaining regarding level counting: 1-200 or -100 <-> +100
         private ObservableCollection<LevelData> _levels = new ObservableCollection<LevelData>();
 
         private int current_level = 1;
+        private string visibility_MODE = "all"; // all | range | level
 
         private LevelData ZERO_LEVEL = new LevelData(0, "Zero Level", true, true); // 'level system level'
 
@@ -35,6 +40,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
             initiate();
         }
+
+        internal ObservableCollection<LevelData > getLevels() { return _levels; }
 
         private void initiate()
         {
@@ -67,7 +74,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     }
                     // test area
 
-                    _levels.Add(new LevelData(i, $"level {i}", "desc", upper, flag, flag2, _container));
+                    _levels.Add(new LevelData(i, $"level {i}", "desc", upper, flag, flag2));
 
                     if (lower == 100)
                     {
@@ -82,11 +89,24 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             }           
         }
 
+        internal void LevelChange()
+        {
+            CoreCanvas current_screen = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+            if (current_screen != null)
+            {
+                current_screen.SetVisibility(current_level, visibility_MODE);
+            }
+            
+        }
+
         internal LevelData? System()
         {
             int levelCap = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
 
             int lowerLevelCap = levelCap;
+
+            LevelChange();
 
             return _levels[lowerLevelCap];
         }
@@ -96,54 +116,57 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             if (current_level < 0)
             {
                 int difference = 100 - current_level;
+                LevelChange();
 
                 return _levels[difference];
             }
             else
             {
+                LevelChange();
                 return _levels[current_level];
             }            
         }
 
+        internal int Get_LEVEL()
+        {
+            return current_level;
+        }
+
         internal LevelData? Get_ZERO_LEVEL()
         {
+            LevelChange();
             return ZERO_LEVEL;
         }
 
         internal LevelData? First()
-        {            
-            int levelCap = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
-                        
+        {
+            LevelChange();
+
             return _levels[1];
         }
 
         internal LevelData? Last()
         {
-            int levelCap = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
 
-            int upperLevelCap = levelCap;
+            LevelChange();
 
-            return _levels[upperLevelCap];
+            return _levels[current_level];
         }
 
 
         internal LevelData? Next()
         {
-            // upper and lower math, if below zero, lower 1 - 100, if above zero, upper 101-200
+            if (current_level < 200)
+            {
+                current_level++;
+            }
+            else
+            {
+                current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            }
 
-            //int levelCap = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
-
-            //int upperLevelCap = levelCap;
-
-            //if (current_level <= upperLevelCap)
-            //{
-            //    current_level++;
-            //}
-            //else
-            //{
-            //    current_level = upperLevelCap;
-            //}
-
+            LevelChange();
 
             return _levels[current_level];
         }
@@ -151,21 +174,16 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal LevelData? Prev()
         {
-            // upper and lower math, if below zero, lower 1 - 100, if above zero, upper 101-200
+            if (current_level > 1)
+            {
+                current_level--;
+            }
+            else
+            {
+                current_level = 1;
+            }
 
-            //int levelCap = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
-
-            //int lowerLevelCap = levelCap;
-
-            //if (current_level <= lowerLevelCap)
-            //{
-            //    current_level++;
-            //}
-            //else
-            //{
-            //    current_level = lowerLevelCap;
-            //}
-
+            LevelChange();
 
             return _levels[current_level];
         }
@@ -173,8 +191,21 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         internal void SetCurrentLevel(int level)
         {
             current_level = level;
+
+            LevelChange();
         }
 
+        internal void SetVisibilityMODE(string MODE)
+        {
+            if (MODE.Equals("all")| MODE.Equals("level") | MODE.Equals("range") )
+            {
+                visibility_MODE = MODE;
+            }
+            else
+            {
+                visibility_MODE = "all";
+            }            
+        }
     }
 }
 /*  END OF FILE

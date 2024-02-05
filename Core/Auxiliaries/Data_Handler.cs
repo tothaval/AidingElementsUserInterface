@@ -177,6 +177,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return GetCoreData();
         }
+
         public ContainerData? LoadContainerData()
         {
             //ContainerData coreData = new XML_Handler().co();
@@ -192,7 +193,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             //return GetCoreData();
 
-            return new ContainerData(coreData);
+            return new ContainerData(coreData, -5);
         }
 
         public CoreData? LoadLabelData()

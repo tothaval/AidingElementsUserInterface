@@ -14,6 +14,7 @@ using AidingElementsUserInterface.Core.FlatShareCC_Data;
 using AidingElementsUserInterface.Elements.MyNote;
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,12 +35,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         internal string LabelData_file = @".\data\Core\labeldata.xml";
         internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
         internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
+        
         // folders
-        internal string Core_xml_folder = @"data\Core\";                
-        internal string Core_Screens_folder = @"data\Core\Screens\";
-
-        internal string ContainerData_xml_folder = @"data\Core\ContainerData\";
+        internal string Core_xml_folder = @"data\Core\";
         #endregion Core paths
+
+        #region screens
+        internal string SYSTEM_folder = @"data\System\";
+        internal string SYSTEM_Container_folder = @"data\System\Container";
+        internal string UserSpace_folder = @"data\UserSpace\";
+        #endregion screens
 
         //FlatShareCostCalculator paths
         internal string FlatShareCC_data_file = @".\data\FlatShareCC\data.xml";
@@ -60,31 +65,18 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         private void build_path_structure()
         {
             check_path(Core_xml_folder);
-            check_path(Core_Screens_folder);
+            check_path(SYSTEM_folder);
+            check_path(SYSTEM_Container_folder);
 
-            string screen_system_folder = $"{Core_Screens_folder}\\System\\";
-            check_path(screen_system_folder);
-
-            for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
+            check_path(UserSpace_folder);
+            
+            for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
-                string screen_folder = $"{Core_Screens_folder}\\{i}\\";
+                string screen_folder = $"{UserSpace_folder}\\Screen_{i}\\";
                 check_path(screen_folder);
 
                 string container_folder = $"{screen_folder}\\Container\\";
                 check_path(container_folder);
-
-                string level_folder = $"{screen_folder}\\Levels\\";
-                check_path(level_folder);
-
-                string level_system_folder = $"{screen_folder}\\System\\";
-                check_path(level_system_folder);
-
-                string level_lower = $"{level_folder}\\Lower\\";
-                check_path(level_lower);
-
-                string level_upper = $"{level_folder}\\Upper\\";
-                check_path(level_upper);
-
             }
 
             check_path(FlatShareCC_xml_folder);
@@ -92,8 +84,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             check_path(MyNote_notes_folder);
             check_path(MyNote_notes_matrix_folder);
             check_path(MyNote_xml_folder);
-
-            check_path(ContainerData_xml_folder);
         }
 
         private bool check_path(string path)

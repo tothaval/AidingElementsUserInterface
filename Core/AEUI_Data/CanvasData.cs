@@ -17,6 +17,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     {
         // name of canvas
         internal string canvasName { get; set; }
+        internal int canvasID { get; set; }
 
         // element grid width and height
         internal GridLength element_spacing;
@@ -34,7 +35,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         }
 
 
-        public CanvasData(string canvas_name = "canvas")
+        public CanvasData(string canvas_name = "userscreen", int canvasID = 0)
         {
             canvasName = canvas_name;
 
@@ -44,10 +45,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
             width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
-
+            this.canvasID = canvasID;
         }
 
-        public CanvasData(CoreData coreData)
+        public CanvasData(CoreData coreData, int canvasID = 0)
         {
             background = coreData.background;
             borderbrush = coreData.borderbrush;

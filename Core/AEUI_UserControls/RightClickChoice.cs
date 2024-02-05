@@ -1,5 +1,5 @@
 ﻿/* Aiding Elements User Interface
- *      RightClickChoice element class
+ *      RightClickChoice element
  * 
  * inherits from: CoreContainer user control
  * 

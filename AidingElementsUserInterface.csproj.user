@@ -58,7 +58,13 @@
     <Compile Update="Core\AEUI_UserControls\CoreToolTip.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Core\AEUI_UserControls\Document.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Core\AEUI_UserControls\Request.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Core\AEUI_UserControls\Text.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Elements\Clock.xaml.cs">
@@ -201,7 +207,13 @@
     <Page Update="Core\AEUI_SystemControls\LevelShift.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Core\AEUI_UserControls\Document.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Core\AEUI_UserControls\Request.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Core\AEUI_UserControls\Text.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Clock.xaml">

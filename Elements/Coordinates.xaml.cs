@@ -75,7 +75,14 @@ namespace AidingElementsUserInterface.Elements
 
         internal void registerMouseMove(CoreCanvas coreCanvas)
         {
-            coreCanvas.MouseMove += CoreCanvas_MouseMove;
+            if (coreCanvas != null)
+            {
+                coreCanvas.MouseMove += CoreCanvas_MouseMove;
+            }
+            else
+            {
+                new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.MouseMove += CoreCanvas_MouseMove;
+            }
         }
 
         private void CoreCanvas_MouseMove(object sender, MouseEventArgs e)

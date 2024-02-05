@@ -21,11 +21,15 @@ namespace AidingElementsUserInterface.Core.AEUI_HelperClasses
     {
         private int screen_index = -100;
 
+        private long icountagainststupid = 0;
+
         private System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         private bool breakState = false;
 
         private DateTime initiation_time = new DateTime();
+
+        internal System.Windows.Threading.DispatcherTimer GET_timer => _timer;
 
         public SystemPulseTimer(int screen_index)
         {
@@ -61,19 +65,26 @@ namespace AidingElementsUserInterface.Core.AEUI_HelperClasses
         {
             return $"{DateTime.UtcNow - initiation_time}";
         }
-            
-            
 
         private void _timer_Tick(object sender, EventArgs e)
         {
-            CoreCanvas active_canvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+            icountagainststupid++;
 
-            if (active_canvas.get_CANVAS_NAME().Contains(screen_index.ToString()))
+            if (icountagainststupid == 101)
             {
-                active_canvas.SetCanvasToolTip(GetSessionRuntime());
-            }
-            
+                MainWindow mw = new SharedLogic().GetMainWindow();
 
+                if (mw.Get_SYSTEM_ACTIVE_FLAG)
+                {
+                    mw.Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.SetCanvasToolTip(GetSessionRuntime());
+                }
+                else
+                {
+                    mw.Get_ACTIVE_CANVAS.SetCanvasToolTip(GetSessionRuntime());
+                }
+            }
+
+            icountagainststupid = 102;
         }
         #endregion tick and sessionswitch
 

@@ -99,6 +99,11 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return null;
         }
 
+        internal SYSTEM_handler GetSystemHandler()
+        {
+            return GetMainWindow().system_handler;
+        }
+
         internal SystemPulseTimer GetSystemPulseTimer()
         {
             CoreCanvasSwitch coreCanvasSwitch = GetMainWindow().CORE_CANVAS_SWITCH;

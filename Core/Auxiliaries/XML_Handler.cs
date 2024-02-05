@@ -17,20 +17,13 @@ using AidingElementsUserInterface.Elements;
 using AidingElementsUserInterface.Elements.MyNote;
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics.Metrics;
 using System.IO;
-using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Xml;
-using System.Xml.Linq;
-using static System.Windows.Forms.LinkLabel;
 using Link = AidingElementsUserInterface.Elements.Link;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
@@ -56,15 +49,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             myNote_element = myNote;
         }
 
-        private XmlNode? NodeCheck(XmlNode node, string SubNodeName)
+        internal XmlNode? NodeCheck(XmlNode node, string SubNodeName)
         {
             XmlNode xmlNode = node.SelectSingleNode(SubNodeName);
 
             return xmlNode;
         }
 
-
-        private XmlNode Content_save(XmlDocument xmlDocument, CoreContainer container)
+        internal XmlNode Content_save(XmlDocument xmlDocument, CoreContainer container)
         {
             XmlNode node_Content = xmlDocument.CreateElement("Content");
 
@@ -107,9 +99,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return node_Content;
         }
-
-        // Core loading and saving via XML
-        #region Core
         internal XmlNode? saveContent(XmlDocument xmlDocument, XmlNode node, ContentData data)
         {
             if (data != null)
@@ -135,6 +124,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             return null;
         }
+
+        // Core loading and saving via XML
+        #region Core
+
         // ButtonData
         // + color linkData? OR replace color values in core linkData OR if colordata == null, use coredata
         #region ButtonData
@@ -284,7 +277,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             ObservableCollection<CoreCanvas> screens = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens;
 
-
             for (int i = 0; i < screens.Count; i++)
             {
                 CanvasData canvasData = screens[i].getCanvasData();
@@ -326,12 +318,60 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                     try
                     {
-                        xmlDocument.Save($@".\{Core_Screens_folder}\{i}\{CanvasData_file}");
+                        xmlDocument.Save($@".\{UserSpace_folder}\Screen_{i}\{CanvasData_file}");
                     }
                     catch (Exception)
                     {
 
                     }
+                }
+            }
+        }
+
+        internal void CanvasData_save(CanvasData canvasData)
+        {
+            if (canvasData != null)
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("Core");
+                xmlDocument.AppendChild(node);
+
+                XmlNode node_CanvasData = xmlDocument.CreateElement("CanvasData");
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, canvasData);
+
+                if (aux_node != null)
+                {
+                    node_CanvasData.AppendChild(aux_node);
+                }
+
+                XmlNode canvasName = xmlDocument.CreateElement("canvasName");
+                canvasName.InnerText = canvasData.canvasName;
+                node_CanvasData.AppendChild(canvasName);
+
+                XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
+                grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
+                node_CanvasData.AppendChild(grouping_displacement);
+
+                XmlNode node_element_spacing = xmlDocument.CreateElement("element_spacing");
+                node_element_spacing.InnerText = canvasData.element_spacing.ToString();
+                if (node_element_spacing.InnerText.Equals("Auto") || node_element_spacing.InnerText.Equals("auto"))
+                {
+                    node_element_spacing.InnerText = "-1";
+                }
+                node_CanvasData.AppendChild(node_element_spacing);
+
+                node.AppendChild(node_CanvasData);
+
+                try
+                {
+                    xmlDocument.Save($@".\{UserSpace_folder}\screen_{canvasData.canvasID}\{CanvasData_file}");
+                }
+                catch (Exception)
+                {
+
                 }
             }
         }
@@ -341,9 +381,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // ContainerData
         #region ContainerData
         #region ContainerData loading
-        private ContainerData? loadContainerData(XmlNode node)
+        internal ContainerData? loadContainerData(XmlNode node, int canvasID)
         {
-            ContainerData containerData = new ContainerData();
+            ContainerData containerData = new ContainerData(canvasID);
             SharedLogic logic = new SharedLogic();
 
             XmlNode? node_ContainerData = NodeCheck(node, "ContainerData");
@@ -355,13 +395,13 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 CoreData? aux_data = loadCoreData(node_CoreData);
                 if (aux_data != null)
                 {
-                    containerData = new ContainerData(aux_data);
+                    containerData = new ContainerData(aux_data, canvasID);
                 }
 
-                XmlNode? containerLocation = NodeCheck(node_ContainerData, "CanvasName");
+                XmlNode? containerLocation = NodeCheck(node_ContainerData, "CanvasID");
                 if (containerLocation != null)
                 {
-                    containerData.CanvasName = containerLocation.InnerText;
+                    containerData.CanvasID = Int32.Parse(containerLocation.InnerText);
                 }
 
                 XmlNode? ContainerDataFilename = NodeCheck(node_ContainerData, "ContainerDataFilename");
@@ -384,8 +424,13 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
 
-            foreach (string filename in scan_directory(ContainerData_xml_folder))
+            int folder_counter = 1;
+
+            //MessageBox.Show($@".\{Core_Screens_folder}{folder_counter}\Container");
+            //ContainerData_xml_folder
+            foreach (string filename in scan_directory($@"{UserSpace_folder}screen_{folder_counter}\Container\"))
             {
+                MessageBox.Show(filename);
                 if (File.Exists(filename))
                 {
                     XmlDocument xmlDocument = new XmlDocument();
@@ -397,7 +442,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                     if (node_Container != null)
                     {
-                        ContainerData containerData = loadContainerData(node_Container);
+                        ContainerData containerData = loadContainerData(node_Container, folder_counter);
 
                         XmlNode node_Content = node_Container.SelectSingleNode("Content");
 
@@ -465,7 +510,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                             if (containerData == null)
                             {
-                                containerData = new ContainerData();
+                                containerData = new ContainerData(folder_counter);
                             }
 
                             containerData.SetElement(userControl);
@@ -477,15 +522,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                         }
                     }
                 }
+
+                folder_counter++;
             }
 
             return container_list;
         }
-
         #endregion Container loading
 
         #region Container saving
-        internal void Container_save(CoreContainer coreContainer, int counter = 0)
+        internal void Container_save(CoreContainer coreContainer, int counter, int canvasID)
         {
             XmlDocument xmlDocument = new XmlDocument();
             CoreContainer container = coreContainer;
@@ -494,16 +540,18 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             {
                 XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
 
+                xmlDocument.AppendChild(node_ContainerData);
+
                 XmlNode node = node_ContainerData;
 
                 if (node != null)
                 {
-                    XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasName");
-                    node_CanvasName.InnerText = container.GetContainerData().CanvasName;
+                    XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasID");
+                    node_CanvasName.InnerText = container.GetContainerData().CanvasID.ToString();
                     node.AppendChild(node_CanvasName);
 
                     XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
-                    node_ContainerDataFilename.InnerText = $"{counter}.xml";
+                    node_ContainerDataFilename.InnerText = $"{canvasID}_{counter}.xml";
                     node.AppendChild(node_ContainerDataFilename);
 
                     XmlNode node_z_position = xmlDocument.CreateElement("level");
@@ -532,21 +580,21 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 try
                 {
-                    xmlDocument.Save($@".\{ContainerData_xml_folder}{counter}.xml");
+                    xmlDocument.Save(
+                        $@"{UserSpace_folder}screen_{canvasID}\Container\{canvasID}_{counter}.xml");
                 }
                 catch (Exception)
                 {
-
+                    MessageBox.Show($@"{UserSpace_folder}screen_{canvasID}\Container\{canvasID}_{counter}.xml");
                 }
             }
-        }
+        }   
 
         internal XmlNode? ContainerData_save(XmlDocument xmlDocument, ContainerData containerData)
         {
             if (containerData != null)
             {
-                XmlNode node = xmlDocument.CreateElement("Container");
-                xmlDocument.AppendChild(node);
+                XmlNode node_container = xmlDocument.CreateElement("Container");
 
                 XmlNode node_ContainerData = xmlDocument.CreateElement("ContainerData");
 
@@ -578,7 +626,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             if (node != null)
             {
                 XmlNode node_CanvasName = xmlDocument.CreateElement("CONTAINER_DATA_TEMPLATE");
-                node_CanvasName.InnerText = containerData.CanvasName;
+                node_CanvasName.InnerText = containerData.CanvasID.ToString();
                 node.AppendChild(node_CanvasName);
 
                 XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
@@ -720,8 +768,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         }
 
 
-
-        private CoreData? loadCoreData(XmlNode node)
+        internal CoreData? loadCoreData(XmlNode node)
         {
             SharedLogic logic = new SharedLogic();
             CoreData coreData = new CoreData(true);
@@ -993,7 +1040,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // LinkData
         #region LinkData
         #region LinkData loading
-        private UserControl? ContentData_load(Type type, XmlNode node_ContentData)
+        internal UserControl? ContentData_load(Type type, XmlNode node_ContentData)
         {
             ContentData contentData = loadContentData(node_ContentData);
             UserControl userControl = null;

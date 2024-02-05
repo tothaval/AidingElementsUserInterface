@@ -9,6 +9,7 @@
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_HelperClasses;
+using AidingElementsUserInterface.Core.AEUI_Logic;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using Microsoft.VisualBasic;
@@ -43,8 +44,6 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         private ObservableCollection<SystemPulseTimer> systemPulseTimers = new ObservableCollection<SystemPulseTimer>();
 
 
-
-
         internal ObservableCollection<CoreCanvas> Get_coreCanvasScreens => coreCanvasScreens;
         internal ObservableCollection<SystemPulseTimer> Get_systemPulseTimers => systemPulseTimers;
 
@@ -52,26 +51,9 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         {
             InitializeComponent();
 
-            registerEvents();
-
             load_last_ACTIVE_CANVAS();
 
-            canvasNamePanel();
-        }
-
-        private void canvasNameUpdate()
-        {
-            CL_canvasNameDisplay.setText(coreCanvasScreens[ACTIVE_CANVAS_ID].get_CANVAS_NAME());
-        }
-
-
-        private void canvasNamePanel()
-        {
-            CL_canvasNameDisplay.setText(coreCanvasScreens[ACTIVE_CANVAS_ID].get_CANVAS_NAME());
-
-            CL_canvasNameDisplay.textblock.MouseLeftButtonDown += CL_canvasNameDisplay_MouseLeftButtonDown;
-            CL_canvasNameDisplay.textblock.MouseLeftButtonUp += CL_canvasNameDisplay_MouseLeftButtonUp;
-            CTB_canvasNameChange.textbox.KeyUp += CTB_canvasNameChange_KeyUp;
+            registerEvents();
         }
 
         private void CTB_canvasNameChange_KeyUp(object sender, KeyEventArgs e)
@@ -109,14 +91,11 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
                 CTB_SWITCH.Visibility = Visibility.Collapsed;
             }
 
-            coreCanvasScreens[ACTIVE_CANVAS_ID].set_CANVAS_NAME(CTB_canvasNameChange.getText());
-
-            canvasNameUpdate();
+            coreCanvasScreens[ACTIVE_CANVAS_ID].getCanvasData().canvasName= CTB_canvasNameChange.getText();
         }
-
+              
         internal void copy()
         {
-
             _copySelection = new ObservableCollection<CoreContainer>();
 
             _copySelection = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.get_selected_items();
@@ -160,30 +139,35 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             }
         }
 
-
-        private void initiate()
+        private async void initiate()
         {
-            ACTIVE_CANVAS_ID = 0;
+            UserSpace_xml xml = new UserSpace_xml();
 
-            XML_Handler xml = new XML_Handler();
+            for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP-1; i++)
+            {                
+                CanvasData canvasData = xml.CanvasData_load($"{xml.UserSpace_folder}screen_{i+1}\\{xml.CanvasData_file}");
 
+                if (canvasData == null)
+                {
+                    CoreCanvas screen = new CoreCanvas(new CanvasData($"UserSpace_{i + 1}", i+1));
+                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i+1);
 
-            //1 corecanvas is reserved for system, that is why i = 1 instead of i = 0;
-            for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
-            {
-                CanvasData canvasData = new XML_Handler().CanvasData_load(
-                    $"{xml.Core_Screens_folder}{i-1}\\{xml.CanvasData_file}");
+                    coreCanvasScreens.Add(screen);
+                    systemPulseTimers.Add(systemPulseTimer);
+                }
+                else
+                {
+                    CoreCanvas screen = new CoreCanvas(canvasData);
+                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i+1);
 
-                CoreCanvas screen = new CoreCanvas($"{canvasData.canvasName}", canvasData);
-                SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
-
-                coreCanvasScreens.Add(screen);
-                systemPulseTimers.Add(systemPulseTimer);
+                    coreCanvasScreens.Add(screen);
+                    systemPulseTimers.Add(systemPulseTimer);
+                }
             }
 
+            ACTIVE_CANVAS_ID = 0;
+
             Set_ACTIVE_CANVAS();
-
-
         }
 
         private void Left()
@@ -212,12 +196,17 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
                 initiate();
             }
 
+            //Set_ACTIVE_CANVAS();
         }
 
         private void registerEvents()
         {
             CB_left.button.Click += CB_left_Click;
             CB_right.button.Click += CB_right_Click;
+
+            CL_canvasNameDisplay.textblock.MouseLeftButtonDown += CL_canvasNameDisplay_MouseLeftButtonDown;
+            CL_canvasNameDisplay.textblock.MouseLeftButtonUp += CL_canvasNameDisplay_MouseLeftButtonUp;
+            CTB_canvasNameChange.textbox.KeyUp += CTB_canvasNameChange_KeyUp;
         }
 
         private void Right()
@@ -232,18 +221,52 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             Set_ACTIVE_CANVAS();
         }
 
+        internal void save_Screens()
+        {
+            //XML_Handler handler = new XML_Handler();
+
+            UserSpace_xml handler = new UserSpace_xml();
+            int counter = 0;
+
+
+            for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP - 1; i++)
+            {
+                int id = coreCanvasScreens[i].getCanvasData().canvasID;
+                
+                string path = $"{handler.UserSpace_folder}screen_{i+1}\\";
+                
+                handler.delete_files(path);
+
+                handler.CanvasData_save(coreCanvasScreens[i].getCanvasData(), coreCanvasScreens[i].GetLevelSystem());
+                
+                foreach (object item in coreCanvasScreens[i].canvas.Children)
+                {
+
+                    if (item.GetType() == typeof(CoreContainer))
+                    {
+                        CoreContainer container = (CoreContainer)item;
+
+                        handler.Container_save(container, counter, id);
+
+                        counter++;
+                    }
+                }
+
+                counter = 0;
+            }
+        }
+
+
         private void Set_ACTIVE_CANVAS()
         {
             border.Child = null;
 
             border.Child = coreCanvasScreens[ACTIVE_CANVAS_ID];
 
-            canvasNameUpdate();
-
             new SharedLogic().GetMainWindow().set_ACTIVE_CANVAS(coreCanvasScreens[ACTIVE_CANVAS_ID]);
+
+            CTB_canvasNameChange.setText(coreCanvasScreens[ACTIVE_CANVAS_ID].getCanvasData().canvasName);
         }
-
-
 
         private void CB_left_Click(object sender, RoutedEventArgs e)
         {
@@ -261,7 +284,18 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
         internal CoreCanvas Get_ACTIVE_CANVAS()
         {
-            return coreCanvasScreens[ACTIVE_CANVAS_ID];
+            try
+            {
+                if (coreCanvasScreens[ACTIVE_CANVAS_ID] != null)
+                {
+                }
+
+                return coreCanvasScreens[ACTIVE_CANVAS_ID];
+            }
+            catch (Exception)
+            {
+                return new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
+            }
         }
 
     }

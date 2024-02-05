@@ -39,7 +39,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 CoreContainer coreContainer = GetCoreContainer(content, ref target);
 
-                coreContainer.GetContainerData().CanvasName = target.Name;
+                coreContainer.GetContainerData().CanvasID = target.getCanvasData().canvasID;
 
 
                 new SharedLogic().GetElementHandler().addElement(coreContainer, target);

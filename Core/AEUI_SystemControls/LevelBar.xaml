@@ -17,37 +17,30 @@
              xmlns:usercontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">                
-    <Grid HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center">
 
-        </Grid.ColumnDefinitions>
+        <core:CoreButton x:Name="CB_First"/>
+        <core:CoreButton x:Name="CB_Prev"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelId"
-                             Grid.Column="0" />
+        <usercontrols:CoreLabel x:Name="CL_LevelId"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelName"
-                              Grid.Column="1"/>
+        <usercontrols:CoreLabel x:Name="CL_LevelName"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelDescription"
-                              Grid.Column="2"/>
+        <usercontrols:CoreLabel x:Name="CL_LevelDescription"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelLogin"
-                              Grid.Column="3"/>
+        <usercontrols:CoreLabel x:Name="CL_LevelLogin"/>
+        
+        <core:CoreButton x:Name="CB_Zero"/>
 
         <usercontrols:CoreLabel x:Name="CL_LevelSecurityPanel"
-                             Grid.Column="4"
                              Visibility="Hidden"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelElementCount"
-                              Grid.Column="5"/>
+        <usercontrols:CoreLabel x:Name="CL_LevelElementCount"/>
 
+        <core:CoreButton x:Name="CB_Next"/>
+        <core:CoreButton x:Name="CB_Last"/>
 
-    </Grid>
+    </StackPanel>
 </UserControl>
 <!-- end of file -->

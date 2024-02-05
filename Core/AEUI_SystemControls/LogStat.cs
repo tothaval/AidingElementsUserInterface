@@ -60,11 +60,18 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
                 new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS()
                 );
 
-            SystemPulseTimer systemPulse = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_systemPulseTimers[screen_index];
+            try
+            {
+                SystemPulseTimer systemPulse = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_systemPulseTimers[screen_index];
 
-            CTB_Log.appendText(
-                $"\n{logEntry.id}: {logEntry.dateTime}\t{systemPulse.GetSessionRuntime()}\t {logEntry.title} {logEntry.content}"
-                );
+                CTB_Log.appendText(
+                    $"\n{logEntry.id}: {logEntry.dateTime}\t{systemPulse.GetSessionRuntime()}\t {logEntry.title} {logEntry.content}"
+                    );
+            }
+            catch (Exception)
+            {
+
+            }            
         }
 
         internal ObservableCollection<NoteData> getCommandLogs()

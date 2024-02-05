@@ -13,15 +13,10 @@ ________________________________________________________________________________
 _______________________________________________
 currently implemented functions:
 
-
 content and container save and load currently broken
-
-recommendation: 
-menu -> control -> System to access system canvas
-in System canvas, LevelShift can be deactivated with click on LevelShift in 
-menu -> tools -> LevelShift
-
 CoreOptions element has been improved, but is unfinished__WIP__
+
+
 
 element control: __WIP__
 	elements can be moved via left mouse button
