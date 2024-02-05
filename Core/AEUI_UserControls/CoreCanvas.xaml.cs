@@ -20,6 +20,7 @@ using AidingElementsUserInterface.Elements.MyNote;
 
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -42,7 +43,6 @@ namespace AidingElementsUserInterface.Core
     public partial class CoreCanvas : UserControl
     {
         private CanvasData config;
-        private string canvas_name;
 
         private LevelSystem levelSystem = new LevelSystem();
 
@@ -53,29 +53,25 @@ namespace AidingElementsUserInterface.Core
 
         private CallCentral callCentral;
 
+        private bool SYSTEM_CANVAS_FLAG = false;
+
 
         public CoreCanvas()
         {
-            InitializeComponent();
-
-            this.canvas_name = "core canvas";
             this.config = new CanvasData();
-            CanvasDataResources(config);
+
+            InitializeComponent();
 
             build();
 
             callCentral = new CallCentral(ref __CoreCanvas);
         }
 
-        internal CoreCanvas(string canvas_name, CanvasData canvasData)
+        internal CoreCanvas(CanvasData canvasData)
         {
-            InitializeComponent();
-            
-            this.canvas_name = canvas_name;
             this.config = canvasData;
 
-            CanvasDataResources(canvasData);
-
+            InitializeComponent();
 
             build();
 
@@ -96,8 +92,6 @@ namespace AidingElementsUserInterface.Core
                 item.element_border.Height = data.height;
 
                 Panel.SetZIndex(item, data.level);
-
-                MessageBox.Show(data.level_visibility_list);
             }
         }
 
@@ -106,7 +100,16 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
+            CoreContainer coreContainer;
+
+            if (SYSTEM_CANVAS_FLAG)
+            {
+                coreContainer = logic.GetSystemHandler().instantiate(content, ref __CoreCanvas);
+            }
+            else
+            {
+                coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
+            }
 
             if (coreContainer != null)
             {
@@ -119,7 +122,16 @@ namespace AidingElementsUserInterface.Core
         {
             SharedLogic logic = new SharedLogic();
 
-            CoreContainer coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
+            CoreContainer coreContainer;
+
+            if (SYSTEM_CANVAS_FLAG)
+            {
+                coreContainer = logic.GetSystemHandler().instantiate(content, ref __CoreCanvas);
+            }
+            else
+            {
+                coreContainer = logic.GetElementHandler().instantiate(content, ref __CoreCanvas);
+            }
 
             if (coreContainer != null)
             {
@@ -132,7 +144,14 @@ namespace AidingElementsUserInterface.Core
         {
             PositionElement(container, point);
 
-            new SharedLogic().GetElementHandler().addElement(container, __CoreCanvas);
+            if (SYSTEM_CANVAS_FLAG)
+            {
+                new SharedLogic().GetSystemHandler().addSYSTEMelement(container);
+            }
+            else
+            {
+                new SharedLogic().GetElementHandler().addElement(container, __CoreCanvas);
+            }            
 
             canvas.Children.Add(container);
         }
@@ -143,62 +162,57 @@ namespace AidingElementsUserInterface.Core
         }
 
         private void build()
-        {
-            Data_Handler data_Handler = new SharedLogic().GetDataHandler();
+        {           
+            Resources["Level"] = 0;
+            Resources["CurrentLevel"] = 0;
 
-            //if (config == null)
-            //{
-            //    config = new CanvasData(canvas_name);
-            //}
+            Resources["LevelBarHeight"] = (double)75;
 
-            canvas.Resources["Level"] = 0;
-            canvas.Resources["CurrentLevel"] = 0;
-
-            canvas.Resources["LevelBarHeight"] = (double)75;
-
-            canvas.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
-            canvas.Resources["LevelShiftOrientationScroll"] = Orientation.Horizontal;
-            canvas.Resources["LevelShiftOrientationInner"] = Orientation.Vertical;
+            Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
+            Resources["LevelShiftOrientationScroll"] = Orientation.Horizontal;
+            Resources["LevelShiftOrientationInner"] = Orientation.Vertical;
 
             //Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
             //Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Horizontal;
 
             _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
 
-            data_Handler.AddCanvasData(config);
+            CanvasDataResources(config);
         }
 
-        private void CanvasDataResources(CanvasData canvasData)
+        internal void CanvasDataResources(CanvasData canvasData)
         {
             if (canvasData == null)
             {
                 canvasData = new CanvasData();
             }
 
-            canvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
-            canvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
-            canvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
-            canvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
-
-            canvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
-            canvas.Resources["CanvasData_thickness"] = canvasData.thickness;
-
-            canvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
-            canvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
+            __CoreCanvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
+            __CoreCanvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
+            __CoreCanvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
+            __CoreCanvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
             
-            canvas.Resources["CanvasData_width"] = canvasData.width;
-            canvas.Resources["CanvasData_height"] = canvasData.height;
+            __CoreCanvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
+            __CoreCanvas.Resources["CanvasData_thickness"] = canvasData.thickness;
             
-            canvas.Resources["CanvasData_canvasName"] = canvasData.canvasName;
-            canvas.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
+            __CoreCanvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
+            __CoreCanvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
             
-            canvas.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
+            __CoreCanvas.Resources["CanvasData_width"] = canvasData.width;
+            __CoreCanvas.Resources["CanvasData_height"] = canvasData.height;
+            
+            __CoreCanvas.Resources["CanvasData_canvasName"] = canvasData.canvasName;
+            __CoreCanvas.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
+            
+            __CoreCanvas.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
 
 
             if (File.Exists(canvasData.imageFilePath))
             {
-                canvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
-                canvas.Resources["CanvasData_background"] = canvas.Resources["CanvasData_image"];
+                __CoreCanvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
+                __CoreCanvas.Resources["CanvasData_background"] = canvas.Resources["CanvasData_image"];
+
+                canvas.Background = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
             }
         }
 
@@ -208,11 +222,6 @@ namespace AidingElementsUserInterface.Core
             {
                 item.ContainerDataResources(containerData);
             }
-
-        }
-
-        public void clearCanvasElements()
-        {
 
         }
 
@@ -248,10 +257,6 @@ namespace AidingElementsUserInterface.Core
         internal CanvasData getCanvasData()
         {
             return config;
-        }
-        internal string get_CANVAS_NAME()
-        {
-            return canvas_name;
         }
 
         internal CallCentral GetCentral()
@@ -533,9 +538,10 @@ namespace AidingElementsUserInterface.Core
         {
             this.config = data;
         }
-        internal void set_CANVAS_NAME(string canvas_name)
-        {
-            this.canvas_name = canvas_name;
+
+        internal void set_SYSTEM_CANVAS_FLAG(bool is_SYSTEM_CANVAS)
+        {           
+            this.SYSTEM_CANVAS_FLAG = is_SYSTEM_CANVAS;
         }
 
         internal void SetVisibility(int newLevel, string state)

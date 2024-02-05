@@ -26,8 +26,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     {
         internal CoreData settings { get; set; }
         internal UserControl element { get; set; }
+        
+        internal int CanvasID { get; set; }
 
-        internal string? CanvasName { get; set; }
         internal string? ContainerDataFilename { get; set; }
 
         internal int level;
@@ -35,32 +36,52 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         public ContainerData()
         {
             settings = new SharedLogic().GetDataHandler().GetCoreData();
+            
+            if (settings == null)
+            {
+                settings = new CoreData();
+            }
+
+            CanvasID = -5;
+        }
+
+        public ContainerData(int canvasID)
+        {
+            settings = new SharedLogic().GetDataHandler().GetCoreData();
 
             if (settings == null)
             {
                 settings = new CoreData();
             }
+
+            CanvasID = canvasID;
         }
 
-        public ContainerData(CoreData coreData)
+        public ContainerData(CoreData coreData, int canvasID)
         {
             settings = coreData;
+
+            CanvasID = canvasID;
         }
 
-        public ContainerData(UserControl _content)
+        public ContainerData(UserControl _content, int canvasID)
         {
             element = _content;
 
             level = 0;
+
+            CanvasID = canvasID;
         }
 
-        public ContainerData(CoreData coreData, UserControl _content)
+        public ContainerData(CoreData coreData, UserControl _content, int canvasID)
         {
             UpdateCoreData(coreData);
 
             element = _content;
 
             level = 0;
+
+            CanvasID = canvasID;
         }
 
         internal void UpdateCoreData(CoreData coreData)
@@ -71,12 +92,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal UserControl GetElement()
         {
             return element;
-        }
-
-        internal void SetCanvasName(string canvasName)
-        {
-            this.CanvasName = canvasName;
-            
         }
 
         internal void SetContainerDataFilename(string containerDataFilename)

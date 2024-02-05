@@ -9,6 +9,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
@@ -22,6 +23,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         private Dictionary<CoreContainer, UserControl> containerContents = new Dictionary<CoreContainer, UserControl>();
 
+
         internal ElementHandler()
         {
 
@@ -30,13 +32,11 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal async void addElement(CoreContainer container, CoreCanvas canvas)
         {
-            container.GetContainerData().CanvasName = canvas.Name;
+            container.GetContainerData().CanvasID = canvas.getCanvasData().canvasID;
 
             containerLocations.Add(container, canvas);
 
             containerContents.Add(container, container.GetContainerData().GetElement());
-
-
         }
 
         internal Dictionary<CoreContainer, UserControl> GetContainerContentsDict()
@@ -63,20 +63,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             }
 
             return true;
-        }
-
-        internal void save_state(XML_Handler handler)
-        {
-            int counter = 0;
-
-            handler.delete_files(handler.ContainerData_xml_folder);
-
-            foreach (CoreContainer container in containerLocations.Keys)
-            {
-                handler.Container_save(container, counter);
-
-                counter++;
-            }
         }
 
         // public void save_state() ... use for loops, the index is the filename or foldername,

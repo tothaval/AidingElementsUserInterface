@@ -18,92 +18,74 @@
              xmlns:systemcontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_SystemControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-                 
-                 Background="{DynamicResource CanvasData_background}"
-                 BorderBrush="{DynamicResource CanvasData_borderbrush}"
-                 BorderThickness="{DynamicResource CanvasData_thickness}"
-                 >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+             >
+        <Grid 
+                   >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        
-        <Border x:Name="border_LevelBar"
+
+            <Border x:Name="border_LevelBar"
                         Grid.Row="0" 
                 HorizontalAlignment="Stretch"
                         >
-            <usercontrols:LevelBar x:Name="_LevelBar"
+                <usercontrols:LevelBar x:Name="_LevelBar"
                                    HorizontalAlignment="Stretch"
                                    
                                    HorizontalContentAlignment="Stretch"/>
-        </Border>
+            </Border>
 
-        
-        <Border x:Name="border_LevelSystemDisplay"
+
+            <Border x:Name="border_LevelSystemDisplay"
                 Grid.Row="1"
                 Grid.RowSpan="1">
-            <systemcontrols:LevelSystemDisplay x:Name="LSD"
+                <systemcontrols:LevelSystemDisplay x:Name="LSD"
                                                Visibility="Collapsed"/>
 
-        </Border>
+            </Border>
 
 
-        <Canvas x:Name="canvas"           
-                Grid.Row="1"
-                Grid.RowSpan="2"
-                
-                Background="Transparent"
-                
-                ClipToBounds="True"
-                Focusable="True"
-                
-                ScrollViewer.CanContentScroll="True"
-                ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                ScrollViewer.VerticalScrollBarVisibility="Auto" 
-            
-                SnapsToDevicePixels="True"            
-                                     
-                Height="{DynamicResource CanvasData_height}"
-                Width="{DynamicResource CanvasData_width}"
-                
-                Drop="canvas_Drop"
-                
-                Loaded="canvas_Loaded"
-                MouseDown="canvas_MouseDown"
-                MouseLeftButtonDown="canvas_MouseLeftButtonDown"
-                MouseMove="canvas_MouseMove"
-                MouseUp="canvas_MouseUp"
-                PreviewDragOver="canvas_PreviewDragOver"
-            
-                PreviewKeyDown="canvas_KeyDown"
-                PreviewKeyUp="canvas_KeyUp"
-                >
-        <Border x:Name="border_level"
-                
-                Visibility="Visible"
-                
-                Panel.ZIndex="30001"  
-                
-                Background="{DynamicResource CanvasData_background}"
+            <Border
                 BorderBrush="{DynamicResource CanvasData_borderbrush}"
                 BorderThickness="{DynamicResource CanvasData_thickness}"
                 CornerRadius="{DynamicResource CanvasData_cornerRadius}"
+                Background="{DynamicResource CanvasData_background}"
+                Grid.Row="1"
+                Grid.RowSpan="2"
                 >
 
+            <ScrollViewer x:Name="SV_canvasZoom"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto"
+                          CanContentScroll="True"
+                          ClipToBounds="True"
+                          Background="Transparent">
+                <Canvas x:Name="canvas"
+                        
+                        Focusable="True"
+                        Background="Transparent"                   
+            
+                    SnapsToDevicePixels="True"            
+                    
+                    Height="{DynamicResource CanvasData_height}"
+                    Width="{DynamicResource CanvasData_width}"
+                
+                    Drop="canvas_Drop"
+                    
+                    Loaded="canvas_Loaded"
+                    MouseDown="canvas_MouseDown"
+                    MouseLeftButtonDown="canvas_MouseLeftButtonDown"
+                    MouseMove="canvas_MouseMove"
+                    MouseUp="canvas_MouseUp"
+                    PreviewDragOver="canvas_PreviewDragOver"
+            
+                    PreviewKeyDown="canvas_KeyDown"
+                    PreviewKeyUp="canvas_KeyUp"/>
+            </ScrollViewer>
         </Border>
-
-        </Canvas>
-    </Grid>
+        </Grid>
 </UserControl>
-
-<!--KeyDown="canvas_KeyDown"
-            KeyUp="canvas_KeyUp"
-    
-    
-    Panel.ZIndex="{DynamicResource Level}"-->
-
-
 <!-- end of file -->

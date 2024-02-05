@@ -40,43 +40,46 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         #region constructors
         public CoreContainer()
         {
-            ContainerDataResources();
-
             InitializeComponent();
+
+            containerData = new ContainerData();
+
+            ContainerDataResources(containerData);
         }
 
         internal CoreContainer(ContainerData containerData)
         {
             this.containerData = containerData;
 
-            ContainerDataResources();
-
             InitializeComponent();
+
+            ContainerDataResources(containerData);
+
         }
 
         internal CoreContainer(UserControl element, ref CoreCanvas canvas)
         {
-            ContainerDataResources();
 
             InitializeComponent();
+
 
             this.canvas = canvas;
 
             //containerData = new ContainerData(canvas.getCanvasData(), element);
-            containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element);
-
-            containerData.SetCanvasName(canvas.getCanvasData().canvasName);
+            containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element, canvas.getCanvasData().canvasID);
 
             containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
+
+            ContainerDataResources(containerData);
 
             initialize_container();
         }
 
-        internal void ContainerDataResources(ContainerData containerData = null)
+        internal void ContainerDataResources(ContainerData? containerData)
         {
             if (containerData == null)
             {
-                containerData = new ContainerData(new CoreData());
+                containerData = new ContainerData(new CoreData(), GetContainerData().CanvasID);
             }
             else
             {
@@ -100,7 +103,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             this.Resources["ContainerData_width"] = containerData.settings.width;
             this.Resources["ContainerData_height"] = containerData.settings.height;
                             
-            this.Resources["ContainerData_CanvasName"] = containerData.CanvasName;
+            this.Resources["ContainerData_CanvasID"] = containerData.CanvasID;
                             
             this.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
                             
@@ -153,7 +156,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             coreContainer.RowTop.Height = new GridLength(0);
             coreContainer.RowBottom.Height = new GridLength(0);
 
-            coreContainer.ContainerDataResources();
+            //coreContainer.ContainerDataResources();
         }
 
         private void _loadtimer_Tick(object sender, EventArgs e)
@@ -189,33 +192,35 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             register_events();
         }
 
-
-        private void register_events()
+        internal void deselect(bool remove_from_list = true)
         {
-            element_border.MouseEnter += Element_border_MouseEnter;
-            element_border.MouseLeave += Element_border_MouseLeave;
+            container_is_selected = false;
 
-            element_border.MouseDown += Element_border_MouseDown;
-            element_border.MouseMove += Element_border_MouseMove;
-            element_border.MouseUp += Element_border_MouseUp;
+            element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
+
+            if (remove_from_list)
+            {
+                canvas.removeFromSelectedItems(this);
+            }
         }
 
 
         internal ContainerData GetContainerData()
         {
-            return containerData;
-        }
 
-        internal Point get_dragPoint()
-        {
-            return dragPoint;
+                return containerData;
+  
+            
         }
 
         internal bool get_containerIsSelected()
         {
             return container_is_selected;
         }
-
+        internal Point get_dragPoint()
+        {
+            return dragPoint;
+        }
         internal Point get_Position()
         {
             return canvas.GetElementPosition(this);
@@ -242,17 +247,14 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             initialize_container();
         }
 
-
-        internal void deselect(bool remove_from_list = true)
+        private void register_events()
         {
-            container_is_selected = false;
+            element_border.MouseEnter += Element_border_MouseEnter;
+            element_border.MouseLeave += Element_border_MouseLeave;
 
-            element_border.BorderBrush = containerData.settings.borderbrush.GetBrush();
-
-            if (remove_from_list)
-            {
-                canvas.removeFromSelectedItems(this);
-            }
+            element_border.MouseDown += Element_border_MouseDown;
+            element_border.MouseMove += Element_border_MouseMove;
+            element_border.MouseUp += Element_border_MouseUp;
         }
 
         internal void remove_Container()

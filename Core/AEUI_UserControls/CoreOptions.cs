@@ -24,9 +24,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Runtime.InteropServices.ObjectiveC;
 using ComboBox = System.Windows.Controls.ComboBox;
 using AidingElementsUserInterface.Core.MyNote_Data;
+using AidingElementsUserInterface.Core.AEUI_Logic;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
+    // noch ein grid einbauen, um dort die BrushSetup usercontrols aufzurufen, damit trennung vom element klar ist,
+    // im element  noch buttons und eine combobox einbauen, um datentypen gezielt verändern zu können.
+
     internal class CoreOptions : CoreContainer
     {
         private Data_Handler handler; // move to SetupData, utilize xaml
@@ -122,7 +126,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             if (canvasData == null)
             {
-                canvasData = new CanvasData();
+                canvasData = new CanvasData($"userscreen_{GetContainerData().CanvasID}", GetContainerData().CanvasID);
             }
 
             wrapPanel.Children.Add(CVC_canvasName);
@@ -140,7 +144,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void CONFIGURATION_ContainerData() //???
         {
-            ContainerData containerData = new ContainerData(new CoreData());
+            ContainerData containerData = new ContainerData(new CoreData(), GetContainerData().CanvasID);
 
             wrapPanel.Children.Add(CVC_ContainerDataFilename);
             wrapPanel.Children.Add(CVC_z_position);
@@ -367,7 +371,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private ContainerData ParseContainerDataCVCs()
         {
-            ContainerData containerData = new ContainerData(ParseCoreDataCVCs());
+            ContainerData containerData = new ContainerData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
 
             containerData.ContainerDataFilename = CVC_ContainerDataFilename.value;
             containerData.level = int.Parse(CVC_z_position.Value);
@@ -448,34 +452,33 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void Save_CanvasData()
         {
-            CanvasData canvasData = new CanvasData(ParseCoreDataCVCs());
+            CanvasData canvasData = new CanvasData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
+            SharedLogic logic = new SharedLogic();
+            //XML_Handler handler = new XML_Handler();
 
-            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            coreCanvas.Resources["CanvasData_background"] = canvasData.background.GetBrush();
-            coreCanvas.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
-            coreCanvas.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
-            coreCanvas.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
-            
-            coreCanvas.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
-            coreCanvas.Resources["CanvasData_thickness"] = canvasData.thickness;
-            
-            coreCanvas.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
-            coreCanvas.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
-            
-            coreCanvas.Resources["CanvasData_width"] = canvasData.width;
-            coreCanvas.Resources["CanvasData_height"] = canvasData.height;
-
-            if (canvasData.imageFilePath != null)
+            if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
-                if (File.Exists(canvasData.imageFilePath))
-                {
-                    coreCanvas.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
-                    coreCanvas.Resources["CanvasData_background"] = coreCanvas.Resources["CanvasData_image"];
-                }
-            }
+                //MessageBox.Show("system");
+                
+                CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
 
-            handler.SetCanvasData(canvasData);
+                coreCanvas.CanvasDataResources(canvasData);
+                coreCanvas.setCanvasData(canvasData);
+
+                //new SYSTEM_xml().SYSTEM_CanvasData_save(canvasData, new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem());
+            }
+            else
+            {
+                //MessageBox.Show("user");
+
+                CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+                coreCanvas.CanvasDataResources(canvasData);
+                coreCanvas.setCanvasData(canvasData);
+
+                //new UserSpace_xml().CanvasData_save(canvasData, new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem());
+                //handler.CanvasData_save(canvasData);
+            }
         }
 
         private void Save_ButtonData()
@@ -510,7 +513,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void Save_ContainerData()
         {
-            ContainerData containerData = new ContainerData(ParseCoreDataCVCs());
+            ContainerData containerData = new ContainerData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
 
             handler.SetContainerData(containerData);
         }

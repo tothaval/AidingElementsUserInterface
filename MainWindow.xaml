@@ -257,6 +257,11 @@
                               
                               Click="MI_Coordinates_Click"/>
 
+                            <MenuItem x:Name="MI_Document"
+                              Header="Document"
+                              
+                              Click="MI_Document_Click"/>
+
                             <MenuItem x:Name="MI_FileLink"
                               Header="FileLink"
                               
@@ -271,6 +276,11 @@
                               Header="Link"
                               
                               Click="MI_Link_Click"/>
+
+                            <MenuItem x:Name="MI_Text"
+                              Header="Text"
+                              
+                              Click="MI_Text_Click"/>
 
                             <MenuItem x:Name="MI_MyNote"
                               Header="MyNote"

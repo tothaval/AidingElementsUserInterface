@@ -102,15 +102,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(new_level, RB_State);
             }            
 
-            Application.Current.Resources["CurrentLevel"] = new_level;
-
             CL_current_level.setText(new_level.ToString());
             currentLevelSystem.SetCurrentLevel(new_level);
 
-            LevelData levelData = new LevelData(new_level, "nuub", false, false);
-
-            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelBar().update(levelData);
-
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelBar().update(currentLevelSystem.Get_CURRENT_LEVEL());
         }
 
         private void SB_LevelShift_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -120,9 +115,16 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void RB_Range_Checked(object sender, RoutedEventArgs e)
         {
+
             SP_Range_CVCs.Visibility = Visibility.Visible;
 
             RB_State = "range";
+
+            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+            currentLevelSystem.SetVisibilityMODE(RB_State);
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+            e.Handled = true;
         }
 
         private void RB_Range_Unchecked(object sender, RoutedEventArgs e)
@@ -133,11 +135,23 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private void RB_Level_Checked(object sender, RoutedEventArgs e)
         {
             RB_State = "level";
+
+            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+            currentLevelSystem.SetVisibilityMODE(RB_State);
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+            e.Handled = true;
         }
 
         private void RB_All_Checked(object sender, RoutedEventArgs e)
         {
             RB_State = "all";
+
+            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+            currentLevelSystem.SetVisibilityMODE(RB_State);
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+            e.Handled = true;
         }
     }
 }

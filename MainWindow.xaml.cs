@@ -10,32 +10,16 @@
  * 
  * AEUI dev goals:
  * 
- *  MainWindow frame
- *      CoreCanvasSwitch (license: hardcoded amount of 11 CoreCanvas elements,
- *      accessible via switch element, each protectable via security layer with password request
- *      1 CoreCanvas is reserved for the aeui core and system display stuff, the system canvas
- *      is placed in a separate border within MainWindow xaml, access via Visibility change
- *      
- *      CoreCanvasSwitch loads the current canvas (should it hold the data or discard it(save canvas and remove every object))
- *      CoreCanvasSwitch responds to 2 buttons right and left of the mainwindow border
- * 
- *      also hardcoded are: LevelCap 201 (201 accessible z-layer per canvas, 1 for CanvasSystem stuff, unchangeable)
- *                          Canvas Max Size 10.000 pixels, a wider canvas than the display should be accessible with a
- *                          scrollviewer and zoom in/zoom out code from image
- *                          
- *                          the caps could be raised with a new license or an expansion right
- *                          
- *                          maybe offer a product called (individually compiled license version to hardcode user settings in the .exe)
  * 
  *  mind fuck stuff: probably my keyboard, but left alt can only be executed via ctrl+ left alt
  * 
  *  to do
- *      LevelSystem class
- *      LevelSystemDisplay usercontrol
  *      LevelShift
  *      LevelData
  *      
  *      further develop and upgrade Canvas save and load functionality, to accompany for the recent changes
+ *      
+ *      further work on concept stack and pop items from the stack
  */
 using System.Windows;
 using System.Windows.Input;
@@ -74,13 +58,18 @@ namespace AidingElementsUserInterface
         internal Data_Handler data_Handler = new Data_Handler();
         internal ElementHandler element_handler = new ElementHandler();
 
+        internal SYSTEM_handler system_handler = new SYSTEM_handler();
+
         internal SharedLogic logic = new SharedLogic();
 
         private LevelData SYSTEM_LEVEL = new LevelData(0, "SYSTEM LEVEL", true, true); // 'system canvas'  'level system level'
 
-
         internal CoreCanvas Get_ACTIVE_CANVAS => ACTIVE_CANVAS;
+
+
+        internal SystemCanvas Get_SYTEM_CANVAS => SYSTEM_CANVAS;
         internal bool Get_SYSTEM_ACTIVE_FLAG => SYSTEM_ACTIVE_FLAG;
+
         internal void set_ACTIVE_CANVAS(CoreCanvas activeCanvas)
         {
             this.ACTIVE_CANVAS = activeCanvas;
@@ -90,7 +79,7 @@ namespace AidingElementsUserInterface
 
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();       
 
             build();
         }
@@ -102,7 +91,10 @@ namespace AidingElementsUserInterface
 
             MainWindowResources();
 
-            ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+            }
         }
 
 
@@ -158,16 +150,16 @@ namespace AidingElementsUserInterface
             __MainWindow.Resources["MainWindow_borderbrush"] = mainWindowData.borderbrush.GetBrush();
             __MainWindow.Resources["MainWindow_foreground"] = mainWindowData.foreground.GetBrush();
             __MainWindow.Resources["MainWindow_highlight"] = mainWindowData.highlight.GetBrush();
-            
+
             __MainWindow.Resources["MainWindow_cornerRadius"] = mainWindowData.cornerRadius;
             __MainWindow.Resources["MainWindow_thickness"] = mainWindowData.thickness;
-            
+
             __MainWindow.Resources["MainWindow_fontSize"] = (double)mainWindowData.fontSize;
             __MainWindow.Resources["MainWindow_fontFamily"] = mainWindowData.fontFamily;
-            
+
             __MainWindow.Resources["MainWindow_width"] = mainWindowData.width;
             __MainWindow.Resources["MainWindow_height"] = mainWindowData.height;
-            
+
             __MainWindow.Resources["MainWindow_initialPosition_X"] = mainWindowData.initialPosition.X;
             __MainWindow.Resources["MainWindow_initialPosition_Y"] = mainWindowData.initialPosition.Y;
 
@@ -182,23 +174,21 @@ namespace AidingElementsUserInterface
 
         public void quitAEUI()
         {
+            SYSTEM_CANVAS.save();
+
             if (mainWindowData != null)
             {
                 mainWindowData.initialPosition = new Point(this.Left, this.Top);
-
-                XML_Handler xml_handler = new XML_Handler();
-
-                xml_handler.ButtonData_save();
-                xml_handler.CanvasData_save();
-                xml_handler.CoreData_save();
-                xml_handler.MainWindowData_save();
-                xml_handler.TextBoxData_save();
-
-                if (element_handler != null)
-                {
-                    element_handler.save_state(xml_handler);
-                }
             }
+
+            XML_Handler xml_handler = new XML_Handler();
+
+            xml_handler.ButtonData_save();
+            xml_handler.CoreData_save();
+            xml_handler.MainWindowData_save();
+            xml_handler.TextBoxData_save();
+
+            CORE_CANVAS_SWITCH.save_Screens();
 
             Application.Current.Shutdown();
         }
@@ -211,7 +201,6 @@ namespace AidingElementsUserInterface
                 border_CORE_CANVAS_SWITCH.Visibility = Visibility.Collapsed;
                 border_SYSTEM_CANVAS.Visibility = Visibility.Visible;
 
-                ACTIVE_CANVAS = SYSTEM_CANVAS.Get_SYSTEM_CANVAS;
                 SYSTEM_ACTIVE_FLAG = true;
             }
             else
@@ -226,7 +215,21 @@ namespace AidingElementsUserInterface
 
         #endregion processing
 
+        private void summonElement(object sender)
+        {
+            if (SYSTEM_ACTIVE_FLAG)
+            {
+                SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+            }
+            else
+            {
+                if (ACTIVE_CANVAS != null)
+                {
+                    ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
+                }
+            }
 
+        }
 
 
         // events
@@ -409,34 +412,30 @@ namespace AidingElementsUserInterface
         #region elements menu item clicks
         private void MI_Coordinates_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
+        private void MI_Document_Click(object sender, RoutedEventArgs e)
+        {
+            summonElement(sender);
+        }
+        private void MI_Text_Click(object sender, RoutedEventArgs e)
+        {
+            summonElement(sender);
+        }
         private void MI_FileLink_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Image_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Link_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_MyNote_Click(object sender, RoutedEventArgs e)
@@ -453,60 +452,42 @@ namespace AidingElementsUserInterface
         #region about menu item clicks
         private void MI_Manual_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
 
         private void MI_Version_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_License_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Documentation_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
         #endregion about menu item clicks
 
         #region control menu item clicks
         private void MI_Command_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_CoreOptions_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
 
 
         private void MI_SYSTEM_Click(object sender, RoutedEventArgs e)
         {
-            SYSTEM_CANVAS_SWITCH();           
+            SYSTEM_CANVAS_SWITCH();
         }
 
 
@@ -549,93 +530,59 @@ namespace AidingElementsUserInterface
 
         private void MI_Adjust_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Copy_Click(object sender, RoutedEventArgs e)
         {
-
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Paste_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Move_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_LevelShift_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_LocalDrives_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
 
         private void MI_Random_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Request_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
 
         private void MI_Stopwatch_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_Clock_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
 
         private void MI_RightClickChoice_Click(object sender, RoutedEventArgs e)
         {
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS.GetCentral().ExecuteCommandRequest($">{((MenuItem)sender).Header}");
-            }
+            summonElement(sender);
         }
         #endregion tools menu item clicks
 
@@ -680,14 +627,14 @@ namespace AidingElementsUserInterface
             }
         }
         private void MI_group_to_row_Click(object sender, RoutedEventArgs e)
-            {
+        {
             if (ACTIVE_CANVAS != null)
             {
                 ACTIVE_CANVAS.group_selected_items(false);
             }
         }
         private void MI_delete_Click(object sender, RoutedEventArgs e)
-                {
+        {
             if (ACTIVE_CANVAS != null)
             {
                 ACTIVE_CANVAS.delete_selected_items();
@@ -713,7 +660,7 @@ namespace AidingElementsUserInterface
             }
         }
 
-         // origin:      https://stackoverflow.com/questions/16245706/check-for-device-change-add-remove-events
+        // origin:      https://stackoverflow.com/questions/16245706/check-for-device-change-add-remove-events
         private IntPtr HwndHandler(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam, ref bool handled)
         {
             if (msg == UsbNotification.WmDevicechange)
@@ -721,7 +668,7 @@ namespace AidingElementsUserInterface
                 switch ((int)wparam)
                 {
                     case UsbNotification.DbtDeviceremovecomplete:
-                        ACTIVE_CANVAS.updateLocalDrives();                        
+                        ACTIVE_CANVAS.updateLocalDrives();
                         //updateDriveInfo(); // this is where you do your magic
                         break;
                     case UsbNotification.DbtDevicearrival:
@@ -747,7 +694,6 @@ namespace AidingElementsUserInterface
                 UsbNotification.RegisterUsbDeviceNotification(windowHandle);
             }
         }
-
     }
 }
 /*  END OF FILE
