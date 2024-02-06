@@ -50,41 +50,39 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
             if (canvasData == null)
             {
-                SYSTEM_CANVAS = new CoreCanvas(new CanvasData("SYSTEM", 0));
+                SYSTEM_CANVAS.setCanvasData(new CanvasData("SYSTEM", 0));
             }
             else
             {
-                SYSTEM_CANVAS = new CoreCanvas(canvasData);
-            }            
+                SYSTEM_CANVAS.setCanvasData(canvasData);
+            }
 
-            //SYSTEM_CANVAS.CanvasDataResources(canvasData);
-
-            //SYSTEM_CANVAS.set_CANVAS_NAME("SYSTEM");
-            //SYSTEM_CANVAS.set_SYSTEM_CANVAS_FLAG(true);
+            SYSTEM_CANVAS.set_SYSTEM_CANVAS_FLAG(true);
 
             SYSTEM_CANVAS._LevelBar.update(SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL());
-                        
+
             foreach (CoreContainer item in xml.SYSTEM_Container_load())
             {
-                MessageBox.Show("sys_cont_test");
-
                 item.setCanvas(ref SYSTEM_CANVAS);
 
                 SYSTEM_CANVAS.add_element_to_canvas(item, item.get_dragPoint());
 
-                item.load_Container();                
+                item.load_Container();
             }
-
         }
 
         internal void save()
         {
             SYSTEM_xml xml = new SYSTEM_xml();
             LevelSystem levelSystem = SYSTEM_CANVAS.GetLevelSystem();
-            
-            xml.SYSTEM_CanvasData_save(SYSTEM_CANVAS.getCanvasData(), levelSystem);
 
-            //MessageBox.Show(SYSTEM_CANVAS.canvas.Children.Count.ToString());
+            string path = $"{xml.SYSTEM_Container_folder}";
+            xml.delete_files(path);
+
+            string path_ = $"{xml.SYSTEM_folder}";
+            xml.delete_files(path_);
+
+            xml.SYSTEM_CanvasData_save(SYSTEM_CANVAS.getCanvasData(), levelSystem);
 
             foreach (object item in SYSTEM_CANVAS.canvas.Children)
             {

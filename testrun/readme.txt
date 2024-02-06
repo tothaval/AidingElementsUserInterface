@@ -12,11 +12,17 @@ ________________________________________________________________________________
 2024, Aiding Elements User Interface readme.txt
 _______________________________________________
 currently implemented functions:
+11 canvas screens with a total of 1.100.000.000 pixels screen space
+easy accessible, every screen saves and loads its contents, each
+screen can be modified via coreoptions element via changing of
+'canvas' values.
 
-content and container save and load currently broken
+each element can be shifted over the level system. each screen
+holds a total number of 200 levels for the user, and one for the system,
+elements can be made invisible, if level radiobox is selected in
+levelshift element.
+
 CoreOptions element has been improved, but is unfinished__WIP__
-
-
 
 element control: __WIP__
 	elements can be moved via left mouse button

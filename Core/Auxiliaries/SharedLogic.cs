@@ -63,16 +63,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return GetMainWindow().data_Handler;
         }
 
-        internal ElementHandler GetElementHandler()
-        {
-            return GetMainWindow().element_handler;
-        }
 
         internal FlatShareCC GetFlatShareCC()
         {
             FlatShareCC select = new FlatShareCC();
 
-            select = (FlatShareCC)GetMainWindow().element_handler.returnFlatShareCC();
+            //select = (FlatShareCC)GetMainWindow().element_handler.returnFlatShareCC();
 
             return select;
         }
@@ -97,11 +93,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             }
 
             return null;
-        }
-
-        internal SYSTEM_handler GetSystemHandler()
-        {
-            return GetMainWindow().system_handler;
         }
 
         internal SystemPulseTimer GetSystemPulseTimer()

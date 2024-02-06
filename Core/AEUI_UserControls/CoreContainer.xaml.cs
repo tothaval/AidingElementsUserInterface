@@ -259,7 +259,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void remove_Container()
         {
-            new SharedLogic().GetElementHandler().removeElement(__CoreContainer);
             canvas.canvas.Children.Remove(__CoreContainer);
 
             content_border.Child = null;
@@ -330,14 +329,16 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 ContainerLogic.DragStart(
                     ref elementDrag,
                     ref __CoreContainer,
-                    ref containerData.level,
                     ref dragPoint,
                     ref canvas
                     );
 
+
+                Panel.SetZIndex(__CoreContainer, CoreCanvasSwitchData.Get_CORECANVAS_DRAG_LEVEL);
+                                
                 //mainWindow.writing = false;
                 ////Keyboard.ClearFocus();
-                Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);                           
+                Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);
             }
 
 
@@ -364,9 +365,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             if (e.ChangedButton == MouseButton.Left)
             {
                 ContainerLogic.DragStop(
-                    ref elementDrag,
-                    ref __CoreContainer,
-                    ref containerData.level
+                    ref elementDrag
                     );
 
                 dragPoint = new Point(Canvas.GetLeft(__CoreContainer), Canvas.GetTop(__CoreContainer));
@@ -376,6 +375,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     selected();
                 }
 
+                Panel.SetZIndex(__CoreContainer, containerData.level);
 
                 //int count = 0;
                 //foreach (YS_CORE_ContainerElement item in mainWindow.UIE_ModuleCreator.list_YS_CORE_ContainerElement)
@@ -400,23 +400,26 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 int index = containerData.level;
 
-                Canvas.SetZIndex(__CoreContainer, index + CoreCanvasSwitchData.Get_CORECANVAS_HOVER_LEVEL);
-
-
-                //MessageBox.Show($"{Canvas.GetZIndex(this)}\n{containerData.level}\n{containerData.level + containerData.hoverLevel}");
+                Panel.SetZIndex(__CoreContainer, index + CoreCanvasSwitchData.Get_CORECANVAS_HOVER_LEVEL);
             }
 
-            e.Handled = true; 
+            e.Handled = true;
+
+
+            L_Z.Content = Panel.GetZIndex(__CoreContainer);
         }
 
         private void Element_border_MouseLeave(object sender, MouseEventArgs e)
         {
             if (containerData != null)
             {
-                Canvas.SetZIndex(__CoreContainer, containerData.level);
+                Panel.SetZIndex(__CoreContainer, containerData.level);
             }
 
             e.Handled = true;
+
+
+            L_Z.Content = Panel.GetZIndex(__CoreContainer);
         }
         #endregion element mouse events
 

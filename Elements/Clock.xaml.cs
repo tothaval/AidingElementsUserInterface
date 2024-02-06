@@ -26,9 +26,19 @@ namespace AidingElementsUserInterface.Elements
         {
             InitializeComponent();
 
-            int screen_index = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens.IndexOf(
+
+            int screen_index = -5;
+            if (new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH == null)
+            {
+
+                screen_index = -15;
+            }
+            else
+            {
+                screen_index = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens.IndexOf(
                 new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS()
                 ); // refactor later, also at logstat.cs
+            }            
 
             systemPulse = new SystemPulseTimer(screen_index);
 

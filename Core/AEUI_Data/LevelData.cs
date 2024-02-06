@@ -23,15 +23,13 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         private string name;
         private string description;
 
-        private bool zero_flag; // lower = false, upper = true
         private bool visibility_flag; 
         private bool login_flag;
         private bool security_flag;
 
         internal int LEVEL => level;
-        internal string NAME => name;               
+        internal string NAME => name;
         internal string DESCRIPTION => description;
-        internal bool ZERO_FLAG => zero_flag;
         internal bool VISIBILITY_FLAG => visibility_flag;
 
         internal bool LOGIN_FLAG => login_flag;
@@ -47,13 +45,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             this.name = name;
             this.description = "SYSTEM PANEL";
 
-            this.zero_flag = true;
             login_flag = lOGIN_FLAG;
             security_flag = sECURITY_FLAG;
         }
 
 
-        public LevelData(int level, string name, string description, bool zero_flag, bool lOGIN_FLAG, bool sECURITY_FLAG)
+        public LevelData(int level, string name, string description, bool lOGIN_FLAG, bool sECURITY_FLAG)
         {
             this.visibility_flag = true;
 
@@ -61,7 +58,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             this.name = name;
             this.description = description;
 
-            this.zero_flag = zero_flag;
             login_flag = lOGIN_FLAG;
             security_flag = sECURITY_FLAG;
         }

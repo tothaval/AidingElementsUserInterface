@@ -3,10 +3,13 @@ using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml;
 
 namespace AidingElementsUserInterface.Core.AEUI_Logic
@@ -21,62 +24,68 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         #region CanvasData loading
         internal CanvasData? CanvasData_load(string path)
         {
-            //if (File.Exists(@$"{path}"))
-            //{
-            //    XmlDocument xmlDocument = new XmlDocument();
-            //    CanvasData canvasData = new CanvasData();
+            if (File.Exists(@$"{path}"))
+            {
+                XmlDocument xmlDocument = new XmlDocument();
+                CanvasData canvasData = new CanvasData();
 
-            //    xmlDocument.Load(path);
+                xmlDocument.Load(path);
 
-            //    XmlNode node = xmlDocument.SelectSingleNode("Core");
+                XmlNode node = xmlDocument.SelectSingleNode("Core");
 
-            //    if (node != null)
-            //    {
-            //        XmlNode node_CanvasData = node.SelectSingleNode("CanvasData");
+                if (node != null)
+                {
+                    XmlNode node_CanvasData = node.SelectSingleNode("CanvasData");
 
-            //        if (node_CanvasData != null)
-            //        {
-            //            XmlNode node_CoreData = node_CanvasData.SelectSingleNode("CoreData");
+                    if (node_CanvasData != null)
+                    {
+                        XmlNode node_CoreData = node_CanvasData.SelectSingleNode("CoreData");
 
-            //            CoreData aux_data = loadCoreData(node_CoreData);
+                        CoreData aux_data = new XML_Handler().loadCoreData(node_CoreData);
 
-            //            if (aux_data != null)
-            //            {
-            //                canvasData.apply_CoreData(aux_data);
-            //            }
+                        if (aux_data != null)
+                        {
+                            canvasData.apply_CoreData(aux_data);
+                        }
 
-            //            canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
+                        canvasData.canvasID = Int32.Parse(node_CanvasData.SelectSingleNode("canvasID").InnerText);
 
-            //            canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
+                        canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
+
+                        canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
 
 
-            //            XmlNode? element_spacing = NodeCheck(node_CanvasData, "element_spacing");
-            //            if (element_spacing != null)
-            //            {
-            //                if (element_spacing.InnerText.Equals("-1"))
-            //                {
-            //                    canvasData.element_spacing = GridLength.Auto;
-            //                }
-            //                else
-            //                {
-            //                    canvasData.element_spacing = new GridLength(Double.Parse(element_spacing.InnerText));
-            //                }
-            //            }
+                        XmlNode? element_spacing = new XML_Handler().NodeCheck(node_CanvasData, "element_spacing");
+                        if (element_spacing != null)
+                        {
+                            if (element_spacing.InnerText.Equals("-1"))
+                            {
+                                canvasData.element_spacing = GridLength.Auto;
+                            }
+                            else
+                            {
+                                canvasData.element_spacing = new GridLength(Double.Parse(element_spacing.InnerText));
+                            }
+                        }
 
-            //        }
-            //    }
+                    }
+                }
 
-            //    return canvasData;
-            //}
+                return canvasData;
+            }
 
             return null;
         }
+
         #endregion CanvasData loading
 
 
         #region CanvasData saving
-        internal void CanvasData_save(CanvasData canvasData, LevelSystem levelSystem)
+        internal void CanvasData_save(CoreCanvas userScreen, int id)
         {
+            CanvasData canvasData = userScreen.getCanvasData();
+            LevelSystem levelSystem = userScreen.GetLevelSystem();
+
             if (canvasData != null)
             {
                 XmlDocument xmlDocument = new XmlDocument();
@@ -125,9 +134,15 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     node.AppendChild(aux_LevelData);
                 }
 
+
+                //MessageBox.Show(canvasData.imageFilePath);
+
+                check_path($@"{UserSpace_folder}screen_{id}");
+
+                xmlDocument.Save($@"{UserSpace_folder}screen_{id}\{CanvasData_file}");
+
                 try
                 {
-                    xmlDocument.Save($@"{UserSpace_folder}screen_{canvasData.canvasID}\{CanvasData_file}");
                 }
                 catch (Exception)
                 {
@@ -136,6 +151,123 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             }
         }
         #endregion CanvasData saving
+
+        #region Container loading
+
+        internal ObservableCollection<CoreContainer> Container_load(int i)
+        {
+            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
+
+            foreach (string filename in scan_directory($"{UserSpace_folder}screen_{i + 1}\\Container\\"))
+            {
+
+
+                if (File.Exists(filename))
+                {
+                    //MessageBox.Show(filename); 
+                    XmlDocument xmlDocument = new XmlDocument();
+
+                    xmlDocument.Load(filename);
+
+                    XmlNode? node_Container = xmlDocument.SelectSingleNode("ContainerData");
+
+
+                    if (node_Container != null)
+                    {
+                        ContainerData containerData = new XML_Handler().loadContainerData(node_Container, 0);
+
+                        XmlNode node_Content = node_Container.SelectSingleNode("Content");
+
+                        if (node_Content != null)
+                        {
+                            UserControl userControl = new UserControl();
+
+                            XmlNode node_Type = node_Content.SelectSingleNode("Type");
+
+                            if (node_Type != null)
+                            {
+                                Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                if (type != null)
+                                {
+                                    XmlNode? node_Data = node_Content.SelectSingleNode("Data");
+
+                                    if (node_Data != null)
+                                    {
+                                        //containerData = loadContentData(node_Data);
+                                        userControl = new XML_Handler().ContentData_load(type, node_Data);
+                                    }
+                                    else
+                                    {
+                                        userControl = (UserControl)Activator.CreateInstance(type);
+                                    }
+                                }
+                                else
+                                {
+                                    Type? type_in_folder = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                    if (type_in_folder != null)
+                                    {
+
+                                        userControl = (UserControl)Activator.CreateInstance(type_in_folder);
+                                    }
+                                    else
+                                    {
+                                        Type? core_type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{node_Type.InnerText}, AidingElementsUserInterface");
+
+                                        if (core_type != null)
+                                        {
+                                            userControl = (UserControl)Activator.CreateInstance(core_type);
+                                        }
+                                    }
+                                }
+                            }
+
+                            Point container_position;
+                            XmlNode node_Position = node_Container.SelectSingleNode("Position");
+
+                            if (node_Position != null)
+                            {
+                                XmlNode node_x = node_Position.SelectSingleNode("x");
+                                XmlNode node_y = node_Position.SelectSingleNode("y");
+
+                                if (node_x != null && node_y != null)
+                                {
+                                    container_position = new Point(
+                                        Double.Parse(node_x.InnerText),
+                                        Double.Parse(node_y.InnerText)
+                                        );
+                                }
+                            }
+
+                            if (containerData == null)
+                            {
+                                containerData = new ContainerData(0);
+                            }
+
+                            containerData.SetElement(userControl);
+
+                            CoreContainer coreContainer = new CoreContainer(containerData);
+                            coreContainer.setPosition(container_position);
+
+                            container_list.Add(coreContainer);
+
+
+                        }
+                    }
+                }
+            }
+
+            //MessageBox.Show($@".\{Core_Screens_folder}{folder_counter}\Container");
+            //ContainerData_xml_folder
+
+
+            //MessageBox.Show(container_list.Count.ToString()); gibt aktuell 0 aus, die Liste wird nicht korrekt gebaut
+
+            return container_list;
+        }
+        #endregion Container loading
+
 
         #region Container saving
         internal void Container_save(CoreContainer coreContainer, int counter, int canvasID)
@@ -340,7 +472,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
 
         internal XmlNode? saveCoreData(XmlDocument xmlDocument, XmlNode node, CoreData data)
-        {
+        {           
             if (data != null)
             {
                 XmlNode imageIsBackground = xmlDocument.CreateElement("imageIsBackground");
@@ -434,10 +566,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 XmlNode VISIBILITY_FLAG = xmlDocument.CreateElement("VISIBILITY_FLAG");
                 VISIBILITY_FLAG.InnerText = levelData.VISIBILITY_FLAG.ToString();
                 node_LevelData.AppendChild(VISIBILITY_FLAG);
-
-                XmlNode ZERO_FLAG = xmlDocument.CreateElement("ZERO_FLAG");
-                ZERO_FLAG.InnerText = levelData.ZERO_FLAG.ToString();
-                node_LevelData.AppendChild(ZERO_FLAG);
 
                 return node_LevelData;
             }

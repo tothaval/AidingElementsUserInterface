@@ -113,20 +113,40 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.Container)
             {
-                CoreCanvas active_canvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-                active_canvas.ChangeSelectionData(ParseContainerDataCVCs());
+                if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                {
+                    new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.ChangeSelectionData(ParseContainerDataCVCs());
+                }
+                else
+                {
+                    if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                    {
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ChangeSelectionData(ParseContainerDataCVCs());
+                    }
+                }
             }
         }
 
 
         private void CONFIGURATION_CanvasData()
         {
-            CanvasData canvasData = new SharedLogic().GetDataHandler().GetCanvasData();
+            CanvasData canvasData;
+
+            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+            {                
+                canvasData = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.getCanvasData();
+            }
+            else
+            {                
+                canvasData = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.getCanvasData();
+            }
 
             if (canvasData == null)
             {
-                canvasData = new CanvasData($"userscreen_{GetContainerData().CanvasID}", GetContainerData().CanvasID);
+                if (GetContainerData().CanvasID < 1)
+               {
+                    canvasData = new CanvasData($"userscreen_1", 1);
+                }                
             }
 
             wrapPanel.Children.Add(CVC_canvasName);
@@ -369,6 +389,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
         }
 
+        private CanvasData ParseCanvasDataCVCs(CanvasData canvasData)
+        {
+            canvasData.canvasName = CVC_canvasName.value;
+            canvasData.grouping_displacement = Int32.Parse(CVC_grouping_displacement.value);
+            canvasData.element_spacing = new GridLength(Int32.Parse(CVC_element_spacing.value));
+
+            return canvasData;
+        }
+
         private ContainerData ParseContainerDataCVCs()
         {
             ContainerData containerData = new ContainerData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
@@ -462,6 +491,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 
                 CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
 
+                canvasData.canvasID = coreCanvas.getCanvasData().canvasID;
+                canvasData = ParseCanvasDataCVCs(canvasData);
+
                 coreCanvas.CanvasDataResources(canvasData);
                 coreCanvas.setCanvasData(canvasData);
 
@@ -472,6 +504,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 //MessageBox.Show("user");
 
                 CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+
+                canvasData.canvasID = coreCanvas.getCanvasData().canvasID;
+                canvasData = ParseCanvasDataCVCs(canvasData);
 
                 coreCanvas.CanvasDataResources(canvasData);
                 coreCanvas.setCanvasData(canvasData);
