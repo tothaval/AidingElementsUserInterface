@@ -56,9 +56,6 @@ namespace AidingElementsUserInterface
         internal MainWindowData mainWindowData;
 
         internal Data_Handler data_Handler = new Data_Handler();
-        internal ElementHandler element_handler = new ElementHandler();
-
-        internal SYSTEM_handler system_handler = new SYSTEM_handler();
 
         internal SharedLogic logic = new SharedLogic();
 
@@ -66,8 +63,8 @@ namespace AidingElementsUserInterface
 
         internal CoreCanvas Get_ACTIVE_CANVAS => ACTIVE_CANVAS;
 
-
         internal SystemCanvas Get_SYTEM_CANVAS => SYSTEM_CANVAS;
+
         internal bool Get_SYSTEM_ACTIVE_FLAG => SYSTEM_ACTIVE_FLAG;
 
         internal void set_ACTIVE_CANVAS(CoreCanvas activeCanvas)

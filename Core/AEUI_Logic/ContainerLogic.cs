@@ -27,15 +27,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         public static void DragStart(
             ref bool elementDrag,
             ref CoreContainer CORE_ContainerElement,
-            ref int z_position,
             ref Point dragPoint,
             ref CoreCanvas canvas
             )
         {
-            if (elementDrag == false)
-            {
-                z_position = Panel.GetZIndex(CORE_ContainerElement);
-            }
 
             // start dragging
             elementDrag = true;
@@ -44,7 +39,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             dragPoint = Mouse.GetPosition(canvas);
 
             canvas.MapSelection(CORE_ContainerElement, dragPoint);
-            Panel.SetZIndex(CORE_ContainerElement, CoreCanvasSwitchData.Get_CORECANVAS_DRAG_LEVEL);
         }
 
         public static void DragMove(
@@ -75,14 +69,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         }
 
         public static void DragStop(
-            ref bool elementDrag,
-            ref CoreContainer CORE_ContainerElement,
-            ref int z_position
+            ref bool elementDrag
             )
         {
             elementDrag = false;
-
-            Panel.SetZIndex(CORE_ContainerElement, z_position);
         }
 
         public static void RotateUserControl(

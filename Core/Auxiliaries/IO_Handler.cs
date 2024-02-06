@@ -86,7 +86,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             check_path(MyNote_xml_folder);
         }
 
-        private bool check_path(string path)
+        protected bool check_path(string path)
         {
             if (!Directory.Exists(path))
             {

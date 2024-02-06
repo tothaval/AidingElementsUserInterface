@@ -34,6 +34,8 @@ namespace AidingElementsUserInterface.Elements
         {
             InitializeComponent();
 
+            detectCoreContainer();
+
             build();
         }
 
@@ -41,17 +43,41 @@ namespace AidingElementsUserInterface.Elements
 
         private async void detectCoreContainer()
         {
-            await Task.Delay(5);
+            await Task.Delay(25);
 
-            foreach (CoreContainer item in new SharedLogic().GetElementHandler().GetContainerContentsDict().Keys)
+            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
-                if (item.GetContainerData().GetElement() == __Coordinates)
+
+                foreach (CoreContainer item in new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.canvas.Children)
                 {
-                    coreContainer = item;
+                    if (item.GetContainerData().GetElement() == __Coordinates)
+                    {
+                        coreContainer = item;
 
-                    break;
+                        registerMouseMove(new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS);
+
+                        break;
+                    }
+
                 }
+            }
+            else 
+            {
+                if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                {
+                    foreach (CoreContainer item in new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.canvas.Children)
+                    {
+                        if (item.GetContainerData().GetElement() == __Coordinates)
+                        {
+                            coreContainer = item;
 
+                            registerMouseMove(new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS);
+
+                            break;
+                        }
+
+                    }
+                }            
             }
         }
 
@@ -67,9 +93,6 @@ namespace AidingElementsUserInterface.Elements
                 uie_textblockseparator.Foreground = textBoxData.foreground.GetBrush();
             }
 
-            detectCoreContainer();
-
-            registerMouseMove(new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS);
         }
 
 
@@ -78,10 +101,6 @@ namespace AidingElementsUserInterface.Elements
             if (coreCanvas != null)
             {
                 coreCanvas.MouseMove += CoreCanvas_MouseMove;
-            }
-            else
-            {
-                new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.MouseMove += CoreCanvas_MouseMove;
             }
         }
 

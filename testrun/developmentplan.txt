@@ -4,9 +4,7 @@ Stephan Kammel(fractal void)
 
 development plan
 
-further develop save and load of data and elements
 finish level system
-fix recently added bugs
 
 start copying and transcribing texts and concepts to documentation document
 

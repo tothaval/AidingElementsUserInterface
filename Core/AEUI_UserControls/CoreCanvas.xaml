@@ -19,7 +19,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
-        <Grid 
+
+    <Border x:Name="CoreCanvasBorder"
+            BorderBrush="{DynamicResource CanvasData_borderbrush}"
+            BorderThickness="{DynamicResource CanvasData_thickness}"
+            CornerRadius="{DynamicResource CanvasData_cornerRadius}"
+            Background="{DynamicResource CanvasData_background}">
+    <Grid 
                    >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -49,10 +55,6 @@
 
 
             <Border
-                BorderBrush="{DynamicResource CanvasData_borderbrush}"
-                BorderThickness="{DynamicResource CanvasData_thickness}"
-                CornerRadius="{DynamicResource CanvasData_cornerRadius}"
-                Background="{DynamicResource CanvasData_background}"
                 Grid.Row="1"
                 Grid.RowSpan="2"
                 >
@@ -60,7 +62,7 @@
             <ScrollViewer x:Name="SV_canvasZoom"
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto"
-                          CanContentScroll="True"
+                          CanContentScroll="False"
                           ClipToBounds="True"
                           Background="Transparent">
                 <Canvas x:Name="canvas"
@@ -87,5 +89,6 @@
             </ScrollViewer>
         </Border>
         </Grid>
+    </Border>
 </UserControl>
 <!-- end of file -->

@@ -18,6 +18,7 @@
         xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
         mc:Ignorable="d" 
         IsHitTestVisible="True"
+               
         
         FontSize="{DynamicResource ContainerData_fontSize}"
         FontFamily="{DynamicResource ContainerData_fontFamily}"
@@ -63,6 +64,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition x:Name="RowTop" Height="{DynamicResource CanvasData_element_spacing}"/>
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition x:Name="RowBottom" Height="{DynamicResource CanvasData_element_spacing}"/>
 
                     </Grid.RowDefinitions>
@@ -74,6 +76,8 @@
                             Background="Transparent"
                             BorderBrush="Transparent"
                             IsHitTestVisible="True" />
+
+                    <Label x:Name="L_Z" Grid.Column="1" Grid.Row="2"/>
                 </Grid>
             </Border>
         </Grid>

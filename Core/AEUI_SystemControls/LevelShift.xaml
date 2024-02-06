@@ -25,10 +25,9 @@
                        Orientation="{DynamicResource LevelShiftOrientationScroll}"
                        Visibility="Visible"
                        
-                       Value="0"
+                       Value="1"
                                 
-                       Minimum="-100"
-                       Maximum="100"
+                       Maximum="{DynamicResource Level_Cap}"
                        
                        LargeChange="5"
                        SmallChange="1"
@@ -59,6 +58,8 @@
                                 <RadioButton x:Name="RB_All"
                                  GroupName="VisibilityFactor"
                                  Content="all"
+                                             IsChecked="True"
+                                             
                                      Checked="RB_All_Checked"/>
                                 <RadioButton x:Name="RB_Range"
                                  GroupName="VisibilityFactor"
