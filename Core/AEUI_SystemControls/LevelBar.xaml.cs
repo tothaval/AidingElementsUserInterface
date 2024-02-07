@@ -59,6 +59,122 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_Zero.button.Click += CB_Zero_Click;
             CB_Next.button.Click += CB_Next_Click;
             CB_Last.button.Click += CB_Last_Click;
+
+            CL_LevelName.textblock.MouseLeftButtonDown += CL_LevelName_MouseLeftButtonDown;
+            CL_LevelName.textblock.MouseLeftButtonUp += CL_LevelName_MouseLeftButtonUp;
+
+            CL_LevelDescription.textblock.MouseLeftButtonDown += CL_LevelDescription_MouseLeftButtonDown;
+            CL_LevelDescription.textblock.MouseLeftButtonUp += CL_LevelDescription_MouseLeftButtonUp;
+
+            CTB_LevelName.textbox.KeyUp += CTB_LevelName_KeyUp;
+            CTB_LevelDescription.textbox.KeyUp += CTB_LevelDescription_KeyUp;
+        }
+
+        private void LevelDescriptionSwitch()
+        {
+            if (border_LevelDescCL.Visibility == Visibility.Visible)
+            {
+
+                border_LevelDescCL.Visibility = Visibility.Collapsed;
+                border_LevelDescCTB.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                border_LevelDescCL.Visibility = Visibility.Visible;
+                border_LevelDescCTB.Visibility = Visibility.Collapsed;
+            }
+
+
+            string newDescription = CTB_LevelDescription.getText();
+
+            GetLevelSystem().Get_CURRENT_LEVEL().SetDescription(newDescription);
+
+            CL_LevelDescription.setText(newDescription);
+        }
+
+
+        private void LevelNameSwitch()
+        {
+            if (border_LevelNameCL.Visibility == Visibility.Visible)
+            {
+
+                border_LevelNameCL.Visibility = Visibility.Collapsed;
+                border_LevelNameCTB.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                border_LevelNameCL.Visibility = Visibility.Visible;
+                border_LevelNameCTB.Visibility = Visibility.Collapsed;
+            }
+
+
+            string newName = CTB_LevelName.getText();
+
+            GetLevelSystem().Get_CURRENT_LEVEL().SetName(newName);
+            CL_LevelName.setText(newName);
+        }
+
+
+        private void CTB_LevelLogin_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+            }
+        }
+
+        private void CTB_LevelDescription_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                LevelDescriptionSwitch();
+            }
+        }
+
+        private void CTB_LevelName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter || e.Key == Key.Return)
+            {
+                LevelNameSwitch();
+            }
+        }
+
+        private void CL_LevelLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                
+            }
+        }
+        private void CL_LevelLogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void CL_LevelDescription_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                LevelDescriptionSwitch();
+            }
+        }
+
+
+        private void CL_LevelDescription_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void CL_LevelName_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                LevelNameSwitch();
+            }
+        }
+
+        private void CL_LevelName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
 
         internal void update(LevelData levelData)
@@ -83,7 +199,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 {
                     CL_LevelElementCount.setText(new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.canvas.Children.Count.ToString());
                 }
-            }            
+            }
 
             GetLevelSystem().LevelChange();
         }
@@ -95,13 +211,18 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 return new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
             }
 
+            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+            {
+                return new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem();
+            }
+
             return new LevelSystem();
         }
 
 
         private void CB_FirstClick(object sender, RoutedEventArgs e)
         {
-           update(GetLevelSystem().First());
+            update(GetLevelSystem().First());
             // level system show first level (lowest, meaning 100)
         }
 

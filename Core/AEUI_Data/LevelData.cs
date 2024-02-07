@@ -11,6 +11,7 @@ using AidingElementsUserInterface.Core.AEUI_UserControls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,6 +62,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             login_flag = lOGIN_FLAG;
             security_flag = sECURITY_FLAG;
         }
+
+        internal void SetName(string name) { this.name  = name; }
+        internal void SetDescription(string description) { this.description = description;}        
+
     }
 }
 /*  END OF FILE
