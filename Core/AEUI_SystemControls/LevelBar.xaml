@@ -25,11 +25,35 @@
 
         <usercontrols:CoreLabel x:Name="CL_LevelId"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelName"/>
+        <StackPanel Orientation="Horizontal">
+            <Border x:Name="border_LevelNameCL"
+                    Visibility="Visible">
+                <usercontrols:CoreLabel x:Name="CL_LevelName"/>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelDescription"/>
+            </Border>
+
+            <Border x:Name="border_LevelNameCTB"
+                    Visibility="Collapsed">
+                <core:CoreTextBox x:Name="CTB_LevelName"/>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+            <Border x:Name="border_LevelDescCL"
+                    Visibility="Visible">
+                <usercontrols:CoreLabel x:Name="CL_LevelDescription"/>
+
+            </Border>
+
+            <Border x:Name="border_LevelDescCTB"
+                    Visibility="Collapsed">
+                <core:CoreTextBox x:Name="CTB_LevelDescription"/>
+            </Border>
+        </StackPanel>
+
 
         <usercontrols:CoreLabel x:Name="CL_LevelLogin"/>
+
         
         <core:CoreButton x:Name="CB_Zero"/>
 
