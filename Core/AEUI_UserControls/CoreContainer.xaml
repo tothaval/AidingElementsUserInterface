@@ -17,9 +17,8 @@
         xmlns:AUIE_Container="clr-namespace:AidingElementsUserInterface.Core.AEUI_HelperClasses"
         xmlns:local="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
         mc:Ignorable="d" 
-        IsHitTestVisible="True"
-               
-        
+        IsHitTestVisible="True"     
+                
         FontSize="{DynamicResource ContainerData_fontSize}"
         FontFamily="{DynamicResource ContainerData_fontFamily}"
         
@@ -48,8 +47,11 @@
                     Background="{DynamicResource ContainerData_background}"
                     BorderBrush="{DynamicResource ContainerData_borderbrush}"
                     BorderThickness="{DynamicResource ContainerData_thickness}"
-                    CornerRadius="{DynamicResource ContainerData_cornerRadius}">
+                    CornerRadius="{DynamicResource ContainerData_cornerRadius}"
+                    >
                 <Grid x:Name="element_grid"
+                      
+                      
                       Background="Transparent"
                       MouseEnter="element_grid_MouseEnter"
                       MouseMove="element_grid_MouseMove"
@@ -80,6 +82,13 @@
                     <Label x:Name="L_Z" Grid.Column="1" Grid.Row="2"/>
                 </Grid>
             </Border>
+            
+            <Border x:Name="options_border"
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            IsHitTestVisible="True"/>
         </Grid>
     </Border>
 </AUIE_Container:UserControl_Inheritance>

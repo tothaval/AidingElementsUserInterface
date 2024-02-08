@@ -114,23 +114,22 @@ namespace AidingElementsUserInterface.Core
             __CoreButton.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
             __CoreButton.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
             __CoreButton.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
-            
+
             __CoreButton.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
             __CoreButton.Resources["ButtonData_thickness"] = buttonData.thickness;
-            
+
             __CoreButton.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
             __CoreButton.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
-            
+
             __CoreButton.Resources["ButtonData_width"] = buttonData.width;
             __CoreButton.Resources["ButtonData_height"] = buttonData.height;
 
-            if (File.Exists(buttonData.imageFilePath))
+            if (File.Exists(buttonData.background.brushpath))
             {
-                __CoreButton.Resources["ButtonData_image"] = new ImageBrush(new BitmapImage(new Uri(buttonData.imageFilePath)));
-                __CoreButton.Resources["ButtonData_background"] = __CoreButton.Resources["ButtonData_image"];
+                __CoreButton.Resources["ButtonData_image"] = buttonData.background.GetBrush();
+                __CoreButton.Resources["ButtonData_background"] = buttonData.background.GetBrush();                
             }
         }
-
 
         internal void _disabled()
         {
@@ -139,7 +138,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void deselect()
         {
-            this.Resources["ButtonData_highlight"] = config.highlight.GetBrush();
+            __CoreButton.Resources["ButtonData_background"] = config.background.GetBrush();
 
             selected = false;
         }
@@ -151,7 +150,7 @@ namespace AidingElementsUserInterface.Core
 
         internal void select()
         {
-            this.Resources["ButtonData_highlight"] = config.background.GetBrush();
+            __CoreButton.Resources["ButtonData_background"] = config.highlight.GetBrush();
 
             selected = true;
         }

@@ -113,10 +113,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             __CoreLabel.Resources["LabelData_width"] = labelData.width;
             __CoreLabel.Resources["LabelData_height"] = labelData.height;
 
-            if (File.Exists(labelData.imageFilePath))
+            if (File.Exists(labelData.background.brushpath))
             {
-                __CoreLabel.Resources["LabelData_image"] = new ImageBrush(new BitmapImage(new Uri(labelData.imageFilePath)));
-                __CoreLabel.Resources["LabelData_background"] = __CoreLabel.Resources["LabelData_image"];
+                __CoreLabel.Resources["LabelData_image"] = labelData.background.GetBrush();
+                __CoreLabel.Resources["LabelData_background"] = labelData.background.GetBrush();
             }
         }
 

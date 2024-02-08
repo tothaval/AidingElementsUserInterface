@@ -33,6 +33,8 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
     /// </summary>
     public partial class SystemCanvas : UserControl
     {
+        private CoreCanvas SYSTEM_CANVAS;
+
         internal CoreCanvas Get_SYSTEM_CANVAS => SYSTEM_CANVAS;
 
 
@@ -50,16 +52,17 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
             if (canvasData == null)
             {
-                SYSTEM_CANVAS.setCanvasData(new CanvasData("SYSTEM", 0));
+                SYSTEM_CANVAS = new CoreCanvas(new CanvasData("SYSTEM", 0));
             }
             else
             {
+                SYSTEM_CANVAS = new CoreCanvas(canvasData);
                 SYSTEM_CANVAS.setCanvasData(canvasData);
             }
 
             SYSTEM_CANVAS.set_SYSTEM_CANVAS_FLAG(true);
 
-            SYSTEM_CANVAS._LevelBar.update(SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL());
+            //SYSTEM_CANVAS._LevelBar.update(SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL());
 
             foreach (CoreContainer item in xml.SYSTEM_Container_load())
             {
@@ -69,6 +72,8 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
                 item.load_Container();
             }
+
+            border.Child = SYSTEM_CANVAS;
         }
 
         internal void save()

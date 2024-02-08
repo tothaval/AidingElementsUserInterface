@@ -223,7 +223,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             if (File.Exists(@$"{path}"))
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                CanvasData canvasData = new CanvasData();
+                CanvasData canvasData = new CanvasData(true);
 
                 xmlDocument.Load(path);
 
@@ -420,176 +420,14 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return containerData;
         }
 
-        internal ObservableCollection<CoreContainer> Container_load()
-        {
-            ObservableCollection<CoreContainer> container_list = new ObservableCollection<CoreContainer>();
-
-            int folder_counter = 1;
-
-            //MessageBox.Show($@".\{Core_Screens_folder}{folder_counter}\Container");
-            //ContainerData_xml_folder
-            foreach (string filename in scan_directory($@"{UserSpace_folder}screen_{folder_counter}\Container\"))
-            {
-                MessageBox.Show(filename);
-                if (File.Exists(filename))
-                {
-                    XmlDocument xmlDocument = new XmlDocument();
-
-                    xmlDocument.Load(filename);
-
-                    XmlNode? node_Container = xmlDocument.SelectSingleNode("Container");
-
-
-                    if (node_Container != null)
-                    {
-                        ContainerData containerData = loadContainerData(node_Container, folder_counter);
-
-                        XmlNode node_Content = node_Container.SelectSingleNode("Content");
-
-                        if (node_Content != null)
-                        {
-                            UserControl userControl = new UserControl();
-
-                            XmlNode node_Type = node_Content.SelectSingleNode("Type");
-
-                            if (node_Type != null)
-                            {
-                                Type? type = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                if (type != null)
-                                {
-                                    XmlNode? node_Data = node_Content.SelectSingleNode("Data");
-
-                                    if (node_Data != null)
-                                    {
-                                        //containerData = loadContentData(node_Data);
-                                        userControl = ContentData_load(type, node_Data);
-                                    }
-                                    else
-                                    {
-                                        userControl = (UserControl)Activator.CreateInstance(type);
-                                    }
-                                }
-                                else
-                                {
-                                    Type? type_in_folder = Type.GetType($"AidingElementsUserInterface.Elements.{node_Type.InnerText}.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                    if (type_in_folder != null)
-                                    {
-
-                                        userControl = (UserControl)Activator.CreateInstance(type_in_folder);
-                                    }
-                                    else
-                                    {
-                                        Type? core_type = Type.GetType($"AidingElementsUserInterface.Core.AEUI_UserControls.{node_Type.InnerText}, AidingElementsUserInterface");
-
-                                        if (core_type != null)
-                                        {
-                                            userControl = (UserControl)Activator.CreateInstance(core_type);
-                                        }
-                                    }
-                                }
-                            }
-
-                            Point container_position;
-                            XmlNode node_Position = node_Container.SelectSingleNode("Position");
-
-                            if (node_Position != null)
-                            {
-                                XmlNode node_x = node_Position.SelectSingleNode("x");
-                                XmlNode node_y = node_Position.SelectSingleNode("y");
-
-                                if (node_x != null && node_y != null)
-                                {
-                                    container_position = new Point(
-                                        Double.Parse(node_x.InnerText),
-                                        Double.Parse(node_y.InnerText)
-                                        );
-                                }
-                            }
-
-                            if (containerData == null)
-                            {
-                                containerData = new ContainerData(folder_counter);
-                            }
-
-                            containerData.SetElement(userControl);
-
-                            CoreContainer coreContainer = new CoreContainer(containerData);
-                            coreContainer.setPosition(container_position);
-
-                            container_list.Add(coreContainer);
-                        }
-                    }
-                }
-
-                folder_counter++;
-            }
-
-            return container_list;
-        }
         #endregion Container loading
 
         #region Container saving
-        internal void Container_save(CoreContainer coreContainer, int counter, int canvasID)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            CoreContainer container = coreContainer;
+   
+        #endregion Container saving
 
-            if (coreContainer != null)
-            {
-                XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
-
-                xmlDocument.AppendChild(node_ContainerData);
-
-                XmlNode node = node_ContainerData;
-
-                if (node != null)
-                {
-                    XmlNode node_CanvasName = xmlDocument.CreateElement("CanvasID");
-                    node_CanvasName.InnerText = container.GetContainerData().CanvasID.ToString();
-                    node.AppendChild(node_CanvasName);
-
-                    XmlNode node_ContainerDataFilename = xmlDocument.CreateElement("ContainerDataFilename");
-                    node_ContainerDataFilename.InnerText = $"{canvasID}_{counter}.xml";
-                    node.AppendChild(node_ContainerDataFilename);
-
-                    XmlNode node_z_position = xmlDocument.CreateElement("level");
-                    node_z_position.InnerText = container.GetContainerData().level.ToString();
-                    node.AppendChild(node_z_position);
-
-                    XmlNode node_Content = Content_save(xmlDocument, container);
-
-                    if (node_Content != null)
-                    {
-                        node.AppendChild(node_Content);
-                    }
-                }
-
-                XmlNode node_Position = xmlDocument.CreateElement("Position");
-
-                XmlNode node_position_x = xmlDocument.CreateElement("x");
-                node_position_x.InnerText = ((int)container.get_dragPoint().X).ToString();
-                node_Position.AppendChild(node_position_x);
-
-                XmlNode node_position_y = xmlDocument.CreateElement("y");
-                node_position_y.InnerText = ((int)container.get_dragPoint().Y).ToString();
-                node_Position.AppendChild(node_position_y);
-
-                node.AppendChild(node_Position);
-
-                try
-                {
-                    xmlDocument.Save(
-                        $@"{UserSpace_folder}screen_{canvasID}\Container\{canvasID}_{counter}.xml");
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show($@"{UserSpace_folder}screen_{canvasID}\Container\{canvasID}_{counter}.xml");
-                }
-            }
-        }   
-
+        // ContainerData saving
+        #region ContainerData saving
         internal XmlNode? ContainerData_save(XmlDocument xmlDocument, ContainerData containerData)
         {
             if (containerData != null)
@@ -636,8 +474,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode node_z_position = xmlDocument.CreateElement("level");
                 node_z_position.InnerText = "0";
                 node.AppendChild(node_z_position);
-
-                node.AppendChild(node_ContainerData);
 
                 XmlNode node_Position = xmlDocument.CreateElement("Position");
 
@@ -721,6 +557,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     colorData.brushtype = brushtype.InnerText;
                 }
 
+                XmlNode? brushpath = node_ColorDataNode.SelectSingleNode("brushpath");
+                if (brushpath != null)
+                {
+                    colorData.brushpath = brushpath.InnerText;
+                }
+
                 XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
                 if (gradiantEndPoint != null)
                 {
@@ -775,8 +617,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             if (node != null)
             {
-                coreData.imageIsBackground = bool.Parse(node.SelectSingleNode("imageIsBackground").InnerText);
-
                 ColorData aux_background = loadColorData(node, "background");
                 if (aux_background != null) { coreData.background = aux_background; }
 
@@ -798,8 +638,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 coreData.height = Double.Parse(node.SelectSingleNode("height").InnerText);
                 coreData.width = Double.Parse(node.SelectSingleNode("width").InnerText);
-
-                coreData.imageFilePath = node.SelectSingleNode("imageFilePath").InnerText;
 
                 return coreData;
             }
@@ -850,6 +688,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 brushtype.InnerText = data.brushtype.ToString();
                 _ColorDataNode.AppendChild(brushtype);
 
+                XmlNode brushpath = xmlDocument.CreateElement("brushpath");
+                brushpath.InnerText = data.brushpath.ToString();
+                _ColorDataNode.AppendChild(brushpath);
+
                 XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradiantEndPoint");
                 gradiantEndPoint.InnerText = data.gradiantEndPoint.ToString();
                 _ColorDataNode.AppendChild(gradiantEndPoint);
@@ -889,10 +731,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             if (data != null)
             {
-                XmlNode imageIsBackground = xmlDocument.CreateElement("imageIsBackground");
-                imageIsBackground.InnerText = data.imageIsBackground.ToString();
-                node.AppendChild(imageIsBackground);
-
                 XmlNode? aux_background = saveColorData(xmlDocument, data.background, "background");
                 if (aux_background != null)
                 {
@@ -940,11 +778,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode width = xmlDocument.CreateElement("width");
                 width.InnerText = data.width.ToString();
                 node.AppendChild(width);
-
-                XmlNode imageFilePath = xmlDocument.CreateElement("imageFilePath");
-                imageFilePath.InnerText = data.imageFilePath;
-                node.AppendChild(imageFilePath);
-
 
                 return node;
             }
@@ -1078,32 +911,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 }
 
                 return contentData;
-            }
-
-            return null;
-        }
-        private LinkData? loadLinkData(XmlNode node)
-        {
-            LinkData linkData = new LinkData();
-
-            if (node != null)
-            {
-                XmlNode? link_node = node.SelectSingleNode("Link");
-                XmlNode? linkText_node = node.SelectSingleNode("LinkText");
-
-                if (link_node != null && linkText_node != null)
-                {
-                    string link = link_node.InnerText;
-                    string linkText = linkText_node.InnerText;
-
-                    if (link != null && linkText != null)
-                    {
-                        linkData.SetLink(link);
-                        linkData.SetLinkText(linkText);
-                    }
-                }
-
-                return linkData;
             }
 
             return null;

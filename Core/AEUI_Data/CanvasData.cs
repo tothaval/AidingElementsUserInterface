@@ -9,6 +9,7 @@
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
+using AidingElementsUserInterface.Core.AEUI_Logic;
 using System.Windows;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
@@ -25,17 +26,17 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         // selection group positioning
         internal int grouping_displacement { get; set; }
 
+        private LevelSystem levelSystem { get; set; }
+
 
         public CanvasData(bool load)
         {
-
             height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
             width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
-
         }
 
 
-        public CanvasData(string canvas_name = "userscreen", int canvasID = 0)
+        public CanvasData(string canvas_name, int canvasID)
         {
             canvasName = canvas_name;
 
@@ -48,7 +49,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             this.canvasID = canvasID;
         }
 
-        public CanvasData(CoreData coreData, int canvasID = 0)
+        public CanvasData(CoreData coreData)
         {
             background = coreData.background;
             borderbrush = coreData.borderbrush;
@@ -64,12 +65,26 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
             width = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
 
-            imageFilePath = coreData.imageFilePath;
-
             canvasName = "canvas";
             grouping_displacement = 25;
 
             element_spacing = new GridLength(8);
+        }
+
+        internal LevelSystem GetLevelSystem()
+        {
+            return levelSystem;
+        }
+
+
+        internal void setCanvasID(int identifierIndexDigit)
+        {
+            canvasID = identifierIndexDigit;
+        }
+
+        internal void SetLevelSystem(LevelSystem levelSystem)
+        {
+            this.levelSystem = levelSystem;
         }
     }
 }

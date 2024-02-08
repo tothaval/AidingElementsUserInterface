@@ -34,6 +34,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     public partial class LevelShift : UserControl
     {
         string RB_State = "all";
+        bool loading = true;
 
         public LevelShift()
         {
@@ -41,6 +42,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             build();
             registerEvents();
+
+            loading = false;
         }
 
         private void build()
@@ -192,13 +195,16 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void RB_All_Checked(object sender, RoutedEventArgs e)
         {
-            RB_State = "all";
+            if (!loading)
+            {
+                RB_State = "all";
 
-            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
-            currentLevelSystem.SetVisibilityMODE(RB_State);
-            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+                LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+                currentLevelSystem.SetVisibilityMODE(RB_State);
+                new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
 
-            e.Handled = true;
+                e.Handled = true;
+            }
         }
     }
 }

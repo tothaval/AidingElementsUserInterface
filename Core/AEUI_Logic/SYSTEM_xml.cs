@@ -33,7 +33,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             if (File.Exists(@$"{path}"))
             {
                 XmlDocument xmlDocument = new XmlDocument();
-                CanvasData canvasData = new CanvasData();
+                CanvasData canvasData = new CanvasData(true);
 
                 xmlDocument.Load(path);
 
@@ -236,7 +236,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                             containerData.SetElement(userControl);
 
-                            CoreContainer coreContainer = new CoreContainer(containerData);
+                            CoreContainer coreContainer = new CoreContainer(containerData, userControl);
                             coreContainer.setPosition(container_position);
 
                             container_list.Add(coreContainer);

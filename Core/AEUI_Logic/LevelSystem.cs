@@ -29,55 +29,46 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
     {
         // the question remaining regarding level counting: 1-200 or -100 <-> +100
         private ObservableCollection<LevelData> _levels = new ObservableCollection<LevelData>();
+        private int canvasID = 0;
 
         internal int current_level {get;set;}
         private string visibility_MODE = "all"; // all | range | level
 
         private LevelData ZERO_LEVEL = new LevelData(0, "Zero Level", true, true); // 'level system level'
 
-        public LevelSystem()
+        public LevelSystem(int canvasID)
         {
             current_level = 1;
+            this.canvasID = canvasID;
 
             initiate();
         }
+
+        public LevelSystem(ObservableCollection<LevelData> levels, int canvasID)
+        {
+            _levels.Clear();
+
+            current_level = 1;
+            _levels = levels;                
+            this.canvasID = canvasID;
+        }
+
 
         internal ObservableCollection<LevelData> getLevels() { return _levels; }
 
         private void initiate()
         {
-            //load, if fails, instantiate first time style
-
             if (ZERO_LEVEL != null)
             {
                 _levels.Add(ZERO_LEVEL);
 
-
                 for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP; i++)
                 {
-
                     bool flag = false;
                     bool flag2 = false;
 
-                    // test areas
-                    if (i == 2 && i == 4)
-                    {
-                        flag = true;
-
-                        if (i == 4)
-                        {
-                            flag2 = true;
-                        }
-
-                    }
-                    // test area
-
-                    _levels.Add(new LevelData(i, $"level {i}", "desc", flag, flag2));
+                    _levels.Add(new LevelData(i, $"level {i}", "desc", flag, flag2, true));
                 }
-            }
-            else
-            {
-                throw new Exception();
             }
         }
 

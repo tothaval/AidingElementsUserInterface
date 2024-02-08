@@ -28,13 +28,13 @@
                 <ColumnDefinition Width="2"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Rectangle x:Name="ColorField"
                        Grid.Column="0"
                        
                        MinWidth="150"
                        MinHeight="150"/>
-            
+
             <StackPanel x:Name="SP_ColorSetters"
                         Orientation="Vertical"
                         Grid.Column="2">
@@ -42,16 +42,65 @@
                         Orientation="Horizontal"
                         Minimum="0"
                         Maximum="255"
-                        Interval="1"/>
+                        Interval="1"
+                        Value="255"
+                        ValueChanged="S_Alpha_ValueChanged"
+                        />
                 <Label/>
-                <Slider x:Name="S_Red"/>
-                <Slider x:Name="S_Green"/>
-                <Slider x:Name="S_Blue"/>
+                <Slider x:Name="S_Red"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="255"
+                        Interval="1"
+                        Value="255"
+                        ValueChanged="S_Red_ValueChanged"
+                        />
+                <Slider x:Name="S_Green"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="255"
+                        Interval="1"
+                        Value="255"
+                        ValueChanged="S_Green_ValueChanged"
+                        />
+                <Slider x:Name="S_Blue"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="255"
+                        Interval="1"
+                        Value="255"
+                        ValueChanged="S_Blue_ValueChanged"
+                        />
                 <Label/>
-                <Slider x:Name="S_Brightness"/>
+                <Slider x:Name="S_Brightness"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="100"
+                        Interval="5"
+                        Value="255"
+                        ValueChanged="S_Brightness_ValueChanged"
+                        />
                 <Label/>
-                <Slider x:Name="S_Grey"/>
+                <Slider x:Name="S_Grey"
+                        Orientation="Horizontal"
+                        Minimum="0"
+                        Maximum="255"
+                        Interval="1"
+                        Value="255"
+                        ValueChanged="S_Grey_ValueChanged"
+                        />
             </StackPanel>
         </Grid>
+
+        <StackPanel x:Name="SP_GradientArea"
+                    Orientation="Vertical"
+                    Visibility="Collapsed">
+        <core:CoreButton x:Name="CB_AddGradient"/>
+
+        <StackPanel x:Name="SP_gradientSteps"
+                    Orientation="Vertical"/>
+        </StackPanel>
+
+        <core:CoreButton x:Name="CB_SaveColorData"/>
     </StackPanel>    
 </UserControl>

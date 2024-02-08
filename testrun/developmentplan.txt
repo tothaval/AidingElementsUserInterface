@@ -1,17 +1,10 @@
-2024|02|05
+2024|02|08
 autor:
 Stephan Kammel(fractal void)
 
 development plan
 
 finish level system
-
-start copying and transcribing texts and concepts to documentation document
-
-find a solution for canvas backgrounds, because of canvas size
-pictures are very large, it would probably be best if a smaller
-viewport would display the background image and via image zoom
-mechanic and optional a scrollviewer the user can traverse the canvas
 
 once finished, work on unfinished stuff below this line
 
@@ -21,26 +14,19 @@ Stephan Kammel(fractal void)
 
 development plan
 
-
-finish new level system, fix save and load of containers
+finish new level system
 
 update development plan with proper document
-update license ideas
 
 finish development of OptionsElement		
 	later: harden the OptionElement against input errors
 
-timer -> Clock, timer with setup
-	
+timer -> Clock, timer with setup	
 
 integrate and transform these ysui predecessors for aeui
 
-
 random element, corematrix classes
 	continue development of random element
-		add button "random" for values between RandomMin and RandomMax
-		use button "base10" for values between 0-9|1-10
-		use button "base6"  for values between 1-6, 
 			integrate option for dice pictures
 
 	finalize corematrix classes for intermediary use

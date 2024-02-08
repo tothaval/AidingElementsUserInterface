@@ -51,7 +51,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         }
 
 
-        public LevelData(int level, string name, string description, bool lOGIN_FLAG, bool sECURITY_FLAG)
+        public LevelData(int level, string name, string description, bool lOGIN_FLAG, bool sECURITY_FLAG, bool visibility_flag)
         {
             this.visibility_flag = true;
 
@@ -61,6 +61,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             login_flag = lOGIN_FLAG;
             security_flag = sECURITY_FLAG;
+            this.visibility_flag = visibility_flag;
         }
 
         internal void SetName(string name) { this.name  = name; }
