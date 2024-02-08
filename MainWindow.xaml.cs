@@ -162,10 +162,12 @@ namespace AidingElementsUserInterface
 
             __MainWindow.Resources["MainWindow_language"] = mainWindowData.language;
 
-            if (File.Exists(mainWindowData.imageFilePath))
+            if (File.Exists(mainWindowData.background.brushpath))
             {
-                __MainWindow.Resources["MainWindow_image"] = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
-                __MainWindow.Resources["MainWindow_background"] = __MainWindow.Resources["MainWindow_image"];
+                __MainWindow.Resources["MainWindow_image"] = mainWindowData.background.GetBrush();
+                __MainWindow.Resources["MainWindow_background"] = mainWindowData.background.GetBrush();
+
+                border.Background = mainWindowData.background.GetBrush();
             }
         }
 

@@ -51,8 +51,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             height = 480;
             width = 640;
 
-            imageFilePath = coreData.imageFilePath;
-
             //MainWindowData properties
             initialPosition = new Point(25, 25);
             language = "english";

@@ -32,6 +32,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreCanvas canvas;
         private ContainerData containerData;
 
+        private object element {  get; set; }
+
+        internal object Element => element;
+
         private Point dragPoint = new Point();        
 
         private bool elementDrag = false;
@@ -47,9 +51,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerDataResources(containerData);
         }
 
-        internal CoreContainer(ContainerData containerData)
+        internal CoreContainer(ContainerData containerData, object element)
         {
             this.containerData = containerData;
+            this.element = element;
 
             InitializeComponent();
 
@@ -62,8 +67,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             InitializeComponent();
 
-
             this.canvas = canvas;
+            this.element = element;
 
             //containerData = new ContainerData(canvas.getCanvasData(), element);
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element, canvas.getCanvasData().canvasID);
@@ -77,6 +82,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void ContainerDataResources(ContainerData? containerData)
         {
+            object element = this.containerData.GetElement();
+
+            containerData.element = (UserControl)element;
+
             if (containerData == null)
             {
                 containerData = new ContainerData(new CoreData(), GetContainerData().CanvasID);
@@ -89,32 +98,34 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 }
             }
 
-            this.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
-            this.Resources["ContainerData_borderbrush"] = containerData.settings.borderbrush.GetBrush();
-            this.Resources["ContainerData_foreground"] = containerData.settings.foreground.GetBrush();
-            this.Resources["ContainerData_highlight"] = containerData.settings.highlight.GetBrush();
-                            
-            this.Resources["ContainerData_cornerRadius"] = containerData.settings.cornerRadius;
-            this.Resources["ContainerData_thickness"] = containerData.settings.thickness;
-                            
-            this.Resources["ContainerData_fontSize"] = (double)containerData.settings.fontSize;
-            this.Resources["ContainerData_fontFamily"] = containerData.settings.fontFamily;
-                            
-            this.Resources["ContainerData_width"] = containerData.settings.width;
-            this.Resources["ContainerData_height"] = containerData.settings.height;
-                            
-            this.Resources["ContainerData_CanvasID"] = containerData.CanvasID;
-                            
-            this.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
-                            
-            this.Resources["ContainerData_z_position"] = containerData.level;
+            __CoreContainer.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
+            __CoreContainer.Resources["ContainerData_borderbrush"] = containerData.settings.borderbrush.GetBrush();
+            __CoreContainer.Resources["ContainerData_foreground"] = containerData.settings.foreground.GetBrush();
+            __CoreContainer.Resources["ContainerData_highlight"] = containerData.settings.highlight.GetBrush();
+                        
+            __CoreContainer.Resources["ContainerData_cornerRadius"] = containerData.settings.cornerRadius;
+            __CoreContainer.Resources["ContainerData_thickness"] = containerData.settings.thickness;
+                        
+            __CoreContainer.Resources["ContainerData_fontSize"] = (double)containerData.settings.fontSize;
+            __CoreContainer.Resources["ContainerData_fontFamily"] = containerData.settings.fontFamily;
+                        
+            __CoreContainer.Resources["ContainerData_width"] = containerData.settings.width;
+            __CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
+                        
+            __CoreContainer.Resources["ContainerData_CanvasID"] = containerData.CanvasID;
+                        
+            __CoreContainer.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
+                        
+            __CoreContainer.Resources["ContainerData_z_position"] = containerData.level;
 
 
-            if (File.Exists(containerData.settings.imageFilePath))
+            if (File.Exists(containerData.settings.background.brushpath))
             {
-                this.Resources["ContainerData_image"] = new ImageBrush(new BitmapImage(new Uri(containerData.settings.imageFilePath)));
-                this.Resources["ContainerData_background"] = this.Resources["ContainerData_image"];
+                __CoreContainer.Resources["ContainerData_image"] = containerData.settings.background.GetBrush();
+                __CoreContainer.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
             }
+
+            __CoreContainer.containerData = containerData;
         }
 
         internal ref CoreCanvas GetCanvas()
@@ -170,21 +181,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             //}
         }
         #endregion constructors
-        internal void _backgroundImage()
-        {
-            if (containerData.settings.imageFilePath != null)
-            {
-                if (File.Exists(containerData.settings.imageFilePath))
-                {
-                    element_border.Background = new ImageBrush(new BitmapImage(new Uri(containerData.settings.imageFilePath)));
-                }
-                else
-                {
-                    element_border.Background = containerData.settings.background.GetBrush();
-                }
-            }
-        }
-
         private void build()
         {
             Background = new SolidColorBrush(Colors.Transparent);

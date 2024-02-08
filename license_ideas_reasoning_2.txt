@@ -10,6 +10,27 @@ es kann eine registrierung erfolgen
 
 client cluster hub
 
+Network types of aeui net client license clusters
+->LogicalLinkClientCluster LogLLC (new protocol? Licensekey translation and filtering), f.e. for schools
+
+->LocalLinkClientCluster LocLLC (ipv4), f.e. neighborhoods or buildings, not necessarily connected to the GLLC
+->GlobalLinkClientCluster GLLC (ipv6), internet, global network
+
+LocLLC: z.b. rental building or neighborhood based on adress, if set, anonymous
+until the clients share their identities, could be used to identify noise sources
+and ask them to be more quiet or to plan neighborhood activities or to chat or videochat
+with the LocLLC or LogLLC community.
+
+ClientCluster links könnten auch einen oder mehrere zusätzliche Screens der Nutzerlizenz
+für eine spezifizierte Dauer zur Verfügung stellen, so dass der persönliche Userspace nicht
+geschmälert wird. Beim Aufbau des Programms nach Start könnte in der entsprechenden Funktion
+im CoreCanvasSwitch eine zusätzliche Zählvariable für additionale Screens eingebaut werden.
+Die über das Lizenzcap hinausgehenden Screens und deren Contents müssten separat, bzw. aus
+dem Screenobjekt heraus initialisiert werden, damit ließen sich umfangreiche Einpflegungen
+ggf. vermeiden. Würde die Mechanik so konzipiert, dass mit einem Autorisierungsprüfverfahren 
+gearbeitet wird, müsste lediglich über ein Marktplatzfeature die Buchung vorgenommen werden.
+Der Contentbetreiber müsste sich um seinen Content kümmern, AEUI um die Realisierung der korrekten
+Initialisierung des gebuchten Zusatzcontents.
 
 logical link 1 screen öffnet zugang zu kontext, z.b. gruppenchatfeatures,
  sowie 20 gemeinsam nutztbare level innerhalb der eigenen oberfläche
@@ -32,6 +53,27 @@ auch Level sollten mit einer Authentifizierung versehbar sein, so ließen sich g
 Level gegen Gesamtsicht des LevelShift elements und auch gegen direkten Contentzugriff schützen.
 Was in einem solchen Fall mit den gespeicherten und leicht findbaren Contentdaten geschehen muss,
 kann ich derzeit nicht sagen.
+
+Level 0 sollte immer für das Levelsystem und die Screenoptionen reserviert sein. Denkbar
+wäre, auf diesem Level die Instanzierung von Elementen auf bestimmte Elemente zu begrenzen.
+Selbes gilt für den Systemscreen. Auf dieser Ebene sollen ausschließlich Systemelemente
+erzeugbar sein, sowie Templates. Auch das Kopieren und Verschieben von Elementen soll
+besonderen Regeln unterliegen.
+
+Alle anderen Systemaufgaben könnten über den Systemscreen erledigt werden. Vielleicht
+ließe sich auch der Systembereich mit mehreren Screens ergänzen, zum Beispiel für eine
+Antivirussecurity Suite könnte ein zusätzlicher Screen auf dem Systemlevel denkbar sein,
+der dort platziert wird anstatt im Userspace.
+
+Auch komplexere Anwendungen könnten als Element eingebaut werden oder gar mehrere 
+Screens oder Level benötigen.
+
+Sellable Elements per Marktplatz, z.B. mit Monocontent(wie ein Buch oder ein Song, Kunst)
+in einem passablen Contentviewer. Caller rights müssen mit Kauf der Lizenz zugeschrieben werden.
+Das gekaufte Element kann daraufhin im eigenen Userspace nach login generiert werden, unabhängig
+vom Gerät. So wäre das Ziel zum aktuellen Zeitpunkt(2024|02|08||19|17).
+
+Lizenzgruppen
 
 Eltern können Lizenzen für Kinder beantragen, die mit zunehmendem Alter automatisch upgegradet
 werden, und zudem den Zugang zu den Vorversionen blockieren, mit Ausnahme für Pädagogen, Ärzte, etc.

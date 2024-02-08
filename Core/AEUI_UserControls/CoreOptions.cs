@@ -64,7 +64,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreValueChange CVC_thickness = new CoreValueChange("thickness");
         private CoreValueChange CVC_fontSize = new CoreValueChange("fontSize");
         private CoreValueChange CVC_fontFamily = new CoreValueChange("fontFamily");
-        private CoreValueChange CVC_imageFilePath = new CoreValueChange("image", true);
         private CoreValueChange CVC_height = new CoreValueChange("height");
         private CoreValueChange CVC_width = new CoreValueChange("width");
         #endregion CoreData CVCs
@@ -133,20 +132,20 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CanvasData canvasData;
 
             if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
-            {                
+            {
                 canvasData = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.getCanvasData();
             }
             else
-            {                
+            {
                 canvasData = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.getCanvasData();
             }
 
             if (canvasData == null)
             {
                 if (GetContainerData().CanvasID < 1)
-               {
+                {
                     canvasData = new CanvasData($"userscreen_1", 1);
-                }                
+                }
             }
 
             wrapPanel.Children.Add(CVC_canvasName);
@@ -204,7 +203,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CVC_thickness);
             wrapPanel.Children.Add(CVC_fontSize);
             wrapPanel.Children.Add(CVC_fontFamily);
-            wrapPanel.Children.Add(CVC_imageFilePath);
             wrapPanel.Children.Add(CVC_height);
             wrapPanel.Children.Add(CVC_width);
 
@@ -228,7 +226,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_thickness.setText(coreData.thickness.ToString());
             CVC_fontSize.setText(coreData.fontSize.ToString());
             CVC_fontFamily.setText(coreData.fontFamily.ToString());
-            CVC_imageFilePath.setText(coreData.imageFilePath.ToString());
             CVC_height.setText(coreData.height.ToString());
             CVC_width.setText(coreData.width.ToString());
         }
@@ -308,42 +305,95 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void CVC_background_Click(object sender, RoutedEventArgs e)
         {
-            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            if (coreCanvas != null)
+            if (options_border.Child == null)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
-                // container bauen oder parameter übergeben
+                options_border.Child = new BrushSetup(ref CVC_background);
+            }
+            else
+            {
+                if (options_border.Child.GetType() == typeof(BrushSetup))
+                {
+                    BrushSetup setup = options_border.Child as BrushSetup;
+
+                    if (setup.callerCVC == CVC_background)
+                    {
+                        options_border.Child = null;
+                    }
+                    else
+                    {
+                        options_border.Child = new BrushSetup(ref CVC_background);
+                    }
+                }
             }
         }
         private void CVC_borderbrush_Click(object sender, RoutedEventArgs e)
         {
-            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            if (coreCanvas != null)
+            if (options_border.Child == null)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
-                // container bauen und ausgewähltes Enum als data parameter übergeben oder Central upgraden für andere constructors
+                options_border.Child = new BrushSetup(ref CVC_borderbrush);
+            }
+            else
+            {
+                if (options_border.Child.GetType() == typeof(BrushSetup))
+                {
+                    BrushSetup setup = options_border.Child as BrushSetup;
+
+                    if (setup.callerCVC == CVC_borderbrush)
+                    {
+                        options_border.Child = null;
+                    }
+                    else
+                    {
+                        options_border.Child = new BrushSetup(ref CVC_borderbrush);
+                    }
+                }
             }
         }
+
         private void CVC_foreground_Click(object sender, RoutedEventArgs e)
         {
-            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            if (coreCanvas != null)
+            if (options_border.Child == null)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
-                // container bauen oder parameter übergeben
+                options_border.Child = new BrushSetup(ref CVC_foreground);
+            }
+            else
+            {
+                if (options_border.Child.GetType() == typeof(BrushSetup))
+                {
+                    BrushSetup setup = options_border.Child as BrushSetup;
+
+                    if (setup.callerCVC == CVC_foreground)
+                    {
+                        options_border.Child = null;
+                    }
+                    else
+                    {
+                        options_border.Child = new BrushSetup(ref CVC_foreground);
+                    }
+                }
             }
         }
         private void CVC_highlight_Click(object sender, RoutedEventArgs e)
         {
-            CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            if (coreCanvas != null)
+            if (options_border.Child == null)
             {
-                coreCanvas.GetCentral().ExecuteCommandRequest($">BrushSetup");
-                // container bauen oder parameter übergeben
+                options_border.Child = new BrushSetup(ref CVC_highlight);
+            }
+            else
+            {
+                if (options_border.Child.GetType() == typeof(BrushSetup))
+                {
+                    BrushSetup setup = options_border.Child as BrushSetup;
+
+                    if (setup.callerCVC == CVC_highlight)
+                    {
+                        options_border.Child = null;
+                    }
+                    else
+                    {
+                        options_border.Child = new BrushSetup(ref CVC_highlight);
+                    }
+                }
             }
         }
 
@@ -407,6 +457,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             return containerData;
         }
+
         private CoreData ParseCoreDataCVCs()
         {
             CoreData coreData = new CoreData();
@@ -439,7 +490,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             coreData.thickness = new Thickness(a, b, c, d);
             coreData.fontSize = int.Parse(CVC_fontSize.Value);
             coreData.fontFamily = new System.Windows.Media.FontFamily(CVC_fontFamily.Value);
-            coreData.imageFilePath = CVC_imageFilePath.Value;
             coreData.height = double.Parse(CVC_height.Value);
             coreData.width = double.Parse(CVC_width.Value);
 
@@ -457,62 +507,51 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.MainWindow.Resources["MainWindowData_borderbrush"] = mainWindowData.borderbrush.GetBrush();
             Application.Current.MainWindow.Resources["MainWindowData_foreground"] = mainWindowData.foreground.GetBrush();
             Application.Current.MainWindow.Resources["MainWindowData_highlight"] = mainWindowData.highlight.GetBrush();
-                                    
+
             Application.Current.MainWindow.Resources["MainWindowData_cornerRadius"] = mainWindowData.cornerRadius;
             Application.Current.MainWindow.Resources["MainWindowData_thickness"] = mainWindowData.thickness;
-                               
+
             Application.Current.MainWindow.Resources["MainWindowData_fontSize"] = (double)mainWindowData.fontSize;
             Application.Current.MainWindow.Resources["MainWindowData_fontFamily"] = mainWindowData.fontFamily;
-                             
+
             Application.Current.MainWindow.Resources["MainWindowData_width"] = mainWindowData.width;
             Application.Current.MainWindow.Resources["MainWindowData_height"] = mainWindowData.height;
 
-            if (mainWindowData.imageFilePath != null)
+            if (File.Exists(mainWindowData.background.brushpath))
             {
-                if (File.Exists(mainWindowData.imageFilePath))
-                {
-                    Application.Current.MainWindow.Resources["MainWindowData_image"] = new ImageBrush(new BitmapImage(new Uri(mainWindowData.imageFilePath)));
-                    Application.Current.MainWindow.Resources["MainWindowData_background"] = Application.Current.MainWindow.Resources["MainWindowData_image"];
-                }
+                Application.Current.MainWindow.Resources["MainWindowData_image"] = mainWindowData.background.GetBrush();
+                Application.Current.MainWindow.Resources["MainWindowData_background"] = mainWindowData.background.GetBrush();                
             }
+
+            new SharedLogic().GetMainWindow().border.Background = mainWindowData.background.GetBrush();
 
             handler.SetMainWindowData(mainWindowData);
         }
 
         private void Save_CanvasData()
         {
-            CanvasData canvasData = new CanvasData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
+            CanvasData canvasData = new CanvasData(ParseCoreDataCVCs());
             SharedLogic logic = new SharedLogic();
-            //XML_Handler handler = new XML_Handler();
 
             if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
-                //MessageBox.Show("system");
-                
-                CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
+                CoreCanvas coreCanvas = logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
 
                 canvasData.canvasID = coreCanvas.getCanvasData().canvasID;
                 canvasData = ParseCanvasDataCVCs(canvasData);
 
                 coreCanvas.CanvasDataResources(canvasData);
                 coreCanvas.setCanvasData(canvasData);
-
-                //new SYSTEM_xml().SYSTEM_CanvasData_save(canvasData, new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem());
             }
             else
             {
-                //MessageBox.Show("user");
-
-                CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+                CoreCanvas coreCanvas = logic.GetMainWindow().Get_ACTIVE_CANVAS;
 
                 canvasData.canvasID = coreCanvas.getCanvasData().canvasID;
                 canvasData = ParseCanvasDataCVCs(canvasData);
 
                 coreCanvas.CanvasDataResources(canvasData);
                 coreCanvas.setCanvasData(canvasData);
-
-                //new UserSpace_xml().CanvasData_save(canvasData, new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem());
-                //handler.CanvasData_save(canvasData);
             }
         }
 
@@ -534,14 +573,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["ButtonData_width"] = coreData.width;
             Application.Current.Resources["ButtonData_height"] = coreData.height;
 
-            if (coreData.imageFilePath != null)
+
+            if (File.Exists(coreData.background.brushpath))
             {
-                if (File.Exists(coreData.imageFilePath))
-                {
-                    Application.Current.Resources["ButtonData_image"] = new ImageBrush(new BitmapImage(new Uri(coreData.imageFilePath)));
-                    Application.Current.Resources["ButtonData_background"] = Application.Current.Resources["ButtonData_image"];
-                }
+                Application.Current.Resources["ButtonData_image"] = coreData.background.GetBrush();
+                Application.Current.Resources["ButtonData_background"] = coreData.background.GetBrush();
             }
+
 
             handler.SetButtonData(coreData);
         }
@@ -572,14 +610,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["LabelData_width"] = coreData.width;
             Application.Current.Resources["LabelData_height"] = coreData.height;
 
-            if (coreData.imageFilePath != null)
+
+            if (File.Exists(coreData.background.brushpath))
             {
-                if (File.Exists(coreData.imageFilePath))
-                {
-                    Application.Current.Resources["LabelData_image"] = new ImageBrush(new BitmapImage(new Uri(coreData.imageFilePath)));
-                    Application.Current.Resources["LabelData_background"] = Application.Current.Resources["LabelData_image"];
-                }
+                Application.Current.Resources["LabelData_image"] = coreData.background.GetBrush();
+                Application.Current.Resources["LabelData_background"] = coreData.background.GetBrush();
             }
+
 
             handler.SetLabelData(coreData);
         }
@@ -601,13 +638,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["TextBoxData_width"] = coreData.width;
             Application.Current.Resources["TextBoxData_height"] = coreData.height;
 
-            if (coreData.imageFilePath != null)
+            if (File.Exists(coreData.background.brushpath))
             {
-                if (File.Exists(coreData.imageFilePath))
-                {
-                    Application.Current.Resources["TextBoxData_image"] = new ImageBrush(new BitmapImage(new Uri(coreData.imageFilePath)));
-                    Application.Current.Resources["TextBoxData_background"] = Application.Current.Resources["TextBoxData_image"];
-                }
+                Application.Current.Resources["TextBoxData_image"] = coreData.background.GetBrush();
+                Application.Current.Resources["TextBoxData_background"] = coreData.background.GetBrush();
             }
 
             handler.SetTextBoxData(coreData);
@@ -630,14 +664,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             Application.Current.Resources["CoreData_width"] = coreData.width;
             Application.Current.Resources["CoreData_height"] = coreData.height;
 
-            if (coreData.imageFilePath != null)
+
+            if (File.Exists(coreData.background.brushpath))
             {
-                if (File.Exists(coreData.imageFilePath))
-                {
-                    Application.Current.Resources["CoreData_image"] = new ImageBrush(new BitmapImage(new Uri(coreData.imageFilePath)));
-                    Application.Current.Resources["CoreData_background"] = Application.Current.Resources["CoreData_image"];
-                }
+                Application.Current.Resources["CoreData_image"] = coreData.background.GetBrush();
+                Application.Current.Resources["CoreData_background"] = coreData.background.GetBrush();
             }
+
 
             handler.SetCoreData(coreData);
         }
@@ -647,6 +680,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ApplySelectionChange();
         }
 
+
+        // update to compensate for the recent changes to data and storgare logic
         private void CB_saveChanges_Click(object sender, RoutedEventArgs e)
         {
             switch (CBX_dataTypeSelection.SelectedIndex)

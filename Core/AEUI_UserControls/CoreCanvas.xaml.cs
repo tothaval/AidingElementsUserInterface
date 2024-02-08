@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -44,7 +45,7 @@ namespace AidingElementsUserInterface.Core
     {
         private CanvasData config { get; set; }
 
-        private LevelSystem levelSystem = new LevelSystem();
+        private LevelSystem levelSystem;
 
         private System.Windows.Point selection_point;
         private System.Windows.Shapes.Rectangle selection_rectangle;
@@ -55,29 +56,76 @@ namespace AidingElementsUserInterface.Core
 
         private bool SYSTEM_CANVAS_FLAG = false;
 
-
-        public CoreCanvas()
-        {
-            this.config = new CanvasData();
-
-            InitializeComponent();
-
-            build();
-
-            callCentral = new CallCentral(ref __CoreCanvas);
-        }
-
         internal CoreCanvas(CanvasData canvasData)
         {
             this.config = canvasData;
 
             InitializeComponent();
 
+            CanvasDataResources(config);
+
             build();
 
             callCentral = new CallCentral(ref __CoreCanvas);
+
+            loadElements(canvasData, canvasData.canvasID);
         }
 
+
+        private async void loadElements(CanvasData canvasData, int i)
+        {
+
+            levelSystem = canvasData.GetLevelSystem();
+
+            // hier noch buggy, das geladene levelsystem wird zu langsam weitergegeben, weshalb
+            // die null referenz exception zündet
+            if (levelSystem == null)
+            {
+                levelSystem = new LevelSystem(i);
+            }
+
+            //MessageBox.Show(levelSystem.getLevels()[1].NAME);
+
+            if (levelSystem != null)
+            {
+                _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
+            }
+            
+
+            if (SYSTEM_CANVAS_FLAG)
+            {
+                SYSTEM_xml sys_xml = new SYSTEM_xml();
+
+                ObservableCollection<CoreContainer> coreContainers = sys_xml.SYSTEM_Container_load();
+
+                foreach (CoreContainer item in coreContainers)
+                {
+                    item.setCanvas(ref __CoreCanvas);
+
+                    add_element_to_canvas(item, item.get_dragPoint());
+
+                    item.load_Container();
+                }
+
+            }
+            else
+            {
+                //MessageBox.Show($"{i}\n{config.canvasID}\n");
+
+                UserSpace_xml userSpace_Xml = new UserSpace_xml();
+                ObservableCollection<CoreContainer> coreContainers = userSpace_Xml.Container_load(i);
+
+                foreach (CoreContainer item in coreContainers)
+                {
+                    item.setCanvas(ref __CoreCanvas);
+
+                    add_element_to_canvas(item, item.get_dragPoint());
+
+                    item.load_Container();
+                }
+            }
+
+        }
 
         internal CoreContainer? instantiate(UserControl content, ref CoreCanvas target)
         {
@@ -118,12 +166,12 @@ namespace AidingElementsUserInterface.Core
 
             if (SYSTEM_CANVAS_FLAG)
             {
-                coreContainer = instantiate(content, ref __CoreCanvas); 
-                
+                coreContainer = instantiate(content, ref __CoreCanvas);
+
                 if (coreContainer != null)
                 {
                     PositionElement(coreContainer, logic.point);
-                    SetLevel(coreContainer);
+                    //SetLevel(coreContainer);
                     canvas.Children.Add(coreContainer);
                 }
             }
@@ -152,7 +200,7 @@ namespace AidingElementsUserInterface.Core
                 if (coreContainer != null)
                 {
                     PositionElement(coreContainer, e.GetPosition(canvas));
-                    SetLevel(coreContainer);
+                    //SetLevel(coreContainer);
 
                     canvas.Children.Add(coreContainer);
                 }
@@ -178,7 +226,7 @@ namespace AidingElementsUserInterface.Core
             if (SYSTEM_CANVAS_FLAG)
             {
                 PositionElement(container, point);
-                SetLevel(container);
+                //SetLevel(container);
 
                 canvas.Children.Add(container);
             }
@@ -198,7 +246,7 @@ namespace AidingElementsUserInterface.Core
         }
 
         private void build()
-        {           
+        {
             Resources["Level"] = 0;
             Resources["CurrentLevel"] = 0;
 
@@ -211,8 +259,6 @@ namespace AidingElementsUserInterface.Core
             //Application.Current.Resources["LevelShiftOrientationOut"] = Orientation.Vertical;
             //Application.Current.Resources["LevelShiftOrientationInner"] = Orientation.Horizontal;
 
-            _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
-
             CanvasDataResources(config);
         }
 
@@ -220,35 +266,35 @@ namespace AidingElementsUserInterface.Core
         {
             if (canvasData == null)
             {
-                canvasData = new CanvasData();
+                canvasData = new CanvasData(true);
             }
 
             CoreCanvasBorder.Resources["CanvasData_background"] = canvasData.background.GetBrush();
             CoreCanvasBorder.Resources["CanvasData_borderbrush"] = canvasData.borderbrush.GetBrush();
             CoreCanvasBorder.Resources["CanvasData_foreground"] = canvasData.foreground.GetBrush();
             CoreCanvasBorder.Resources["CanvasData_highlight"] = canvasData.highlight.GetBrush();
-            
+
             CoreCanvasBorder.Resources["CanvasData_cornerRadius"] = canvasData.cornerRadius;
             CoreCanvasBorder.Resources["CanvasData_thickness"] = canvasData.thickness;
-            
+
             CoreCanvasBorder.Resources["CanvasData_fontSize"] = (double)canvasData.fontSize;
             CoreCanvasBorder.Resources["CanvasData_fontFamily"] = canvasData.fontFamily;
-            
+
             CoreCanvasBorder.Resources["CanvasData_width"] = canvasData.width;
             CoreCanvasBorder.Resources["CanvasData_height"] = canvasData.height;
-            
+
             CoreCanvasBorder.Resources["CanvasData_canvasName"] = canvasData.canvasName;
             CoreCanvasBorder.Resources["CanvasData_element_spacing"] = canvasData.element_spacing;
 
             CoreCanvasBorder.Resources["CanvasData_grouping_displacement"] = canvasData.grouping_displacement;
 
 
-            if (File.Exists(canvasData.imageFilePath))
+            if (File.Exists(canvasData.background.brushpath))
             {
-                CoreCanvasBorder.Resources["CanvasData_image"] = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
-                CoreCanvasBorder.Resources["CanvasData_background"] = canvas.Resources["CanvasData_image"];
+                CoreCanvasBorder.Resources["CanvasData_image"] = canvasData.background.GetBrush();
+                CoreCanvasBorder.Resources["CanvasData_background"] = canvasData.background.GetBrush();
 
-                CoreCanvasBorder.Background = new ImageBrush(new BitmapImage(new Uri(canvasData.imageFilePath)));
+                CoreCanvasBorder.Background = canvasData.background.GetBrush();
             }
 
             this.config = canvasData;
@@ -271,7 +317,7 @@ namespace AidingElementsUserInterface.Core
                 {
                     CoreContainer item = child as CoreContainer;
 
-                    item.remove_Container();                    
+                    item.remove_Container();
                 }
             }
 
@@ -535,7 +581,7 @@ namespace AidingElementsUserInterface.Core
                         selected_items.Add(item);
                     }
                 }
-                
+
             }
         }
 
@@ -565,15 +611,18 @@ namespace AidingElementsUserInterface.Core
         }
 
         internal void set_SYSTEM_CANVAS_FLAG(bool is_SYSTEM_CANVAS)
-        {           
+        {
             this.SYSTEM_CANVAS_FLAG = is_SYSTEM_CANVAS;
         }
 
         internal void SetLevel(CoreContainer coreContainer)
         {
-            coreContainer.GetContainerData().level = levelSystem.Get_LEVEL();
+            if (levelSystem != null)
+            {
+                coreContainer.GetContainerData().level = levelSystem.Get_LEVEL();
 
-            Panel.SetZIndex(coreContainer, levelSystem.Get_LEVEL());
+                Panel.SetZIndex(coreContainer, levelSystem.Get_LEVEL());
+            }
         }
 
         internal void SetVisibility(int newLevel, string state)
@@ -584,7 +633,7 @@ namespace AidingElementsUserInterface.Core
                 {
                     CoreContainer sinnlos = child as CoreContainer;
 
-                    if(sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
+                    if (sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
                     {
                         if (state.Equals("all"))
                         {

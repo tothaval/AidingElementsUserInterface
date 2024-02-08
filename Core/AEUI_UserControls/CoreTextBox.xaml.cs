@@ -105,10 +105,10 @@ namespace AidingElementsUserInterface.Core
             __CoreTextBox.Resources["TextBoxData_width"] = textBoxData.width;
             __CoreTextBox.Resources["TextBoxData_height"] = textBoxData.height;
 
-            if (File.Exists(textBoxData.imageFilePath))
+            if (File.Exists(textBoxData.background.brushpath))
             {
-                __CoreTextBox.Resources["TextBoxData_image"] = new ImageBrush(new BitmapImage(new Uri(textBoxData.imageFilePath)));
-                __CoreTextBox.Resources["TextBoxData_background"] = __CoreTextBox.Resources["TextBoxData_image"];
+                __CoreTextBox.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
+                __CoreTextBox.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
             }
         }
 

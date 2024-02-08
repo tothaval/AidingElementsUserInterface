@@ -58,10 +58,10 @@ namespace AidingElementsUserInterface
             Application.Current.Resources["CoreData_width"] = coreData.width;
             Application.Current.Resources["CoreData_height"] = coreData.height;
 
-            if (File.Exists(coreData.imageFilePath))
+            if (File.Exists(coreData.background.brushtype))
             {
-                Application.Current.Resources["CoreData_image"] = new ImageBrush(new BitmapImage(new Uri(coreData.imageFilePath)));
-                Application.Current.Resources["CoreData_background"] = Application.Current.Resources["CoreData_image"];
+                Application.Current.Resources["CoreData_image"] = coreData.background.GetBrush();
+                Application.Current.Resources["CoreData_background"] = coreData.background.GetBrush();
             }
         }
     }

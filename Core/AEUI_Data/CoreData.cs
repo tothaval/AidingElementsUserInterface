@@ -16,8 +16,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class CoreData
     {
-        internal bool imageIsBackground { get; set; }
-
         internal ColorData background { get; set; }
         internal ColorData borderbrush { get; set; }
         internal ColorData foreground { get; set; }
@@ -31,16 +29,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal double height { get; set; }
         internal double width { get; set; }
-        internal string imageFilePath { get; set; }
-
 
         // replace this colors with ColorData class objects, manipulate via xml or dependencyproperty or the like, as soon as i get it.
         // implement parsing and color building functions within colorData or a new ColorLogic class, dunno yet.
 
         public CoreData()
         {
-            imageIsBackground = false;
-
             background = new ColorData(1);
             borderbrush = new ColorData(2);
             foreground = new ColorData(3);
@@ -56,8 +50,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
             height = 25;
             width = 50;
-
-            imageFilePath = "";
         }
 
         public CoreData(bool load)
@@ -69,8 +61,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         {
             if (coreData != null)
             {
-                imageIsBackground = coreData.imageIsBackground;
-
                 background = coreData.background;
                 borderbrush = coreData.borderbrush;
                 foreground = coreData.foreground;
@@ -84,8 +74,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
                 height = coreData.height;
                 width = coreData.width;
-
-                imageFilePath = coreData.imageFilePath;
             }
         }
 

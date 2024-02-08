@@ -24,7 +24,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
     internal class ContainerData
     {
-        internal CoreData settings { get; set; }
+        internal CoreData settings = new CoreData();
+
         internal UserControl element { get; set; }
         
         internal int CanvasID { get; set; }
@@ -33,27 +34,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal int level;
 
+        public ContainerData(bool load)
+        {
+                
+        }
+
         public ContainerData()
         {
-            settings = new SharedLogic().GetDataHandler().GetCoreData();
-            
-            if (settings == null)
-            {
-                settings = new CoreData();
-            }
-
             CanvasID = -5;
         }
 
         public ContainerData(int canvasID)
         {
-            settings = new SharedLogic().GetDataHandler().GetCoreData();
-
-            if (settings == null)
-            {
-                settings = new CoreData();
-            }
-
             CanvasID = canvasID;
         }
 
@@ -75,7 +67,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         public ContainerData(CoreData coreData, UserControl _content, int canvasID)
         {
-            UpdateCoreData(coreData);
+            settings = coreData;            
 
             element = _content;
 
@@ -86,12 +78,17 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal void UpdateCoreData(CoreData coreData)
         {
-            settings = coreData;
+            this.settings = coreData;
         }
 
         internal UserControl GetElement()
         {
             return element;
+        }
+
+        internal void SetCanvasID(int canvasID)
+        {
+            this.CanvasID = canvasID;
         }
 
         internal void SetContainerDataFilename(string containerDataFilename)

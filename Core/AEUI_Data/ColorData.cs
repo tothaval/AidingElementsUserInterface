@@ -10,14 +10,17 @@
 
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal class ColorData
     {
         internal string brushtype { get; set; }
+        internal string brushpath { get; set; }
 
         //LinearGradientBrush
         internal Point gradiantEndPoint { get; set; }
@@ -44,6 +47,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal ColorData(int nr = 1)
         {
             brushtype = "SolidColorBrush";
+            brushpath = "-";
 
             gradiantOrigin = new Point(0.5, 0.5);
 
@@ -119,6 +123,23 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
                         new GradientStop(logic.ParseColor(color4_string), 0.8));
 
                     return brush;
+                }
+                else if (brushtype.Equals("ImageBrush"))
+                {
+                    if (!brushpath.Equals("-"))
+                    {
+                        if (File.Exists(brushpath))
+                        {
+                            ImageSource? imageSource = new BitmapImage(new Uri(brushpath));
+
+                            if (imageSource != null)
+                            {
+                                ImageBrush brush = new ImageBrush(imageSource);
+
+                                return brush;
+                            }                            
+                        }
+                    }
                 }
                 else if (brushtype.Equals("DrawingBrush"))
                 {

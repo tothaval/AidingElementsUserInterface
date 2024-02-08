@@ -50,6 +50,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_Next.setContent(">");
             CB_Last.setContent(">>|");
 
+            CL_LevelDescription.textblock.MaxWidth = 300;
+            CL_LevelDescription.textblock.TextWrapping = TextWrapping.Wrap;
+            CL_LevelDescription.ToolTip = CL_LevelDescription.textblock.Text;
+
+            CTB_LevelDescription.textbox.MaxWidth = 300;
+            CTB_LevelDescription.textbox.TextWrapping = TextWrapping.Wrap;
+            CTB_LevelDescription.textbox.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
         }
 
         private void registerEvents()
@@ -201,22 +208,28 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 }
             }
 
-            GetLevelSystem().LevelChange();
+            if (GetLevelSystem() != null)
+            {
+                GetLevelSystem().LevelChange();
+            }            
         }
 
-        private LevelSystem GetLevelSystem()
+        private LevelSystem? GetLevelSystem()
         {
-            if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
-            {
-                return new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
-            }
-
             if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
                 return new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem();
             }
+            else
+            {
 
-            return new LevelSystem();
+                if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                {
+                    return new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+                }
+            }
+
+            return null;
         }
 
 

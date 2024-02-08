@@ -147,34 +147,28 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         {
             UserSpace_xml xml = new UserSpace_xml();
 
-            for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP - 1; i++)
+            for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
-                CanvasData canvasData = xml.CanvasData_load($"{xml.UserSpace_folder}screen_{i + 1}\\{xml.CanvasData_file}");
+                CanvasData canvasData = xml.CanvasData_load($"{xml.UserSpace_folder}screen_{i}\\{xml.CanvasData_file}");
+
 
                 if (canvasData == null)
                 {
-                    CoreCanvas screen = new CoreCanvas(new CanvasData($"UserSpace_{i + 1}", i + 1));
-                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i + 1);
+                    CoreCanvas screen = new CoreCanvas(new CanvasData($"UserSpace_{i}", i));
+                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
 
                     coreCanvasScreens.Add(screen);
                     systemPulseTimers.Add(systemPulseTimer);
                 }
                 else
                 {
+                    canvasData.canvasID = i;
                     CoreCanvas screen = new CoreCanvas(canvasData);
-                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i + 1);
+
+                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
 
                     coreCanvasScreens.Add(screen);
                     systemPulseTimers.Add(systemPulseTimer);
-                        
-                    foreach (CoreContainer item in xml.Container_load(i))
-                    {
-                        item.setCanvas(ref screen);
-
-                        screen.add_element_to_canvas(item, item.get_dragPoint());
-
-                        item.load_Container();
-                    }
                 }
             }
 
