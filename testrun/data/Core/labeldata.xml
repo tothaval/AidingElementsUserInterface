@@ -1,5 +1,5 @@
 <Core>
-  <CanvasData>
+  <LabelData>
     <CoreData>
       <background>
         <brushtype>SolidColorBrush</brushtype>
@@ -49,12 +49,8 @@
       <thickness>2,2,2,2</thickness>
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
-      <height>10000</height>
-      <width>10000</width>
+      <height>25</height>
+      <width>50</width>
     </CoreData>
-    <canvasID>7</canvasID>
-    <canvasName>UserSpace_7</canvasName>
-    <grouping_displacement>25</grouping_displacement>
-    <element_spacing>8</element_spacing>
-  </CanvasData>
+  </LabelData>
 </Core>

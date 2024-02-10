@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AidingElementsUserInterface.Core.AEUI_HelperClasses
 {
@@ -72,16 +73,18 @@ namespace AidingElementsUserInterface.Core.AEUI_HelperClasses
 
             if (icountagainststupid == 101)
             {
-                MainWindow mw = new SharedLogic().GetMainWindow();
+                //MainWindow mw = (MainWindow)Application.Current.MainWindow;
 
-                if (mw.Get_SYSTEM_ACTIVE_FLAG)
-                {
-                    mw.Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.SetCanvasToolTip(GetSessionRuntime());
-                }
-                else
-                {
-                    mw.Get_ACTIVE_CANVAS.SetCanvasToolTip(GetSessionRuntime());
-                }
+                //if (mw.Get_SYSTEM_ACTIVE_FLAG)
+                //{
+                //    //mw.Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.SetCanvasToolTip(GetSessionRuntime());
+                //    //mw.Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.initialLevelBackground();
+                //}
+                //else
+                //{
+                //    //mw.Get_ACTIVE_CANVAS.SetCanvasToolTip(GetSessionRuntime());
+                //    //mw.Get_ACTIVE_CANVAS.initialLevelBackground();
+                //}
             }
 
             icountagainststupid = 102;

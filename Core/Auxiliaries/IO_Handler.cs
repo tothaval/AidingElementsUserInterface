@@ -28,21 +28,23 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         // Core paths
         #region Core paths
         // files
-        internal string ButtonData_file = @".\data\Core\buttondata.xml";
+
+        internal string ButtonData_file = @"buttondata.xml";
         internal string CanvasData_file = @"canvasdata.xml";
-        internal string ContainerData_file = @".\data\Core\containerdata.xml";
-        internal string CoreData_file = @".\data\Core\coredata.xml";
-        internal string LabelData_file = @".\data\Core\labeldata.xml";
-        internal string MainWindowData_file = @".\data\Core\mainwindowdata.xml";
-        internal string TextBoxData_file = @".\data\Core\textboxdata.xml";
-        
+        internal string ContainerData_file = @"containerdata.xml";
+        internal string CoreData_file = @"coredata.xml";
+        internal string LabelData_file = @"labeldata.xml";
+        internal string LevelData_file = @"leveldata.xml";
+        internal string MainWindowData_file = @"mainwindowdata.xml";
+        internal string TextBoxData_file = @"textboxdata.xml";
+
         // folders
-        internal string Core_xml_folder = @"data\Core\";
+        internal string CORE_folder = @"data\Core\";
         #endregion Core paths
 
         #region screens
         internal string SYSTEM_folder = @"data\System\";
-        internal string SYSTEM_Container_folder = @"data\System\Container";
+        internal string SYSTEM_Container_folder = @"data\System\Container\";
         internal string UserSpace_folder = @"data\UserSpace\";
         #endregion screens
 
@@ -64,7 +66,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         private void build_path_structure()
         {
-            check_path(Core_xml_folder);
+            check_path(CORE_folder);
             check_path(SYSTEM_folder);
             check_path(SYSTEM_Container_folder);
 

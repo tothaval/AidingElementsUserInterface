@@ -7,7 +7,7 @@
         <gradiantEndPoint>0,5;0</gradiantEndPoint>
         <gradiantOrigin>0,5;0,5</gradiantOrigin>
         <gradiantStartPoint>0,5;1</gradiantStartPoint>
-        <color1_string>#FFFFEBCD</color1_string>
+        <color1_string>#B37CA2DE</color1_string>
         <color2_string>#FF000000</color2_string>
         <color3_string>#FF2F4F4F</color3_string>
         <color4_string>#FF0FFF0F</color4_string>
@@ -49,11 +49,11 @@
       <thickness>2,2,2,2</thickness>
       <fontSize>12</fontSize>
       <fontFamily>Verdana</fontFamily>
-      <height>797</height>
-      <width>1290</width>
+      <height>816</height>
+      <width>1246</width>
     </CoreData>
-    <initialPositionX>482</initialPositionX>
-    <initialPositionY>194</initialPositionY>
+    <initialPositionX>471</initialPositionX>
+    <initialPositionY>172</initialPositionY>
     <language>english</language>
   </MainWindowData>
 </Core>

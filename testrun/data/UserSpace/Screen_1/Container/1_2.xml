@@ -6,7 +6,7 @@
       <gradiantEndPoint>0,5;0</gradiantEndPoint>
       <gradiantOrigin>0,5;0,5</gradiantOrigin>
       <gradiantStartPoint>0,5;1</gradiantStartPoint>
-      <color1_string>#BC67D578</color1_string>
+      <color1_string>#BE7E7189</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#FF2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
@@ -17,7 +17,7 @@
       <gradiantEndPoint>0,5;0</gradiantEndPoint>
       <gradiantOrigin>0,5;0,5</gradiantOrigin>
       <gradiantStartPoint>0,5;1</gradiantStartPoint>
-      <color1_string>#FF000000</color1_string>
+      <color1_string>#FF0000FF</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#FF2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
@@ -53,12 +53,12 @@
   </CoreData>
   <CanvasID>-5</CanvasID>
   <ContainerDataFilename>1_2.xml</ContainerDataFilename>
-  <level>1</level>
+  <level>0</level>
   <Content>
     <Type>Clock</Type>
   </Content>
   <Position>
-    <x>639</x>
-    <y>299</y>
+    <x>773</x>
+    <y>95</y>
   </Position>
 </ContainerData>

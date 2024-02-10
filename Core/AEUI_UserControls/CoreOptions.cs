@@ -158,6 +158,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             CONFIGURATION_CoreData(canvasData);
 
+            CB_changeSelection.Visibility = Visibility.Collapsed;
+
             data = canvasData;
         }
 
@@ -172,6 +174,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_z_position.setText(containerData.level.ToString());
 
             CONFIGURATION_CoreData(containerData.settings);
+
+            CB_changeSelection.Visibility = Visibility.Visible;
 
             data = containerData;
         }
@@ -228,6 +232,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_fontFamily.setText(coreData.fontFamily.ToString());
             CVC_height.setText(coreData.height.ToString());
             CVC_width.setText(coreData.width.ToString());
+
+            CB_changeSelection.Visibility = Visibility.Collapsed;
         }
 
         private void CONFIGURATION_MainWindowData()
@@ -247,6 +253,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_initialPosition.setText(mainWindowData.initialPosition.ToString());
             CVC_language.setText(mainWindowData.language.ToString());
 
+            CB_changeSelection.Visibility = Visibility.Collapsed;
         }
 
         private void build()
@@ -553,6 +560,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 coreCanvas.CanvasDataResources(canvasData);
                 coreCanvas.setCanvasData(canvasData);
             }
+
+            handler.SetCanvasData(canvasData);
         }
 
         private void Save_ButtonData()

@@ -1,6 +1,7 @@
 ﻿using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
+using AidingElementsUserInterface.Core.MyNote_Data;
 using AidingElementsUserInterface.Elements;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Xml;
 
 namespace AidingElementsUserInterface.Core.AEUI_Logic
@@ -69,16 +71,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                                 canvasData.element_spacing = new GridLength(Double.Parse(element_spacing.InnerText));
                             }
                         }
-
-                        XmlNode? node_levelSystem = NodeCheck(node, "LevelSystem");
-
-                        LevelSystem levelSystem = UserSpace_Level_load(node_levelSystem, canvasData.canvasID);
-                        
-                        //MessageBox.Show(levelSystem.getLevels()[1].NAME);
-                        canvasData.SetLevelSystem(levelSystem);
-
-                        // LevelSystem load
-
                     }
                 }
 
@@ -135,16 +127,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 node.AppendChild(node_CanvasData);
 
-                XmlNode node_LevelSystem = xmlDocument.CreateElement("LevelSystem");
-
-                XmlNode aux_LevelData = saveLevels(xmlDocument, node_LevelSystem, levelSystem);
-
-                if (aux_LevelData != null)
-                {
-                    node.AppendChild(aux_LevelData);
-                }
-
-
                 //MessageBox.Show(canvasData.imageFilePath);
 
                 check_path($@"{UserSpace_folder}screen_{id}");
@@ -176,6 +158,63 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             {
                 XmlNode? node_ColorDataNode = node.SelectSingleNode(ColorDataNode);
 
+                if (node_ColorDataNode != null)
+                {
+                    XmlNode? brushtype = node_ColorDataNode.SelectSingleNode("brushtype");
+                    if (brushtype != null)
+                    {
+                        colorData.brushtype = brushtype.InnerText;
+                    }
+
+                    XmlNode? brushpath = node_ColorDataNode.SelectSingleNode("brushpath");
+                    if (brushpath != null)
+                    {
+                        colorData.brushpath = brushpath.InnerText;
+                    }
+
+                    XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
+                    if (gradiantEndPoint != null)
+                    {
+                        colorData.gradiantEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
+                    }
+
+                    XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradiantOrigin");
+                    if (gradiantOrigin != null)
+                    {
+                        colorData.gradiantOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
+                    }
+
+                    XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradiantStartPoint");
+                    if (gradiantStartPoint != null)
+                    {
+                        colorData.gradiantStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
+                    }
+
+                    XmlNode? color1_string = node_ColorDataNode.SelectSingleNode("color1_string");
+                    if (color1_string != null)
+                    {
+                        colorData.color1_string = color1_string.InnerText;
+                    }
+
+                    XmlNode? color2_string = node_ColorDataNode.SelectSingleNode("color2_string");
+                    if (color2_string != null)
+                    {
+                        colorData.color2_string = color2_string.InnerText;
+                    }
+
+                    XmlNode? color3_string = node_ColorDataNode.SelectSingleNode("color3_string");
+                    if (color3_string != null)
+                    {
+                        colorData.color3_string = color3_string.InnerText;
+                    }
+
+                    XmlNode? color4_string = node_ColorDataNode.SelectSingleNode("color4_string");
+                    if (color4_string != null)
+                    {
+                        colorData.color4_string = color4_string.InnerText;
+                    }
+                }
+
                 // his name and mind are quite stupid.
                 //MessageBox.Show(node_ColorDataNode.InnerXml);
                 //MessageBox.Show(node_ColorDataNode.InnerText);
@@ -185,59 +224,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 //MessageBox.Show(node_ColorDataNode.Value);
                 //MessageBox.Show(node_ColorDataNode.ParentNode.Name);
 
-                XmlNode? brushtype = node_ColorDataNode.SelectSingleNode("brushtype");
-                if (brushtype != null)
-                {
-                    colorData.brushtype = brushtype.InnerText;
-                }
+                //MessageBox.Show(node_ColorDataNode.OuterXml + "\n" + node.OuterXml);
 
-                XmlNode? brushpath = node_ColorDataNode.SelectSingleNode("brushpath");
-                if (brushpath != null)
-                {
-                    colorData.brushpath = brushpath.InnerText;
-                }
-
-                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
-                if (gradiantEndPoint != null)
-                {
-                    colorData.gradiantEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
-                }
-
-                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradiantOrigin");
-                if (gradiantOrigin != null)
-                {
-                    colorData.gradiantOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
-                }
-
-                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradiantStartPoint");
-                if (gradiantStartPoint != null)
-                {
-                    colorData.gradiantStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
-                }
-
-                XmlNode? color1_string = node_ColorDataNode.SelectSingleNode("color1_string");
-                if (color1_string != null)
-                {
-                    colorData.color1_string = color1_string.InnerText;
-                }
-
-                XmlNode? color2_string = node_ColorDataNode.SelectSingleNode("color2_string");
-                if (color2_string != null)
-                {
-                    colorData.color2_string = color2_string.InnerText;
-                }
-
-                XmlNode? color3_string = node_ColorDataNode.SelectSingleNode("color3_string");
-                if (color3_string != null)
-                {
-                    colorData.color3_string = color3_string.InnerText;
-                }
-
-                XmlNode? color4_string = node_ColorDataNode.SelectSingleNode("color4_string");
-                if (color4_string != null)
-                {
-                    colorData.color4_string = color4_string.InnerText;
-                }
             }
 
             return colorData;
@@ -440,11 +428,24 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 XmlNode node_Position = xmlDocument.CreateElement("Position");
 
                 XmlNode node_position_x = xmlDocument.CreateElement("x");
-                node_position_x.InnerText = ((int)container.get_dragPoint().X).ToString();
+
+                int x = (int)container.get_dragPoint().X;
+                int y = (int)container.get_dragPoint().Y;
+
+                if (x < 0)
+                {
+                    x *= -1;
+                }
+                if (y < 0)
+                {
+                    y *= -1;
+                }
+
+                node_position_x.InnerText = x.ToString();
                 node_Position.AppendChild(node_position_x);
 
                 XmlNode node_position_y = xmlDocument.CreateElement("y");
-                node_position_y.InnerText = ((int)container.get_dragPoint().Y).ToString();
+                node_position_y.InnerText = y.ToString();
                 node_Position.AppendChild(node_position_y);
 
                 node.AppendChild(node_Position);
@@ -768,51 +769,75 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             return xmlNode;
         }
 
-        internal LevelSystem UserSpace_Level_load(XmlNode node, int canvasID)
+        internal LevelSystem UserSpace_Level_load(string path, int canvasID)
         {
-            ObservableCollection<LevelData> levels = new ObservableCollection<LevelData>();
-
-            if (node != null)
+            if (File.Exists(@$"{path}"))
             {
-                XmlNodeList? nodeList_LevelData = node.SelectNodes("LevelData");
+                XmlDocument xmlDocument = new XmlDocument();
 
-                for (int i = 0; i < nodeList_LevelData.Count; i++)
+                xmlDocument.Load(path);
+
+                XmlNode node = xmlDocument.SelectSingleNode("LevelSystem");
+
+                // LevelSystem load
+                if (node != null)
                 {
-                    int level;
-                    string name;
-                    string description;
-                    bool loginFlag;
-                    bool securityFlag;
-                    bool visibilityFlag;                    
+                    XmlNodeList? nodeList_LevelData = node.SelectNodes("LevelData");
+                    ObservableCollection<LevelData> levels = new ObservableCollection<LevelData>();
 
-                    if (nodeList_LevelData[i] != null)
+                    for (int i = 0; i < nodeList_LevelData.Count; i++)
                     {
-                        level = Int32.Parse(nodeList_LevelData[i].SelectSingleNode("LEVEL").InnerText);
+                        int level;
+                        string name;
+                        string description;
+                        bool loginFlag;
+                        bool securityFlag;
+                        bool visibilityFlag;
+                        bool hasBackground;
+                        ColorData colorData;
 
-                        name = nodeList_LevelData[i].SelectSingleNode("NAME").InnerText;
+                        if (nodeList_LevelData[i] != null)
+                        {
+                            level = Int32.Parse(nodeList_LevelData[i].SelectSingleNode("LEVEL").InnerText);
 
-                        description = nodeList_LevelData[i].SelectSingleNode("DESCRIPTION").InnerText;
+                            name = nodeList_LevelData[i].SelectSingleNode("NAME").InnerText;
 
-                        loginFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("SECURITY_FLAG").InnerText);
+                            description = nodeList_LevelData[i].SelectSingleNode("DESCRIPTION").InnerText;
 
-                        securityFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("LOGIN_FLAG").InnerText);
+                            loginFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("SECURITY_FLAG").InnerText);
 
-                        visibilityFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("VISIBILITY_FLAG").InnerText);
+                            securityFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("LOGIN_FLAG").InnerText);
 
-                        LevelData levelData = new LevelData(level, name, description, loginFlag, securityFlag, visibilityFlag);
+                            visibilityFlag = bool.Parse(nodeList_LevelData[i].SelectSingleNode("VISIBILITY_FLAG").InnerText);
 
-                        levels.Add(levelData);
-                    }                    
+                            hasBackground = bool.Parse(nodeList_LevelData[i].SelectSingleNode("HASBACKGROUND").InnerText);
+
+                            if (hasBackground)
+                            {            
+                                colorData = loadColorData(nodeList_LevelData[i], "background");
+
+                                LevelData levelData = new LevelData(level, name, description, loginFlag, securityFlag, visibilityFlag, hasBackground, colorData);
+
+                                levels.Add(levelData);
+                            }
+                            else
+                            {
+                                LevelData levelData = new LevelData(level, name, description, loginFlag, securityFlag, visibilityFlag, hasBackground, null);
+
+                                levels.Add(levelData);
+                            }
+
+                        }
+                    }
+
+                    LevelSystem levelSystem = new LevelSystem(levels, canvasID);
+
+                    return levelSystem;
                 }
-
-                LevelSystem levelSystem = new LevelSystem(levels, canvasID);
-
-                return levelSystem;
             }
 
             return null;
         }
-
 
         internal XmlNode? UserSpace_Level_save(XmlDocument xmlDocument, XmlNode node_LevelData, LevelData levelData)
         {
@@ -842,16 +867,31 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 VISIBILITY_FLAG.InnerText = levelData.VISIBILITY_FLAG.ToString();
                 node_LevelData.AppendChild(VISIBILITY_FLAG);
 
+                XmlNode HASBACKGROUND = xmlDocument.CreateElement("HASBACKGROUND");
+                HASBACKGROUND.InnerText = levelData.HASBACKGROUND.ToString();
+                node_LevelData.AppendChild(HASBACKGROUND);
+
+                XmlNode? aux_background = saveColorData(xmlDocument, levelData.Background, "background");
+                if (aux_background != null)
+                {
+                    node_LevelData.AppendChild(aux_background);
+                }
+
                 return node_LevelData;
             }
 
             return null;
         }
 
-        internal XmlNode? saveLevels(XmlDocument xmlDocument, XmlNode node, LevelSystem levelSystem)
+        internal void saveLevels(LevelSystem levelSystem)
         {
             if (levelSystem != null)
             {
+                XmlDocument xmlDocument = new XmlDocument();
+
+                XmlNode node = xmlDocument.CreateElement("LevelSystem");
+                xmlDocument.AppendChild(node);
+
                 foreach (LevelData level in levelSystem.getLevels())
                 {
                     XmlNode node_LevelData = xmlDocument.CreateElement("LevelData");
@@ -863,10 +903,22 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     }
                 }
 
-                return node;
-            }
+                //MessageBox.Show(canvasData.imageFilePath);
 
-            return null;
+                //if (levelSystem.CanvasID == 0)
+                //{
+                //    check_path($@"{SYSTEM_folder}");
+
+                //    xmlDocument.Save($@"{SYSTEM_folder}\{LevelData_file}");
+                //}
+                //else
+                //{
+                check_path($@"{UserSpace_folder}screen_{levelSystem.CanvasID}");
+
+                xmlDocument.Save($@"{UserSpace_folder}screen_{levelSystem.CanvasID}\{LevelData_file}");
+                //}
+
+            }
         }
     }
 }

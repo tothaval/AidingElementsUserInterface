@@ -59,8 +59,6 @@ namespace AidingElementsUserInterface
 
         internal SharedLogic logic = new SharedLogic();
 
-        private LevelData SYSTEM_LEVEL = new LevelData(0, "SYSTEM LEVEL", true, true); // 'system canvas'  'level system level'
-
         internal CoreCanvas Get_ACTIVE_CANVAS => ACTIVE_CANVAS;
 
         internal SystemCanvas Get_SYTEM_CANVAS => SYSTEM_CANVAS;
@@ -180,11 +178,22 @@ namespace AidingElementsUserInterface
                 mainWindowData.initialPosition = new Point(this.Left, this.Top);
             }
 
+            data_Handler.SetMainWindowData(mainWindowData);
+
             XML_Handler xml_handler = new XML_Handler();
 
             xml_handler.ButtonData_save();
+            if (data_Handler.GetCanvasData() == null)
+            {
+                xml_handler.CanvasData_save(SYSTEM_CANVAS.Get_SYSTEM_CANVAS.getCanvasData());
+            }
+            else
+            {
+                xml_handler.CanvasData_save(data_Handler.GetCanvasData());
+            }            
+
             xml_handler.CoreData_save();
-            xml_handler.MainWindowData_save();
+            xml_handler.LabelData_save();
             xml_handler.TextBoxData_save();
 
             CORE_CANVAS_SWITCH.save_Screens();

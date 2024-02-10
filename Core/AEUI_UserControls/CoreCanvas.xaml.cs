@@ -23,6 +23,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,10 +46,12 @@ namespace AidingElementsUserInterface.Core
     {
         private CanvasData config { get; set; }
 
-        private LevelSystem levelSystem;
+        private LevelSystem levelSystem { get; set; }
 
         private System.Windows.Point selection_point;
         private System.Windows.Shapes.Rectangle selection_rectangle;
+
+        private System.Windows.Threading.DispatcherTimer _timer = new System.Windows.Threading.DispatcherTimer();
 
         private ObservableCollection<CoreContainer> selected_items = new ObservableCollection<CoreContainer>();
 
@@ -58,9 +61,9 @@ namespace AidingElementsUserInterface.Core
 
         internal CoreCanvas(CanvasData canvasData)
         {
-            this.config = canvasData;
-
             InitializeComponent();
+
+            this.config = canvasData;
 
             CanvasDataResources(config);
 
@@ -68,31 +71,76 @@ namespace AidingElementsUserInterface.Core
 
             callCentral = new CallCentral(ref __CoreCanvas);
 
-            loadElements(canvasData, canvasData.canvasID);
+            loadElements(config.canvasID);
+
+            _timer.Tick += _timer_Tick;
+            _timer.Interval = TimeSpan.FromMilliseconds(1);
+            _timer.Start();
+
         }
-
-
-        private async void loadElements(CanvasData canvasData, int i)
+        private void _timer_Tick(object sender, EventArgs e)
         {
-
-            levelSystem = canvasData.GetLevelSystem();
-
-            // hier noch buggy, das geladene levelsystem wird zu langsam weitergegeben, weshalb
-            // die null referenz exception zündet
-            if (levelSystem == null)
-            {
-                levelSystem = new LevelSystem(i);
-            }
-
-            //MessageBox.Show(levelSystem.getLevels()[1].NAME);
-
-            if (levelSystem != null)
-            {
-                _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
-            }
-            
+            NoLevelBackground();
 
             if (SYSTEM_CANVAS_FLAG)
+            {
+                SYSTEM_xml xml = new SYSTEM_xml();
+
+                LevelSystem levelSystem = xml.SYSTEM_Level_load($"{xml.SYSTEM_folder}{xml.LevelData_file}");
+
+                if (levelSystem != null)
+                {
+                    _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
+
+                    if (levelSystem.Get_CURRENT_LEVEL().HASBACKGROUND)
+                    {
+                        if (levelSystem.Get_CURRENT_LEVEL().Background != null)
+                        {
+                            SetBackground(levelSystem.Get_CURRENT_LEVEL().Background);
+                        }
+                        else
+                        {
+                            levelSystem.Get_CURRENT_LEVEL().SetBackground(false, null);
+                        }
+                    }
+
+                    this.levelSystem = levelSystem;
+                }
+            }
+            else
+            {
+                UserSpace_xml xml = new UserSpace_xml();
+
+                LevelSystem levelSystem = xml.UserSpace_Level_load($"{xml.UserSpace_folder}screen_{config.canvasID}\\{xml.LevelData_file}", config.canvasID);
+
+                if (levelSystem != null)
+                {
+                    _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
+
+
+                    if (levelSystem.Get_CURRENT_LEVEL().HASBACKGROUND)
+                    {
+                        if (levelSystem.Get_CURRENT_LEVEL().Background != null)
+                        {
+                            SetBackground(levelSystem.Get_CURRENT_LEVEL().Background);
+                        }
+                    }
+
+                    this.levelSystem = levelSystem;
+                }
+            }
+
+            if (levelSystem == null)
+            {
+                levelSystem = new LevelSystem(config.canvasID);
+            }
+
+            _timer.Stop();
+        }
+
+        private async void loadElements(int i)
+        {
+            if (i == 0)
             {
                 SYSTEM_xml sys_xml = new SYSTEM_xml();
 
@@ -110,8 +158,6 @@ namespace AidingElementsUserInterface.Core
             }
             else
             {
-                //MessageBox.Show($"{i}\n{config.canvasID}\n");
-
                 UserSpace_xml userSpace_Xml = new UserSpace_xml();
                 ObservableCollection<CoreContainer> coreContainers = userSpace_Xml.Container_load(i);
 
@@ -124,7 +170,6 @@ namespace AidingElementsUserInterface.Core
                     item.load_Container();
                 }
             }
-
         }
 
         internal CoreContainer? instantiate(UserControl content, ref CoreCanvas target)
@@ -171,7 +216,7 @@ namespace AidingElementsUserInterface.Core
                 if (coreContainer != null)
                 {
                     PositionElement(coreContainer, logic.point);
-                    //SetLevel(coreContainer);
+                    SetLevel(coreContainer);
                     canvas.Children.Add(coreContainer);
                 }
             }
@@ -200,7 +245,7 @@ namespace AidingElementsUserInterface.Core
                 if (coreContainer != null)
                 {
                     PositionElement(coreContainer, e.GetPosition(canvas));
-                    //SetLevel(coreContainer);
+                    SetLevel(coreContainer);
 
                     canvas.Children.Add(coreContainer);
                 }
@@ -226,7 +271,7 @@ namespace AidingElementsUserInterface.Core
             if (SYSTEM_CANVAS_FLAG)
             {
                 PositionElement(container, point);
-                //SetLevel(container);
+                SetLevel(container);
 
                 canvas.Children.Add(container);
             }
@@ -298,6 +343,19 @@ namespace AidingElementsUserInterface.Core
             }
 
             this.config = canvasData;
+        }
+
+        internal void NoLevelBackground()
+        {
+            CoreCanvasBorder.Background = config.background.GetBrush();                     
+        }
+
+        internal void SetBackground(ColorData colorData)
+        {
+            if (colorData != null)
+            {
+                CoreCanvasBorder.Background = colorData.GetBrush();
+            }            
         }
 
         internal void ChangeSelectionData(ContainerData containerData)

@@ -24,6 +24,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -32,12 +33,17 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     /// </summary>
     public partial class LevelBar : UserControl
     {
+        SharedLogic logic = new SharedLogic();
+        bool loading = true;
+
         public LevelBar()
         {
             InitializeComponent();
 
             build();
             registerEvents();
+
+            loading = false;
         }
 
         private void build()
@@ -46,6 +52,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_Prev.setContent("<");
 
             CB_Zero.setContent("zero");
+            CB_LevelBackground.setContent("background");
 
             CB_Next.setContent(">");
             CB_Last.setContent(">>|");
@@ -64,6 +71,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_First.button.Click += CB_FirstClick;
             CB_Prev.button.Click += CB_Prev_Click;
             CB_Zero.button.Click += CB_Zero_Click;
+            CB_LevelBackground.button.Click += CB_LevelBackground_Click;
             CB_Next.button.Click += CB_Next_Click;
             CB_Last.button.Click += CB_Last_Click;
 
@@ -99,6 +107,21 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CL_LevelDescription.setText(newDescription);
         }
 
+        private void LevelBackgroundSwitch()
+        {
+            if (border_LevelBackground.Visibility == Visibility.Collapsed)
+            {
+                border_LevelBackground.Visibility = Visibility.Visible;
+
+                border_LevelBackground.Child = new BrushSetup(ref __LevelBar);
+            }
+            else
+            {
+                border_LevelBackground.Visibility = Visibility.Collapsed;
+                border_LevelBackground.Child = null;
+            }
+        }
+
 
         private void LevelNameSwitch()
         {
@@ -119,6 +142,53 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             GetLevelSystem().Get_CURRENT_LEVEL().SetName(newName);
             CL_LevelName.setText(newName);
+        }
+
+        internal void ChangeLevelBackground(ColorData? colorData)
+        {
+            if (!loading)
+            {
+                LevelBackgroundSwitch();
+
+                if (colorData == null)
+                {
+                    if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                    {
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL().SetBackground(false, null);
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().LevelChange();
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.NoLevelBackground();
+                    }
+                    else
+                    {
+                        if (logic.GetMainWindow().Get_ACTIVE_CANVAS != null)
+                        {
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL().SetBackground(false, null);
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem().LevelChange();
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.NoLevelBackground();
+                        }
+                    }
+
+                }
+                else
+                {
+                    if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                    {
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL().SetBackground(true, colorData);
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().LevelChange();
+                        logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.SetBackground(colorData);
+                    }
+                    else
+                    {
+                        if (logic.GetMainWindow().Get_ACTIVE_CANVAS != null)
+                        {
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL().SetBackground(true, colorData);
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem().LevelChange();
+                            logic.GetMainWindow().Get_ACTIVE_CANVAS.SetBackground(colorData);
+                        }
+                    }
+
+                }
+            }                        
         }
 
 
@@ -186,46 +256,49 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void update(LevelData levelData)
         {
-            CL_LevelId.setText(levelData.LEVEL.ToString());
-
-            CL_LevelName.setText(levelData.NAME.ToString());
-            CL_LevelDescription.setText(levelData.DESCRIPTION.ToString());
-
-            CL_LevelLogin.setText(levelData.LOGIN_FLAG.ToString());
-
-            CL_LevelSecurityPanel.setText(levelData.SECURITY_FLAG.ToString());
-
-            // fix this later, intended display is element count per level, not per screen
-            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+            if (!loading)
             {
-                CL_LevelElementCount.setText(new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.canvas.Children.Count.ToString());
-            }
-            else
-            {
-                if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                CL_LevelId.setText(levelData.LEVEL.ToString());
+
+                CL_LevelName.setText(levelData.NAME.ToString());
+                CL_LevelDescription.setText(levelData.DESCRIPTION.ToString());
+
+                CL_LevelLogin.setText(levelData.LOGIN_FLAG.ToString());
+
+                CL_LevelSecurityPanel.setText(levelData.SECURITY_FLAG.ToString());
+
+                // fix this later, intended display is element count per level, not per screen
+                if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
                 {
-                    CL_LevelElementCount.setText(new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.canvas.Children.Count.ToString());
+                    CL_LevelElementCount.setText(logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.canvas.Children.Count.ToString());
                 }
-            }
+                else
+                {
+                    if (logic.GetMainWindow().Get_ACTIVE_CANVAS != null)
+                    {
+                        CL_LevelElementCount.setText(logic.GetMainWindow().Get_ACTIVE_CANVAS.canvas.Children.Count.ToString());
+                    }
+                }
 
-            if (GetLevelSystem() != null)
-            {
-                GetLevelSystem().LevelChange();
-            }            
+                if (GetLevelSystem() != null)
+                {
+                    GetLevelSystem().LevelChange();
+                }
+            }       
         }
 
         private LevelSystem? GetLevelSystem()
         {
-            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+            if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
-                return new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem();
+                return logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem();
             }
             else
             {
 
-                if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                if (logic.GetMainWindow().Get_ACTIVE_CANVAS != null)
                 {
-                    return new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+                    return logic.GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
                 }
             }
 
@@ -247,6 +320,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             update(GetLevelSystem().Get_ZERO_LEVEL());
         }
+
+        private void CB_LevelBackground_Click(object sender, RoutedEventArgs e)
+        {
+            LevelBackgroundSwitch();               
+        }
+
 
         private void CB_Next_Click(object sender, RoutedEventArgs e)
         {

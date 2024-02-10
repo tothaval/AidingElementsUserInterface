@@ -4,17 +4,12 @@ Stephan Kammel(fractal void)
 
 development plan
 
-finish level system
-
-once finished, work on unfinished stuff below this line
 
 2024|01|14
 autor:
 Stephan Kammel(fractal void)
 
 development plan
-
-finish new level system
 
 update development plan with proper document
 

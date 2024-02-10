@@ -26,9 +26,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         // selection group positioning
         internal int grouping_displacement { get; set; }
 
-        private LevelSystem levelSystem { get; set; }
-
-
         public CanvasData(bool load)
         {
             height = CoreCanvasSwitchData.Get_CORECANVAS_DIMENSION_CAP;
@@ -71,20 +68,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             element_spacing = new GridLength(8);
         }
 
-        internal LevelSystem GetLevelSystem()
-        {
-            return levelSystem;
-        }
-
-
         internal void setCanvasID(int identifierIndexDigit)
         {
             canvasID = identifierIndexDigit;
-        }
-
-        internal void SetLevelSystem(LevelSystem levelSystem)
-        {
-            this.levelSystem = levelSystem;
         }
     }
 }

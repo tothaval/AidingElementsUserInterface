@@ -150,32 +150,24 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
                 CanvasData canvasData = xml.CanvasData_load($"{xml.UserSpace_folder}screen_{i}\\{xml.CanvasData_file}");
-
-
+                
                 if (canvasData == null)
                 {
-                    CoreCanvas screen = new CoreCanvas(new CanvasData($"UserSpace_{i}", i));
-                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
-
-                    coreCanvasScreens.Add(screen);
-                    systemPulseTimers.Add(systemPulseTimer);
+                    canvasData = new CanvasData($"UserSpace_{i}", i);
                 }
-                else
-                {
-                    canvasData.canvasID = i;
-                    CoreCanvas screen = new CoreCanvas(canvasData);
 
-                    SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
+                canvasData.canvasID = i;
 
-                    coreCanvasScreens.Add(screen);
-                    systemPulseTimers.Add(systemPulseTimer);
+                CoreCanvas screen = new CoreCanvas(canvasData);
+                SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
+                
+                coreCanvasScreens.Add(screen);
+                systemPulseTimers.Add(systemPulseTimer);
                 }
-            }
 
             ACTIVE_CANVAS_ID = 0;
-
             Set_ACTIVE_CANVAS();
-        }
+        }        
 
         private void Left()
         {
@@ -234,9 +226,11 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             for (int i = 0; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP - 1; i++)
             {
                 UserSpace_xml handler = new UserSpace_xml();
-                handler.CanvasData_save(coreCanvasScreens[i],i+1);
+                handler.CanvasData_save(coreCanvasScreens[i],i+1);            
 
                 int id = coreCanvasScreens[i].getCanvasData().canvasID;
+
+                handler.saveLevels(coreCanvasScreens[i].GetLevelSystem());
 
                 foreach (object item in coreCanvasScreens[i].canvas.Children)
                 {
