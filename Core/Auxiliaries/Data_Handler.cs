@@ -253,11 +253,12 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
             new XML_Handler().save_ButtonData(data);
         }
+
         public void SetCanvasData(CanvasData data)
         {
             AddCanvasData(data);
 
-            new XML_Handler().CanvasData_save();
+            new XML_Handler().CanvasData_save(data);
 
             canvasData = data;
         }

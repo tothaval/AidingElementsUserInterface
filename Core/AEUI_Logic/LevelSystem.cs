@@ -21,13 +21,14 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
 
 namespace AidingElementsUserInterface.Core.AEUI_Logic
 {
     internal class LevelSystem
     {
-        // the question remaining regarding level counting: 1-200 or -100 <-> +100
+        SharedLogic logic = new SharedLogic();
+
         private ObservableCollection<LevelData> _levels = new ObservableCollection<LevelData>();
         private int canvasID = 0;
 
@@ -35,6 +36,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         private string visibility_MODE = "all"; // all | range | level
 
         private LevelData ZERO_LEVEL = new LevelData(0, "Zero Level", true, true); // 'level system level'
+
+        internal int CanvasID => canvasID;
 
         public LevelSystem(int canvasID)
         {
@@ -46,11 +49,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         public LevelSystem(ObservableCollection<LevelData> levels, int canvasID)
         {
-            _levels.Clear();
-
-            current_level = 1;
             _levels = levels;                
             this.canvasID = canvasID;
+
+            current_level = 1;
+
+            LevelChange();
         }
 
 
@@ -74,27 +78,70 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal void LevelChange()
         {
-            CoreCanvas current_screen = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-
-            if (current_screen != null)
+            if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
-                if (current_level < 0)
-                {
-                    current_level = 0;
-                }
-                if(current_level > CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1)
-                {
-                    current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
-                }
+                CoreCanvas current_screen = logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
+                current_screen.NoLevelBackground();
 
-                current_screen.SetVisibility(current_level, visibility_MODE);
+                if (current_screen != null)
+                {
+                    if (current_level < 0)
+                    {
+                        current_level = 0;
+                    }
+                    if (current_level > CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1)
+                    {
+                        current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+                    }
+
+                    if (Get_CURRENT_LEVEL() != null)
+                    {
+                        if (Get_CURRENT_LEVEL().HASBACKGROUND)
+                        {
+                            if (Get_CURRENT_LEVEL().Background != null)
+                            {
+                                current_screen.SetBackground(Get_CURRENT_LEVEL().Background);
+                            }                            
+                        }
+                    }
+
+                    current_screen.SetVisibility(current_level, visibility_MODE);
+                }
             }
+            else
+            {
+                if (logic.GetMainWindow().Get_ACTIVE_CANVAS != null)
+                {
+                    CoreCanvas current_screen = logic.GetMainWindow().Get_ACTIVE_CANVAS;
+                    current_screen.NoLevelBackground();
 
+                    if (current_screen != null)
+                    {
+                        if (current_level < 0)
+                        {
+                            current_level = 0;
+                        }
+                        if (current_level > CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1)
+                        {
+                            current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+                        }
+
+                        if (Get_CURRENT_LEVEL() != null)
+                        {
+                            if (Get_CURRENT_LEVEL().HASBACKGROUND)
+                            {
+                                current_screen.SetBackground(Get_CURRENT_LEVEL().Background);
+                            }
+                        }
+
+                        current_screen.SetVisibility(current_level, visibility_MODE);
+                    }
+                }
+            }
         }
 
         internal LevelData? Get_CURRENT_LEVEL()
-        {
-            LevelChange();
+        {            
             return _levels[current_level];
 
         }
@@ -106,7 +153,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal LevelData? Get_ZERO_LEVEL()
         {
-            LevelChange();
+         
+                LevelChange();
+            
             current_level = 0;
 
             return ZERO_LEVEL;
@@ -114,8 +163,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         internal LevelData? First()
         {
-            LevelChange();
-
+  
+                LevelChange();
+            
             current_level = 1;
 
             return _levels[1];
@@ -125,7 +175,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         {
             current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
 
-            LevelChange();
+
+                LevelChange();
+ 
 
             return _levels[current_level];
         }
@@ -142,7 +194,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
             }
 
-            LevelChange();
+                LevelChange();
+            
 
             return _levels[current_level];
         }
@@ -159,7 +212,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 current_level = 0;
             }
 
-            LevelChange();
+                LevelChange();
+            
 
             return _levels[current_level];
         }
@@ -168,7 +222,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         {
             current_level = level;
 
-            LevelChange();
+
+                LevelChange();
+            
         }
 
         internal void SetVisibilityMODE(string MODE)

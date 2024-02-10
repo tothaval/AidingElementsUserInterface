@@ -101,6 +101,9 @@
                     Orientation="Vertical"/>
         </StackPanel>
 
+
+        <core:CoreButton x:Name="CB_ResetColorData"
+                         Visibility="Collapsed"/>
         <core:CoreButton x:Name="CB_SaveColorData"/>
     </StackPanel>    
 </UserControl>

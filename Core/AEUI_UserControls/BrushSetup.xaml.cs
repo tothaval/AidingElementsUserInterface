@@ -36,6 +36,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         byte alpha = 255, red = 255, green = 255, blue = 255, brightness = 100, grey = 255;
 
         internal CoreValueChange callerCVC;
+        internal LevelBar callerLB;
 
         public BrushSetup()
         {
@@ -55,6 +56,19 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             registerEvents();
         }
 
+
+
+        internal BrushSetup(ref LevelBar LB)
+        {
+            this.callerLB = LB;
+
+            InitializeComponent();
+
+            CB_ResetColorData.Visibility = Visibility.Visible;
+
+            build();
+            registerEvents();
+        }
 
         private void BrushTypeSelection(CoreButton core)
         {
@@ -87,6 +101,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_VisualBrush.setContent("visual");
 
             CB_AddGradient.setContent("add gradient");
+
+            CB_ResetColorData.setContent("reset brush");
             CB_SaveColorData.setContent("save brush");
         }
 
@@ -131,6 +147,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CB_VisualBrush.button.Click += CB_VisualBrush_Click;
 
             CB_AddGradient.button.Click += CB_AddGradient_Click;
+            CB_ResetColorData.button.Click += CB_ResetColorData_Click;
             CB_SaveColorData.button.Click += CB_SaveColorData_Click;
         }
 
@@ -139,9 +156,27 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             // add leveldata line in stackpanel, store all of them in colordata, alter colordata accordingly
         }
 
+        private void CB_ResetColorData_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            resetCaller();
+        }
+
+
         private void CB_SaveColorData_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             updateCaller();
+        }
+
+        private void resetCaller()
+        {
+            if (callerCVC != null)
+            {
+                callerCVC.setObject(new ColorData());
+            }
+            if (callerLB != null)
+            {
+                callerLB.ChangeLevelBackground(null);
+            }
         }
 
         private void updateCaller()
@@ -149,7 +184,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             if (callerCVC != null)
             {
                     callerCVC.setObject(colorData);                                             
-            }            
+            }
+            if (callerLB != null)
+            {
+                callerLB.ChangeLevelBackground(colorData);
+            }
         }
 
         private void CB_SolidColorBrush_Click(object sender, System.Windows.RoutedEventArgs e)
