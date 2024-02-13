@@ -357,7 +357,7 @@
                         <MenuItem x:Name="MI_infobits"
                           Header="infobits">
                             <MenuItem x:Name="MI_SessionRuntime_IB"
-                          Header="session runtime"
+                          Header="AEUI runtime"
                               
                           Click="MI_SessionRuntime_IB_Click"/>
                         </MenuItem>
@@ -385,6 +385,9 @@
                               
                               Click="MI_Version_Click"/>
                         </MenuItem>
+
+                        <MenuItem x:Name="MI_SAME"
+                          Header="SAME" Click="MI_SAME_Click"/>
                     </Menu>
                 </Border>
 

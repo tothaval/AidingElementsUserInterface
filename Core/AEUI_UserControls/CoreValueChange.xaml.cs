@@ -68,6 +68,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 {
                     coreButton = new CoreButton(true);
                     // so it blends in with the surrounding textboxes
+
+                    TB_value_identifier.MinWidth = 150;
+
                     coreButton.button.Width = coreButton.config.width * 3;
                     coreButton.button.MaxHeight = coreButton.config.height * 3;
                     //coreButton.button.Width = coreButton.config.width * 3;

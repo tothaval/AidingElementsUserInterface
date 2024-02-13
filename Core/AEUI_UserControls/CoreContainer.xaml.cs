@@ -32,11 +32,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreCanvas canvas;
         private ContainerData containerData;
 
-        private object element {  get; set; }
+        private object element { get; set; }
 
         internal object Element => element;
 
-        private Point dragPoint = new Point();        
+        private Point dragPoint = new Point();
 
         private bool elementDrag = false;
         private bool container_is_selected = false;
@@ -102,20 +102,20 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             __CoreContainer.Resources["ContainerData_borderbrush"] = containerData.settings.borderbrush.GetBrush();
             __CoreContainer.Resources["ContainerData_foreground"] = containerData.settings.foreground.GetBrush();
             __CoreContainer.Resources["ContainerData_highlight"] = containerData.settings.highlight.GetBrush();
-                        
+
             __CoreContainer.Resources["ContainerData_cornerRadius"] = containerData.settings.cornerRadius;
             __CoreContainer.Resources["ContainerData_thickness"] = containerData.settings.thickness;
-                        
+
             __CoreContainer.Resources["ContainerData_fontSize"] = (double)containerData.settings.fontSize;
             __CoreContainer.Resources["ContainerData_fontFamily"] = containerData.settings.fontFamily;
-                        
+
             __CoreContainer.Resources["ContainerData_width"] = containerData.settings.width;
             __CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
-                        
+
             __CoreContainer.Resources["ContainerData_CanvasID"] = containerData.CanvasID;
-                        
+
             __CoreContainer.Resources["ContainerData_ContainerDataFilename"] = containerData.ContainerDataFilename;
-                        
+
             __CoreContainer.Resources["ContainerData_z_position"] = containerData.level;
 
 
@@ -204,9 +204,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         internal ContainerData GetContainerData()
         {
 
-                return containerData;
-  
-            
+            return containerData;
+
+
         }
 
         internal bool get_containerIsSelected()
@@ -331,7 +331,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
 
                 Panel.SetZIndex(__CoreContainer, CoreCanvasSwitchData.Get_CORECANVAS_DRAG_LEVEL);
-                                
+
                 //mainWindow.writing = false;
                 ////Keyboard.ClearFocus();
                 Keyboard.Focus(new SharedLogic().GetMainWindow().focusTarget);
@@ -412,17 +412,28 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 Panel.SetZIndex(__CoreContainer, containerData.level);
             }
 
-            e.Handled = true;
-
-
             L_Z.Content = Panel.GetZIndex(__CoreContainer);
+
+
+            System.Windows.Threading.DispatcherTimer _fadeOut = new System.Windows.Threading.DispatcherTimer();
+
+            _fadeOut.Tick += _fadeOut_Tick;
+            _fadeOut.Interval = TimeSpan.FromSeconds(3);
+            _fadeOut.Start();
+
+            e.Handled = true;
+        }
+
+        private void _fadeOut_Tick(object? sender, EventArgs e)
+        {
+            L_Z.Content = null;
         }
         #endregion element mouse events
 
         private void element_grid_MouseEnter(object sender, MouseEventArgs e)
         {
 
-            
+
         }
 
         private void element_grid_MouseMove(object sender, MouseEventArgs e)
@@ -433,7 +444,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void element_grid_MouseLeave(object sender, MouseEventArgs e)
         {
-         
+
         }
     }
 }

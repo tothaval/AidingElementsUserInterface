@@ -42,6 +42,8 @@ using System.Windows.Controls;
 using AidingElementsUserInterface.Core.AEUI_SystemControls;
 using System.Xml.Serialization;
 using System.Windows.Controls.Primitives;
+using System.Diagnostics;
+using System.Text;
 
 namespace AidingElementsUserInterface
 {
@@ -701,6 +703,26 @@ namespace AidingElementsUserInterface
                 source.AddHook(HwndHandler);
                 UsbNotification.RegisterUsbDeviceNotification(windowHandle);
             }
+        }
+
+        private void MI_SAME_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("not yet implemented\nno effect");
+
+            // 2024|02|13||20|27
+            // WIP
+
+            // simple artificial mind extension: this is going to be a thinking support tool based on an idea of me
+            // from some years past. i used the ideas base principles to some success since i first had it, but
+            // i do not know whether it will work in a digital environment or even if i am able to implement it.
+            //
+            // it will probably not be an element, but i am not sure yet. the whole implementation is ultra low
+            // prio for now and will take a considerable amount of time and thinking before i will begin or continue
+            // any steps regarding the SAME mechanic.
+
+            // i packed it in the menu to have a reminder, a goal and a reason to feel a little bit agitated because
+            // it is not implemented yet.
+            // 2024|02|13||20|27
         }
     }
 }

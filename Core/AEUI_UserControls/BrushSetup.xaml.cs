@@ -68,6 +68,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             build();
             registerEvents();
+
+            
         }
 
         private void BrushTypeSelection(CoreButton core)
@@ -133,8 +135,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ColorField.Fill = colorData.GetBrush();               
             
             //CT_ArgbhexString.setText(argb.ToString());
-            //CT_ArgbString.setText($"{(int)alpha_value},{(int)red_value},{(int)green_value},{(int)blue_value}");
-            
+            //CT_ArgbString.setText($"{(int)alpha_value},{(int)red_value},{(int)green_value},{(int)blue_value}");            
         }
 
         private void registerEvents()
@@ -153,6 +154,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void CB_AddGradient_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            colorData.gradientSteps.Add(colorData.color1_string);
+            SP_gradientSteps.Children.Add(new CoreLabel(colorData.color1_string));
+
             // add leveldata line in stackpanel, store all of them in colordata, alter colordata accordingly
         }
 
@@ -198,7 +202,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             BrushTypeSelection(CB_SolidColorBrush);
 
             colorData.brushtype = "SolidColorBrush";
-            colorData.color1_string = "#BB00FFDD";
 
             ColorField.Fill = colorData.GetBrush();
 
@@ -214,6 +217,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             colorData.brushtype = "RadialGradientBrush";
 
+            ColorField.Fill = colorData.GetBrush();
+
             e.Handled = true;
         }
         private void CB_LinearGradientBrush_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -225,6 +230,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             BrushTypeSelection(CB_LinearGradientBrush);
 
             colorData.brushtype = "LinearGradientBrush";
+
+            ColorField.Fill = colorData.GetBrush();
 
             e.Handled = true;
         }

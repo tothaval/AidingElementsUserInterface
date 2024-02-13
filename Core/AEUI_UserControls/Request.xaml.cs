@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,32 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             C_Console.GetCoreTextBox().textbox.KeyUp += Textbox_KeyUp; ;
 
         }
+
+        //private void MI_LocalProcesses_IB_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StringBuilder processOverview = new StringBuilder();
+
+        //    // pretty ugly, because there are many processes, therefor it is not a good idea to 
+        //    // make an infobit for all processes, but it is suitable for a system element
+
+        //    foreach (Process process in Process.GetProcesses())
+        //    {
+        //        processOverview.AppendLine(
+        //            $"{process.Id} {process.ProcessName} {process.BasePriority} {process.MachineName}"
+        //            );
+
+        //        // tested:
+        //        //  -> working        {process.MachineName} {process.BasePriority} {process.Id} {process.ProcessName} 
+        //        //  -> access denied  {process.UserProcessorTime} {process.ProcessorAffinity}
+        //    }
+
+
+        //    new CoreToolTip(processOverview.ToString());
+
+        //    e.Handled = true;
+        //}
+
+
 
         private void Textbox_KeyUp(object sender, KeyEventArgs e)
         {
