@@ -9,25 +9,11 @@
  */
 using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
-using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Elements
 {
@@ -46,7 +32,6 @@ namespace AidingElementsUserInterface.Elements
             updateDriveInfo();
         }
 
-
         internal void updateDriveInfo()
         {
             stackPanel.Children.Clear();
@@ -61,17 +46,20 @@ namespace AidingElementsUserInterface.Elements
                 {
                     driveInfoElement.setText(
                         $"{drive.DriveType}");
-                    driveInfoElement.coreButton._disabled();
+                    driveInfoElement.coreButton._disabled();                    
                 }
                 else
                 {
-                    driveInfoElement.setText(
-                        $"{drive.DriveType} {drive.DriveFormat}\n" +
-                        $"{drive.AvailableFreeSpace / gigabyte:N2}/{drive.TotalSize / gigabyte:N2} GB");
+                    double free_space = drive.AvailableFreeSpace / gigabyte;
+                    double total_space = drive.TotalSize / gigabyte;
 
-                    driveInfoElement.coreButton.setTooltip(
-                        $"{drive.DriveType} {drive.DriveFormat}\n" +
-                        $"{drive.AvailableFreeSpace/gigabyte:N2}/{drive.TotalSize/gigabyte:N2} GB");
+                    double percentage = free_space / total_space * 100;
+
+                    driveInfoElement.setIdentifier($"{drive.Name}\n{drive.DriveType} {drive.DriveFormat}");
+                       
+                    driveInfoElement.setText($"{free_space:N2}/{total_space:N2} GB\n{percentage:N2}% free space");
+
+                    driveInfoElement.coreButton.setTooltip($"{drive.VolumeLabel} ({drive.Name})");
                 }
 
                 driveInfoElement.coreButton.button.Click += Button_Click;
@@ -82,7 +70,6 @@ namespace AidingElementsUserInterface.Elements
 
 
         }
-
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {

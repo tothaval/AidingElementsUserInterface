@@ -27,10 +27,10 @@
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center">                
             </local:CoreLabel>
-            <StackPanel x:Name="SP_ValueChangeElement">
+            <StackPanel x:Name="SP_ValueChangeElement"
+                              HorizontalAlignment="Right">
                 <Border x:Name="border_CB"/> 
                 <core:CoreTextBox x:Name="CTB_Value" 
-                              HorizontalAlignment="Right"
                               Visibility="Visible">
                 </core:CoreTextBox>
             </StackPanel>

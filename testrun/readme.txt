@@ -27,6 +27,8 @@ CoreOptions element has been improved, but is unfinished__WIP__
 element control: __WIP__
 	elements can be moved via left mouse button
 
+	alt 	show or hide level system at screen top
+
 	ctrl + left click
 		FileLink, Image or Link or canvas_name(enter for save)
 		 	reset element

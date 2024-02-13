@@ -1,12 +1,12 @@
 <ContainerData>
   <CoreData>
     <background>
-      <brushtype>SolidColorBrush</brushtype>
+      <brushtype>LinearGradientBrush</brushtype>
       <brushpath>-</brushpath>
       <gradiantEndPoint>0,5;0</gradiantEndPoint>
       <gradiantOrigin>0,5;0,5</gradiantOrigin>
       <gradiantStartPoint>0,5;1</gradiantStartPoint>
-      <color1_string>#B7FE732D</color1_string>
+      <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#FF2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
@@ -52,13 +52,13 @@
     <width>50</width>
   </CoreData>
   <CanvasID>-5</CanvasID>
-  <ContainerDataFilename>1_0.xml</ContainerDataFilename>
+  <ContainerDataFilename>1_3.xml</ContainerDataFilename>
   <level>0</level>
   <Content>
-    <Type>LocalDrives</Type>
+    <Type>Manual</Type>
   </Content>
   <Position>
-    <x>700</x>
-    <y>253</y>
+    <x>32</x>
+    <y>50</y>
   </Position>
 </ContainerData>

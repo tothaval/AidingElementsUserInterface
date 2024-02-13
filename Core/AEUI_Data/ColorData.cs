@@ -10,6 +10,7 @@
 
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Media;
@@ -35,6 +36,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal string color3_string { get; set; }
         internal string color4_string { get; set; }
 
+        internal ObservableCollection<string> gradientSteps { get; set; }
+
 
         internal ColorData(bool load)
         {
@@ -46,6 +49,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal ColorData(int nr = 1)
         {
+            gradientSteps = new ObservableCollection<string>();
+
             brushtype = "SolidColorBrush";
             brushpath = "-";
 
