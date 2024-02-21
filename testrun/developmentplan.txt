@@ -28,6 +28,12 @@ random element, corematrix classes
 
 bugs:
 - selection rectangle is not working properly, selection is sometimes not inside the rectangle
+- if an preconfigured aeui with data folder and set up configuration is opened from a link or
+filelink element, also in ysui via bindingbutton, meaning it is executed via process.start(),
+it will be opened unconfigured. no clue why, maybe the os stores a template or such, dunno.
+really strange behaviour. same happens with different aeui.exe versions in different folders.
+if opened via double click, it all loads fine from the same folder with the same .exe being executed.
+
 
 update development plan
 (f.e. start development on ColorOptions, start development of Container properties change tools

@@ -429,10 +429,7 @@ namespace AidingElementsUserInterface
         {
             summonElement(sender);
         }
-        private void MI_Text_Click(object sender, RoutedEventArgs e)
-        {
-            summonElement(sender);
-        }
+
         private void MI_FileLink_Click(object sender, RoutedEventArgs e)
         {
             summonElement(sender);
@@ -444,6 +441,16 @@ namespace AidingElementsUserInterface
         }
 
         private void MI_Link_Click(object sender, RoutedEventArgs e)
+        {
+            summonElement(sender);
+        }
+
+        private void MI_Shapes_Click(object sender, RoutedEventArgs e)
+        {
+            summonElement(sender);
+        }
+
+        private void MI_Text_Click(object sender, RoutedEventArgs e)
         {
             summonElement(sender);
         }

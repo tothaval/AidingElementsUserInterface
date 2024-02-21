@@ -95,15 +95,48 @@
         <StackPanel x:Name="SP_GradientArea"
                     Orientation="Vertical"
                     Visibility="Collapsed">
-        <core:CoreButton x:Name="CB_AddGradient"/>
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient1"/>
 
-        <StackPanel x:Name="SP_gradientSteps"
-                    Orientation="Vertical"/>
+                <core:CoreButton x:Name="CB_Color1"/>
+            </StackPanel>            
+
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient2"/>
+                
+                <core:CoreButton x:Name="CB_Color2"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient3"/>
+
+                <core:CoreButton x:Name="CB_Color3"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient4"/>
+
+                <core:CoreButton x:Name="CB_Color4"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient5"/>
+
+                <core:CoreButton x:Name="CB_Color5"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_Gradient6"/>
+
+                <core:CoreButton x:Name="CB_Color6"/>
+            </StackPanel>
+
+            <Rectangle x:Name="RECT_GradientArea"
+                       MinHeight="100"
+                       MinWidth="150"/>
         </StackPanel>
 
-
-        <core:CoreButton x:Name="CB_ResetColorData"
-                         Visibility="Collapsed"/>
+        <core:CoreButton x:Name="CB_ResetColorData"/>
         <core:CoreButton x:Name="CB_SaveColorData"/>
     </StackPanel>    
 </UserControl>

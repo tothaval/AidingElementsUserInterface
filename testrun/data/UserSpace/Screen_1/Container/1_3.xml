@@ -1,7 +1,7 @@
 <ContainerData>
   <CoreData>
     <background>
-      <brushtype>LinearGradientBrush</brushtype>
+      <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
       <gradiantEndPoint>0,5;0</gradiantEndPoint>
       <gradiantOrigin>0,5;0,5</gradiantOrigin>
@@ -51,14 +51,14 @@
     <height>25</height>
     <width>50</width>
   </CoreData>
-  <CanvasID>-5</CanvasID>
+  <CanvasID>1</CanvasID>
   <ContainerDataFilename>1_3.xml</ContainerDataFilename>
-  <level>0</level>
+  <level>1</level>
   <Content>
-    <Type>Manual</Type>
+    <Type>Shapes</Type>
   </Content>
   <Position>
-    <x>32</x>
+    <x>489</x>
     <y>50</y>
   </Position>
 </ContainerData>

@@ -277,6 +277,11 @@
                               
                               Click="MI_Link_Click"/>
 
+                            <MenuItem x:Name="MI_Shapes"
+                              Header="Shapes"
+                              
+                              Click="MI_Shapes_Click"/>
+
                             <MenuItem x:Name="MI_Text"
                               Header="Text"
                               
