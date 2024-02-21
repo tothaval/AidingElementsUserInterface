@@ -26,13 +26,14 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     {
         internal CoreData settings = new CoreData();
 
-        internal UserControl element { get; set; }
+        internal object element { get; set; }
         
         internal int CanvasID { get; set; }
 
         internal string? ContainerDataFilename { get; set; }
 
         internal int level;
+        internal double rotation;
 
         public ContainerData(bool load)
         {
@@ -49,29 +50,37 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             CanvasID = canvasID;
         }
 
-        public ContainerData(CoreData coreData, int canvasID)
+        public ContainerData(CoreData coreData, int canvasID, int level = 0, double rotation = 0.0)
         {
             settings = coreData;
 
             CanvasID = canvasID;
+
+            this.level = level;
+
+            this.rotation = rotation;
         }
 
-        public ContainerData(UserControl _content, int canvasID)
+        public ContainerData(UserControl _content, int canvasID, int level = 0, double rotation = 0.0)
         {
             element = _content;
 
-            level = 0;
+            this.level = level;
+
+            this.rotation = rotation;
 
             CanvasID = canvasID;
         }
 
-        public ContainerData(CoreData coreData, UserControl _content, int canvasID)
+        public ContainerData(CoreData coreData, object _content, int canvasID, int level = 0, double rotation = 0.0)
         {
             settings = coreData;            
 
             element = _content;
 
-            level = 0;
+            this.level = level;
+
+            this.rotation = rotation;
 
             CanvasID = canvasID;
         }
@@ -81,7 +90,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             this.settings = coreData;
         }
 
-        internal UserControl GetElement()
+        internal object GetElement()
         {
             return element;
         }
@@ -96,7 +105,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             this.ContainerDataFilename = containerDataFilename;
         }
 
-        internal void SetElement(UserControl userControl)
+        internal void SetElement(object userControl)
         {
             this.element = userControl;
         }

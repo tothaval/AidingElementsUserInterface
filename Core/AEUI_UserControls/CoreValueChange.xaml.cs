@@ -183,6 +183,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         }
 
+        internal string getIdentifier()
+        {
+            return TB_value_identifier.textblock.Text;
+        }
+
         internal void setIdentifier(string value_identifier)
         {
             TB_value_identifier.setText(value_identifier);

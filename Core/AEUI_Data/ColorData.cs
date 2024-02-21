@@ -11,10 +11,14 @@
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Brush = System.Windows.Media.Brush;
+using Point = System.Windows.Point;
 
 namespace AidingElementsUserInterface.Core.AEUI_Data
 {
@@ -35,21 +39,23 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal string color2_string { get; set; }
         internal string color3_string { get; set; }
         internal string color4_string { get; set; }
+        internal string color5_string { get; set; }
+        internal string color6_string { get; set; }
 
-        internal ObservableCollection<string> gradientSteps { get; set; }
-
+        internal double[] offsets = new double[6];
 
         internal ColorData(bool load)
         {
             if (load)
             {
+                color5_string = "#FFFFFFFF";
+                color6_string = "#FF000000";
 
             }
         }
 
         internal ColorData(int nr = 1)
         {
-            gradientSteps = new ObservableCollection<string>();
 
             brushtype = "SolidColorBrush";
             brushpath = "-";
@@ -81,8 +87,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             }
 
             color2_string = "#FF000000";
-            color3_string = "#FF2F4F4F";
+            color3_string = "#EE2F4F4F";
             color4_string = "#FF0FFF0F";
+            color5_string = "#FFFFFFFF";
+            color6_string = "#FF000000";
         }
 
         internal Brush? GetBrush()
@@ -104,30 +112,51 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
                     RadialGradientBrush brush = new RadialGradientBrush();
                     brush.GradientOrigin = gradiantOrigin;
 
-                    // Create four gradient stops.
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 0.0));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color2_string), 0.25));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color3_string), 0.75));
-                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color4_string), 1.0));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), 0.00));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color2_string), 0.20));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color3_string), 0.40));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color4_string), 0.60));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color5_string), 0.80));
+                    brush.GradientStops.Add(new GradientStop(logic.ParseColor(color6_string), 1.00));
 
                     return brush;
                 }
                 else if (brushtype.Equals("LinearGradientBrush"))
                 {
-                    LinearGradientBrush brush = new LinearGradientBrush();
+                            LinearGradientBrush brush = new LinearGradientBrush()
+                            {
+                                StartPoint = gradiantStartPoint,
+                                EndPoint = gradiantEndPoint
+                            };
 
-                    brush.StartPoint = gradiantStartPoint;
-                    brush.EndPoint = gradiantEndPoint;
-                    brush.GradientStops.Add(
-                        new GradientStop(logic.ParseColor(color1_string), 0.2));
-                    brush.GradientStops.Add(
-                        new GradientStop(logic.ParseColor(color2_string), 0.4));
-                    brush.GradientStops.Add(
-                        new GradientStop(logic.ParseColor(color3_string), 0.6));
-                    brush.GradientStops.Add(
-                        new GradientStop(logic.ParseColor(color4_string), 0.8));
+                            //brush.StartPoint = gradiantStartPoint;
+                            //brush.EndPoint = gradiantEndPoint;
 
-                    return brush;
+                            //foreach (GradientStop item in gradientStops)
+                            //{
+                            //brush.GradientStops.Add(new GradientStop(item.Color, item.Offset));
+                            //}
+
+                            // applying the GradientStops directly works, a LinearGradientBrush is drawn to any
+                            // object as intended, but when assigning the GradientStops via loop they are
+                            // assigned to the brush, but the brush will only draw first or last color
+                            // i really do not get this, maybe some form of bug within the framework
+                            // even the correct amount of stops was passed to the brush, doesn't matter, i will
+                            // limit brush gradients to 6 for now, case closed.
+                            // will have to test, whether to build in offset or not.
+
+                            // MessageBox.Show(gradientStops.Count.ToString() + "\n" + brush.GradientStops.Count.ToString());
+                            // i dont get it and i dont get IT, just useless junk.
+
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color1_string), offsets[0]));
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color2_string), offsets[1]));
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color3_string), offsets[2]));
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color4_string), offsets[3]));
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color5_string), offsets[4]));
+                            brush.GradientStops.Add(new GradientStop(logic.ParseColor(color6_string), offsets[5]));
+
+                            return brush;
+                  
                 }
                 else if (brushtype.Equals("ImageBrush"))
                 {
@@ -167,6 +196,15 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             }
 
             return _brush;
+        }
+
+        internal void setOffsets(double[] offsets)
+        {
+            if (offsets.Length == 6)
+            {
+                MessageBox.Show("six");
+                this.offsets = offsets;
+            }            
         }
 
     }

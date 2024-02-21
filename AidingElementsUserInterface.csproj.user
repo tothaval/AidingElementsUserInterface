@@ -145,6 +145,9 @@
     <Compile Update="Elements\Random\Random.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Elements\Shapes.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Elements\Stopwatch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -292,6 +295,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Random\Random.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Elements\Shapes.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Elements\Stopwatch.xaml">

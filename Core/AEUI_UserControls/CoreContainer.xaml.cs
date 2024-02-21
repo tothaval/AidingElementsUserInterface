@@ -20,6 +20,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -61,6 +62,41 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerDataResources(containerData);
 
         }
+
+        internal CoreContainer(Shape element, ContainerData containerData, ref CoreCanvas canvas)
+        {
+
+            InitializeComponent();
+
+            this.canvas = canvas;
+            this.element = element;
+
+            content_border.Child = element;
+
+            //containerData = new ContainerData(canvas.getCanvasData(), element);
+            this.containerData = containerData;
+
+            this.containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
+
+            ContainerDataResources(containerData);
+
+            build();
+                       
+
+            element_border.Background = new SolidColorBrush(Colors.Transparent);
+            element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            
+            //element.Fill = new SolidColorBrush(Colors.Transparent);
+            //element.Stroke = new SolidColorBrush(Colors.Transparent);
+            //element_border.BorderThickness = new Thickness(0);
+
+
+            //ColumnLeft.Width = new GridLength(0);
+            //ColumnRight.Width = new GridLength(0);
+
+            //RowTop.Height = new GridLength(0);
+            //RowBottom.Height = new GridLength(0);
+            }
 
         internal CoreContainer(UserControl element, ref CoreCanvas canvas)
         {
@@ -126,6 +162,34 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
 
             __CoreContainer.containerData = containerData;
+
+            if (content_border.Child != null)
+            {
+                if (content_border.Child.GetType().IsSubclassOf(typeof(Shape)))
+                {
+                    ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+
+                    if (File.Exists(containerData.settings.background.brushpath))
+                    {
+                        ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+
+                    }
+
+                    if (container_is_selected)
+                    {
+                        ((Shape)content_border.Child).Stroke = containerData.settings.highlight.GetBrush();
+                    }
+                    else
+                    {
+                        ((Shape)content_border.Child).Stroke = containerData.settings.borderbrush.GetBrush();
+                    }                    
+
+                    //element_border.Background = new SolidColorBrush(Colors.Transparent);
+                    //element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    //element_border.BorderThickness = new Thickness(0);
+                }
+            }
+
         }
 
         internal ref CoreCanvas GetCanvas()
@@ -198,6 +262,20 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 canvas.removeFromSelectedItems(this);
             }
+
+            if (content_border.Child != null)
+            {
+                if (content_border.Child.GetType().IsSubclassOf(typeof(Shape)))
+                {
+                    ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+                    ((Shape)content_border.Child).Stroke = containerData.settings.borderbrush.GetBrush();
+                    ((Shape)content_border.Child).StrokeThickness = containerData.settings.thickness.Left;
+
+                    element_border.Background = new SolidColorBrush(Colors.Transparent);
+                    element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    element_border.BorderThickness = new Thickness(0);
+                }
+            }
         }
 
 
@@ -233,7 +311,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             content_border.Child = null;
 
-            content_border.Child = containerData.GetElement();
+            content_border.Child = (UIElement)containerData.GetElement();
 
             build();
         }
@@ -266,6 +344,20 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             element_border.BorderBrush = containerData.settings.highlight.GetBrush();
 
             canvas.add_selected_item(this);
+
+            if (content_border.Child != null)
+            {
+                if (content_border.Child.GetType().IsSubclassOf(typeof(Shape)))
+                {
+                    ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+                    ((Shape)content_border.Child).Stroke = containerData.settings.highlight.GetBrush();
+                    ((Shape)content_border.Child).StrokeThickness = containerData.settings.thickness.Left;
+
+                    element_border.Background = new SolidColorBrush(Colors.Transparent);
+                    element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                    element_border.BorderThickness = new Thickness(0);
+                }
+            }
         }
 
         private void selected()
