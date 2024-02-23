@@ -32,8 +32,15 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
         internal string? ContainerDataFilename { get; set; }
 
+        // low prio:
+        // integrate level and rotation save and load
         internal int level;
         internal double rotation;
+
+        // low prio:
+        // replace current dragPoint return with a ContainerData value
+        // use dragPoint solely for dragging
+        internal Point position;
 
         public ContainerData(bool load)
         {

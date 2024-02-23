@@ -396,11 +396,9 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             return null;
         }
 
-        internal void ContainerDataTemplate_save()
+        internal void ContainerDataTemplate_save(ContainerData containerData)
         {
             XmlDocument xmlDocument = new XmlDocument();
-
-            ContainerData containerData = new SharedLogic().GetDataHandler().GetContainerData();
 
             if (containerData == null)
             {
@@ -438,6 +436,8 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
                 node.AppendChild(node_Position);
 
+                xmlDocument.AppendChild(node);
+                                
                 try
                 {
                     xmlDocument.Save($"{CORE_folder}{ContainerData_file}");
@@ -514,22 +514,22 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     colorData.brushpath = brushpath.InnerText;
                 }
 
-                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
+                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradientEndPoint");
                 if (gradiantEndPoint != null)
                 {
-                    colorData.gradiantEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
+                    colorData.gradientEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
                 }
 
-                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradiantOrigin");
+                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradientOrigin");
                 if (gradiantOrigin != null)
                 {
-                    colorData.gradiantOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
+                    colorData.gradientOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
                 }
 
-                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradiantStartPoint");
+                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradientStartPoint");
                 if (gradiantStartPoint != null)
                 {
-                    colorData.gradiantStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
+                    colorData.gradientStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
                 }
 
                 XmlNode? color1_string = node_ColorDataNode.SelectSingleNode("color1_string");
@@ -554,6 +554,18 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 if (color4_string != null)
                 {
                     colorData.color4_string = color4_string.InnerText;
+                }
+
+                XmlNode? color5_string = node_ColorDataNode.SelectSingleNode("color5_string");
+                if (color5_string != null)
+                {
+                    colorData.color5_string = color5_string.InnerText;
+                }
+
+                XmlNode? color6_string = node_ColorDataNode.SelectSingleNode("color6_string");
+                if (color6_string != null)
+                {
+                    colorData.color6_string = color6_string.InnerText;
                 }
             }
 
@@ -643,16 +655,16 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 brushpath.InnerText = data.brushpath.ToString();
                 _ColorDataNode.AppendChild(brushpath);
 
-                XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradiantEndPoint");
-                gradiantEndPoint.InnerText = data.gradiantEndPoint.ToString();
+                XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradientEndPoint");
+                gradiantEndPoint.InnerText = data.gradientEndPoint.ToString();
                 _ColorDataNode.AppendChild(gradiantEndPoint);
 
-                XmlNode gradiantOrigin = xmlDocument.CreateElement("gradiantOrigin");
-                gradiantOrigin.InnerText = data.gradiantOrigin.ToString();
+                XmlNode gradiantOrigin = xmlDocument.CreateElement("gradientOrigin");
+                gradiantOrigin.InnerText = data.gradientOrigin.ToString();
                 _ColorDataNode.AppendChild(gradiantOrigin);
 
-                XmlNode gradiantStartPoint = xmlDocument.CreateElement("gradiantStartPoint");
-                gradiantStartPoint.InnerText = data.gradiantStartPoint.ToString();
+                XmlNode gradiantStartPoint = xmlDocument.CreateElement("gradientStartPoint");
+                gradiantStartPoint.InnerText = data.gradientStartPoint.ToString();
                 _ColorDataNode.AppendChild(gradiantStartPoint);
 
                 XmlNode color1_string = xmlDocument.CreateElement("color1_string");
@@ -670,6 +682,25 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode color4_string = xmlDocument.CreateElement("color4_string");
                 color4_string.InnerText = data.color4_string;
                 _ColorDataNode.AppendChild(color4_string);
+
+                XmlNode color5_string = xmlDocument.CreateElement("color5_string");
+                color5_string.InnerText = data.color5_string;
+                _ColorDataNode.AppendChild(color5_string);
+
+                XmlNode color6_string = xmlDocument.CreateElement("color6_string");
+                color6_string.InnerText = data.color6_string;
+                _ColorDataNode.AppendChild(color6_string);
+
+                XmlNode gradientOffsets = xmlDocument.CreateElement("gradientOffsets");
+                _ColorDataNode.AppendChild(gradientOffsets);
+
+                foreach (Double gradientOffset in data.offsets)
+                {
+                    XmlNode offset = xmlDocument.CreateElement("offset");
+                    offset.InnerText = gradientOffset.ToString();
+
+                    gradientOffsets.AppendChild(offset);
+                }
 
                 return _ColorDataNode;
             }

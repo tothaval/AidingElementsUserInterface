@@ -28,6 +28,7 @@
 
 
         <StackPanel x:Name="SP_shapeOptions" Orientation="Vertical">
+            <usercontrols:CoreValueChange x:Name="CVC_Amount"/>
             <usercontrols:CoreValueChange x:Name="CVC_Width"/>
             <usercontrols:CoreValueChange x:Name="CVC_Height"/>
             <usercontrols:CoreValueChange x:Name="CVC_Rotation"/>

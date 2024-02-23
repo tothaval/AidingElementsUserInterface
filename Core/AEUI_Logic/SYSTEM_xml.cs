@@ -64,22 +64,22 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     colorData.brushpath = brushpath.InnerText;
                 }
 
-                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradiantEndPoint");
+                XmlNode? gradiantEndPoint = node_ColorDataNode.SelectSingleNode("gradientEndPoint");
                 if (gradiantEndPoint != null)
                 {
-                    colorData.gradiantEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
+                    colorData.gradientEndPoint = logic.ParsePoint(gradiantEndPoint.InnerText);
                 }
 
-                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradiantOrigin");
+                XmlNode? gradiantOrigin = node_ColorDataNode.SelectSingleNode("gradientOrigin");
                 if (gradiantOrigin != null)
                 {
-                    colorData.gradiantOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
+                    colorData.gradientOrigin = logic.ParsePoint(gradiantOrigin.InnerText);
                 }
 
-                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradiantStartPoint");
+                XmlNode? gradiantStartPoint = node_ColorDataNode.SelectSingleNode("gradientStartPoint");
                 if (gradiantStartPoint != null)
                 {
-                    colorData.gradiantStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
+                    colorData.gradientStartPoint = logic.ParsePoint(gradiantStartPoint.InnerText);
                 }
 
                 XmlNode? color1_string = node_ColorDataNode.SelectSingleNode("color1_string");
@@ -105,6 +105,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 {
                     colorData.color4_string = color4_string.InnerText;
                 }
+
+                XmlNode? color5_string = node_ColorDataNode.SelectSingleNode("color5_string");
+                if (color5_string != null)
+                {
+                    colorData.color5_string = color5_string.InnerText;
+                }
+
+                XmlNode? color6_string = node_ColorDataNode.SelectSingleNode("color6_string");
+                if (color6_string != null)
+                {
+                    colorData.color6_string = color6_string.InnerText;
+                }
             }
 
             return colorData;
@@ -127,16 +139,16 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 brushpath.InnerText = data.brushpath.ToString();
                 _ColorDataNode.AppendChild(brushpath);
 
-                XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradiantEndPoint");
-                gradiantEndPoint.InnerText = data.gradiantEndPoint.ToString();
+                XmlNode gradiantEndPoint = xmlDocument.CreateElement("gradientEndPoint");
+                gradiantEndPoint.InnerText = data.gradientEndPoint.ToString();
                 _ColorDataNode.AppendChild(gradiantEndPoint);
 
-                XmlNode gradiantOrigin = xmlDocument.CreateElement("gradiantOrigin");
-                gradiantOrigin.InnerText = data.gradiantOrigin.ToString();
+                XmlNode gradiantOrigin = xmlDocument.CreateElement("gradientOrigin");
+                gradiantOrigin.InnerText = data.gradientOrigin.ToString();
                 _ColorDataNode.AppendChild(gradiantOrigin);
 
-                XmlNode gradiantStartPoint = xmlDocument.CreateElement("gradiantStartPoint");
-                gradiantStartPoint.InnerText = data.gradiantStartPoint.ToString();
+                XmlNode gradiantStartPoint = xmlDocument.CreateElement("gradientStartPoint");
+                gradiantStartPoint.InnerText = data.gradientStartPoint.ToString();
                 _ColorDataNode.AppendChild(gradiantStartPoint);
 
                 XmlNode color1_string = xmlDocument.CreateElement("color1_string");
@@ -154,6 +166,25 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 XmlNode color4_string = xmlDocument.CreateElement("color4_string");
                 color4_string.InnerText = data.color4_string;
                 _ColorDataNode.AppendChild(color4_string);
+
+                XmlNode color5_string = xmlDocument.CreateElement("color5_string");
+                color5_string.InnerText = data.color5_string;
+                _ColorDataNode.AppendChild(color5_string);
+
+                XmlNode color6_string = xmlDocument.CreateElement("color6_string");
+                color6_string.InnerText = data.color6_string;
+                _ColorDataNode.AppendChild(color6_string);
+
+                XmlNode gradientOffsets = xmlDocument.CreateElement("gradientOffsets");
+                _ColorDataNode.AppendChild(gradientOffsets);
+
+                foreach (Double gradientOffset in data.offsets)
+                {
+                    XmlNode offset = xmlDocument.CreateElement("offset");
+                    offset.InnerText = gradientOffset.ToString();
+
+                    gradientOffsets.AppendChild(offset);
+                }
 
                 return _ColorDataNode;
             }
@@ -546,6 +577,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     node_z_position.InnerText = container.GetContainerData().level.ToString();
                     node.AppendChild(node_z_position);
 
+                    XmlNode node_rotation = xmlDocument.CreateElement("rotation");
+                    node_rotation.InnerText = container.GetContainerData().rotation.ToString();
+                    node.AppendChild(node_rotation);
+
                     XmlNode node_Content = new XML_Handler().Content_save(xmlDocument, container);
 
                     if (node_Content != null)
@@ -624,6 +659,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 if (z_position != null)
                 {
                     containerData.level = Int32.Parse(z_position.InnerText);
+                }
+
+                XmlNode? rotation = NodeCheck(node_ContainerData, "rotation");
+                if (rotation != null)
+                {
+                    containerData.rotation = Double.Parse(rotation.InnerText);
                 }
             }
 

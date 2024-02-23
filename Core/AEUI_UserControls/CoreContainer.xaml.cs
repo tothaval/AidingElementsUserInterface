@@ -73,16 +73,16 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             content_border.Child = element;
 
-            //containerData = new ContainerData(canvas.getCanvasData(), element);
-            this.containerData = containerData;
+            this.containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element, canvas.getCanvasData().canvasID);
 
             this.containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
+
+            //containerData = new ContainerData(canvas.getCanvasData(), element);
 
             ContainerDataResources(containerData);
 
             build();
                        
-
             element_border.Background = new SolidColorBrush(Colors.Transparent);
             element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
             
@@ -116,11 +116,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             initialize_container();
         }
 
-        internal void ContainerDataResources(ContainerData? containerData)
+        internal async void ContainerDataResources(ContainerData? containerData)
         {
-            object element = this.containerData.GetElement();
+            //object element = this.containerData.GetElement();
 
-            containerData.element = (UserControl)element;
+            //containerData.element = (UserControl)element;
+
 
             if (containerData == null)
             {
@@ -133,6 +134,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     containerData.settings = new CoreData();
                 }
             }
+
+            containerData.SetContainerDataFilename(this.containerData.ContainerDataFilename);
+            containerData.SetElement(this.containerData.GetElement());
+            containerData.SetCanvasID(this.containerData.CanvasID);
 
             __CoreContainer.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
             __CoreContainer.Resources["ContainerData_borderbrush"] = containerData.settings.borderbrush.GetBrush();
@@ -161,7 +166,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 __CoreContainer.Resources["ContainerData_background"] = containerData.settings.background.GetBrush();
             }
 
-            __CoreContainer.containerData = containerData;
 
             if (content_border.Child != null)
             {
@@ -183,13 +187,14 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     {
                         ((Shape)content_border.Child).Stroke = containerData.settings.borderbrush.GetBrush();
                     }                    
-
-                    //element_border.Background = new SolidColorBrush(Colors.Transparent);
-                    //element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                    //element_border.BorderThickness = new Thickness(0);
                 }
             }
 
+            setRotation(containerData.rotation);            
+
+            await Task.Delay(4);
+
+            this.containerData = containerData;
         }
 
         internal ref CoreCanvas GetCanvas()
@@ -375,22 +380,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         internal void setCanvas(ref CoreCanvas coreCanvas)
         {
             this.canvas = coreCanvas;
-        }
-
-        private void setColors()
-        {
-            //imageFilepath = "-";
-            //imageIsBackground = false;
-
-            //ContainerLogic.ApplyColorOnBorder(
-            //    element_border,
-            //    containerData.GetColorData().brushtype,
-            //    containerData.GetColorData().brushOrientation,
-            //    containerData.GetColorData().color1_string,
-            //    containerData.GetColorData().color2_string,
-            //    containerData.GetColorData().color3_string,
-            //    containerData.GetColorData().color4_string
-            //    );
         }
 
         internal void setContainerData(ContainerData containerData)
