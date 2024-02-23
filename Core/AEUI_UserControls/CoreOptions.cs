@@ -25,12 +25,10 @@ using System.Runtime.InteropServices.ObjectiveC;
 using ComboBox = System.Windows.Controls.ComboBox;
 using AidingElementsUserInterface.Core.MyNote_Data;
 using AidingElementsUserInterface.Core.AEUI_Logic;
+using System.Threading.Tasks;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
-    // noch ein grid einbauen, um dort die BrushSetup usercontrols aufzurufen, damit trennung vom element klar ist,
-    // im element  noch buttons und eine combobox einbauen, um datentypen gezielt verändern zu können.
-
     internal class CoreOptions : CoreContainer
     {
         private Data_Handler handler; // move to SetupData, utilize xaml
@@ -42,7 +40,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private ComboBox CBX_dataTypeSelection = new ComboBox();
 
-
         #region CanvasData CVCs
         private CoreValueChange CVC_canvasName = new CoreValueChange("canvas name");
         private CoreValueChange CVC_element_spacing = new CoreValueChange("element spacing");
@@ -51,7 +48,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         #region ContainerData CVCs
         private CoreValueChange CVC_ContainerDataFilename = new CoreValueChange("container filename");
-        private CoreValueChange CVC_z_position = new CoreValueChange("level");
+        private CoreValueChange CVC_rotation = new CoreValueChange("rotation");
+        private CoreValueChange CVC_level = new CoreValueChange("level");
         #endregion ContainerData CVCs
 
         #region CoreData CVCs
@@ -168,10 +166,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerData containerData = new ContainerData(new CoreData(), GetContainerData().CanvasID);
 
             wrapPanel.Children.Add(CVC_ContainerDataFilename);
-            wrapPanel.Children.Add(CVC_z_position);
+            wrapPanel.Children.Add(CVC_rotation);
+            wrapPanel.Children.Add(CVC_level);
 
             CVC_ContainerDataFilename.setText(containerData.ContainerDataFilename);
-            CVC_z_position.setText(containerData.level.ToString());
+
+            CVC_rotation.setText(containerData.rotation.ToString());
+            CVC_level.setText(containerData.level.ToString());
 
             CONFIGURATION_CoreData(containerData.settings);
 
@@ -306,8 +307,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_borderbrush.coreButton.button.Click += CVC_borderbrush_Click;
             CVC_foreground.coreButton.button.Click += CVC_foreground_Click;
             CVC_highlight.coreButton.button.Click += CVC_highlight_Click;
-
-
         }
 
         private void CVC_background_Click(object sender, RoutedEventArgs e)
@@ -459,20 +458,22 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             ContainerData containerData = new ContainerData(ParseCoreDataCVCs(), GetContainerData().CanvasID);
 
-            containerData.ContainerDataFilename = CVC_ContainerDataFilename.value;
-            containerData.level = int.Parse(CVC_z_position.Value);
+            containerData.ContainerDataFilename = CVC_ContainerDataFilename.Value;
+            containerData.level = int.Parse(CVC_level.Value);
+            containerData.rotation = Double.Parse(CVC_rotation.Value);
 
             return containerData;
         }
 
         private CoreData ParseCoreDataCVCs()
         {
-            CoreData coreData = new CoreData();
-
-            coreData.background = (ColorData)CVC_background._Object;
-            coreData.borderbrush = (ColorData)CVC_borderbrush._Object;
-            coreData.foreground = (ColorData)CVC_foreground._Object;
-            coreData.highlight = (ColorData)CVC_highlight._Object;
+            CoreData coreData = new CoreData()
+            {
+                background = (ColorData)CVC_background._Object,
+                borderbrush = (ColorData)CVC_borderbrush._Object,
+                foreground = (ColorData)CVC_foreground._Object,
+                highlight = (ColorData)CVC_highlight._Object
+            };
 
             string splitter = CVC_cornerRadius.value;
             string[] split = splitter.Split(',');
@@ -527,10 +528,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             if (File.Exists(mainWindowData.background.brushpath))
             {
                 Application.Current.MainWindow.Resources["MainWindowData_image"] = mainWindowData.background.GetBrush();
-                Application.Current.MainWindow.Resources["MainWindowData_background"] = mainWindowData.background.GetBrush();                
+                Application.Current.MainWindow.Resources["MainWindowData_background"] = mainWindowData.background.GetBrush();
             }
 
             new SharedLogic().GetMainWindow().border.Background = mainWindowData.background.GetBrush();
+
+            mainWindowData.width = new SharedLogic().GetMainWindow().mainWindowData.width;
+            mainWindowData.height = new SharedLogic().GetMainWindow().mainWindowData.height;
+
+            new SharedLogic().GetMainWindow().mainWindowData = mainWindowData;
 
             handler.SetMainWindowData(mainWindowData);
         }

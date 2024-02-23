@@ -34,6 +34,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void build()
         {
+            CB_AdjustSelection.setContent("apply to selection");
+
             CVC_X.setIdentifier("x: "); CVC_X.setText("0");
             CVC_Y.setIdentifier("y: "); CVC_Y.setText("0");
 

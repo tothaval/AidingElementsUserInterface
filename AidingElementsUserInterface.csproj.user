@@ -10,9 +10,6 @@
     <Compile Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Core\AEUI_SystemControls\LevelSystemDisplay.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Core\AEUI_SystemControls\SystemCanvas.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -157,9 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Core\AEUI_SystemControls\CoreCanvasSwitch.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Core\AEUI_SystemControls\LevelSystemDisplay.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Core\AEUI_SystemControls\SystemCanvas.xaml">

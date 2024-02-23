@@ -195,6 +195,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void setObject(object _object)
         {
+            //if (_object.GetType() == typeof(ColorData))
+            //{
+            //    MessageBox.Show($"{((ColorData)_object).color1_string}");
+            //}            
+
             this._object = _object;
         }
 
@@ -268,6 +273,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             {
                 value = CTB_Value.getText();
             }
+
+            //e.Handled = true;
         }
 
         private void textbox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

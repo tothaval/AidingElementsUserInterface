@@ -25,7 +25,7 @@
             BorderThickness="{DynamicResource CanvasData_thickness}"
             CornerRadius="{DynamicResource CanvasData_cornerRadius}"
             Background="{DynamicResource CanvasData_background}">
-    <Grid 
+        <Grid 
                    >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -59,35 +59,40 @@
                 Grid.RowSpan="2"
                 >
 
-            <ScrollViewer x:Name="SV_canvasZoom"
-                          VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Auto"
-                          CanContentScroll="False"
-                          ClipToBounds="True"
-                          Background="Transparent">
-                <Canvas x:Name="canvas"
-                        
-                        Focusable="True"
-                        Background="Transparent"                   
-            
-                    SnapsToDevicePixels="True"            
-                    
-                    Height="{DynamicResource CanvasData_height}"
-                    Width="{DynamicResource CanvasData_width}"
+                <ScrollViewer x:Name="SV_canvasZoom"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Auto"
+                              CanContentScroll="True"                          
+                              ClipToBounds="True"
+                              Background="Transparent"
+                              MouseDoubleClick="SV_canvasZoom_MouseDoubleClick"
+                              >
+                    <Canvas x:Name="canvas"
+                            Focusable="True"
+                            Background="Transparent"                            
+                            
+                            SnapsToDevicePixels="True"
+                            
+                            Height="{DynamicResource CanvasData_height}"
+                            Width="{DynamicResource CanvasData_width}"
                 
-                    Drop="canvas_Drop"
-                    
-                    Loaded="canvas_Loaded"
-                    MouseDown="canvas_MouseDown"
-                    MouseLeftButtonDown="canvas_MouseLeftButtonDown"
-                    MouseMove="canvas_MouseMove"
-                    MouseUp="canvas_MouseUp"
-                    PreviewDragOver="canvas_PreviewDragOver"
+                            Drop="canvas_Drop"
+                            
+                            Loaded="canvas_Loaded"
+                            MouseDown="canvas_MouseDown"
+                            MouseLeftButtonDown="canvas_MouseLeftButtonDown"                            
+                            MouseLeftButtonUp="canvas_MouseLeftButtonUp"
+                            MouseMove="canvas_MouseMove"
+                            MouseUp="canvas_MouseUp"
+                        
+                            MouseWheel="canvas_MouseWheel"
+                        
+                            PreviewDragOver="canvas_PreviewDragOver"
             
-                    PreviewKeyDown="canvas_KeyDown"
-                    PreviewKeyUp="canvas_KeyUp"/>
-            </ScrollViewer>
-        </Border>
+                            PreviewKeyDown="canvas_KeyDown"
+                            PreviewKeyUp="canvas_KeyUp"/>
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Border>
 </UserControl>

@@ -18,28 +18,36 @@
              xmlns:usercontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Orientation="Horizontal"
-                HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
-        <core:CoreButton x:Name="CB_First"/>
-        <core:CoreButton x:Name="CB_Prev"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-        <usercontrols:CoreLabel x:Name="CL_LevelId"/>
+        <StackPanel Grid.Column="0"
+                    Grid.Row="0"
+                    Orientation="Horizontal">
+            <core:CoreButton x:Name="CB_First"/>
+            <core:CoreButton x:Name="CB_Prev"/>
 
-        <StackPanel Orientation="Horizontal">
+            <usercontrols:CoreLabel x:Name="CL_LevelId"/>
+
             <Border x:Name="border_LevelNameCL"
                     Visibility="Visible">
                 <usercontrols:CoreLabel x:Name="CL_LevelName"/>
-
             </Border>
 
             <Border x:Name="border_LevelNameCTB"
                     Visibility="Collapsed">
                 <core:CoreTextBox x:Name="CTB_LevelName"/>
             </Border>
-        </StackPanel>
 
-        <StackPanel Orientation="Horizontal">
             <Border x:Name="border_LevelDescCL"
                     Visibility="Visible">
                 <usercontrols:CoreLabel x:Name="CL_LevelDescription"/>
@@ -50,29 +58,34 @@
                     Visibility="Collapsed">
                 <core:CoreTextBox x:Name="CTB_LevelDescription"/>
             </Border>
+
+            <usercontrols:CoreLabel x:Name="CL_LevelLogin"/>
+
+            <core:CoreButton x:Name="CB_Zero"/>
         </StackPanel>
 
 
-        <usercontrols:CoreLabel x:Name="CL_LevelLogin"/>
+        <core:CoreButton x:Name="CB_LevelBackground"
+                             Grid.Column="1"
+                             Grid.Row="0"/>
+        <Border Name="border_LevelBackground"
+                    Visibility="Collapsed"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    />
 
 
-        <core:CoreButton x:Name="CB_Zero"/>
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="2"
+                    Grid.Row="0">
+            <usercontrols:CoreLabel x:Name="CL_LevelSecurityPanel"
+                                    Visibility="Hidden"/>
 
-        <StackPanel Orientation="Vertical">
-            <core:CoreButton x:Name="CB_LevelBackground"/>
-            <Border Name="border_LevelBackground"
-                    Visibility="Collapsed"/>
+            <usercontrols:CoreLabel x:Name="CL_LevelElementCount"/>
+
+            <core:CoreButton x:Name="CB_Next"/>
+            <core:CoreButton x:Name="CB_Last"/>
         </StackPanel>
-
-
-        <usercontrols:CoreLabel x:Name="CL_LevelSecurityPanel"
-                             Visibility="Hidden"/>
-
-        <usercontrols:CoreLabel x:Name="CL_LevelElementCount"/>
-
-        <core:CoreButton x:Name="CB_Next"/>
-        <core:CoreButton x:Name="CB_Last"/>
-
-    </StackPanel>
+    </Grid>
 </UserControl>
 <!-- end of file -->

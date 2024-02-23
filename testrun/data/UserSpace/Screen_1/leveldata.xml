@@ -10,13 +10,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -26,17 +29,27 @@
     <SECURITY_FLAG>False</SECURITY_FLAG>
     <LOGIN_FLAG>False</LOGIN_FLAG>
     <VISIBILITY_FLAG>True</VISIBILITY_FLAG>
-    <HASBACKGROUND>False</HASBACKGROUND>
+    <HASBACKGROUND>True</HASBACKGROUND>
     <background>
-      <brushtype>SolidColorBrush</brushtype>
+      <brushtype>LinearGradientBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;0,5</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;1</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#BCB6F0CC</color6_string>
+      <gradientOffsets>
+        <offset>0</offset>
+        <offset>0,2</offset>
+        <offset>0,4</offset>
+        <offset>0,6</offset>
+        <offset>0,8</offset>
+        <offset>1</offset>
+      </gradientOffsets>
     </background>
   </LevelData>
   <LevelData>
@@ -46,17 +59,27 @@
     <SECURITY_FLAG>False</SECURITY_FLAG>
     <LOGIN_FLAG>False</LOGIN_FLAG>
     <VISIBILITY_FLAG>True</VISIBILITY_FLAG>
-    <HASBACKGROUND>False</HASBACKGROUND>
+    <HASBACKGROUND>True</HASBACKGROUND>
     <background>
-      <brushtype>SolidColorBrush</brushtype>
+      <brushtype>RadialGradientBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
-      <color2_string>#FF000000</color2_string>
+      <color2_string>#FFFF3ECD</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets>
+        <offset>0</offset>
+        <offset>0,2</offset>
+        <offset>0,4</offset>
+        <offset>0,5</offset>
+        <offset>0,6</offset>
+        <offset>1</offset>
+      </gradientOffsets>
     </background>
   </LevelData>
   <LevelData>
@@ -66,17 +89,20 @@
     <SECURITY_FLAG>False</SECURITY_FLAG>
     <LOGIN_FLAG>False</LOGIN_FLAG>
     <VISIBILITY_FLAG>True</VISIBILITY_FLAG>
-    <HASBACKGROUND>False</HASBACKGROUND>
+    <HASBACKGROUND>True</HASBACKGROUND>
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
-      <color1_string>#FFFFEBCD</color1_string>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
+      <color1_string>#FF000000</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -90,13 +116,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -110,13 +139,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -130,13 +162,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -150,13 +185,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -170,13 +208,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -190,13 +231,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -210,13 +254,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -230,13 +277,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -250,13 +300,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -270,13 +323,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -290,13 +346,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -310,13 +369,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -330,13 +392,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -350,13 +415,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -370,13 +438,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -390,13 +461,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -410,13 +484,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -430,13 +507,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -450,13 +530,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -470,13 +553,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -490,13 +576,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -510,13 +599,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -530,13 +622,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -550,13 +645,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -570,13 +668,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -590,13 +691,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -610,13 +714,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -630,13 +737,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -650,13 +760,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -670,13 +783,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -690,13 +806,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -710,13 +829,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -730,13 +852,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -750,13 +875,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -770,13 +898,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -790,13 +921,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -810,13 +944,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -830,13 +967,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -850,13 +990,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -870,13 +1013,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -890,13 +1036,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -910,13 +1059,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -930,13 +1082,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -950,13 +1105,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -970,13 +1128,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -990,13 +1151,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1010,13 +1174,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1030,13 +1197,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1050,13 +1220,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1070,13 +1243,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1090,13 +1266,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1110,13 +1289,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1130,13 +1312,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1150,13 +1335,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1170,13 +1358,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1190,13 +1381,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1210,13 +1404,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1230,13 +1427,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1250,13 +1450,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1270,13 +1473,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1290,13 +1496,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1310,13 +1519,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1330,13 +1542,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1350,13 +1565,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1370,13 +1588,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1390,13 +1611,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1410,13 +1634,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1430,13 +1657,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1450,13 +1680,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1470,13 +1703,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1490,13 +1726,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1510,13 +1749,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1530,13 +1772,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1550,13 +1795,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1570,13 +1818,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1590,13 +1841,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1610,13 +1864,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1630,13 +1887,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1650,13 +1910,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1670,13 +1933,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1690,13 +1956,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1710,13 +1979,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1730,13 +2002,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1750,13 +2025,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1770,13 +2048,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1790,13 +2071,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1810,13 +2094,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1830,13 +2117,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1850,13 +2140,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1870,13 +2163,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1890,13 +2186,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1910,13 +2209,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1930,13 +2232,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1950,13 +2255,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1970,13 +2278,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -1990,13 +2301,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2010,13 +2324,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2030,13 +2347,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2050,13 +2370,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2070,13 +2393,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2090,13 +2416,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2110,13 +2439,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2130,13 +2462,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2150,13 +2485,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2170,13 +2508,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2190,13 +2531,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2210,13 +2554,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2230,13 +2577,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2250,13 +2600,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2270,13 +2623,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2290,13 +2646,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2310,13 +2669,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2330,13 +2692,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2350,13 +2715,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2370,13 +2738,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2390,13 +2761,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2410,13 +2784,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2430,13 +2807,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2450,13 +2830,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2470,13 +2853,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2490,13 +2876,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2510,13 +2899,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2530,13 +2922,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2550,13 +2945,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2570,13 +2968,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2590,13 +2991,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2610,13 +3014,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2630,13 +3037,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2650,13 +3060,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2670,13 +3083,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2690,13 +3106,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2710,13 +3129,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2730,13 +3152,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2750,13 +3175,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2770,13 +3198,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2790,13 +3221,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2810,13 +3244,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2830,13 +3267,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2850,13 +3290,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2870,13 +3313,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2890,13 +3336,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2910,13 +3359,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2930,13 +3382,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2950,13 +3405,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2970,13 +3428,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -2990,13 +3451,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3010,13 +3474,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3030,13 +3497,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3050,13 +3520,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3070,13 +3543,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3090,13 +3566,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3110,13 +3589,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3130,13 +3612,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3150,13 +3635,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3170,13 +3658,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3190,13 +3681,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3210,13 +3704,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3230,13 +3727,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3250,13 +3750,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3270,13 +3773,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3290,13 +3796,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3310,13 +3819,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3330,13 +3842,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3350,13 +3865,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3370,13 +3888,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3390,13 +3911,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3410,13 +3934,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3430,13 +3957,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3450,13 +3980,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3470,13 +4003,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3490,13 +4026,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3510,13 +4049,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3530,13 +4072,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3550,13 +4095,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3570,13 +4118,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3590,13 +4141,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3610,13 +4164,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3630,13 +4187,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3650,13 +4210,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3670,13 +4233,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3690,13 +4256,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3710,13 +4279,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3730,13 +4302,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3750,13 +4325,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3770,13 +4348,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3790,13 +4371,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3810,13 +4394,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3830,13 +4417,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3850,13 +4440,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3870,13 +4463,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3890,13 +4486,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3910,13 +4509,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3930,13 +4532,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3950,13 +4555,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3970,13 +4578,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -3990,13 +4601,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>
@@ -4010,13 +4624,16 @@
     <background>
       <brushtype>SolidColorBrush</brushtype>
       <brushpath>-</brushpath>
-      <gradiantEndPoint>0,5;0</gradiantEndPoint>
-      <gradiantOrigin>0,5;0,5</gradiantOrigin>
-      <gradiantStartPoint>0,5;1</gradiantStartPoint>
+      <gradientEndPoint>0,5;1</gradientEndPoint>
+      <gradientOrigin>0,5;0,5</gradientOrigin>
+      <gradientStartPoint>0,5;0</gradientStartPoint>
       <color1_string>#FFFFEBCD</color1_string>
       <color2_string>#FF000000</color2_string>
       <color3_string>#EE2F4F4F</color3_string>
       <color4_string>#FF0FFF0F</color4_string>
+      <color5_string>#FFFFFFFF</color5_string>
+      <color6_string>#FF000000</color6_string>
+      <gradientOffsets />
     </background>
   </LevelData>
 </LevelSystem>

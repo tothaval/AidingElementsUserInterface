@@ -21,6 +21,7 @@
 using AidingElementsUserInterface.Core.AEUI_Data;
 
 using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Media;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
@@ -267,7 +268,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
         {
             AddContainerData(data);
 
-            new XML_Handler().ContainerDataTemplate_save();
+            new XML_Handler().ContainerDataTemplate_save(data);
 
             containerData = data;
         }

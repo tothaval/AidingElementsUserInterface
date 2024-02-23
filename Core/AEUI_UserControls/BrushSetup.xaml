@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Rectangle x:Name="ColorField"
+            <Canvas x:Name="ColorField"
                        Grid.Column="0"
                        
                        MinWidth="150"
@@ -38,22 +38,23 @@
             <StackPanel x:Name="SP_ColorSetters"
                         Orientation="Vertical"
                         Grid.Column="2">
+                <local:CoreValueChange x:Name="CVC_ColorStringInput"/>
+
                 <Slider x:Name="S_Alpha"
                         Orientation="Horizontal"
                         Minimum="0"
                         Maximum="255"
                         Interval="1"
                         Value="255"
-                        ValueChanged="S_Alpha_ValueChanged"
                         />
                 <Label/>
+
                 <Slider x:Name="S_Red"
                         Orientation="Horizontal"
                         Minimum="0"
                         Maximum="255"
                         Interval="1"
                         Value="255"
-                        ValueChanged="S_Red_ValueChanged"
                         />
                 <Slider x:Name="S_Green"
                         Orientation="Horizontal"
@@ -61,7 +62,6 @@
                         Maximum="255"
                         Interval="1"
                         Value="255"
-                        ValueChanged="S_Green_ValueChanged"
                         />
                 <Slider x:Name="S_Blue"
                         Orientation="Horizontal"
@@ -69,7 +69,6 @@
                         Maximum="255"
                         Interval="1"
                         Value="255"
-                        ValueChanged="S_Blue_ValueChanged"
                         />
                 <Label/>
                 <Slider x:Name="S_Brightness"
@@ -78,7 +77,6 @@
                         Maximum="100"
                         Interval="5"
                         Value="255"
-                        ValueChanged="S_Brightness_ValueChanged"
                         />
                 <Label/>
                 <Slider x:Name="S_Grey"
@@ -87,7 +85,6 @@
                         Maximum="255"
                         Interval="1"
                         Value="255"
-                        ValueChanged="S_Grey_ValueChanged"
                         />
             </StackPanel>
         </Grid>
@@ -95,6 +92,13 @@
         <StackPanel x:Name="SP_GradientArea"
                     Orientation="Vertical"
                     Visibility="Collapsed">
+            
+            <StackPanel Orientation="Horizontal">
+                <local:CoreValueChange x:Name="CVC_GradientOrigin"/>
+                <local:CoreValueChange x:Name="CVC_GradientStart"/>
+                <local:CoreValueChange x:Name="CVC_GradientStop"/>                
+            </StackPanel>
+
             <StackPanel Orientation="Horizontal">
                 <local:CoreValueChange x:Name="CVC_Gradient1"/>
 
@@ -132,7 +136,7 @@
             </StackPanel>
 
             <Rectangle x:Name="RECT_GradientArea"
-                       MinHeight="100"
+                       MinHeight="150"
                        MinWidth="150"/>
         </StackPanel>
 

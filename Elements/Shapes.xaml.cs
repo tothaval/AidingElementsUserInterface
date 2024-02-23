@@ -4,6 +4,7 @@ using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace AidingElementsUserInterface.Elements
     public partial class Shapes : UserControl
     {
         CoreData coreData;
-        Shape shape;
+        ObservableCollection<Shape> shapes;
 
         // bugs:
         // when changing borderbrush or highlight over coreOptions, background changes too
@@ -52,16 +53,20 @@ namespace AidingElementsUserInterface.Elements
         {
             // use containerdata for all values?
             coreData = new CoreData();
+            shapes = new ObservableCollection<Shape>();
+
+            CVC_Amount.setIdentifier("shape amount");
+            CVC_Amount.setText("1");
 
             CVC_Width.setIdentifier("shape width");
             CVC_Width.setText(coreData.width.ToString());
 
             CVC_Height.setIdentifier("shape height");
             CVC_Height.setText(coreData.height.ToString());
-            
+
             CVC_Rotation.setIdentifier("shape rotation");
             CVC_Rotation.setText("0.0");
-            
+
             CVC_Level.setIdentifier("shape level");
             CVC_Level.setText("1");
 
@@ -74,10 +79,11 @@ namespace AidingElementsUserInterface.Elements
 
         }
 
-        private void CB_AddShape_Click(object sender, RoutedEventArgs e)
+        private async void CB_AddShape_Click(object sender, RoutedEventArgs e)
         {
             double rotation;
             int level;
+            int multitude_offset = 0;
 
             try
             {
@@ -90,34 +96,51 @@ namespace AidingElementsUserInterface.Elements
                 level = 1;
             }
 
-
             GetShape();
-
 
             if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
                 CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
+                              
 
+                foreach (Shape shape in shapes)
+                {
+                    ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
+                    containerData.SetElement(shape);
 
-                ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
-                
-                CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
-                coreContainer.setRotation(rotation);
+                    await Task.Delay(4);
 
-                coreCanvas.add_element_to_canvas(coreContainer, new Point(100, 100));
+                    CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
+                    coreContainer.setRotation(rotation);
+
+                    await Task.Delay(4);
+
+                    coreCanvas.add_element_to_canvas(coreContainer, new Point(100 + multitude_offset, 100 + multitude_offset));
+
+                    multitude_offset += 25;
+                }
             }
             else
             {
                 if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
                 {
                     CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
+                    foreach (Shape shape in shapes)
+                    {
+                        ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
+                        containerData.SetElement(shape);
 
-                    ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
+                        await Task.Delay(4);
 
-                    CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
-                    coreContainer.setRotation(rotation);
+                        CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
+                        coreContainer.setRotation(rotation);
 
-                    coreCanvas.add_element_to_canvas(coreContainer, new Point(100, 100));
+                        await Task.Delay(4);
+
+                        coreCanvas.add_element_to_canvas(coreContainer, new Point(100 + multitude_offset, 100 + multitude_offset));
+
+                        multitude_offset += 25;
+                    }
                 }
             }
 
@@ -127,23 +150,42 @@ namespace AidingElementsUserInterface.Elements
 
         private void GetShape()
         {
+            shapes.Clear();
+
+            int amount;
             double width;
             double height;
 
             try
             {
+                amount = Int32.Parse(CVC_Amount.Value);
                 width = Double.Parse(CVC_Width.Value);
                 height = Double.Parse(CVC_Height.Value);
             }
             catch (Exception)
             {
+                amount = 1;
                 width = coreData.width;
                 height = coreData.height;
             }
 
             if (CBI_Ellipse.IsSelected)
             {
-                Ellipse ellipse = new Ellipse()
+
+                for (int i = 0; i < amount; i++)
+                {
+                    Ellipse ellipse = new Ellipse()
+                    {
+                        Width = width,
+                        Height = height,
+                        Fill = coreData.background.GetBrush(),
+                        Stroke = coreData.borderbrush.GetBrush()
+                    };
+
+                    shapes.Add(ellipse);
+                }
+
+                border_ShapeDisplay.Child = new Ellipse()
                 {
                     Width = width,
                     Height = height,
@@ -151,37 +193,29 @@ namespace AidingElementsUserInterface.Elements
                     Stroke = coreData.borderbrush.GetBrush()
                 };
 
-                shape = new Ellipse()
-                {
-                    Width = width,
-                    Height = height,
-                    Fill = coreData.background.GetBrush(),
-                    Stroke = coreData.borderbrush.GetBrush()
-                };
-
-                border_ShapeDisplay.Child = ellipse;
             }
             else if (CBI_Rectangle.IsSelected)
-            {
-                Rectangle rectangle = new Rectangle()
+            {              
+                for (int i = 0; i < amount; i++)
+                {
+                    Rectangle rectangle = new Rectangle()
+                    {
+                        Width = width,
+                        Height = height,
+                        Fill = coreData.background.GetBrush(),
+                        Stroke = coreData.borderbrush.GetBrush()
+                    };
+
+                    shapes.Add(rectangle);
+                }
+
+                border_ShapeDisplay.Child = new Rectangle()
                 {
                     Width = width,
                     Height = height,
                     Fill = coreData.background.GetBrush(),
                     Stroke = coreData.borderbrush.GetBrush()
                 };
-
-
-                shape = new Rectangle()
-                {
-                    Width = width,
-                    Height = height,
-                    Fill = coreData.background.GetBrush(),
-                    Stroke = coreData.borderbrush.GetBrush()
-                };
-
-
-                border_ShapeDisplay.Child = rectangle;
             }
         }
 

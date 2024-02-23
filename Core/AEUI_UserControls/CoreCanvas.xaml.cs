@@ -30,6 +30,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using static AidingElementsUserInterface.Core.AEUI_UserControls.Adjust;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using DragEventArgs = System.Windows.DragEventArgs;
@@ -58,6 +59,9 @@ namespace AidingElementsUserInterface.Core
         private CallCentral callCentral;
 
         private bool SYSTEM_CANVAS_FLAG = false;
+
+        private Point image_offset;
+        private Point mouse_position;
 
         internal CoreCanvas(CanvasData canvasData)
         {
@@ -195,9 +199,21 @@ namespace AidingElementsUserInterface.Core
                 Canvas.SetTop(item, data.y);
                 item.setRotation(data.rotation);
 
-                item.element_border.Width = data.width;
-                item.element_border.Height = data.height;
+                if (item.GetContainerData().GetElement() != null)
+                {
+                    if (item.GetContainerData().GetElement().GetType().IsSubclassOf(typeof(Shape)))
+                    {
+                        ((Shape)item.content_border.Child).Width = data.width;
+                        ((Shape)item.content_border.Child).Height = data.height;
+                    }
+                    else
+                    {
+                        item.content_border.Width = data.width;
+                        item.content_border.Height = data.height;
+                    }
+                }
 
+                OnChildDesiredSizeChanged(item);
                 Panel.SetZIndex(item, data.level);
             }
         }
@@ -338,16 +354,15 @@ namespace AidingElementsUserInterface.Core
             {
                 CoreCanvasBorder.Resources["CanvasData_image"] = canvasData.background.GetBrush();
                 CoreCanvasBorder.Resources["CanvasData_background"] = canvasData.background.GetBrush();
-
-                CoreCanvasBorder.Background = canvasData.background.GetBrush();
             }
+            CoreCanvasBorder.Background = canvasData.background.GetBrush();
 
             this.config = canvasData;
         }
 
         internal void NoLevelBackground()
         {
-            CoreCanvasBorder.Background = config.background.GetBrush();                     
+            CoreCanvasBorder.Background = config.background.GetBrush();
         }
 
         internal void SetBackground(ColorData colorData)
@@ -355,7 +370,7 @@ namespace AidingElementsUserInterface.Core
             if (colorData != null)
             {
                 CoreCanvasBorder.Background = colorData.GetBrush();
-            }            
+            }
         }
 
         internal void ChangeSelectionData(ContainerData containerData)
@@ -691,25 +706,30 @@ namespace AidingElementsUserInterface.Core
                 {
                     CoreContainer sinnlos = child as CoreContainer;
 
-                    if (sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
+                    if (sinnlos.GetContainerData().element != null)
                     {
-                        if (state.Equals("all"))
-                        {
-                            sinnlos.Visibility = Visibility.Visible;
-                        }
-                        if (state.Equals("range"))
-                        {
 
-                        }
-                        if (state.Equals("level"))
+
+                        if (sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
                         {
-                            if (Panel.GetZIndex(sinnlos) == newLevel && state.Equals("level"))
+                            if (state.Equals("all"))
                             {
                                 sinnlos.Visibility = Visibility.Visible;
                             }
-                            else
+                            if (state.Equals("range"))
                             {
-                                sinnlos.Visibility = Visibility.Collapsed;
+
+                            }
+                            if (state.Equals("level"))
+                            {
+                                if (Panel.GetZIndex(sinnlos) == newLevel && state.Equals("level"))
+                                {
+                                    sinnlos.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    sinnlos.Visibility = Visibility.Collapsed;
+                                }
                             }
                         }
                     }
@@ -809,6 +829,20 @@ namespace AidingElementsUserInterface.Core
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                canvas.CaptureMouse();
+
+                mouse_position = e.GetPosition(CoreCanvasBorder);
+                image_offset.X = canvas.RenderTransform.Value.OffsetX;
+                image_offset.Y = canvas.RenderTransform.Value.OffsetY;
+
+            }
+            if (canvas.IsMouseCaptured)
+            {
+                return;
+            }
+
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
@@ -841,6 +875,20 @@ namespace AidingElementsUserInterface.Core
                 canvas.Children.Remove(selection_rectangle);
                 //selection_rectangle = null;
             }
+
+            if (!canvas.IsMouseCaptured) return;
+
+            if (canvas.IsMouseCaptured)
+            {
+                Point p = e.MouseDevice.GetPosition(CoreCanvasBorder);
+
+                Matrix m = canvas.RenderTransform.Value;
+                m.OffsetX = image_offset.X + (p.X - mouse_position.X);
+                m.OffsetY = image_offset.Y + (p.Y - mouse_position.Y);
+
+                canvas.RenderTransform = new MatrixTransform(m);
+
+            }
         }
 
         private void canvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -866,6 +914,48 @@ namespace AidingElementsUserInterface.Core
 
         #endregion events
 
+        private void SV_canvasZoom_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            canvas.RenderTransform = new MatrixTransform(1, 0, 0, 1, 0, 0);
+            canvas.Background = new SolidColorBrush(Colors.Transparent);
+
+            e.Handled = true;
+        }
+
+        private void canvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            Point p = e.MouseDevice.GetPosition(canvas);
+
+            Matrix m = canvas.RenderTransform.Value;
+            if (e.Delta > 0)
+            {
+                m.ScaleAtPrepend(1.2, 1.2, p.X, p.Y);
+            }
+            else
+            {
+                if (canvas.RenderTransform.Value.M11 > 0.095 && canvas.RenderTransform.Value.M22 > 0.095)
+                {
+                    m.ScaleAtPrepend(1 / 1.2, 1 / 1.2, p.X, p.Y);
+                }
+            }
+
+            canvas.RenderTransform = new MatrixTransform(m);
+
+            canvas.Background = new SolidColorBrush(Color.FromArgb(77,255,255,255));
+
+            e.Handled = true;
+
+        }
+
+        private void canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Released)
+            {
+                canvas.ReleaseMouseCapture();
+
+                //e.Handled = true;
+            }
+        }
     }
 }
 /*  END OF FILE
