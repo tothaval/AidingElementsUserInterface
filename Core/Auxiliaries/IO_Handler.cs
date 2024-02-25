@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace AidingElementsUserInterface.Core.Auxiliaries
 {
@@ -71,7 +72,7 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             check_path(SYSTEM_Container_folder);
 
             check_path(UserSpace_folder);
-            
+
             for (int i = 1; i < CoreCanvasSwitchData.Get_CORECANVAS_CAP; i++)
             {
                 string screen_folder = $"{UserSpace_folder}\\Screen_{i}\\";
@@ -86,6 +87,31 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
             check_path(MyNote_notes_folder);
             check_path(MyNote_notes_matrix_folder);
             check_path(MyNote_xml_folder);
+        }
+
+        internal long check_folder_size(string folder_path)
+        {
+            // thx to: https://stackoverflow.com/questions/468119/whats-the-best-way-to-calculate-the-size-of-a-directory-in-net
+
+            DirectoryInfo folder = new DirectoryInfo(folder_path);
+
+            long size = 0;
+
+            // Add file sizes.
+            FileInfo[] files = folder.GetFiles();
+            foreach (FileInfo item in files)
+            {
+                size += item.Length;
+            }
+
+            // Add subdirectory sizes.
+            DirectoryInfo[] directories = folder.GetDirectories();
+
+            foreach (DirectoryInfo item in directories)
+            {
+                size += check_folder_size(item.FullName);
+            }
+            return size;
         }
 
         protected bool check_path(string path)

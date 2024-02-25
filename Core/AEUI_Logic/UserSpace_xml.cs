@@ -1,4 +1,13 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
+﻿/* Aiding Elements User Interface
+ *      UserSpace_xml class
+ * 
+ * class provides separated xml save and load functions for userspace
+ * 
+ * init:        2024|02|05
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
 using AidingElementsUserInterface.Core.MyNote_Data;
@@ -227,16 +236,15 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                         colorData.color6_string = color6_string.InnerText;
                     }
 
-                    //XmlNode gradientOffsets = xmlDocument.CreateElement("gradientOffsets");
-                    //_ColorDataNode.AppendChild(gradientOffsets);
+                    XmlNode? gradientOffsets = node_ColorDataNode.SelectSingleNode("gradientOffsets");
 
-                    //foreach (Double gradientOffset in data.offsets)
-                    //{
-                    //    XmlNode offset = xmlDocument.CreateElement("offset");
-                    //    offset.InnerText = gradientOffset.ToString();
-
-                    //    gradientOffsets.AppendChild(offset);
-                    //}
+                    if (gradientOffsets != null)
+                    {
+                        foreach (XmlNode item in gradientOffsets.ChildNodes)
+                        {
+                            colorData.offsets.Add(Convert.ToDouble(item.InnerText));
+                        }
+                    }
                 }
             }
 
@@ -405,8 +413,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                                 }
 
                                 containerData.SetElement(userControl);
-                                userControl.ToolTip = containerData.settings.background.brushtype + "\n" +
-                                    containerData.settings.background.color1_string;
 
                                 CoreContainer coreContainer = new CoreContainer(containerData, userControl);
                                 coreContainer.setPosition(container_position);
@@ -430,6 +436,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
             if (coreContainer != null)
             {
+                container.GetContainerData().settings.width = container.content_border.ActualWidth;
+                container.GetContainerData().settings.height = container.content_border.ActualHeight;
+
                 XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
 
                 xmlDocument.AppendChild(node_ContainerData);
@@ -965,3 +974,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

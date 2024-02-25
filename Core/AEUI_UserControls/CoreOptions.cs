@@ -108,6 +108,21 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void ApplySelectionChange()
         {
+            if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.Button)
+            {
+                if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                {
+                    new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.ChangeSelectionButtonData(ParseCoreDataCVCs());
+                }
+                else
+                {
+                    if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                    {
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ChangeSelectionButtonData(ParseCoreDataCVCs());
+                    }
+                }
+            }
+
             if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.Container)
             {
                 if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
@@ -119,6 +134,36 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
                     {
                         new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ChangeSelectionData(ParseContainerDataCVCs());
+                    }
+                }
+            }
+            
+            if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.Label)
+            {
+                if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                {
+                    new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.ChangeSelectionLabelData(ParseCoreDataCVCs());
+                }
+                else
+                {
+                    if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                    {
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ChangeSelectionLabelData(ParseCoreDataCVCs());
+                    }
+                }
+            }
+
+            if (CBX_dataTypeSelection.SelectedIndex == (int)AEUI_Data_Types.TextBox)
+            {
+                if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+                {
+                    new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.ChangeSelectionTextBoxData(ParseCoreDataCVCs());
+                }
+                else
+                {
+                    if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                    {
+                        new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ChangeSelectionTextBoxData(ParseCoreDataCVCs());
                     }
                 }
             }
@@ -233,8 +278,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_fontFamily.setText(coreData.fontFamily.ToString());
             CVC_height.setText(coreData.height.ToString());
             CVC_width.setText(coreData.width.ToString());
-
-            CB_changeSelection.Visibility = Visibility.Collapsed;
         }
 
         private void CONFIGURATION_MainWindowData()
@@ -265,7 +308,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Button);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Label);
             CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.TextBox);
-            CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Core);
+            //CBX_dataTypeSelection.Items.Add(AEUI_Data_Types.Core);
 
             hideContainerNesting(this);
 
@@ -426,19 +469,23 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
                 case (int)AEUI_Data_Types.Button:
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetButtonData());
+                    CB_changeSelection.Visibility = Visibility.Visible;
                     break;
 
                 case (int)AEUI_Data_Types.Label:
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetLabelData());
+                    CB_changeSelection.Visibility = Visibility.Visible;
                     break;
 
                 case (int)AEUI_Data_Types.TextBox:
                     CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetTextBoxData());
+                    CB_changeSelection.Visibility = Visibility.Visible;
                     break;
 
-                case (int)AEUI_Data_Types.Core:
-                    CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetCoreData());
-                    break;
+                //case (int)AEUI_Data_Types.Core:
+                //    CONFIGURATION_CoreData(new SharedLogic().GetDataHandler().GetCoreData());
+                //    CB_changeSelection.Visibility = Visibility.Collapsed;
+                //    break;
 
                 default:
                     break;

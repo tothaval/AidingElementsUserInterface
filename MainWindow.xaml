@@ -137,6 +137,7 @@
         <Grid x:Name="grid" Background="Transparent">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="7"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="7"/>
             </Grid.ColumnDefinitions>
@@ -158,6 +159,7 @@
                      Opacity="0"/>
 
             <StackPanel Grid.Column="1"
+                        Grid.ColumnSpan="2"
                         Grid.Row="1"
                         Orientation="Horizontal">
                 <Border>
@@ -170,6 +172,11 @@
                         <MenuItem x:Name="MI_AEUI_CTRL"
                           Header="control"                          
                           >
+
+                            <MenuItem x:Name="MI_Screens"
+                          Header="Screens"
+                          Click="MI_Screens_Click"/>
+
 
                             <MenuItem x:Name="MI_Command"
                           Header="Command"
@@ -402,16 +409,24 @@
 
             </StackPanel>
 
+            <Border x:Name="border_ScreensOverview"
+                    Visibility="Collapsed"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    VerticalAlignment="Center">
+            </Border>
+            
+
             <Border x:Name="border_CORE_CANVAS_SWITCH"
                         Visibility="Visible"
-                    Grid.Column="1"                    
+                    Grid.Column="2"                    
                     Grid.Row="3">
                 <systemcontrols:CoreCanvasSwitch x:Name="CORE_CANVAS_SWITCH"/>
             </Border>
 
             <Border x:Name="border_SYSTEM_CANVAS"
                     Visibility="Collapsed"
-                    Grid.Column="1"                    
+                    Grid.Column="2"                    
                     Grid.Row="3">
                 <systemcontrols:SystemCanvas x:Name="SYSTEM_CANVAS"/>
             </Border>

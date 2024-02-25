@@ -98,7 +98,7 @@ namespace AidingElementsUserInterface.Core
                 this.Resources["TextBoxData_MaxHeight"] = config.height;
             }
 
-            ButtonDataResources();
+            //ButtonDataResources();
         }
 
         private void ButtonDataResources()

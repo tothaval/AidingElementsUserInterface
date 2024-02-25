@@ -169,8 +169,19 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             Set_ACTIVE_CANVAS();
         }        
 
+        internal void jumpToScreen(int ScreenID)
+        {
+            Get_ACTIVE_CANVAS().unsetLSD();
+
+            ACTIVE_CANVAS_ID = ScreenID;
+
+            Set_ACTIVE_CANVAS();               
+        }
+
         private void Left()
         {
+            Get_ACTIVE_CANVAS().unsetLSD();
+
             ACTIVE_CANVAS_ID--;
 
             if (ACTIVE_CANVAS_ID < 0)
@@ -193,6 +204,8 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
         private void Right()
         {
+            Get_ACTIVE_CANVAS().unsetLSD();
+
             ACTIVE_CANVAS_ID++;
 
             if (ACTIVE_CANVAS_ID > CoreCanvasSwitchData.Get_CORECANVAS_CAP - 2)
@@ -260,7 +273,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 
             CTB_canvasNameChange.setText(coreCanvasScreens[ACTIVE_CANVAS_ID].getCanvasData().canvasName);
 
-            CL_canvasNameDisplay.setText(CTB_canvasNameChange.getText());
+            CL_canvasNameDisplay.setText(CTB_canvasNameChange.getText());                       
         }
 
         private void CB_left_Click(object sender, RoutedEventArgs e)

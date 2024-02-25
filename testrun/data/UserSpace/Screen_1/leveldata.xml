@@ -72,14 +72,7 @@
       <color4_string>#FF0FFF0F</color4_string>
       <color5_string>#FFFFFFFF</color5_string>
       <color6_string>#FF000000</color6_string>
-      <gradientOffsets>
-        <offset>0</offset>
-        <offset>0,2</offset>
-        <offset>0,4</offset>
-        <offset>0,5</offset>
-        <offset>0,6</offset>
-        <offset>1</offset>
-      </gradientOffsets>
+      <gradientOffsets />
     </background>
   </LevelData>
   <LevelData>

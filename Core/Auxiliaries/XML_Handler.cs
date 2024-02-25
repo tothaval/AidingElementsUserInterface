@@ -367,10 +367,6 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
 
         #endregion Container loading
 
-        #region Container saving
-   
-        #endregion Container saving
-
         // ContainerData saving
         #region ContainerData saving
         internal XmlNode? ContainerData_save(XmlDocument xmlDocument, ContainerData containerData)
@@ -566,6 +562,17 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 if (color6_string != null)
                 {
                     colorData.color6_string = color6_string.InnerText;
+                }
+
+
+                XmlNode? gradientOffsets = node_ColorDataNode.SelectSingleNode("gradientOffsets");
+
+                if (gradientOffsets != null)
+                {
+                    foreach (XmlNode item in gradientOffsets.ChildNodes)
+                    {
+                        colorData.offsets.Add(Convert.ToDouble(item.InnerText));
+                    }
                 }
             }
 

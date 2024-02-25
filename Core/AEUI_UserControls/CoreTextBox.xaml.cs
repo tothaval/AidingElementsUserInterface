@@ -79,38 +79,9 @@ namespace AidingElementsUserInterface.Core
 
             textbox.Padding = new Thickness(7, 3, 7, 3);
 
-            TextBoxDataResources();
+            //TextBoxDataResources();
         }
 
-        private void TextBoxDataResources()
-        {
-            CoreData textBoxData = config;
-
-            if (textBoxData == null)
-            {
-                textBoxData = new CoreData();
-            }
-
-            __CoreTextBox.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
-            __CoreTextBox.Resources["TextBoxData_borderbrush"] = textBoxData.borderbrush.GetBrush();
-            __CoreTextBox.Resources["TextBoxData_foreground"] = textBoxData.foreground.GetBrush();
-            __CoreTextBox.Resources["TextBoxData_highlight"] = textBoxData.highlight.GetBrush();
-            
-            __CoreTextBox.Resources["TextBoxData_cornerRadius"] = textBoxData.cornerRadius;
-            __CoreTextBox.Resources["TextBoxData_thickness"] = textBoxData.thickness;
-            
-            __CoreTextBox.Resources["TextBoxData_fontSize"] = (double)textBoxData.fontSize;
-            __CoreTextBox.Resources["TextBoxData_fontFamily"] = textBoxData.fontFamily;
-            
-            __CoreTextBox.Resources["TextBoxData_width"] = textBoxData.width;
-            __CoreTextBox.Resources["TextBoxData_height"] = textBoxData.height;
-
-            if (File.Exists(textBoxData.background.brushpath))
-            {
-                __CoreTextBox.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
-                __CoreTextBox.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
-            }
-        }
 
 
 

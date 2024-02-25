@@ -13,6 +13,7 @@ using AidingElementsUserInterface.Core.AEUI_Logic;
 using AidingElementsUserInterface.Core.Auxiliaries;
 
 using System;
+using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +34,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private CoreCanvas canvas;
         private ContainerData containerData;
 
+        CoreData? buttonData;
+        CoreData? labelData;
+        CoreData? textBoxData;
+
         private object element { get; set; }
 
         internal object Element => element;
@@ -42,6 +47,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private bool elementDrag = false;
         private bool container_is_selected = false;
 
+        // constructors
         #region constructors
         public CoreContainer()
         {
@@ -65,7 +71,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal CoreContainer(Shape element, ContainerData containerData, ref CoreCanvas canvas)
         {
-
             InitializeComponent();
 
             this.canvas = canvas;
@@ -82,21 +87,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerDataResources(containerData);
 
             build();
-                       
+
             element_border.Background = new SolidColorBrush(Colors.Transparent);
             element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            
-            //element.Fill = new SolidColorBrush(Colors.Transparent);
-            //element.Stroke = new SolidColorBrush(Colors.Transparent);
-            //element_border.BorderThickness = new Thickness(0);
-
-
-            //ColumnLeft.Width = new GridLength(0);
-            //ColumnRight.Width = new GridLength(0);
-
-            //RowTop.Height = new GridLength(0);
-            //RowBottom.Height = new GridLength(0);
-            }
+        }
 
         internal CoreContainer(UserControl element, ref CoreCanvas canvas)
         {
@@ -106,7 +100,6 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             this.canvas = canvas;
             this.element = element;
 
-            //containerData = new ContainerData(canvas.getCanvasData(), element);
             containerData = new ContainerData(new SharedLogic().GetDataHandler().LoadCoreData(), element, canvas.getCanvasData().canvasID);
 
             containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
@@ -114,6 +107,108 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             ContainerDataResources(containerData);
 
             initialize_container();
+        }
+        #endregion constructors
+
+
+        private void build()
+        {
+            Background = new SolidColorBrush(Colors.Transparent);
+
+            register_events();
+        }
+
+        internal void setButtonData(CoreData buttonData)
+        {
+            // thought applying resources on surrounding context of button 
+            // would overwrite application wide resource setting, but it does not   
+
+            if (buttonData == null)
+            {
+                buttonData = new CoreData();
+            }
+
+            __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
+
+            __CoreContainer.content_border.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
+            __CoreContainer.content_border.Resources["ButtonData_thickness"] = buttonData.thickness;
+
+            __CoreContainer.content_border.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
+            __CoreContainer.content_border.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
+
+            __CoreContainer.content_border.Resources["ButtonData_width"] = buttonData.width;
+            __CoreContainer.content_border.Resources["ButtonData_height"] = buttonData.height;
+
+            if (File.Exists(buttonData.background.brushpath))
+            {
+                __CoreContainer.content_border.Resources["ButtonData_image"] = buttonData.background.GetBrush();
+                __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            }
+
+            this.buttonData = buttonData;
+        }
+
+        internal void setLabelData(CoreData labelData)
+        {
+            if (labelData == null)
+            {
+                labelData = new CoreData();
+            }
+
+            __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
+            __CoreContainer.Resources["LabelData_borderbrush"] = labelData.borderbrush.GetBrush();
+            __CoreContainer.Resources["LabelData_foreground"] = labelData.foreground.GetBrush();
+            __CoreContainer.Resources["LabelData_highlight"] = labelData.highlight.GetBrush();
+            
+            __CoreContainer.Resources["LabelData_cornerRadius"] = labelData.cornerRadius;
+            __CoreContainer.Resources["LabelData_thickness"] = labelData.thickness;
+            
+            __CoreContainer.Resources["LabelData_fontSize"] = (double)labelData.fontSize;
+            __CoreContainer.Resources["LabelData_fontFamily"] = labelData.fontFamily;
+            
+            __CoreContainer.Resources["LabelData_width"] = labelData.width;
+            __CoreContainer.Resources["LabelData_height"] = labelData.height;
+
+            if (File.Exists(labelData.background.brushpath))
+            {
+                __CoreContainer.Resources["LabelData_image"] = labelData.background.GetBrush();
+                __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
+            }
+
+            this.labelData = labelData;
+        }
+
+        internal void setTextBoxData(CoreData textBoxData)
+        {
+            if (textBoxData == null)
+            {
+                textBoxData = new CoreData();
+            }
+
+            __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            __CoreContainer.Resources["TextBoxData_borderbrush"] = textBoxData.borderbrush.GetBrush();
+            __CoreContainer.Resources["TextBoxData_foreground"] = textBoxData.foreground.GetBrush();
+            __CoreContainer.Resources["TextBoxData_highlight"] = textBoxData.highlight.GetBrush();
+
+            __CoreContainer.Resources["TextBoxData_cornerRadius"] = textBoxData.cornerRadius;
+            __CoreContainer.Resources["TextBoxData_thickness"] = textBoxData.thickness;
+
+            __CoreContainer.Resources["TextBoxData_fontSize"] = (double)textBoxData.fontSize;
+            __CoreContainer.Resources["TextBoxData_fontFamily"] = textBoxData.fontFamily;
+
+            __CoreContainer.Resources["TextBoxData_width"] = textBoxData.width;
+            __CoreContainer.Resources["TextBoxData_height"] = textBoxData.height;
+
+            if (File.Exists(textBoxData.background.brushpath))
+            {
+                __CoreContainer.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
+                __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            }
+
+            this.textBoxData = textBoxData;
         }
 
         internal async void ContainerDataResources(ContainerData? containerData)
@@ -186,75 +281,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                     else
                     {
                         ((Shape)content_border.Child).Stroke = containerData.settings.borderbrush.GetBrush();
-                    }                    
+                    }
                 }
             }
 
-            setRotation(containerData.rotation);            
+            setRotation(containerData.rotation);
 
             await Task.Delay(4);
 
             this.containerData = containerData;
-        }
-
-        internal ref CoreCanvas GetCanvas()
-        {
-            return ref canvas;
-        }
-
-
-        internal double getRotation()
-        {
-            RotateTransform rotation = this.RenderTransform as RotateTransform;
-
-            if (rotation != null)
-            {
-                double rotationInDegrees = rotation.Angle;
-
-                return rotationInDegrees;
-            }
-
-            return 0;
-        }
-
-
-
-        internal void setRotation(double angle)
-        {
-            this.RenderTransform = new RotateTransform(angle);
-        }
-
-        internal void hideContainerNesting(CoreContainer coreContainer)
-        {
-            coreContainer.element_border.Background = new SolidColorBrush(Colors.Transparent);
-            coreContainer.element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
-            coreContainer.element_border.BorderThickness = new Thickness(0);
-
-            coreContainer.ColumnLeft.Width = new GridLength(0);
-            coreContainer.ColumnRight.Width = new GridLength(0);
-
-            coreContainer.RowTop.Height = new GridLength(0);
-            coreContainer.RowBottom.Height = new GridLength(0);
-
-            //coreContainer.ContainerDataResources();
-        }
-
-        private void _loadtimer_Tick(object sender, EventArgs e)
-        {
-            //loadTickCounter++;
-            //
-            //if (loadTickCounter == 1 || loadTickCounter < 2)
-            //{
-            //
-            //    _loadtimer.Stop();
-            //}
-        }
-        #endregion constructors
-        private void build()
-        {
-            Background = new SolidColorBrush(Colors.Transparent);
-
-            register_events();
         }
 
         internal void deselect(bool remove_from_list = true)
@@ -283,6 +318,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             }
         }
 
+        internal ref CoreCanvas GetCanvas()
+        {
+            return ref canvas;
+        }
 
         internal ContainerData GetContainerData()
         {
@@ -296,13 +335,44 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             return container_is_selected;
         }
+
         internal Point get_dragPoint()
         {
             return dragPoint;
         }
+
         internal Point get_Position()
         {
             return canvas.GetElementPosition(this);
+        }
+
+        internal double getRotation()
+        {
+            RotateTransform rotation = this.RenderTransform as RotateTransform;
+
+            if (rotation != null)
+            {
+                double rotationInDegrees = rotation.Angle;
+
+                return rotationInDegrees;
+            }
+
+            return 0;
+        }
+
+        internal void hideContainerNesting(CoreContainer coreContainer)
+        {
+            coreContainer.element_border.Background = new SolidColorBrush(Colors.Transparent);
+            coreContainer.element_border.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            coreContainer.element_border.BorderThickness = new Thickness(0);
+
+            coreContainer.ColumnLeft.Width = new GridLength(0);
+            coreContainer.ColumnRight.Width = new GridLength(0);
+
+            coreContainer.RowTop.Height = new GridLength(0);
+            coreContainer.RowBottom.Height = new GridLength(0);
+
+            //coreContainer.ContainerDataResources();
         }
 
         private async void initialize_container()
@@ -380,6 +450,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         internal void setCanvas(ref CoreCanvas coreCanvas)
         {
             this.canvas = coreCanvas;
+
+            containerData.SetCanvasID(canvas.getCanvasData().canvasID);
         }
 
         internal void setContainerData(ContainerData containerData)
@@ -389,13 +461,34 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         internal void setPosition(Point point)
         {
+            containerData.position = point;
             this.dragPoint = point;
         }
 
-        private void Container_Loaded(object sender, RoutedEventArgs e)
+        internal void setRotation(double angle)
         {
+            containerData.rotation = angle;
 
+            this.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+
+            this.RenderTransform = new RotateTransform(angle);
         }
+
+        internal void setSize(double width, double height)
+        {
+            // size change for now is limited to set minWidth and minHeight, 
+            // with the consequence that all elements will remain useable
+            // and never to small to display their contents
+
+            containerData.settings.width = width;
+            containerData.settings.height = height;
+
+            __CoreContainer.Resources["ContainerData_width"] = containerData.settings.width;
+            __CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
+
+            OnChildDesiredSizeChanged(this);
+        }
+
 
         // element mouse events
         #region element mouse events
@@ -483,7 +576,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             e.Handled = true;
 
 
-            L_Z.Content = Panel.GetZIndex(__CoreContainer);
+            ToolTip = Panel.GetZIndex(__CoreContainer);
         }
 
         private void Element_border_MouseLeave(object sender, MouseEventArgs e)
@@ -493,22 +586,21 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
                 Panel.SetZIndex(__CoreContainer, containerData.level);
             }
 
-            L_Z.Content = Panel.GetZIndex(__CoreContainer);
+            ToolTip = Panel.GetZIndex(__CoreContainer);
 
+            //System.Windows.Threading.DispatcherTimer _fadeOut = new System.Windows.Threading.DispatcherTimer();
 
-            System.Windows.Threading.DispatcherTimer _fadeOut = new System.Windows.Threading.DispatcherTimer();
-
-            _fadeOut.Tick += _fadeOut_Tick;
-            _fadeOut.Interval = TimeSpan.FromSeconds(3);
-            _fadeOut.Start();
+            //_fadeOut.Tick += _fadeOut_Tick;
+            //_fadeOut.Interval = TimeSpan.FromSeconds(3);
+            //_fadeOut.Start();
 
             e.Handled = true;
         }
 
-        private void _fadeOut_Tick(object? sender, EventArgs e)
-        {
-            L_Z.Content = null;
-        }
+        //private void _fadeOut_Tick(object? sender, EventArgs e)
+        //{
+        //    ToolTip = null;
+        //}
         #endregion element mouse events
 
         private void element_grid_MouseEnter(object sender, MouseEventArgs e)

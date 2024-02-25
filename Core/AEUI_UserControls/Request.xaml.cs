@@ -1,4 +1,22 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      Request element
+ * 
+ * element combined of command element and logstat element
+ * 
+ * it displays commands, the time of input etc.
+ * 
+ * the plan is to develop this towards a useful system tool,
+ * once the rest of the project has progressed further, currently
+ * planned is an additional configurable infobitpanel, where
+ * system stats and other system informations can be added to
+ * a separate area within the Request element, right or atop
+ * of logstat. 
+ * 
+ * init:        2024|01|19
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -81,3 +99,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

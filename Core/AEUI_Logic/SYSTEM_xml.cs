@@ -3,7 +3,7 @@
  * 
  * class provides separated xml save and load functions for SYSTEM components
  * 
- * init:        2024|01|28
+ * init:        2024|02|05
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
  */
@@ -42,15 +42,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             if (node != null)
             {
                 XmlNode? node_ColorDataNode = node.SelectSingleNode(ColorDataNode);
-
-                // his name and mind are quite stupid.
-                //MessageBox.Show(node_ColorDataNode.InnerXml);
-                //MessageBox.Show(node_ColorDataNode.InnerText);
-                //MessageBox.Show(node_ColorDataNode.OuterXml);
-                //MessageBox.Show(node_ColorDataNode.Name);
-                //MessageBox.Show(node_ColorDataNode.LocalName);
-                //MessageBox.Show(node_ColorDataNode.Value);
-                //MessageBox.Show(node_ColorDataNode.ParentNode.Name);
 
                 XmlNode? brushtype = node_ColorDataNode.SelectSingleNode("brushtype");
                 if (brushtype != null)
@@ -116,6 +107,16 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 if (color6_string != null)
                 {
                     colorData.color6_string = color6_string.InnerText;
+                }
+
+                XmlNode? gradientOffsets = node_ColorDataNode.SelectSingleNode("gradientOffsets");
+
+                if (gradientOffsets != null)
+                {
+                    foreach (XmlNode item in gradientOffsets.ChildNodes)
+                    {
+                        colorData.offsets.Add(Convert.ToDouble(item.InnerText));
+                    }
                 }
             }
 
@@ -444,7 +445,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             {
                 if (File.Exists(filename))
                 {
-                    //MessageBox.Show(filename); check, bis hierhin wird alles gefunden.
                     XmlDocument xmlDocument = new XmlDocument();
 
                     xmlDocument.Load(filename);
@@ -538,12 +538,6 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 }
             }
 
-            //MessageBox.Show($@".\{Core_Screens_folder}{folder_counter}\Container");
-            //ContainerData_xml_folder
-
-
-            //MessageBox.Show(container_list.Count.ToString()); gibt aktuell 0 aus, die Liste wird nicht korrekt gebaut
-
             return container_list;
         }
 
@@ -555,6 +549,11 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             if (coreContainer != null)
             {
                 //MessageBox.Show(container.GetContainerData().element.GetType().Name);
+
+                container.GetContainerData().settings.width = container.content_border.ActualWidth;
+                container.GetContainerData().settings.height = container.content_border.ActualHeight;
+                
+                //containerData.settings.width = content_border.ActualWidth; 
 
                 XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
 

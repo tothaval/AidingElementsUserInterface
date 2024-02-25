@@ -85,10 +85,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 if (current_screen != null)
                 {
-                    if (current_level < 0)
+                    if (current_level <= 0)
                     {
                         current_level = 0;
+                        current_screen.LSD.Visibility = Visibility.Visible;
+                        current_screen.LSD.update();
                     }
+                    else
+                    {
+                        current_screen.LSD.Visibility = Visibility.Collapsed;
+                        current_screen.LSD.clear();
+                    }
+
                     if (current_level > CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1)
                     {
                         current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
@@ -117,10 +125,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                     if (current_screen != null)
                     {
-                        if (current_level < 0)
+                        if (current_level <= 0)
                         {
                             current_level = 0;
+                            current_screen.LSD.Visibility = Visibility.Visible;
+                            current_screen.LSD.update();
                         }
+                        else
+                        {
+                            current_screen.LSD.Visibility = Visibility.Collapsed;
+                            current_screen.LSD.clear();
+                        }
+
                         if (current_level > CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1)
                         {
                             current_level = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
@@ -210,6 +226,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             else
             {
                 current_level = 0;
+
             }
 
                 LevelChange();

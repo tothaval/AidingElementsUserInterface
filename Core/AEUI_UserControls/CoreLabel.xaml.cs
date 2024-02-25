@@ -87,38 +87,9 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             textblock.Padding = new Thickness(7, 3, 7, 3);
 
-            LabelDataResources();
+            //LabelDataResources();
         }
 
-        private void LabelDataResources()
-        {
-            CoreData labelData = config;
-
-            if (labelData == null)
-            {
-                labelData = new CoreData();
-            }
-
-            __CoreLabel.Resources["LabelData_background"] = labelData.background.GetBrush();
-            __CoreLabel.Resources["LabelData_borderbrush"] = labelData.borderbrush.GetBrush();
-            __CoreLabel.Resources["LabelData_foreground"] = labelData.foreground.GetBrush();
-            __CoreLabel.Resources["LabelData_highlight"] = labelData.highlight.GetBrush();
-            
-            __CoreLabel.Resources["LabelData_cornerRadius"] = labelData.cornerRadius;
-            __CoreLabel.Resources["LabelData_thickness"] = labelData.thickness;
-            
-            __CoreLabel.Resources["LabelData_fontSize"] = (double)labelData.fontSize;
-            __CoreLabel.Resources["LabelData_fontFamily"] = labelData.fontFamily;
-            
-            __CoreLabel.Resources["LabelData_width"] = labelData.width;
-            __CoreLabel.Resources["LabelData_height"] = labelData.height;
-
-            if (File.Exists(labelData.background.brushpath))
-            {
-                __CoreLabel.Resources["LabelData_image"] = labelData.background.GetBrush();
-                __CoreLabel.Resources["LabelData_background"] = labelData.background.GetBrush();
-            }
-        }
 
         public void setText(string text)
         {

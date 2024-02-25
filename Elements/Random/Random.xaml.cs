@@ -1,8 +1,8 @@
 ﻿/* Aiding Elements User Interface
- *      Manual element 
+ *      Random element 
  * 
- * create random numbers, choose between dices(base 6)
- * or random number display (base 10)
+ * create random numbers, choose between dices(base 6),
+ * base 10 or a range of random numbers
  * 
  * init:        2024|01|04
  * DEV:         Stephan Kammel
