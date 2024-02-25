@@ -87,24 +87,27 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void LevelDescriptionSwitch()
         {
-            if (border_LevelDescCL.Visibility == Visibility.Visible)
+            if (GetLevelSystem().Get_CURRENT_LEVEL() != GetLevelSystem().Get_ZERO_LEVEL())
             {
+                if (border_LevelDescCL.Visibility == Visibility.Visible)
+                {
 
-                border_LevelDescCL.Visibility = Visibility.Collapsed;
-                border_LevelDescCTB.Visibility = Visibility.Visible;
+                    border_LevelDescCL.Visibility = Visibility.Collapsed;
+                    border_LevelDescCTB.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    border_LevelDescCL.Visibility = Visibility.Visible;
+                    border_LevelDescCTB.Visibility = Visibility.Collapsed;
+                }
+
+
+                string newDescription = CTB_LevelDescription.getText();
+
+                GetLevelSystem().Get_CURRENT_LEVEL().SetDescription(newDescription);
+
+                CL_LevelDescription.setText(newDescription);
             }
-            else
-            {
-                border_LevelDescCL.Visibility = Visibility.Visible;
-                border_LevelDescCTB.Visibility = Visibility.Collapsed;
-            }
-
-
-            string newDescription = CTB_LevelDescription.getText();
-
-            GetLevelSystem().Get_CURRENT_LEVEL().SetDescription(newDescription);
-
-            CL_LevelDescription.setText(newDescription);
         }
 
         private void LevelBackgroundSwitch()
@@ -125,23 +128,26 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void LevelNameSwitch()
         {
-            if (border_LevelNameCL.Visibility == Visibility.Visible)
+            if (GetLevelSystem().Get_CURRENT_LEVEL() != GetLevelSystem().Get_ZERO_LEVEL())
             {
+                if (border_LevelNameCL.Visibility == Visibility.Visible)
+                {
 
-                border_LevelNameCL.Visibility = Visibility.Collapsed;
-                border_LevelNameCTB.Visibility = Visibility.Visible;
+                    border_LevelNameCL.Visibility = Visibility.Collapsed;
+                    border_LevelNameCTB.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    border_LevelNameCL.Visibility = Visibility.Visible;
+                    border_LevelNameCTB.Visibility = Visibility.Collapsed;
+                }
+
+
+                string newName = CTB_LevelName.getText();
+
+                GetLevelSystem().Get_CURRENT_LEVEL().SetName(newName);
+                CL_LevelName.setText(newName);
             }
-            else
-            {
-                border_LevelNameCL.Visibility = Visibility.Visible;
-                border_LevelNameCTB.Visibility = Visibility.Collapsed;
-            }
-
-
-            string newName = CTB_LevelName.getText();
-
-            GetLevelSystem().Get_CURRENT_LEVEL().SetName(newName);
-            CL_LevelName.setText(newName);
         }
 
         internal void ChangeLevelBackground(ColorData? colorData)

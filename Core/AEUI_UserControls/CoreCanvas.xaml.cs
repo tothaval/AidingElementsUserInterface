@@ -139,56 +139,11 @@ namespace AidingElementsUserInterface.Core
                 levelSystem = new LevelSystem(config.canvasID);
             }
 
+            LSD.setCanvas(ref __CoreCanvas);
+
             _timer.Stop();
         }
 
-        private async void loadElements(int i)
-        {
-            if (i == 0)
-            {
-                SYSTEM_xml sys_xml = new SYSTEM_xml();
-
-                ObservableCollection<CoreContainer> coreContainers = sys_xml.SYSTEM_Container_load();
-
-                foreach (CoreContainer item in coreContainers)
-                {
-                    item.setCanvas(ref __CoreCanvas);
-
-                    add_element_to_canvas(item, item.get_dragPoint());
-
-                    item.load_Container();
-                }
-
-            }
-            else
-            {
-                UserSpace_xml userSpace_Xml = new UserSpace_xml();
-                ObservableCollection<CoreContainer> coreContainers = userSpace_Xml.Container_load(i);
-
-                foreach (CoreContainer item in coreContainers)
-                {
-                    item.setCanvas(ref __CoreCanvas);
-
-                    add_element_to_canvas(item, item.get_dragPoint());
-
-                    item.load_Container();
-                }
-            }
-        }
-
-        internal CoreContainer? instantiate(UserControl content, ref CoreCanvas target)
-        {
-            if (content != null)
-            {
-                CoreContainer coreContainer = GetCoreContainer(content);
-
-                coreContainer.GetContainerData().CanvasID = target.getCanvasData().canvasID;
-
-                return coreContainer;
-            }
-
-            return null;
-        }
 
 
         internal void ADJUST_GATE(ADJUST_DATA_STRUCTURE data)
@@ -198,22 +153,9 @@ namespace AidingElementsUserInterface.Core
                 Canvas.SetLeft(item, data.x);
                 Canvas.SetTop(item, data.y);
                 item.setRotation(data.rotation);
-
-                if (item.GetContainerData().GetElement() != null)
-                {
-                    if (item.GetContainerData().GetElement().GetType().IsSubclassOf(typeof(Shape)))
-                    {
-                        ((Shape)item.content_border.Child).Width = data.width;
-                        ((Shape)item.content_border.Child).Height = data.height;
-                    }
-                    else
-                    {
-                        item.content_border.Width = data.width;
-                        item.content_border.Height = data.height;
-                    }
-                }
-
-                OnChildDesiredSizeChanged(item);
+                
+                item.setSize(data.width, data.height);
+                
                 Panel.SetZIndex(item, data.level);
             }
         }
@@ -360,16 +302,27 @@ namespace AidingElementsUserInterface.Core
             this.config = canvasData;
         }
 
-        internal void NoLevelBackground()
+        internal void ChangeSelectionButtonData(CoreData buttonData)
         {
-            CoreCanvasBorder.Background = config.background.GetBrush();
+            foreach (CoreContainer item in selected_items)
+            {
+                item.setButtonData(buttonData);
+            }
         }
 
-        internal void SetBackground(ColorData colorData)
+
+        internal void ChangeSelectionLabelData(CoreData labelData)
         {
-            if (colorData != null)
+            foreach (CoreContainer item in selected_items)
             {
-                CoreCanvasBorder.Background = colorData.GetBrush();
+                item.setLabelData(labelData);
+            }
+        }
+        internal void ChangeSelectionTextBoxData(CoreData labelData)
+        {
+            foreach (CoreContainer item in selected_items)
+            {
+                item.setTextBoxData(labelData);
             }
         }
 
@@ -379,7 +332,6 @@ namespace AidingElementsUserInterface.Core
             {
                 item.ContainerDataResources(containerData);
             }
-
         }
 
         internal void delete_selected_items()
@@ -481,6 +433,54 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
+        internal CoreContainer? instantiate(UserControl content, ref CoreCanvas target)
+        {
+            if (content != null)
+            {
+                CoreContainer coreContainer = GetCoreContainer(content);
+
+                coreContainer.GetContainerData().CanvasID = target.getCanvasData().canvasID;
+
+                return coreContainer;
+            }
+
+            return null;
+        }
+
+        private async void loadElements(int i)
+        {
+            if (i == 0)
+            {
+                SYSTEM_xml sys_xml = new SYSTEM_xml();
+
+                ObservableCollection<CoreContainer> coreContainers = sys_xml.SYSTEM_Container_load();
+
+                foreach (CoreContainer item in coreContainers)
+                {
+                    item.setCanvas(ref __CoreCanvas);
+
+                    add_element_to_canvas(item, item.get_dragPoint());
+
+                    item.load_Container();
+                }
+
+            }
+            else
+            {
+                UserSpace_xml userSpace_Xml = new UserSpace_xml();
+                ObservableCollection<CoreContainer> coreContainers = userSpace_Xml.Container_load(i);
+
+                foreach (CoreContainer item in coreContainers)
+                {
+                    item.setCanvas(ref __CoreCanvas);
+
+                    add_element_to_canvas(item, item.get_dragPoint());
+
+                    item.load_Container();
+                }
+            }
+        }
+
         internal void LevelShiftSelection(int target_level)
         {
             foreach (CoreContainer item in selected_items)
@@ -553,6 +553,11 @@ namespace AidingElementsUserInterface.Core
                     }
                 }
             }
+        }
+
+        internal void NoLevelBackground()
+        {
+            CoreCanvasBorder.Background = config.background.GetBrush();
         }
 
         internal void PositionElement(CoreContainer container, System.Windows.Point point)
@@ -676,6 +681,14 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
+        internal void SetBackground(ColorData colorData)
+        {
+            if (colorData != null)
+            {
+                CoreCanvasBorder.Background = colorData.GetBrush();
+            }
+        }
+
         internal void setCanvasData(CanvasData data)
         {
             this.config = data;
@@ -737,6 +750,11 @@ namespace AidingElementsUserInterface.Core
             }
         }
 
+        internal void unsetLSD()
+        {
+            LSD.Visibility = Visibility.Collapsed;
+            LSD.clear();
+        }
 
         internal void updateLocalDrives()
         {
@@ -812,7 +830,6 @@ namespace AidingElementsUserInterface.Core
             else if (e.ChangedButton == MouseButton.Right)
             {
                 add_element_to_canvas(new RightClickChoice(), e);
-
 
                 SetCanvasToolTip(canvas.ActualWidth.ToString() + "\n" + canvas.RenderSize.Height.ToString());
 

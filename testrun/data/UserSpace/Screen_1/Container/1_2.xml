@@ -67,8 +67,8 @@
     <thickness>2,2,2,2</thickness>
     <fontSize>12</fontSize>
     <fontFamily>Verdana</fontFamily>
-    <height>25</height>
-    <width>50</width>
+    <height>65</height>
+    <width>92,93</width>
   </CoreData>
   <CanvasID>1</CanvasID>
   <ContainerDataFilename>1_2.xml</ContainerDataFilename>

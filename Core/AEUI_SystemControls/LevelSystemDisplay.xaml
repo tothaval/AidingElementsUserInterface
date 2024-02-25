@@ -7,6 +7,16 @@
              xmlns:usercontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
+    <ScrollViewer Margin="10,30,10,30"
+                  CanContentScroll="True"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"                  >
+
+        <StackPanel x:Name="SP_ScreenLevels"
+                Orientation="Vertical">
+
+        </StackPanel>
+    </ScrollViewer>
 
 </UserControl>

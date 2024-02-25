@@ -54,6 +54,7 @@ namespace AidingElementsUserInterface
     {
         private CoreCanvas ACTIVE_CANVAS;
         private bool SYSTEM_ACTIVE_FLAG = false;
+        private bool loading = true;
 
         internal MainWindowData mainWindowData;
 
@@ -71,27 +72,69 @@ namespace AidingElementsUserInterface
         {
             this.ACTIVE_CANVAS = activeCanvas;
             ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+
+            if (ACTIVE_CANVAS.GetLevelSystem() != null)
+            {
+                ACTIVE_CANVAS.GetLevelSystem().SetCurrentLevel(1);
+
+                LevelData level = ACTIVE_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL();
+
+                ACTIVE_CANVAS.GetLevelBar().update(level);
+            }
+
+        }
+
+        internal void set_SYSTEM_CANVAS()
+        {
+            if (!SYSTEM_ACTIVE_FLAG)
+            {
+                border_CORE_CANVAS_SWITCH.Visibility = Visibility.Collapsed;
+                border_SYSTEM_CANVAS.Visibility = Visibility.Visible;
+
+                SYSTEM_ACTIVE_FLAG = true;
+
+
+                if (SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem() != null)
+                {
+                    SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().SetCurrentLevel(1);
+
+                    LevelData level = SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL();
+
+                    SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelBar().update(level);
+                }
+            }
+        }
+
+        internal void unset_SYSTEM_CANVAS()
+        {
+            if (SYSTEM_ACTIVE_FLAG)
+            {
+                SYSTEM_CANVAS.Get_SYSTEM_CANVAS.unsetLSD();
+
+                if (SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem() != null)
+                {
+                    SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().SetCurrentLevel(1);
+
+                    LevelData level = SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelSystem().Get_CURRENT_LEVEL();
+
+                    SYSTEM_CANVAS.Get_SYSTEM_CANVAS.GetLevelBar().update(level);
+                }
+
+                border_CORE_CANVAS_SWITCH.Visibility = Visibility.Visible;
+                border_SYSTEM_CANVAS.Visibility = Visibility.Collapsed;
+
+                SYSTEM_ACTIVE_FLAG = false;
+            }
         }
 
 
         public MainWindow()
         {
-            InitializeComponent();       
+            InitializeComponent();
 
             build();
-        }
 
-
-        private void build()
-        {
-            load_MainWindowData();
-
-            MainWindowResources();
-
-            if (ACTIVE_CANVAS != null)
-            {
-                ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
-            }
+            loading = false;
         }
 
 
@@ -120,6 +163,17 @@ namespace AidingElementsUserInterface
             //{
             //    ACTIVE_CANVAS.RemoveFlatShareCC();
             //}
+        }
+        private void build()
+        {
+            load_MainWindowData();
+
+            MainWindowResources();
+
+            if (ACTIVE_CANVAS != null)
+            {
+                ACTIVE_CANVAS._LevelBar.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void load_MainWindowData()
@@ -192,7 +246,7 @@ namespace AidingElementsUserInterface
             else
             {
                 xml_handler.CanvasData_save(data_Handler.GetCanvasData());
-            }            
+            }
 
             xml_handler.CoreData_save();
             xml_handler.LabelData_save();
@@ -203,6 +257,20 @@ namespace AidingElementsUserInterface
             Application.Current.Shutdown();
         }
 
+        private void ScreensOverviewSwitch()
+        {
+            if (border_ScreensOverview.Visibility == Visibility.Collapsed)
+            {
+                border_ScreensOverview.Visibility = Visibility.Visible;
+                border_ScreensOverview.Child = new Screens();
+            }
+            else
+            {
+                border_ScreensOverview.Visibility = Visibility.Collapsed;
+                border_ScreensOverview.Child = null;
+            }
+        }
+
 
         private void SYSTEM_CANVAS_SWITCH()
         {
@@ -211,12 +279,16 @@ namespace AidingElementsUserInterface
                 border_CORE_CANVAS_SWITCH.Visibility = Visibility.Collapsed;
                 border_SYSTEM_CANVAS.Visibility = Visibility.Visible;
 
+                ACTIVE_CANVAS.unsetLSD();
+
                 SYSTEM_ACTIVE_FLAG = true;
             }
             else
             {
                 border_CORE_CANVAS_SWITCH.Visibility = Visibility.Visible;
                 border_SYSTEM_CANVAS.Visibility = Visibility.Collapsed;
+
+                SYSTEM_CANVAS.Get_SYSTEM_CANVAS.unsetLSD();
 
                 ACTIVE_CANVAS = CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS();
                 SYSTEM_ACTIVE_FLAG = false;
@@ -490,6 +562,11 @@ namespace AidingElementsUserInterface
         #endregion about menu item clicks
 
         #region control menu item clicks
+        private void MI_Screens_Click(object sender, RoutedEventArgs e)
+        {
+            ScreensOverviewSwitch();
+        }
+
         private void MI_Command_Click(object sender, RoutedEventArgs e)
         {
             summonElement(sender);

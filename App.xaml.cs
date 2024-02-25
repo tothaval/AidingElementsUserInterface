@@ -15,6 +15,8 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.IO;
+using AidingElementsUserInterface.Core;
+using AidingElementsUserInterface.Core.AEUI_UserControls;
 
 namespace AidingElementsUserInterface
 {
@@ -32,7 +34,40 @@ namespace AidingElementsUserInterface
 
         private void AddResources()
         {
+            ButtonDataResources();
             CoreDataResources();
+            LabelDataResources();
+            TextBoxDataResources();
+        }
+
+        private void ButtonDataResources()
+        {
+            CoreData buttonData = handler.ButtonData_load();
+
+            if (buttonData == null)
+            {
+                buttonData = new CoreData();
+            }
+
+            Application.Current.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            Application.Current.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
+            Application.Current.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
+            Application.Current.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
+
+            Application.Current.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
+            Application.Current.Resources["ButtonData_thickness"] = buttonData.thickness;
+
+            Application.Current.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
+            Application.Current.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
+
+            Application.Current.Resources["ButtonData_width"] = buttonData.width;
+            Application.Current.Resources["ButtonData_height"] = buttonData.height;
+
+            if (File.Exists(buttonData.background.brushpath))
+            {
+                Application.Current.Resources["ButtonData_image"] = buttonData.background.GetBrush();
+                Application.Current.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            }
         }
 
         private void CoreDataResources()
@@ -64,5 +99,66 @@ namespace AidingElementsUserInterface
                 Application.Current.Resources["CoreData_background"] = coreData.background.GetBrush();
             }
         }
+
+        private void LabelDataResources()
+        {
+            CoreData labelData = handler.LabelData_load();
+
+            if (labelData == null)
+            {
+                labelData = new CoreData();
+            }
+
+            Application.Current.Resources["LabelData_background"] = labelData.background.GetBrush();
+            Application.Current.Resources["LabelData_borderbrush"] = labelData.borderbrush.GetBrush();
+            Application.Current.Resources["LabelData_foreground"] = labelData.foreground.GetBrush();
+            Application.Current.Resources["LabelData_highlight"] = labelData.highlight.GetBrush();
+
+            Application.Current.Resources["LabelData_cornerRadius"] = labelData.cornerRadius;
+            Application.Current.Resources["LabelData_thickness"] = labelData.thickness;
+
+            Application.Current.Resources["LabelData_fontSize"] = (double)labelData.fontSize;
+            Application.Current.Resources["LabelData_fontFamily"] = labelData.fontFamily;
+
+            Application.Current.Resources["LabelData_width"] = labelData.width;
+            Application.Current.Resources["LabelData_height"] = labelData.height;
+
+            if (File.Exists(labelData.background.brushpath))
+            {
+                Application.Current.Resources["LabelData_image"] = labelData.background.GetBrush();
+                Application.Current.Resources["LabelData_background"] = labelData.background.GetBrush();
+            }
+        }
+
+        private void TextBoxDataResources()
+        {
+            CoreData textBoxData = handler.TextBoxData_load();
+
+            if (textBoxData == null)
+            {
+                textBoxData = new CoreData();
+            }
+
+            Application.Current.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            Application.Current.Resources["TextBoxData_borderbrush"] = textBoxData.borderbrush.GetBrush();
+            Application.Current.Resources["TextBoxData_foreground"] = textBoxData.foreground.GetBrush();
+            Application.Current.Resources["TextBoxData_highlight"] = textBoxData.highlight.GetBrush();
+
+            Application.Current.Resources["TextBoxData_cornerRadius"] = textBoxData.cornerRadius;
+            Application.Current.Resources["TextBoxData_thickness"] = textBoxData.thickness;
+
+            Application.Current.Resources["TextBoxData_fontSize"] = (double)textBoxData.fontSize;
+            Application.Current.Resources["TextBoxData_fontFamily"] = textBoxData.fontFamily;
+
+            Application.Current.Resources["TextBoxData_width"] = textBoxData.width;
+            Application.Current.Resources["TextBoxData_height"] = textBoxData.height;
+
+            if (File.Exists(textBoxData.background.brushpath))
+            {
+                Application.Current.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
+                Application.Current.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            }
+        }
+
     }
 }

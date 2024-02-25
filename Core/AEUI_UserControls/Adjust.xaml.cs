@@ -1,21 +1,18 @@
-﻿using AidingElementsUserInterface.Core.AEUI_Data;
+﻿/* Aiding Elements User Interface
+ *      Adjust element
+ * 
+ * this element offers some input textboxes to change
+ * containers in various ways, alter size, position,
+ * rotation and level of an element selection
+ * 
+ * init:        2024|01|19
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
 using AidingElementsUserInterface.Core.Auxiliaries;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
 {
@@ -104,7 +101,24 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void CB_AdjustSelection_Click(object sender, RoutedEventArgs e)
         {
-            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ADJUST_GATE(ParseCVCs());
+            if (new SharedLogic().GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
+            {
+                new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS.ADJUST_GATE(ParseCVCs());
+            }
+            else
+            {
+                if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
+                {
+                    new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.ADJUST_GATE(ParseCVCs());
+                }                
+            }
+
+
+            
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

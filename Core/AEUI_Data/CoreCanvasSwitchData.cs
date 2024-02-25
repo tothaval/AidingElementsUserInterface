@@ -1,4 +1,15 @@
-﻿using System;
+﻿/* Aiding Elements User Interface
+ *      CoreCanvasSwitchData class
+ * 
+ * this class provides drag and hover level data
+ * and stores max caps as technical boundaries
+ * for the aeui system
+ * 
+ * init:        2024|01|19
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +19,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 {
     internal static class CoreCanvasSwitchData
     {
-        private const int CORECANVAS_CAP = 11;
-        private const int CORECANVAS_LEVEL_CAP = 201;
-        private const int CORECANVAS_DIMENSION_CAP = 10000;
+        private const int CORECANVAS_CAP = 11;              // tested 21 screens and 101 levels
+        private const int CORECANVAS_LEVEL_CAP = 201;       // worked, level system needs a fix
+        private const int CORECANVAS_DIMENSION_CAP = 10000; // to correctly generate levels in level 0 overview based on CAP
+                                                            // despite that, no immediate problem came to the eye.
 
         
         private const int CORECANVAS_DRAG_LEVEL = 30000;
@@ -29,3 +41,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
 
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

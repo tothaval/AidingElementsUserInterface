@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/* Aiding Elements User Interface
+ *      UserLicenseLogin user control
+ * 
+ * mockup for much later, once licensing is more relevant and
+ * login and alike functions are already implemented, users
+ * can or must login using the login control to access their
+ * stuff or the full featureset of the surface system
+ * 
+ * init:        2024|01|31
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Core.AEUI_SystemControls
 {
@@ -55,3 +55,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

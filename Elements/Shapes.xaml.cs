@@ -1,4 +1,15 @@
-﻿using AidingElementsUserInterface.Core;
+﻿/* Aiding Elements User Interface
+ *      Shapes element 
+ * 
+ * basic element to draw basic shapes on screen
+ * amount, size, rotation, level and shape type can be set
+ * currently only rectangle and triangle implemented
+ *  
+ * init:        2024|02|20
+ * DEV:         Stephan Kammel
+ * mail:        kammel@posteo.de
+ */
+using AidingElementsUserInterface.Core;
 using AidingElementsUserInterface.Core.AEUI_Data;
 using AidingElementsUserInterface.Core.AEUI_UserControls;
 using AidingElementsUserInterface.Core.Auxiliaries;
@@ -26,7 +37,7 @@ namespace AidingElementsUserInterface.Elements
     public partial class Shapes : UserControl
     {
         CoreData coreData;
-        ObservableCollection<Shape> shapes;
+        ObservableCollection<System.Windows.Shapes.Shape> shapes;
 
         // bugs:
         // when changing borderbrush or highlight over coreOptions, background changes too
@@ -53,7 +64,7 @@ namespace AidingElementsUserInterface.Elements
         {
             // use containerdata for all values?
             coreData = new CoreData();
-            shapes = new ObservableCollection<Shape>();
+            shapes = new ObservableCollection<System.Windows.Shapes.Shape>();
 
             CVC_Amount.setIdentifier("shape amount");
             CVC_Amount.setText("1");
@@ -103,7 +114,7 @@ namespace AidingElementsUserInterface.Elements
                 CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
                               
 
-                foreach (Shape shape in shapes)
+                foreach (System.Windows.Shapes.Shape shape in shapes)
                 {
                     ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
                     containerData.SetElement(shape);
@@ -125,7 +136,7 @@ namespace AidingElementsUserInterface.Elements
                 if (new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS != null)
                 {
                     CoreCanvas coreCanvas = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS;
-                    foreach (Shape shape in shapes)
+                    foreach (System.Windows.Shapes.Shape shape in shapes)
                     {
                         ContainerData containerData = new ContainerData(coreData, coreCanvas.getCanvasData().canvasID, level, rotation);
                         containerData.SetElement(shape);
@@ -155,7 +166,7 @@ namespace AidingElementsUserInterface.Elements
             int amount;
             double width;
             double height;
-
+            
             try
             {
                 amount = Int32.Parse(CVC_Amount.Value);
@@ -229,3 +240,7 @@ namespace AidingElementsUserInterface.Elements
         }
     }
 }
+/*  END OF FILE
+ * 
+ * 
+ */

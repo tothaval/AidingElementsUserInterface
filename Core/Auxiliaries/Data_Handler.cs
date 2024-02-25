@@ -1,22 +1,11 @@
 ﻿/* Aiding Elements User Interface
  *      Data_Handler class
  * 
- * basic linkData classes management class
+ * basic data classes management class
  * 
  * init:        2023|12|12
  * DEV:         Stephan Kammel
  * mail:        kammel@posteo.de
- * 
- * improvement questions: 
- * should the code be rewritten using generic types to reduce overloaded methods count or 
- * should it be redesigned using f.e. abstract methods and override?
- * 
- * intention is to ensure only one instance of a core linkData type exists at any time while running,
- * 
- * because more are not needed, since it is not yet planned to implement fully independent
- * customizable elements within elements.
- * a change in options to alter a color should always effect the related core linkData type and
- * every element depending on it
  */
 using AidingElementsUserInterface.Core.AEUI_Data;
 
