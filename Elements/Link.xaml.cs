@@ -134,7 +134,7 @@ namespace AidingElementsUserInterface.Elements
 
             CB_LinkButton.Visibility = Visibility.Collapsed;
 
-            L_LinkText.Visibility = Visibility.Collapsed;
+            //L_LinkText.Visibility = Visibility.Collapsed;
 
             linkData = null;
         }
@@ -190,8 +190,8 @@ namespace AidingElementsUserInterface.Elements
                 }
             }
 
-            L_LinkText.Content = linkData.GetLinkText;
-            L_LinkText.Visibility = Visibility.Visible;
+            //L_LinkText.Content = linkData.GetLinkText;
+            //L_LinkText.Visibility = Visibility.Visible;
         }
 
         private void setup_choice()

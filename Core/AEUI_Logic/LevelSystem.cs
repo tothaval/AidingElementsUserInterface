@@ -31,8 +31,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
         private ObservableCollection<LevelData> _levels = new ObservableCollection<LevelData>();
         private int canvasID = 0;
-
+                
         internal int current_level {get;set;}
+        
+        internal int max_range { get;set;}
+        internal int min_range { get;set;}
+        
         private string visibility_MODE = "all"; // all | range | level
 
         private LevelData ZERO_LEVEL = new LevelData(0, "Zero Level", true, true); // 'level system level'
@@ -42,17 +46,24 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         public LevelSystem(int canvasID)
         {
             current_level = 1;
+
+            max_range = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            min_range = 1;
+
             this.canvasID = canvasID;
 
             initiate();
         }
 
-        public LevelSystem(ObservableCollection<LevelData> levels, int canvasID)
+        public LevelSystem(ObservableCollection<LevelData> levels, int canvasID, int level_id)
         {
             _levels = levels;                
             this.canvasID = canvasID;
 
-            current_level = 1;
+            current_level = level_id;
+
+            max_range = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            min_range = 1;
 
             LevelChange();
         }
@@ -76,8 +87,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             }
         }
 
-        internal void LevelChange()
+        internal async void LevelChange()
         {
+            await Task.Delay(5);
+
             if (logic.GetMainWindow().Get_SYSTEM_ACTIVE_FLAG)
             {
                 CoreCanvas current_screen = logic.GetMainWindow().Get_SYTEM_CANVAS.Get_SYSTEM_CANVAS;
@@ -85,6 +98,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 if (current_screen != null)
                 {
+                    current_screen.LSD.setCanvas(ref current_screen);
+
+
                     if (current_level <= 0)
                     {
                         current_level = 0;
@@ -114,6 +130,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     }
 
                     current_screen.SetVisibility(current_level, visibility_MODE);
+
+  
                 }
             }
             else
@@ -125,6 +143,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                     if (current_screen != null)
                     {
+                        current_screen.LSD.setCanvas(ref current_screen);
+
                         if (current_level <= 0)
                         {
                             current_level = 0;
@@ -151,6 +171,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                         }
 
                         current_screen.SetVisibility(current_level, visibility_MODE);
+
+                        //current_screen.getCanvasData().setLevel_id(current_level);
                     }
                 }
             }
@@ -242,6 +264,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 LevelChange();
             
+        }
+
+        internal void SetRange(int min, int max)
+        {
+            min_range = min;
+            max_range = max;
         }
 
         internal void SetVisibilityMODE(string MODE)

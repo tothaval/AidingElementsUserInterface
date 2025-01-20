@@ -16,8 +16,9 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
     internal class MainWindowData : CoreData
     {
         // main window size values
-        internal Point initialPosition { get; set; }                
+        internal Point initialPosition { get; set; }             
         internal string? language { get; set; }
+        internal int screen_id { get; set; }
 
         internal MainWindowData(bool load)
         {
@@ -32,6 +33,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             //MainWindowData properties
             initialPosition = new Point(25, 25);
             language = "english";
+
+            screen_id = 1;
         }
 
         internal MainWindowData(CoreData coreData)
@@ -54,6 +57,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
             //MainWindowData properties
             initialPosition = new Point(25, 25);
             language = "english";
+
+            screen_id = 1;
         }
     }
 }

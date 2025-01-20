@@ -244,6 +244,20 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             canvasData.apply_CoreData(aux_data);
                         }
 
+
+
+                        XmlNode? node_canvasID = node_CanvasData.SelectSingleNode("canvasID");
+                        if (node_canvasID != null)
+                        {
+                            canvasData.canvasID = Int32.Parse(node_canvasID.InnerText);
+                        }
+
+                        XmlNode? node_level_id = node_CanvasData.SelectSingleNode("level_id");
+                        if (node_level_id != null)
+                        {
+                            canvasData.level_id = Int32.Parse(node_level_id.InnerText);
+                        }
+
                         canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
 
                         canvasData.grouping_displacement = Int32.Parse(node_CanvasData.SelectSingleNode("grouping_displacement").InnerText);
@@ -292,9 +306,17 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                     node_CanvasData.AppendChild(aux_node);
                 }
 
+                XmlNode canvasID = xmlDocument.CreateElement("canvasID");
+                canvasID.InnerText = canvasData.canvasID.ToString();
+                node_CanvasData.AppendChild(canvasID);
+
                 XmlNode canvasName = xmlDocument.CreateElement("canvasName");
                 canvasName.InnerText = canvasData.canvasName;
                 node_CanvasData.AppendChild(canvasName);
+
+                XmlNode level_id = xmlDocument.CreateElement("level_id");
+                level_id.InnerText = canvasData.level_id.ToString();
+                node_CanvasData.AppendChild(level_id);
 
                 XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
                 grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
@@ -977,6 +999,15 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                             mainWindowData.language = node_language.InnerText;
                         }
 
+
+                        XmlNode? node_screen_id = node_MainWindowData.SelectSingleNode("screen_id");
+                        if (node_screen_id != null)
+                        {
+                            mainWindowData.screen_id = Int32.Parse(node_screen_id.InnerText);
+                        }
+
+
+
                         return mainWindowData;
                     }
                 }
@@ -1023,6 +1054,10 @@ namespace AidingElementsUserInterface.Core.Auxiliaries
                 XmlNode language = xmlDocument.CreateElement("language");
                 language.InnerText = mainWindowData.language;
                 node_MainWindowData.AppendChild(language);
+
+                XmlNode screen_id = xmlDocument.CreateElement("screen_id");
+                screen_id.InnerText = mainWindowData.screen_id.ToString();
+                node_MainWindowData.AppendChild(screen_id);
 
                 node.AppendChild(node_MainWindowData);
 

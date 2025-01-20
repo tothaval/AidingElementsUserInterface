@@ -41,8 +41,8 @@ namespace AidingElementsUserInterface.Elements
             loaded = true;
 
             //L_LinkText.FontSize = new SharedLogic().GetDataHandler().GetCoreData().fontSize;
-            L_LinkText.FontSize = 9;
-            L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
+            //L_LinkText.FontSize = 9;
+            //L_LinkText.FontFamily = new SharedLogic().GetMainWindow().mainWindowData.fontFamily;
         }
 
         internal FileLink(ContentData contentData)
@@ -103,11 +103,11 @@ namespace AidingElementsUserInterface.Elements
 
             this.contentData = data;
 
-            L_LinkText.Content = linkData.GetLinkText;
+            //L_LinkText.Content = linkData.GetLinkText;
 
             CB_LinkButton.Visibility = Visibility.Visible;
             CTB_LinkText.Visibility = Visibility.Visible;
-            L_LinkText.Visibility = Visibility.Visible;       
+            //L_LinkText.Visibility = Visibility.Visible;       
 
             linked = true;
         }
@@ -139,7 +139,7 @@ namespace AidingElementsUserInterface.Elements
 
             CB_LinkButton.Visibility = Visibility.Collapsed;
             CTB_LinkText.Visibility = Visibility.Collapsed;
-            L_LinkText.Visibility = Visibility.Collapsed;
+            //L_LinkText.Visibility = Visibility.Collapsed;
 
             linked = false;
         }
@@ -169,8 +169,8 @@ namespace AidingElementsUserInterface.Elements
 
             SP_Choice.Visibility = Visibility.Collapsed;
 
-            L_LinkText.Content = linkData.GetLinkText;
-            L_LinkText.Visibility = Visibility.Visible;
+            //L_LinkText.Content = linkData.GetLinkText;
+            //L_LinkText.Visibility = Visibility.Visible;
 
             linked = true;
         }

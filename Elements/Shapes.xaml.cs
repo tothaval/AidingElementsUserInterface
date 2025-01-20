@@ -26,6 +26,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -87,9 +88,8 @@ namespace AidingElementsUserInterface.Elements
         private void registerEvents()
         {
             CB_AddShape.button.Click += CB_AddShape_Click;
-
         }
-
+            
         private async void CB_AddShape_Click(object sender, RoutedEventArgs e)
         {
             double rotation;
@@ -121,7 +121,9 @@ namespace AidingElementsUserInterface.Elements
 
                     await Task.Delay(4);
 
-                    CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
+                    Shape shapeElement = new Shape(shape);
+
+                    CoreContainer coreContainer = new CoreContainer(shapeElement, containerData, ref coreCanvas);                    
                     coreContainer.setRotation(rotation);
 
                     await Task.Delay(4);
@@ -143,7 +145,9 @@ namespace AidingElementsUserInterface.Elements
 
                         await Task.Delay(4);
 
-                        CoreContainer coreContainer = new CoreContainer(shape, containerData, ref coreCanvas);
+                        Shape shapeElement = new Shape(shape);
+
+                        CoreContainer coreContainer = new CoreContainer(shapeElement, containerData, ref coreCanvas);
                         coreContainer.setRotation(rotation);
 
                         await Task.Delay(4);

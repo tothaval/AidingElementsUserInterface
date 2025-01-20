@@ -18,6 +18,7 @@
              xmlns:systemcontrols="clr-namespace:AidingElementsUserInterface.Core.AEUI_SystemControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="canvas_Loaded"
              >
 
     <Border x:Name="CoreCanvasBorder"

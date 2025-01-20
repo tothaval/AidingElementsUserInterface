@@ -19,6 +19,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         // name of canvas
         internal string canvasName { get; set; }
         internal int canvasID { get; set; }
+        internal int level_id { get; set; }
 
         // element grid width and height
         internal GridLength element_spacing;
@@ -71,6 +72,11 @@ namespace AidingElementsUserInterface.Core.AEUI_Data
         internal void setCanvasID(int identifierIndexDigit)
         {
             canvasID = identifierIndexDigit;
+        }
+
+        internal void setLevel_id(int level)
+        {
+            level_id = level;
         }
     }
 }

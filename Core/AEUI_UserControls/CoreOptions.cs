@@ -230,19 +230,26 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             CoreData coreData;
 
-            if (_coreData == null)
-            {
-                coreData = new SharedLogic().GetDataHandler().GetCoreData();
-
-                if (coreData == null)
-                {
-                    coreData = new CoreData();
-                }
-            }
-            else
+            if (_coreData != null)
             {
                 coreData = _coreData;
             }
+            else
+            {
+                coreData = new SharedLogic().GetDataHandler().GetCoreData();
+            }
+
+            if (coreData == null)
+            {
+                coreData = new CoreData();
+            }
+
+
+            CVC_background.setObject(new ColorData());
+            CVC_borderbrush.setObject(new ColorData());
+            CVC_foreground.setObject(new ColorData());
+            CVC_highlight.setObject(new ColorData());
+
 
             wrapPanel.Children.Add(CVC_background); // configure with buttons, each opens a color setup tool
             wrapPanel.Children.Add(CVC_borderbrush);
@@ -257,19 +264,19 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             wrapPanel.Children.Add(CVC_width);
 
             CVC_background.setText("setup brush");
-            CVC_background.coreButton.button.Background = coreData.background.GetBrush();
+            //CVC_background.coreButton.button.Background = coreData.background.GetBrush();
             CVC_background.setObject(coreData.background);
 
             CVC_borderbrush.setText("setup brush");
-            CVC_borderbrush.coreButton.Background = coreData.borderbrush.GetBrush();
+            //CVC_borderbrush.coreButton.button.Background = coreData.borderbrush.GetBrush();
             CVC_borderbrush.setObject(coreData.borderbrush);
 
             CVC_foreground.setText("setup brush");
-            CVC_foreground.coreButton.Background = coreData.foreground.GetBrush();
+            //CVC_foreground.coreButton.button.Background = coreData.foreground.GetBrush();
             CVC_foreground.setObject(coreData.foreground);
 
             CVC_highlight.setText("setup brush");
-            CVC_highlight.coreButton.Background = coreData.highlight.GetBrush();
+            //CVC_highlight.coreButton.button.Background = coreData.highlight.GetBrush();
             CVC_highlight.setObject(coreData.highlight);
 
             CVC_cornerRadius.setText(coreData.cornerRadius.ToString());
@@ -341,15 +348,15 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
         private void registerEvents()
         {
-            CB_changeSelection.button.Click += CB_changeSelection_Click;
-            CB_saveChanges.button.Click += CB_saveChanges_Click;
-
-            CBX_dataTypeSelection.SelectionChanged += CBX_dataTypeSelection_SelectionChanged;
-
             CVC_background.coreButton.button.Click += CVC_background_Click;
             CVC_borderbrush.coreButton.button.Click += CVC_borderbrush_Click;
             CVC_foreground.coreButton.button.Click += CVC_foreground_Click;
             CVC_highlight.coreButton.button.Click += CVC_highlight_Click;
+
+            CB_changeSelection.button.Click += CB_changeSelection_Click;
+            CB_saveChanges.button.Click += CB_saveChanges_Click;
+
+            CBX_dataTypeSelection.SelectionChanged += CBX_dataTypeSelection_SelectionChanged;
         }
 
         private void CVC_background_Click(object sender, RoutedEventArgs e)
@@ -449,6 +456,13 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private void selectionChange(object sender)
         {
             int value = ((ComboBox)sender).SelectedIndex;
+
+            options_border.Child = null;
+
+            //CVC_background.setObject(new ColorData());
+            //CVC_borderbrush.setObject(new ColorData());
+            //CVC_foreground.setObject(new ColorData());
+            //CVC_highlight.setObject(new ColorData());
 
             wrapPanel.Children.Clear();
 

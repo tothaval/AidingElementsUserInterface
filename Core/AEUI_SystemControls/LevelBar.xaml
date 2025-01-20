@@ -62,6 +62,32 @@
             <usercontrols:CoreLabel x:Name="CL_LevelLogin"/>
 
             <core:CoreButton x:Name="CB_Zero"/>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton x:Name="RB_Level"
+                                 GroupName="VisibilityFactor"
+                                 Content="level"
+                                     Checked="RB_Level_Checked"
+                                     />
+                <RadioButton x:Name="RB_All"
+                                 GroupName="VisibilityFactor"
+                                 Content="all"
+                                             IsChecked="True"
+                                             
+                                     Checked="RB_All_Checked"/>
+                <RadioButton x:Name="RB_Range"
+                                 GroupName="VisibilityFactor"
+                                 Content="range"
+                                 Checked="RB_Range_Checked"
+                                 Unchecked="RB_Range_Unchecked"/>
+                <StackPanel x:Name="SP_Range_CVCs"
+                            Orientation="Horizontal"
+                                Visibility="Collapsed">
+
+                    <local:CoreValueChange x:Name="CVC_Min_Range"/>
+
+                    <local:CoreValueChange x:Name="CVC_Max_Range"/>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
 
 

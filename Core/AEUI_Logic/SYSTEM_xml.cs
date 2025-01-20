@@ -356,7 +356,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                             canvasData.apply_CoreData(aux_data);
                         }
 
-                        canvasData.canvasID = Int32.Parse(node_CanvasData.SelectSingleNode("canvasID").InnerText);
+
+                        XmlNode? node_canvasID = node_CanvasData.SelectSingleNode("canvasID");
+                        if (node_canvasID != null)
+                        {
+                            canvasData.canvasID = Int32.Parse(node_canvasID.InnerText);
+                        }
+
+                        XmlNode? node_level_id = node_CanvasData.SelectSingleNode("level_id");
+                        if (node_level_id != null)
+                        {
+                            canvasData.level_id = Int32.Parse(node_level_id.InnerText);
+                        }
 
                         canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
 
@@ -385,8 +396,12 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             return null;
         }
 
-        internal void SYSTEM_CanvasData_save(CanvasData canvasData)
+        internal void SYSTEM_CanvasData_save(CoreCanvas systemCanvas)
         {
+            CanvasData canvasData = systemCanvas.getCanvasData();
+            LevelSystem levelSystem = systemCanvas.GetLevelSystem();
+
+
             if (canvasData != null)
             {
                 XmlDocument xmlDocument = new XmlDocument();
@@ -411,6 +426,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 XmlNode canvasName = xmlDocument.CreateElement("canvasName");
                 canvasName.InnerText = canvasData.canvasName;
                 node_CanvasData.AppendChild(canvasName);
+
+                XmlNode level_id = xmlDocument.CreateElement("level_id");
+                level_id.InnerText = levelSystem.current_level.ToString();
+                node_CanvasData.AppendChild(level_id);
 
                 XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
                 grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
@@ -529,6 +548,8 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                             CoreContainer coreContainer = new CoreContainer(containerData, userControl);
                             coreContainer.setPosition(container_position);
+                            coreContainer.setLevel(containerData.level);
+                            coreContainer.setRotation(containerData.rotation);
 
                             container_list.Add(coreContainer);
 
@@ -672,7 +693,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
         #endregion ContainerData loading
         #endregion ContainerData
 
-        internal LevelSystem SYSTEM_Level_load(string path)
+        internal LevelSystem SYSTEM_Level_load(string path, int level_id)
         {
             if (File.Exists(@$"{path}"))
             {
@@ -732,7 +753,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                         }
                     }
 
-                    LevelSystem levelSystem = new LevelSystem(levels, 0);
+                    LevelSystem levelSystem = new LevelSystem(levels, 0, level_id);
 
                     return levelSystem;
                 }

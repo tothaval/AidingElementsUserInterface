@@ -18,9 +18,11 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace AidingElementsUserInterface.Core.AEUI_UserControls
@@ -67,9 +69,10 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             ContainerDataResources(containerData);
 
+            initialize_container();
         }
 
-        internal CoreContainer(Shape element, ContainerData containerData, ref CoreCanvas canvas)
+        internal CoreContainer(AidingElementsUserInterface.Elements.Shape element, ContainerData containerData, ref CoreCanvas canvas)
         {
             InitializeComponent();
 
@@ -82,6 +85,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             this.containerData.SetContainerDataFilename($"{canvas.canvas.Children.Count}.xml");
 
+            //initialize_container();
             //containerData = new ContainerData(canvas.getCanvasData(), element);
 
             ContainerDataResources(containerData);
@@ -115,102 +119,11 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         {
             Background = new SolidColorBrush(Colors.Transparent);
 
+
             register_events();
         }
 
-        internal void setButtonData(CoreData buttonData)
-        {
-            // thought applying resources on surrounding context of button 
-            // would overwrite application wide resource setting, but it does not   
-
-            if (buttonData == null)
-            {
-                buttonData = new CoreData();
-            }
-
-            __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
-            __CoreContainer.content_border.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
-            __CoreContainer.content_border.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
-            __CoreContainer.content_border.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
-
-            __CoreContainer.content_border.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
-            __CoreContainer.content_border.Resources["ButtonData_thickness"] = buttonData.thickness;
-
-            __CoreContainer.content_border.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
-            __CoreContainer.content_border.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
-
-            __CoreContainer.content_border.Resources["ButtonData_width"] = buttonData.width;
-            __CoreContainer.content_border.Resources["ButtonData_height"] = buttonData.height;
-
-            if (File.Exists(buttonData.background.brushpath))
-            {
-                __CoreContainer.content_border.Resources["ButtonData_image"] = buttonData.background.GetBrush();
-                __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
-            }
-
-            this.buttonData = buttonData;
-        }
-
-        internal void setLabelData(CoreData labelData)
-        {
-            if (labelData == null)
-            {
-                labelData = new CoreData();
-            }
-
-            __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
-            __CoreContainer.Resources["LabelData_borderbrush"] = labelData.borderbrush.GetBrush();
-            __CoreContainer.Resources["LabelData_foreground"] = labelData.foreground.GetBrush();
-            __CoreContainer.Resources["LabelData_highlight"] = labelData.highlight.GetBrush();
-            
-            __CoreContainer.Resources["LabelData_cornerRadius"] = labelData.cornerRadius;
-            __CoreContainer.Resources["LabelData_thickness"] = labelData.thickness;
-            
-            __CoreContainer.Resources["LabelData_fontSize"] = (double)labelData.fontSize;
-            __CoreContainer.Resources["LabelData_fontFamily"] = labelData.fontFamily;
-            
-            __CoreContainer.Resources["LabelData_width"] = labelData.width;
-            __CoreContainer.Resources["LabelData_height"] = labelData.height;
-
-            if (File.Exists(labelData.background.brushpath))
-            {
-                __CoreContainer.Resources["LabelData_image"] = labelData.background.GetBrush();
-                __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
-            }
-
-            this.labelData = labelData;
-        }
-
-        internal void setTextBoxData(CoreData textBoxData)
-        {
-            if (textBoxData == null)
-            {
-                textBoxData = new CoreData();
-            }
-
-            __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
-            __CoreContainer.Resources["TextBoxData_borderbrush"] = textBoxData.borderbrush.GetBrush();
-            __CoreContainer.Resources["TextBoxData_foreground"] = textBoxData.foreground.GetBrush();
-            __CoreContainer.Resources["TextBoxData_highlight"] = textBoxData.highlight.GetBrush();
-
-            __CoreContainer.Resources["TextBoxData_cornerRadius"] = textBoxData.cornerRadius;
-            __CoreContainer.Resources["TextBoxData_thickness"] = textBoxData.thickness;
-
-            __CoreContainer.Resources["TextBoxData_fontSize"] = (double)textBoxData.fontSize;
-            __CoreContainer.Resources["TextBoxData_fontFamily"] = textBoxData.fontFamily;
-
-            __CoreContainer.Resources["TextBoxData_width"] = textBoxData.width;
-            __CoreContainer.Resources["TextBoxData_height"] = textBoxData.height;
-
-            if (File.Exists(textBoxData.background.brushpath))
-            {
-                __CoreContainer.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
-                __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
-            }
-
-            this.textBoxData = textBoxData;
-        }
-
+   
         internal async void ContainerDataResources(ContainerData? containerData)
         {
             //object element = this.containerData.GetElement();
@@ -245,8 +158,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             __CoreContainer.Resources["ContainerData_fontSize"] = (double)containerData.settings.fontSize;
             __CoreContainer.Resources["ContainerData_fontFamily"] = containerData.settings.fontFamily;
 
-            __CoreContainer.Resources["ContainerData_width"] = containerData.settings.width;
-            __CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
+            //__CoreContainer.Resources["ContainerData_width"] = containerData.settings.width;
+            //__CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
 
             __CoreContainer.Resources["ContainerData_CanvasID"] = containerData.CanvasID;
 
@@ -264,23 +177,26 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             if (content_border.Child != null)
             {
-                if (content_border.Child.GetType().IsSubclassOf(typeof(Shape)))
+                if (content_border.Child.GetType() == typeof(AidingElementsUserInterface.Elements.Shape))
                 {
-                    ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+                    ((AidingElementsUserInterface.Elements.Shape)content_border.Child).changeShapeSize(
+                        containerData.settings.width, containerData.settings.height);
+
+                    ((AidingElementsUserInterface.Elements.Shape)content_border.Child).Background = containerData.settings.background.GetBrush();
 
                     if (File.Exists(containerData.settings.background.brushpath))
                     {
-                        ((Shape)content_border.Child).Fill = containerData.settings.background.GetBrush();
+                        ((AidingElementsUserInterface.Elements.Shape)content_border.Child).Background = containerData.settings.background.GetBrush();
 
                     }
 
                     if (container_is_selected)
                     {
-                        ((Shape)content_border.Child).Stroke = containerData.settings.highlight.GetBrush();
+                        ((AidingElementsUserInterface.Elements.Shape)content_border.Child).BorderBrush = containerData.settings.highlight.GetBrush();
                     }
                     else
                     {
-                        ((Shape)content_border.Child).Stroke = containerData.settings.borderbrush.GetBrush();
+                        ((AidingElementsUserInterface.Elements.Shape)content_border.Child).BorderBrush = containerData.settings.borderbrush.GetBrush();
                     }
                 }
             }
@@ -329,6 +245,36 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             return containerData;
 
 
+        }
+
+        internal CoreData? GetCustomButtonData()
+        {
+            if (buttonData != null)
+            {
+                return buttonData;
+            }
+
+            return null;
+        }
+
+        internal CoreData? GetCustomLabelData()
+        {
+            if (labelData != null)
+            {
+                return labelData;
+            }
+
+            return null;
+        }
+
+        internal CoreData? GetCustomTextBoxData()
+        {
+            if (textBoxData != null)
+            {
+                return textBoxData;
+            }
+
+            return null;
         }
 
         internal bool get_containerIsSelected()
@@ -387,6 +333,8 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             content_border.Child = null;
 
             content_border.Child = (UIElement)containerData.GetElement();
+
+
 
             build();
         }
@@ -459,6 +407,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             this.containerData = containerData;
         }
 
+        internal void setLevel(int level)
+        {
+            containerData.level = level;
+            Panel.SetZIndex(this, level);
+        }
+
         internal void setPosition(Point point)
         {
             containerData.position = point;
@@ -487,6 +441,99 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             __CoreContainer.Resources["ContainerData_height"] = containerData.settings.height;
 
             OnChildDesiredSizeChanged(this);
+        }
+
+        internal void setButtonData(CoreData buttonData)
+        {
+            // thought applying resources on surrounding context of button 
+            // would overwrite application wide resource setting, but it does not   
+
+            if (buttonData == null)
+            {
+                buttonData = new CoreData();
+            }
+
+            __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_borderbrush"] = buttonData.borderbrush.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_foreground"] = buttonData.foreground.GetBrush();
+            __CoreContainer.content_border.Resources["ButtonData_highlight"] = buttonData.highlight.GetBrush();
+
+            __CoreContainer.content_border.Resources["ButtonData_cornerRadius"] = buttonData.cornerRadius;
+            __CoreContainer.content_border.Resources["ButtonData_thickness"] = buttonData.thickness;
+
+            __CoreContainer.content_border.Resources["ButtonData_fontSize"] = (double)buttonData.fontSize;
+            __CoreContainer.content_border.Resources["ButtonData_fontFamily"] = buttonData.fontFamily;
+
+            __CoreContainer.content_border.Resources["ButtonData_width"] = buttonData.width;
+            __CoreContainer.content_border.Resources["ButtonData_height"] = buttonData.height;
+
+            if (File.Exists(buttonData.background.brushpath))
+            {
+                __CoreContainer.content_border.Resources["ButtonData_image"] = buttonData.background.GetBrush();
+                __CoreContainer.content_border.Resources["ButtonData_background"] = buttonData.background.GetBrush();
+            }
+
+            this.buttonData = buttonData;
+        }
+
+        internal void setLabelData(CoreData labelData)
+        {
+            if (labelData == null)
+            {
+                labelData = new CoreData();
+            }
+
+            __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
+            __CoreContainer.Resources["LabelData_borderbrush"] = labelData.borderbrush.GetBrush();
+            __CoreContainer.Resources["LabelData_foreground"] = labelData.foreground.GetBrush();
+            __CoreContainer.Resources["LabelData_highlight"] = labelData.highlight.GetBrush();
+
+            __CoreContainer.Resources["LabelData_cornerRadius"] = labelData.cornerRadius;
+            __CoreContainer.Resources["LabelData_thickness"] = labelData.thickness;
+
+            __CoreContainer.Resources["LabelData_fontSize"] = (double)labelData.fontSize;
+            __CoreContainer.Resources["LabelData_fontFamily"] = labelData.fontFamily;
+
+            __CoreContainer.Resources["LabelData_width"] = labelData.width;
+            __CoreContainer.Resources["LabelData_height"] = labelData.height;
+
+            if (File.Exists(labelData.background.brushpath))
+            {
+                __CoreContainer.Resources["LabelData_image"] = labelData.background.GetBrush();
+                __CoreContainer.Resources["LabelData_background"] = labelData.background.GetBrush();
+            }
+
+            this.labelData = labelData;
+        }
+
+        internal void setTextBoxData(CoreData textBoxData)
+        {
+            if (textBoxData == null)
+            {
+                textBoxData = new CoreData();
+            }
+
+            __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            __CoreContainer.Resources["TextBoxData_borderbrush"] = textBoxData.borderbrush.GetBrush();
+            __CoreContainer.Resources["TextBoxData_foreground"] = textBoxData.foreground.GetBrush();
+            __CoreContainer.Resources["TextBoxData_highlight"] = textBoxData.highlight.GetBrush();
+
+            __CoreContainer.Resources["TextBoxData_cornerRadius"] = textBoxData.cornerRadius;
+            __CoreContainer.Resources["TextBoxData_thickness"] = textBoxData.thickness;
+
+            __CoreContainer.Resources["TextBoxData_fontSize"] = (double)textBoxData.fontSize;
+            __CoreContainer.Resources["TextBoxData_fontFamily"] = textBoxData.fontFamily;
+
+            __CoreContainer.Resources["TextBoxData_width"] = textBoxData.width;
+            __CoreContainer.Resources["TextBoxData_height"] = textBoxData.height;
+
+            if (File.Exists(textBoxData.background.brushpath))
+            {
+                __CoreContainer.Resources["TextBoxData_image"] = textBoxData.background.GetBrush();
+                __CoreContainer.Resources["TextBoxData_background"] = textBoxData.background.GetBrush();
+            }
+
+            this.textBoxData = textBoxData;
         }
 
 
