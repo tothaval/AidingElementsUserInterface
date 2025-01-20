@@ -24,9 +24,39 @@ namespace AidingElementsUserInterface.Elements
     /// </summary>
     public partial class Shape : UserControl
     {
+        private System.Windows.Shapes.Shape shape;
+        private double width, height;
+
         public Shape()
         {
+                InitializeComponent();
+        }
+
+        public Shape(System.Windows.Shapes.Shape shape)
+        {
             InitializeComponent();
+
+            this.shape = shape;
+
+            border.Child = shape;
+        }
+
+        internal void changeShapeSize(double width, double height)
+        {
+            this.width = width;
+            this.height = height;
+
+            shape.Width = width;
+            shape.Height = height;
+        }
+
+        internal void setShape(System.Windows.Shapes.Shape shape)
+        {
+            border.Child = null;
+
+            this.shape = shape;
+
+            border.Child = shape;
         }
     }
 }

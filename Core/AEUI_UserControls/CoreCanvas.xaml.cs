@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -85,12 +86,13 @@ namespace AidingElementsUserInterface.Core
         private void _timer_Tick(object sender, EventArgs e)
         {
             NoLevelBackground();
+            MainWindowData mainWindowData = new XML_Handler().MainWindowData_load();
 
             if (SYSTEM_CANVAS_FLAG)
             {
                 SYSTEM_xml xml = new SYSTEM_xml();
 
-                LevelSystem levelSystem = xml.SYSTEM_Level_load($"{xml.SYSTEM_folder}{xml.LevelData_file}");
+                LevelSystem levelSystem = xml.SYSTEM_Level_load($"{xml.SYSTEM_folder}{xml.LevelData_file}", config.level_id);
 
                 if (levelSystem != null)
                 {
@@ -115,10 +117,11 @@ namespace AidingElementsUserInterface.Core
             {
                 UserSpace_xml xml = new UserSpace_xml();
 
-                LevelSystem levelSystem = xml.UserSpace_Level_load($"{xml.UserSpace_folder}screen_{config.canvasID}\\{xml.LevelData_file}", config.canvasID);
+                LevelSystem levelSystem = xml.UserSpace_Level_load($"{xml.UserSpace_folder}screen_{config.canvasID}\\{xml.LevelData_file}", config.canvasID, config.level_id);
 
                 if (levelSystem != null)
                 {
+
                     _LevelBar.update(levelSystem.Get_CURRENT_LEVEL());
 
 
@@ -139,6 +142,9 @@ namespace AidingElementsUserInterface.Core
                 levelSystem = new LevelSystem(config.canvasID);
             }
 
+
+
+
             LSD.setCanvas(ref __CoreCanvas);
 
             _timer.Stop();
@@ -155,8 +161,8 @@ namespace AidingElementsUserInterface.Core
                 item.setRotation(data.rotation);
                 
                 item.setSize(data.width, data.height);
-                
-                Panel.SetZIndex(item, data.level);
+
+                item.setLevel(data.level);
             }
         }
 
@@ -167,8 +173,8 @@ namespace AidingElementsUserInterface.Core
 
             CoreContainer coreContainer;
 
-            if (SYSTEM_CANVAS_FLAG)
-            {
+            //if (SYSTEM_CANVAS_FLAG)
+            //{
                 coreContainer = instantiate(content, ref __CoreCanvas);
 
                 if (coreContainer != null)
@@ -177,17 +183,17 @@ namespace AidingElementsUserInterface.Core
                     SetLevel(coreContainer);
                     canvas.Children.Add(coreContainer);
                 }
-            }
-            else
-            {
-                coreContainer = instantiate(content, ref __CoreCanvas);
-                if (coreContainer != null)
-                {
-                    PositionElement(coreContainer, logic.point);
-                    SetLevel(coreContainer);
-                    canvas.Children.Add(coreContainer);
-                }
-            }
+            //}
+            //else
+            //{
+            //    coreContainer = instantiate(content, ref __CoreCanvas);
+            //    if (coreContainer != null)
+            //    {
+            //        PositionElement(coreContainer, logic.point);
+            //        SetLevel(coreContainer);
+            //        canvas.Children.Add(coreContainer);
+            //    }
+            //}
         }
 
         internal void add_element_to_canvas(CoreContainer content, MouseButtonEventArgs e)
@@ -196,8 +202,8 @@ namespace AidingElementsUserInterface.Core
 
             CoreContainer coreContainer;
 
-            if (SYSTEM_CANVAS_FLAG)
-            {
+            //if (SYSTEM_CANVAS_FLAG)
+            //{
                 coreContainer = instantiate(content, ref __CoreCanvas);
 
                 if (coreContainer != null)
@@ -207,39 +213,39 @@ namespace AidingElementsUserInterface.Core
 
                     canvas.Children.Add(coreContainer);
                 }
-            }
-            else
-            {
-                coreContainer = instantiate(content, ref __CoreCanvas);
+            //}
+            //else
+            //{
+            //    coreContainer = instantiate(content, ref __CoreCanvas);
 
-                if (coreContainer != null)
-                {
-                    PositionElement(coreContainer, e.GetPosition(canvas));
-                    SetLevel(coreContainer);
+            //    if (coreContainer != null)
+            //    {
+            //        PositionElement(coreContainer, e.GetPosition(canvas));
+            //        SetLevel(coreContainer);
 
-                    canvas.Children.Add(coreContainer);
-                }
-            }
+            //        canvas.Children.Add(coreContainer);
+            //    }
+            //}
 
 
         }
 
         internal void add_element_to_canvas(CoreContainer container, System.Windows.Point point)
         {
-            if (SYSTEM_CANVAS_FLAG)
-            {
+            //if (SYSTEM_CANVAS_FLAG)
+            //{
                 PositionElement(container, point);
                 SetLevel(container);
 
                 canvas.Children.Add(container);
-            }
-            else
-            {
-                PositionElement(container, point);
-                SetLevel(container);
+            //}
+            //else
+            //{
+            //    PositionElement(container, point);
+            //    SetLevel(container);
 
-                canvas.Children.Add(container);
-            }
+            //    canvas.Children.Add(container);
+            //}
 
         }
 
@@ -705,9 +711,10 @@ namespace AidingElementsUserInterface.Core
         {
             if (levelSystem != null)
             {
-                coreContainer.GetContainerData().level = levelSystem.Get_LEVEL();
+                coreContainer.setLevel(levelSystem.Get_LEVEL());
 
-                Panel.SetZIndex(coreContainer, levelSystem.Get_LEVEL());
+
+                //MessageBox.Show(coreContainer.GetContainerData().level.ToString());
             }
         }
 
@@ -717,31 +724,38 @@ namespace AidingElementsUserInterface.Core
             {
                 if (child.GetType() == typeof(CoreContainer))
                 {
-                    CoreContainer sinnlos = child as CoreContainer;
+                    CoreContainer element = child as CoreContainer;
 
-                    if (sinnlos.GetContainerData().element != null)
+                    if (element.GetContainerData().element != null)
                     {
 
 
-                        if (sinnlos.GetContainerData().element.GetType() != typeof(LevelShift))
+                        if (element.GetContainerData().element.GetType() != typeof(LevelShift))
                         {
                             if (state.Equals("all"))
                             {
-                                sinnlos.Visibility = Visibility.Visible;
+                                element.Visibility = Visibility.Visible;
                             }
                             if (state.Equals("range"))
                             {
-
+                                if (Panel.GetZIndex(element) < levelSystem.min_range || Panel.GetZIndex(element) > levelSystem.max_range)
+                                {
+                                    element.Visibility = Visibility.Collapsed;
+                                }
+                                else if (Panel.GetZIndex(element) > levelSystem.min_range || Panel.GetZIndex(element) < levelSystem.max_range)
+                                {
+                                    element.Visibility = Visibility.Visible;
+                                }
                             }
                             if (state.Equals("level"))
                             {
-                                if (Panel.GetZIndex(sinnlos) == newLevel && state.Equals("level"))
+                                if (Panel.GetZIndex(element) == newLevel && state.Equals("level"))
                                 {
-                                    sinnlos.Visibility = Visibility.Visible;
+                                    element.Visibility = Visibility.Visible;
                                 }
                                 else
                                 {
-                                    sinnlos.Visibility = Visibility.Collapsed;
+                                    element.Visibility = Visibility.Collapsed;
                                 }
                             }
                         }
@@ -752,8 +766,8 @@ namespace AidingElementsUserInterface.Core
 
         internal void unsetLSD()
         {
-            LSD.Visibility = Visibility.Collapsed;
-            LSD.clear();
+            //LSD.Visibility = Visibility.Collapsed;
+            //LSD.clear();
         }
 
         internal void updateLocalDrives()
@@ -792,6 +806,14 @@ namespace AidingElementsUserInterface.Core
 
         private void canvas_Loaded(object sender, RoutedEventArgs e)
         {
+            //foreach (UIElement item in canvas.Children)
+            //{
+            //    if (item is CoreContainer coreCon)
+            //    {
+            //        AdornerLayer.GetAdornerLayer(canvas)?.Add(new ResizeAdorner(coreCon.content_border));
+            //    }
+            //}
+                      
 
         }
 

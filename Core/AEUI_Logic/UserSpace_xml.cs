@@ -21,6 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Xml;
@@ -61,7 +62,18 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                             canvasData.apply_CoreData(aux_data);
                         }
 
-                        canvasData.canvasID = Int32.Parse(node_CanvasData.SelectSingleNode("canvasID").InnerText);
+
+                        XmlNode? node_canvasID = node_CanvasData.SelectSingleNode("canvasID");
+                        if (node_canvasID != null)
+                        {
+                            canvasData.canvasID = Int32.Parse(node_canvasID.InnerText);
+                        }
+
+                        XmlNode? node_level_id = node_CanvasData.SelectSingleNode("level_id");
+                        if (node_level_id != null)
+                        {
+                            canvasData.level_id = Int32.Parse(node_level_id.InnerText);
+                        }
 
                         canvasData.canvasName = node_CanvasData.SelectSingleNode("canvasName").InnerText;
 
@@ -121,6 +133,10 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 XmlNode canvasName = xmlDocument.CreateElement("canvasName");
                 canvasName.InnerText = canvasData.canvasName;
                 node_CanvasData.AppendChild(canvasName);
+
+                XmlNode level_id = xmlDocument.CreateElement("level_id");
+                level_id.InnerText = levelSystem.current_level.ToString();
+                node_CanvasData.AppendChild(level_id);
 
                 XmlNode grouping_displacement = xmlDocument.CreateElement("grouping_displacement");
                 grouping_displacement.InnerText = canvasData.grouping_displacement.ToString();
@@ -340,13 +356,59 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                         xmlDocument.Load(filename);
 
-                        XmlNode? node_Container = xmlDocument.SelectSingleNode("ContainerData");
+                        XmlNode? node_Container = xmlDocument.SelectSingleNode("Container");
 
                         if (node_Container != null)
                         {
-                            ContainerData auxData = loadContainerData(node_Container, i);
+                            ContainerData? containerData = null;
+                            CoreData? ButtonData = null;
+                            CoreData? LabelData = null;
+                            CoreData? TextBoxData = null;
 
-                            ContainerData containerData = auxData;
+
+                            XmlNode? node_ContainerData = node_Container.SelectSingleNode("ContainerData");
+                            if (node_ContainerData != null)
+                            {
+                                ContainerData auxData = loadContainerData(node_ContainerData, i);
+
+                                containerData = auxData;
+                            }
+
+                            XmlNode? node_ButtonData = node_Container.SelectSingleNode("ButtonData");
+                            if (node_ButtonData != null)
+                            {
+                                XmlNode? node_CoreData = NodeCheck(node_ButtonData, "CoreData");
+
+                                CoreData? aux_data = loadCoreData(node_CoreData);
+                                if (aux_data != null)
+                                {
+                                    ButtonData = aux_data;
+                                }
+                            }
+
+                            XmlNode? node_LabelData = node_Container.SelectSingleNode("LabelData");
+                            if (node_LabelData != null)
+                            {
+                                XmlNode? node_CoreData = NodeCheck(node_LabelData, "CoreData");
+
+                                CoreData? aux_data = loadCoreData(node_CoreData);
+                                if (aux_data != null)
+                                {
+                                    LabelData = aux_data;
+                                }                                
+                            }
+
+                            XmlNode? node_TextBoxData = node_Container.SelectSingleNode("TextBoxData");
+                            if (node_TextBoxData != null)
+                            {
+                                XmlNode? node_CoreData = NodeCheck(node_TextBoxData, "CoreData");
+
+                                CoreData? aux_data = loadCoreData(node_CoreData);
+                                if (aux_data != null)
+                                { 
+                                    TextBoxData = aux_data;
+                                }
+                            }
 
                             XmlNode node_Content = node_Container.SelectSingleNode("Content");
 
@@ -412,10 +474,30 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                                     }
                                 }
 
-                                containerData.SetElement(userControl);
+                                if (containerData != null)
+                                {
+                                    containerData.SetElement(userControl);
+                                }
 
                                 CoreContainer coreContainer = new CoreContainer(containerData, userControl);
                                 coreContainer.setPosition(container_position);
+                                coreContainer.setLevel(containerData.level);
+                                coreContainer.setRotation(containerData.rotation);
+
+                                if (ButtonData != null)
+                                {
+                                    coreContainer.setButtonData(ButtonData);
+                                }
+
+                                if (LabelData != null)
+                                {
+                                    coreContainer.setLabelData(LabelData);
+                                }
+
+                                if (TextBoxData != null)
+                                {
+                                    coreContainer.setTextBoxData(TextBoxData);
+                                }
 
                                 container_list.Add(coreContainer);
                             }
@@ -439,11 +521,37 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                 container.GetContainerData().settings.width = container.content_border.ActualWidth;
                 container.GetContainerData().settings.height = container.content_border.ActualHeight;
 
-                XmlNode node_ContainerData = ContainerData_save(xmlDocument, container.GetContainerData());
+                XmlNode node_Container = ContainerData_save(xmlDocument, container.GetContainerData());
 
-                xmlDocument.AppendChild(node_ContainerData);
 
-                XmlNode node = node_ContainerData;
+                XmlNode node_CustomData_Button = CustomButtonData_save(xmlDocument, coreContainer.GetCustomButtonData());
+                if (node_CustomData_Button != null)
+                {
+                    node_Container.AppendChild(node_CustomData_Button);
+                }
+
+
+                XmlNode node_CustomData_Label = CustomLabelData_save(xmlDocument, coreContainer.GetCustomLabelData());
+                if (node_CustomData_Label != null)
+                {
+                    node_Container.AppendChild(node_CustomData_Label);
+                }
+
+                XmlNode node_CustomData_TextBox = CustomTextBoxData_save(xmlDocument, coreContainer.GetCustomTextBoxData());
+                if (node_CustomData_TextBox != null)
+                {
+                    node_Container.AppendChild(node_CustomData_TextBox);
+                }
+
+                xmlDocument.AppendChild(node_Container);
+
+
+
+
+                //node_ContainerData
+
+
+                XmlNode node = node_Container;
 
                 if (node != null)
                 {
@@ -459,7 +567,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     node_level.InnerText = container.GetContainerData().level.ToString();
                     node.AppendChild(node_level);
 
-                    XmlNode node_rotation  = xmlDocument.CreateElement("rotation");
+                    XmlNode node_rotation = xmlDocument.CreateElement("rotation");
                     node_rotation.InnerText = container.GetContainerData().rotation.ToString();
                     node.AppendChild(node_rotation);
 
@@ -524,12 +632,74 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                     node_ContainerData.AppendChild(aux_node);
                 }
 
-                return node_ContainerData;
+                node_container.AppendChild(node_ContainerData);
+
+                return node_container;
             }
 
             return null;
         }
 
+        internal XmlNode? CustomButtonData_save(XmlDocument xmlDocument, CoreData customData)
+        {
+            if (customData != null)
+            {
+                XmlNode node_ButtonData = xmlDocument.CreateElement("ButtonData");
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, customData);
+
+                if (aux_node != null)
+                {
+                    node_ButtonData.AppendChild(aux_node);
+                }
+
+                return node_ButtonData;
+            }
+
+            return null;
+        }
+        internal XmlNode? CustomLabelData_save(XmlDocument xmlDocument, CoreData customData)
+        {
+            if (customData != null)
+            {
+                XmlNode node_LabelData = xmlDocument.CreateElement("LabelData");
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, customData);
+
+                if (aux_node != null)
+                {
+                    node_LabelData.AppendChild(aux_node);
+                }
+
+                return node_LabelData;
+            }
+
+            return null;
+        }
+        internal XmlNode? CustomTextBoxData_save(XmlDocument xmlDocument, CoreData customData)
+        {
+            if (customData != null)
+            {
+                XmlNode node_TextBoxData = xmlDocument.CreateElement("TextBoxData");
+
+                XmlNode node_CoreData = xmlDocument.CreateElement("CoreData");
+
+                XmlNode? aux_node = saveCoreData(xmlDocument, node_CoreData, customData);
+
+                if (aux_node != null)
+                {
+                    node_TextBoxData.AppendChild(aux_node);
+                }
+
+                return node_TextBoxData;
+            }
+
+            return null;
+        }
         #endregion Container saving
         #endregion Container
 
@@ -688,11 +858,11 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
 
                 //XmlNode link = xmlDocument.CreateElement("Link");
                 //link.InnerText = contentData.GetLink;
-                //node_Container.AppendChild(link);
+                //node_ContainerData.AppendChild(link);
 
                 //XmlNode linkText = xmlDocument.CreateElement("LinkText");
                 //linkText.InnerText = contentData.GetLinkText;
-                //node_Container.AppendChild(linkText);
+                //node_ContainerData.AppendChild(linkText);
 
                 return node;
             }
@@ -821,7 +991,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
             return xmlNode;
         }
 
-        internal LevelSystem UserSpace_Level_load(string path, int canvasID)
+        internal LevelSystem UserSpace_Level_load(string path, int canvasID, int level_id)
         {
             if (File.Exists(@$"{path}"))
             {
@@ -865,7 +1035,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                             hasBackground = bool.Parse(nodeList_LevelData[i].SelectSingleNode("HASBACKGROUND").InnerText);
 
                             if (hasBackground)
-                            {            
+                            {
                                 colorData = loadColorData(nodeList_LevelData[i], "background");
 
                                 LevelData levelData = new LevelData(level, name, description, loginFlag, securityFlag, visibilityFlag, hasBackground, colorData);
@@ -882,7 +1052,7 @@ namespace AidingElementsUserInterface.Core.AEUI_Logic
                         }
                     }
 
-                    LevelSystem levelSystem = new LevelSystem(levels, canvasID);
+                    LevelSystem levelSystem = new LevelSystem(levels, canvasID, level_id);
 
                     return levelSystem;
                 }

@@ -24,24 +24,11 @@ namespace AidingElementsUserInterface.Elements
 
         public Clock()
         {
-            InitializeComponent();
+            InitializeComponent();       
 
+            systemPulse = new SystemPulseTimer();
 
-            int screen_index = -5;
-            if (new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH == null)
-            {
-
-                screen_index = -15;
-            }
-            else
-            {
-                screen_index = new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_coreCanvasScreens.IndexOf(
-                new SharedLogic().GetMainWindow().CORE_CANVAS_SWITCH.Get_ACTIVE_CANVAS()
-                ); // refactor later, also at logstat.cs
-            }            
-
-            systemPulse = new SystemPulseTimer(screen_index);
-
+            L_Clock.Content = "Clock";
             systemPulse.GET_timer.Tick += GET_timer_Tick;
             systemPulse.GET_timer.Interval = TimeSpan.FromMilliseconds(281);
             systemPulse.GET_timer.Start();
@@ -52,6 +39,7 @@ namespace AidingElementsUserInterface.Elements
             CL_DateTimeNow_Date.setText(DateTime.UtcNow.ToLongDateString());
             CL_DateTimeNow_Time.setText(DateTime.UtcNow.ToLongTimeString());
             CL_SessionRuntime.setText(systemPulse.GetSessionRuntime());
+            CL_SessionRuntime.ToolTip = "clock uptime";
         }
     }
 }

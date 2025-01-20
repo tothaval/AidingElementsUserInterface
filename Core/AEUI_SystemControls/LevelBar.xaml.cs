@@ -34,6 +34,7 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
     public partial class LevelBar : UserControl
     {
         SharedLogic logic = new SharedLogic();
+        string RB_State = "all";
         bool loading = true;
 
         public LevelBar()
@@ -56,6 +57,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             CB_Next.setContent(">");
             CB_Last.setContent(">>|");
+
+            CVC_Min_Range.setIdentifier("lowest range");
+            CVC_Min_Range.setText("1");
+
+            CVC_Max_Range.setIdentifier("upmost range");
+            CVC_Max_Range.setText($"{CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1}");
 
             CL_LevelDescription.textblock.MaxWidth = 300;
             CL_LevelDescription.textblock.TextWrapping = TextWrapping.Wrap;
@@ -341,6 +348,66 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
         private void CB_Last_Click(object sender, RoutedEventArgs e)
         {
             update(GetLevelSystem().Last());
+        }
+
+        private void RB_Range_Checked(object sender, RoutedEventArgs e)
+        {
+
+            SP_Range_CVCs.Visibility = Visibility.Visible;
+
+            RB_State = "range";
+
+            int min_range;
+            int max_range;
+
+
+            try
+            {
+                min_range = Int32.Parse(CVC_Min_Range.Value);
+                max_range = Int32.Parse(CVC_Max_Range.Value);
+            }
+            catch (Exception)
+            {
+                min_range = 1;
+                max_range = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            }
+
+            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+            currentLevelSystem.SetVisibilityMODE(RB_State);
+            currentLevelSystem.SetRange(min_range, max_range);
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+            e.Handled = true;
+        }
+
+        private void RB_Range_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SP_Range_CVCs.Visibility = Visibility.Collapsed;
+        }
+
+        private void RB_Level_Checked(object sender, RoutedEventArgs e)
+        {
+            RB_State = "level";
+
+            LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+            currentLevelSystem.SetVisibilityMODE(RB_State);
+            new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+            e.Handled = true;
+        }
+
+        private void RB_All_Checked(object sender, RoutedEventArgs e)
+        {
+            if (!loading)
+            {
+                RB_State = "all";
+
+                LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
+                currentLevelSystem.SetVisibilityMODE(RB_State);
+                new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
+
+                e.Handled = true;
+            }
         }
     }
 }

@@ -75,7 +75,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             string path_ = $"{xml.SYSTEM_folder}";
             xml.delete_files(path_);
 
-            xml.SYSTEM_CanvasData_save(SYSTEM_CANVAS.getCanvasData());
+            xml.SYSTEM_CanvasData_save(SYSTEM_CANVAS);
             xml.saveLevels(levelSystem);
 
             foreach (object item in SYSTEM_CANVAS.canvas.Children)

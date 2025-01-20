@@ -43,6 +43,8 @@ namespace AidingElementsUserInterface.Core
         private bool selected = false;
         internal bool isSelected => selected;
 
+        private string contentText { get; set; } = string.Empty;
+
         internal CoreData config;
 
         // constructors
@@ -65,7 +67,8 @@ namespace AidingElementsUserInterface.Core
         {
             InitializeComponent();
 
-            button.Content = content;
+            contentText = content;
+            button.Content = contentText;
 
             build();
         }
@@ -157,16 +160,25 @@ namespace AidingElementsUserInterface.Core
 
         internal void setContent(string content)
         {
-            button.Content = content;
+            contentText = content;
+
+            button.Content = contentText;
         }
 
         internal void setContent(Icon icon)
         {
+            StackPanel stackPanel = new StackPanel() { Orientation = Orientation.Vertical };
+            TextBlock textBlock = new TextBlock() { Text = contentText };
+
             System.Windows.Controls.Image image = new System.Windows.Controls.Image();
             ImageSource imso = SharedLogic.ToImageSource(icon);
             image.Source = imso;
 
-            button.Content = image;
+            stackPanel.Children.Add(image);
+            stackPanel.Children.Add(textBlock);
+
+
+            button.Content = stackPanel;
         }
 
         //internal void SetElement(string content, Icon icon)

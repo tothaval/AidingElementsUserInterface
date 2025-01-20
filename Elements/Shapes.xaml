@@ -38,5 +38,6 @@
         <Border x:Name="border_ShapeDisplay"/>
         
         <core:CoreButton x:Name="CB_AddShape"/>
+        <core:CoreButton x:Name="CB_AddTest"/>
     </StackPanel>
 </UserControl>

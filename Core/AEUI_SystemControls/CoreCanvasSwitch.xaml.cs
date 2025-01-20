@@ -159,7 +159,7 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
                 canvasData.canvasID = i;
 
                 CoreCanvas screen = new CoreCanvas(canvasData);
-                SystemPulseTimer systemPulseTimer = new SystemPulseTimer(i);
+                SystemPulseTimer systemPulseTimer = new SystemPulseTimer();
                 
                 coreCanvasScreens.Add(screen);
                 systemPulseTimers.Add(systemPulseTimer);
@@ -306,6 +306,10 @@ namespace AidingElementsUserInterface.Core.AEUI_SystemControls
             }
         }
 
+        internal int Get_ACTIVE_CANVAS_ID()
+        {
+            return ACTIVE_CANVAS_ID;
+        }
     }
 }
 /*  END OF FILE

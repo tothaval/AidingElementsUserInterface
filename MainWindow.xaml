@@ -99,7 +99,7 @@
                                 <Border CornerRadius="{DynamicResource MainWindow_cornerRadius}"
                                     BorderThickness="{DynamicResource MainWindow_thickness}"
                                         BorderBrush="{DynamicResource MainWindow_borderbrush}"
-                                        Background="{DynamicResource CoreData_background}">
+                                        Background="{DynamicResource MainWindow_background}">
                                     <ScrollViewer x:Name="SubMenuScrollViewer"
                                                   CanContentScroll="true"
                                                   Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -352,6 +352,11 @@
                               
                           Click="MI_Clock_Click"/>
 
+                            <MenuItem x:Name="MI_SessionClock"
+                          Header="SessionClock"
+                              
+                          Click="MI_SessionClock_Click"/>
+
                             <MenuItem x:Name="MI_Stopwatch"
                           Header="Stopwatch"
                               
@@ -360,7 +365,7 @@
 
 
                             <MenuItem x:Name="MI_RightClickChoice"
-                          Header="End it!"                              
+                          Header="RightClickChoice"                              
                           Click="MI_RightClickChoice_Click"/>
 
 

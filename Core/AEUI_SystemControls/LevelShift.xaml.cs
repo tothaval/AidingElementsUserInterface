@@ -54,10 +54,12 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
             CVC_Min_Level.setText((CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1).ToString());
 
             CVC_Min_Range.setIdentifier("lowest range");
+            CVC_Min_Range.setText("1");
 
             CVC_Min_Level.setText("0");
 
             CVC_Max_Range.setIdentifier("upmost range");
+            CVC_Max_Range.setText($"{CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1}");
 
             CVC_Max_Level.setText((CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1).ToString());
 
@@ -170,8 +172,24 @@ namespace AidingElementsUserInterface.Core.AEUI_UserControls
 
             RB_State = "range";
 
+            int min_range;
+            int max_range;
+
+
+            try
+            {
+                min_range = Int32.Parse(CVC_Min_Range.Value);
+                max_range = Int32.Parse(CVC_Max_Range.Value);
+            }
+            catch (Exception)
+            {
+                min_range = 1;
+                max_range = CoreCanvasSwitchData.Get_CORECANVAS_LEVEL_CAP - 1;
+            }          
+
             LevelSystem currentLevelSystem = new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.GetLevelSystem();
             currentLevelSystem.SetVisibilityMODE(RB_State);
+            currentLevelSystem.SetRange(min_range, max_range);
             new SharedLogic().GetMainWindow().Get_ACTIVE_CANVAS.SetVisibility(currentLevelSystem.Get_LEVEL(), RB_State);
 
             e.Handled = true;
